@@ -223,6 +223,22 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/Qolzam/react-social-network/blob/next/LICENSE) file for details
 
 
+//app
+//backyarde
+//email
+//apotts15@gmail.com
+//password
+//fhksecglzkebazdn
+//captcha
+//1598
+
+// id
+// MAMTY1ODAYY2VINJG1YJ
+// auth token
+// ODFhMDljMDQyZjJjZWJiMjA2OTIxOTg5YmMzZWE3
+//
+// firebase functions:config:set gmail.email="apotts15@gmail.com" gmail.password="fhksecglzkebazdn" recaptcha.secretkey="1598" phone.sourcenumber="3174403593" plivo.authid="MAMTY1ODAYY2VINJG1YJ" plivo.authtoken="ODFhMDljMDQyZjJjZWJiMjA2OTIxOTg5YmMzZWE3" setting.appname="backyarde"
+
 ## Acknowledgments
 
 * React

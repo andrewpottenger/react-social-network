@@ -15,6 +15,7 @@ import Card, { CardActions, CardHeader, CardMedia, CardContent } from 'material-
 import {  LinearProgress } from 'material-ui/Progress'
 import Typography from 'material-ui/Typography'
 import SvgShare from 'material-ui-icons/Share'
+import SvgReply from 'material-ui-icons/Reply'
 import SvgComment from 'material-ui-icons/Comment'
 import SvgFavorite from 'material-ui-icons/Favorite'
 import SvgFavoriteBorder from 'material-ui-icons/FavoriteBorder'
@@ -432,7 +433,7 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
               aria-label='Love'>
               <Checkbox
                 className={classes.iconButton}
-                checkedIcon={<SvgFavorite style={{ fill: '#4CAF50' }} />}
+                checkedIcon={<SvgFavorite style={{ fill: '#00b1b3' }} />}
                 icon={<SvgFavoriteBorder style={{ fill: '#757575' }} />}
                 checked={this.props.currentUserVote}
               />
@@ -452,7 +453,7 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
             className={classes.iconButton}
             onClick={this.handleOpenShare}
             aria-label='Comment'>
-            <SvgShare />
+            <SvgReply className='reverseIcon' />
           </IconButton>) : ''}
 
         </CardActions>

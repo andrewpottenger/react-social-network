@@ -808,6 +808,15 @@ g__input-underline::after {
           height: 10px;
           width: 10px; }
 
+.dropdown ul {
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 170px; }
+  .dropdown ul li {
+    padding-left: 28px !important; }
+    .dropdown ul li:hover {
+      background-color: #9b9b9b !important; }
+
 .home__main {
   background-color: #eeeeee;
   transition: margin-left .4s; }

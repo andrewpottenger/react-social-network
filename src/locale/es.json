@@ -2,7 +2,8 @@
     "sidebar" : {
         "home": "Home",
         "profile": "Profile",
-        "people": "People",
+        "explore": "Explore",
+        "people": "Neighbors",
         "settings": "Settings",
         "sendFeedback": "Send Feedback"
 

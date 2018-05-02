@@ -2,7 +2,8 @@
     "sidebar" : {
         "home": "Home",
         "profile": "Profile",
-        "people": "People",
+        "explore": "Explore",
+        "people": "Neighbors",
         "settings": "Settings",
         "sendFeedback": "Send Feedback"
 
@@ -11,7 +12,16 @@
         "home":"Home",
         "notificationTooltip": "Notifications",
         "myAccount": "My Account",
-        "logout": "Logout"
+        "logout": "Logout",
+        "profile": "Profile",
+        "explore": "Explore",
+        "people": "Neighbors",
+        "settings": "Settings",
+        "sendFeedback": "Send Feedback",
+        "my-properties": "My Properties",
+        "add-property": "+add new property",
+        "my-favorites": "My Favorites",
+        "edit-profile": "Edit Profile"
 
     },
     "home": {

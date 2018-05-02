@@ -236,7 +236,15 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                 vertical: 'top',
                 horizontal: 'right'
               }}
-              onClose={this.handleRequestClose}>
+                            onClose={this.handleRequestClose}
+                            className='dropdown'>
+                              <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '14px' }} > {translate!('header.my-properties')} </MenuItem>
+                              <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '12px' }} > {translate!('header.add-property')} </MenuItem>
+                              <MenuItem style={{ backgroundColor: '#9b9b9b', color: 'white', fontSize: '14px' }} > {translate!('header.my-favorites')} </MenuItem>
+                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.profile')} </MenuItem>
+                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.edit-profile')} </MenuItem>
+                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.settings')} </MenuItem>
+                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
               <MenuItem style={{ backgroundColor: 'white', color: blue[500], fontSize: '14px' }} > {translate!('header.myAccount')} </MenuItem>
               <MenuItem style={{ fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
 

@@ -7,13 +7,15 @@ $green-teal:#00ab6b;
 $teal:#58d09f;
 $gold: #FFD700;
 $green: #4CAF50;
+$primary-color: #9b29a2;
+$secondary-color: #3e134d;
 
 $light-grey-border: #eeeeee;
 $light-color: #aaa;
 
 // Navigation colors
 $nav-background: $grey;
-$nav-text-color: white;
+$nav-text-color: $primary-color;
 
 // Shadow
 $glob-box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
