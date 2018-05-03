@@ -10,9 +10,17 @@ import SvgDehaze from 'material-ui-icons/Dehaze'
 import { grey, blue } from 'material-ui/colors'
 import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
+import SvgHome from 'material-ui-icons/Home'
+import SvgFeedback from 'material-ui-icons/Feedback'
+import SvgExplore from 'material-ui-icons/Explore'
+import SvgSettings from 'material-ui-icons/Settings'
+import SvgAccountCircle from 'material-ui-icons/AccountCircle'
+import SvgPeople from 'material-ui-icons/People'
+import SvgKeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown'
 import Popover from 'material-ui/Popover'
 import AppBar from 'material-ui/AppBar'
 import Menu, { MenuList, MenuItem } from 'material-ui/Menu'
+import { ListItemIcon, ListItemText } from 'material-ui/List'
 import Paper from 'material-ui/Paper'
 import Hidden from 'material-ui/Hidden'
 import NotificationsIcon from 'material-ui-icons/Notifications'
@@ -97,7 +105,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
   // On click toggle sidebar
   onToggleSidebar = () => {
    const {onToggleDrawer} = this.props
-   onToggleDrawer()
+   // onToggleDrawer()
   }
 
   /**
@@ -181,22 +189,66 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
       <AppBar position='fixed' color='secondary'>
         <Toolbar>
           {/* Left side */}
-
-          <IconButton onClick={this.onToggleSidebar} >
-            <SvgDehaze color='primary' style={{ cursor: 'pointer' }} />
-          </IconButton>
+          <img src='images/backyardelogo.png' width='120' alt='Backyarde' />
+          {/*<IconButton onClick={this.onToggleSidebar} >*/}
+            {/*<SvgDehaze color='primary' style={{ cursor: 'pointer' }} />*/}
+          {/*</IconButton>*/}
           {/* Header title */}
-          <Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >
-            {config.settings.appName}
-          </Typography>
+          {/*<Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >*/}
+            {/*{config.settings.appName}*/}
+          {/*</Typography>*/}
           <div className='homeHeader__title-root'>
           <Hidden smDown>
-           <div className={classNames({'homeHeader__title-left': anchor === 'left', 'homeHeader__title-right': anchor === 'right' })}>{this.props.title}</div> 
+           <div className={classNames({'homeHeader__title-left': anchor === 'left', 'homeHeader__title-right': anchor === 'right' })}>
+               {/*{this.props.title}*/}
+               </div>
            </Hidden>
           </div>
 
           {/* Notification */}
           <div className='homeHeader__right'>
+            <nav className='nav-links'>
+              {/*<NavLink to='/'>*/}
+                  {/*<MenuItem>*/}
+                      {/*<ListItemIcon>*/}
+                          {/*<SvgHome />*/}
+                      {/*</ListItemIcon>*/}
+                      {/*<ListItemText inset primary={translate!('header.home')} />*/}
+                  {/*</MenuItem>*/}
+              {/*</NavLink>*/}
+              <NavLink to='/find-a-property'>
+                  <MenuItem>
+                      <ListItemIcon>
+                          <SvgHome />
+                      </ListItemIcon>
+                      <ListItemText inset primary={translate!('header.find-a-property')} />
+                  </MenuItem>
+              </NavLink>
+              <NavLink to='/explore'>
+                  <MenuItem>
+                      <ListItemIcon>
+                          <SvgExplore />
+                      </ListItemIcon>
+                      <ListItemText inset primary={translate!('header.explore')} />
+                  </MenuItem>
+              </NavLink>
+              <NavLink to='/people'>
+                  <MenuItem>
+                      <ListItemIcon>
+                          <SvgPeople />
+                      </ListItemIcon>
+                      <ListItemText inset primary={translate!('header.people')} />
+                  </MenuItem>
+              </NavLink>
+              <NavLink to='/settings'>
+                  <MenuItem>
+                      <ListItemIcon>
+                          <SvgSettings />
+                      </ListItemIcon>
+                      <ListItemText inset primary={translate!('header.settings')} />
+                  </MenuItem>
+              </NavLink>
+            </nav>
             <Manager>
               <Target>
                 {this.props.notifyCount! > 0 ? (
@@ -236,19 +288,20 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                 vertical: 'top',
                 horizontal: 'right'
               }}
-                            onClose={this.handleRequestClose}
-                            className='dropdown'>
-                              <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '14px' }} > {translate!('header.my-properties')} </MenuItem>
-                              <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '12px' }} > {translate!('header.add-property')} </MenuItem>
-                              <MenuItem style={{ backgroundColor: '#9b9b9b', color: 'white', fontSize: '14px' }} > {translate!('header.my-favorites')} </MenuItem>
-                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.profile')} </MenuItem>
-                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.edit-profile')} </MenuItem>
-                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.settings')} </MenuItem>
-                              <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
-              <MenuItem style={{ backgroundColor: 'white', color: blue[500], fontSize: '14px' }} > {translate!('header.myAccount')} </MenuItem>
-              <MenuItem style={{ fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
-
+              onClose={this.handleRequestClose}
+              className='dropdown'
+            >
+                <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '14px' }} > {translate!('header.my-properties')} </MenuItem>
+                <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '12px' }} > {translate!('header.add-property')} </MenuItem>
+                <MenuItem style={{ backgroundColor: '#9b9b9b', color: 'white', fontSize: '14px' }} > {translate!('header.my-favorites')} </MenuItem>
+                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.profile')} </MenuItem>
+                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.edit-profile')} </MenuItem>
+                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.settings')} </MenuItem>
+                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
+<MenuItem style={{ backgroundColor: 'white', color: blue[500], fontSize: '14px' }} > {translate!('header.myAccount')} </MenuItem>
+<MenuItem style={{ fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
             </Menu>
+              <SvgKeyboardArrowDown />
           </div>
 
         </Toolbar>

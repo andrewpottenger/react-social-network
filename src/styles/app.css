@@ -817,6 +817,18 @@ g__input-underline::after {
     .dropdown ul li:hover {
       background-color: #9b9b9b !important; }
 
+.nav-links li {
+  display: inline-flex; }
+
+.nav-links svg {
+  margin-right: 0; }
+
+.nav-links a h3, .nav-links a svg {
+  color: #b450bb; }
+
+.nav-links a:hover {
+  color: #9b29a2; }
+
 .home__main {
   background-color: #eeeeee;
   transition: margin-left .4s; }

@@ -159,3 +159,21 @@
     }
   }
 }
+
+.nav-links {
+  li {
+    display: inline-flex;
+  }
+  svg {
+    margin-right: 0;
+  }
+  a {
+    h3, svg {
+      color: #b450bb;
+    }
+
+    &:hover {
+      color: #9b29a2;
+    }
+  }
+}
