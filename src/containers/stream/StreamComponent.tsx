@@ -219,9 +219,11 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
       >
         <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
           <div className='grid-cell animate-top' style={{ maxWidth: '530px', minWidth: '280px' }}>
-            {displayWriting && !tag
-              ? (<PostWriteComponent open={this.state.openPostWrite} onRequestClose={this.handleClosePostWrite} edit={false} >
-                <Paper elevation={2}>
+
+                {displayWriting && !tag
+              ? (<PostWriteComponent open={this.state.openPostWrite} onRequestClose={this.handleClosePostWrite} edit={false}>
+
+                  <Paper elevation={2} className='streamPostBox'>
 
                   <ListItem button
                     style={this.styles.postWtireItem as any}
@@ -244,6 +246,7 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
                   </ListItem>
 
                 </Paper>
+
                 <div style={{ height: '16px' }}></div>
               </PostWriteComponent>)
               : ''}

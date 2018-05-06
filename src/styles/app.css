@@ -917,7 +917,7 @@ svg.flipIcon {
 [class*="PostWriteComponent-fullPageXs-"] {
   border: 2px solid #551360; }
 
-[class*="HomeComponent-content-"] [class*="MuiButtonBase-root-"][class*="MuiListItem-root-"] {
+.streamPostBox div:first-child {
   border: 2px solid #551360;
   padding: 0 !important; }
 

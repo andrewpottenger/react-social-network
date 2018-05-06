@@ -278,14 +278,11 @@ svg.flipIcon {
   border: 2px solid #551360;
 }
 //.MuiButtonBase-root-209 MuiListItem-root-199 MuiListItem-default-202 MuiListItem-gutters-206 MuiListItem-button-207
-[class*="HomeComponent-content-"] [class*="MuiButtonBase-root-"][class*="MuiListItem-root-"] {
+//[class*="HomeComponent-content-"] [class*="MuiButtonBase-root-"][class*="MuiListItem-root-"],
+.streamPostBox div:first-child {
   border: 2px solid #551360;
   padding: 0 !important;
 }
-//[class*="MuiDialogActions-root-"],
-//[class*="MuiDialogActions-root-"] button {
-//  margin: 0;
-//}
 
 [class*="MuiCircularProgress-colorPrimary-"] {
   color: #9b29a2 !important;
