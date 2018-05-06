@@ -18,6 +18,8 @@ import SvgShare from 'material-ui-icons/Share'
 import SvgReply from 'material-ui-icons/Reply'
 import SvgComment from 'material-ui-icons/Comment'
 import SvgFavorite from 'material-ui-icons/Favorite'
+import SvgThumbUp from 'material-ui-icons/ThumbUp'
+import SvgModeComment from 'material-ui-icons/ModeComment'
 import SvgFavoriteBorder from 'material-ui-icons/FavoriteBorder'
 import Checkbox from 'material-ui/Checkbox'
 import Button from 'material-ui/Button'
@@ -393,38 +395,48 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
     // Define variables
     return (
       <Card key={`post-component-${id}`}>
-        <CardHeader
-          title={<NavLink to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
-          subheader={creationDate ? moment.unix(creationDate!).fromNow() + ' | ' + translate!('post.public') : <LinearProgress color='primary' />}
-          avatar={<NavLink to={`/${ownerUserId}`}><UserAvatar fullName={fullName!} fileName={avatar!} size={36} /></NavLink>}
-          action={isPostOwner ? rightIconMenu : ''}
-        >
-        </CardHeader>
+          <div className='flex-wrapper'>
+              <section className='flex-content'>
+                  <div className='flex-columns'>
+                      <aside className='flex-sidebar'>
+                          <CardHeader
+                              title={<NavLink to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
+                              subheader={creationDate ? moment.unix(creationDate!).fromNow() + ' | ' + translate!('post.public') : <LinearProgress color='primary' />}
+                              avatar={<NavLink to={`/${ownerUserId}`}><UserAvatar fullName={fullName!} fileName={avatar!} size={36} /></NavLink>}
+                              action={isPostOwner ? rightIconMenu : ''}
+                          >
+                          </CardHeader>
+                      </aside>
+                      <main className='flex-main'>
+                          <CardContent className={classes.postBody}>
+                          <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
+                              {reactStringReplace(body, /#(\w+)/g, (match: string, i: string) => (
+                                  <NavLink
+                                      style={{ color: 'green' }}
+                                      key={match + i}
+                                      to={`/tag/${match}`}
+                                      onClick={evt => {
+                                          evt.preventDefault()
+                                          goTo!(`/tag/${match}`)
+                                          setHomeTitle!(`#${match}`)
+                                      }}
+                                  >
+                                      #{match}
+
+                                  </NavLink>
+
+                              ))}
+                          </Linkify>
+                      </CardContent></main>
+                  </div>
+              </section>
+              {/*<footer className='flex-footer'>Footer: Fixed height</footer>*/}
+          </div>
+
         {image ? (
           <CardMedia image={image}>
             <Img fileName={image} />
           </CardMedia>) : ''}
-
-        <CardContent className={classes.postBody}>
-          <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
-            {reactStringReplace(body, /#(\w+)/g, (match: string, i: string) => (
-              <NavLink
-                style={{ color: 'green' }}
-                key={match + i}
-                to={`/tag/${match}`}
-                onClick={evt => {
-                  evt.preventDefault()
-                  goTo!(`/tag/${match}`)
-                  setHomeTitle!(`#${match}`)
-                }}
-              >
-                #{match}
-
-              </NavLink>
-
-            ))}
-          </Linkify>
-        </CardContent>
         <CardActions>
           <div className={classes.vote}>
             <IconButton
@@ -433,8 +445,8 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
               aria-label='Love'>
               <Checkbox
                 className={classes.iconButton}
-                checkedIcon={<SvgFavorite style={{ fill: '#00b1b3' }} />}
-                icon={<SvgFavoriteBorder style={{ fill: '#757575' }} />}
+                checkedIcon={<SvgThumbUp style={{ fill: '#551360' }} />}
+                icon={<SvgThumbUp style={{ fill: '#757575' }} />}
                 checked={this.props.currentUserVote}
               />
               <div className={classes.voteCounter}> {this.props.voteCount! > 0 ? this.props.voteCount : ''} </div>
@@ -445,7 +457,7 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
               className={classes.iconButton}
               onClick={this.handleOpenComments}
               aria-label='Comment'>
-              <SvgComment />
+              <SvgModeComment />
               <div className={classes.commentCounter}>{commentCounter! > 0 ? commentCounter : ''} </div>
             </IconButton>
             </div>) : ''}
@@ -453,7 +465,7 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
             className={classes.iconButton}
             onClick={this.handleOpenShare}
             aria-label='Comment'>
-            <SvgReply className='reverseIcon' />
+            <SvgReply className='flipIcon' />
           </IconButton>) : ''}
 
         </CardActions>

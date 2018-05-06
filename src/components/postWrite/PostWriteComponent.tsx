@@ -530,12 +530,13 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
               disableFocusRipple={true}
               disableRipple={true}
               onClick={this.props.onRequestClose}
-              style={{ color: grey[800] }}
+              style={{ backgroundColor: grey[800], color: '#fff'}}
             >
               {translate!('post.cancelButton')}
             </Button>
             <Button
               color='primary'
+              style={{ backgroundColor: '#de64f6', color: '#fff'}}
               disableFocusRipple={true}
               disableRipple={true}
               onClick={this.handlePost}

@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3dc71d38-e050-4d7f-93ab-e636e7b9db20" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/public/images/backyardelogo.png" afterPath="$PROJECT_DIR$/public/images/backyardelogo.png" />
       <change beforePath="$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx" afterPath="$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx" />
+      <change beforePath="$PROJECT_DIR$/src/components/post/PostComponent.tsx" afterPath="$PROJECT_DIR$/src/components/post/PostComponent.tsx" />
+      <change beforePath="$PROJECT_DIR$/src/components/postWrite/PostWriteComponent.tsx" afterPath="$PROJECT_DIR$/src/components/postWrite/PostWriteComponent.tsx" />
+      <change beforePath="$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx" afterPath="$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx" />
       <change beforePath="$PROJECT_DIR$/src/locale/en.json" afterPath="$PROJECT_DIR$/src/locale/en.json" />
+      <change beforePath="$PROJECT_DIR$/src/locale/es.json" afterPath="$PROJECT_DIR$/src/locale/es.json" />
       <change beforePath="$PROJECT_DIR$/src/styles/app.css" afterPath="$PROJECT_DIR$/src/styles/app.css" />
       <change beforePath="$PROJECT_DIR$/src/styles/components/_homeHeader.scss" afterPath="$PROJECT_DIR$/src/styles/components/_homeHeader.scss" />
     </list>
@@ -20,7 +23,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.5545977">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="_global.scss" pinned="false" current-in-tab="false">
@@ -33,15 +36,73 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="HomeHeaderComponent.tsx" pinned="false" current-in-tab="true">
+          <file leaf-file-name="HomeHeaderComponent.tsx" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="349">
-                  <caret line="108" column="3" lean-forward="false" selection-start-line="108" selection-start-column="3" selection-end-line="108" selection-end-column="3" />
+                <state relative-caret-position="335">
+                  <caret line="190" column="25" lean-forward="true" selection-start-line="190" selection-start-column="25" selection-end-line="190" selection-end-column="25" />
                   <folding>
                     <element signature="e#237#285#0" expanded="true" />
                     <element signature="e#1475#1530#0" expanded="true" />
                     <element signature="e#1591#1651#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CardHeader.d.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/material-ui/Card/CardHeader.d.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="34">
+                  <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CardContent.d.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/material-ui/Card/CardContent.d.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="221">
+                  <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#31#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PostComponent.tsx" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/post/PostComponent.tsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="777">
+                  <caret line="459" column="29" lean-forward="false" selection-start-line="459" selection-start-column="15" selection-end-line="459" selection-end-column="29" />
+                  <folding>
+                    <element signature="e#457#545#0" expanded="true" />
+                    <element signature="e#1906#1956#0" expanded="true" />
+                    <element signature="e#2210#2266#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PostWriteComponent.tsx" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/postWrite/PostWriteComponent.tsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="595">
+                  <caret line="544" column="94" lean-forward="false" selection-start-line="544" selection-start-column="79" selection-end-line="544" selection-end-column="94" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="StreamComponent.tsx" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="397">
+                  <caret line="225" column="24" lean-forward="false" selection-start-line="225" selection-start-column="24" selection-end-line="225" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#29#69#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -74,8 +135,8 @@
           <file leaf-file-name="_homeHeader.scss" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/styles/components/_homeHeader.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="670">
-                  <caret line="170" column="7" lean-forward="false" selection-start-line="170" selection-start-column="7" selection-end-line="170" selection-end-column="7" />
+                <state relative-caret-position="772">
+                  <caret line="289" column="9" lean-forward="false" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
                   <folding />
                 </state>
               </provider>
@@ -84,8 +145,8 @@
           <file leaf-file-name="en.json" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/locale/en.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1826">
-                  <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+                <state relative-caret-position="133">
+                  <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="28" />
                   <folding />
                 </state>
               </provider>
@@ -121,37 +182,40 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>padding:</find>
-      <find>paddingTop</find>
-      <find>&lt;SidebarComponent</find>
-      <find>NavLink</find>
-      <find>sidebar.</find>
-      <find>header.edit</find>
-      <find>sendFeedbackStatus</find>
-      <find>global</find>
-      <find>hideSendFeedback</find>
-      <find>auth</find>
-      <find>vertical: 'bottom',</find>
-      <find>showSendFeedback</find>
-      <find>drawerStatus</find>
-      <find>ontoggle</find>
-      <find>HomeComponent</find>
-      <find>onToggleSidebar</find>
-      <find>onToggleDrawer</find>
-      <find>this.props</find>
-      <find>IHomeHeaderComponentProps</find>
-      <find>IHomeHeaderComponentProps.ts</find>
-      <find>authed</find>
-      <find>uid</find>
-      <find>__right</find>
-      <find>drawer</find>
-      <find>clasName</find>
-      <find>secondary</find>
       <find>ListItemIcon</find>
       <find>SvgExplore</find>
       <find>UserAvatarComponent</find>
       <find>homeHeader__title-root</find>
+      <find>CardHeader</find>
+      <find>background</find>
+      <find>hover</find>
+      <find>heart</find>
+      <find>SvgComment</find>
+      <find>border</find>
+      <find>.PostComponent-iconButton-391</find>
+      <find>SvgComm</find>
+      <find>What's</find>
+      <find>logo</find>
+      <find>classNames</find>
+      <find>DialogActions</find>
+      <find>pop</find>
+      <find>postw</find>
+      <find>camer</find>
+      <find>Camera</find>
+      <find>padding</find>
+      <find>textareaPlaceholder</find>
+      <find>postWriteButtonText</find>
+      <find>className</find>
+      <find>Button</find>
+      <find>handlePost</find>
+      <find>button</find>
+      <find>.MuiCircularProgress-colorPrimary-371</find>
+      <find>MuiCircularProgress-colorPrimary-</find>
+      <find>MuiCircularProgress-colorPrimary</find>
     </findStrings>
+    <replaceStrings>
+      <replace>'</replace>
+    </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
     </dirStrings>
@@ -164,10 +228,8 @@
       <list>
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/styles/base/_variables.scss" />
-        <option value="$PROJECT_DIR$/src/locale/es.json" />
         <option value="$PROJECT_DIR$/src/core/environment.ts" />
         <option value="$PROJECT_DIR$/src/config/environment.dev.ts" />
-        <option value="$PROJECT_DIR$/src/components/post/PostComponent.tsx" />
         <option value="$PROJECT_DIR$/src/styles/components/_global.scss" />
         <option value="$PROJECT_DIR$/src/config/environment.prod.ts" />
         <option value="$PROJECT_DIR$/public/index.html" />
@@ -175,9 +237,13 @@
         <option value="$PROJECT_DIR$/src/containers/home/IHomeComponentProps.ts" />
         <option value="$PROJECT_DIR$/src/containers/home/HomeComponent.tsx" />
         <option value="$PROJECT_DIR$/src/components/homeHeader/IHomeHeaderComponentProps.ts" />
-        <option value="$PROJECT_DIR$/src/locale/en.json" />
-        <option value="$PROJECT_DIR$/src/styles/components/_homeHeader.scss" />
         <option value="$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx" />
+        <option value="$PROJECT_DIR$/src/locale/es.json" />
+        <option value="$PROJECT_DIR$/src/components/postWrite/PostWriteComponent.tsx" />
+        <option value="$PROJECT_DIR$/src/locale/en.json" />
+        <option value="$PROJECT_DIR$/src/components/post/PostComponent.tsx" />
+        <option value="$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx" />
+        <option value="$PROJECT_DIR$/src/styles/components/_homeHeader.scss" />
       </list>
     </option>
   </component>
@@ -199,9 +265,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="229" />
-    <option name="y" value="23" />
-    <option name="width" value="1050" />
+    <option name="x" value="33" />
+    <option name="y" value="26" />
+    <option name="width" value="1680" />
     <option name="height" value="1027" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -274,17 +340,6 @@
             <path>
               <item name="react-social-network" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-social-network" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-social-network" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-social-network" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-              <item name="material-ui-icons" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-social-network" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-social-network" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -292,6 +347,13 @@
               <item name="react-social-network" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="react-social-network" type="b2602c69:ProjectViewProjectNode" />
+              <item name="react-social-network" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="postWrite" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-social-network" type="b2602c69:ProjectViewProjectNode" />
@@ -422,12 +484,12 @@
       <workItem from="1524680305974" duration="7888000" />
       <workItem from="1525224642924" duration="1157000" />
       <workItem from="1525228107305" duration="8192000" />
-      <workItem from="1525279158975" duration="3762000" />
+      <workItem from="1525279158975" duration="11823000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22579000" />
+    <option name="totallyTimeSpent" value="30640000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
@@ -444,6 +506,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17142858" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Graph Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -452,7 +515,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -497,42 +559,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/store/actions/authorizeActions.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="50" lean-forward="false" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/environment.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="22" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/sidebarContent/SidebarContentComponent.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="1" column="7" lean-forward="true" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/sidebar/SidebarComponent.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="60" lean-forward="true" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/comment/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/material-ui-icons/Share.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -544,13 +570,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3043">
           <caret line="208" column="14" lean-forward="false" selection-start-line="208" selection-start-column="14" selection-end-line="208" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/post/PostComponent.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="32" />
+          <folding>
+            <element signature="e#29#69#0" expanded="false" />
+            <element signature="e#523#564#0" expanded="false" />
+            <element signature="e#1423#1485#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -558,6 +582,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -586,6 +611,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="891">
           <caret line="94" column="144" lean-forward="false" selection-start-line="94" selection-start-column="69" selection-end-line="94" selection-end-column="144" />
+          <folding>
+            <element signature="e#29#69#0" expanded="false" />
+            <element signature="e#407#479#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -593,6 +622,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="3431" column="19" lean-forward="true" selection-start-line="3431" selection-start-column="19" selection-end-line="3431" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -692,6 +722,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="17" lean-forward="true" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -802,20 +833,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/locale/en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1826">
-          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/material-ui/SvgIcon/SvgIcon.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -868,22 +891,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles/components/_homeHeader.scss">
+    <entry file="file://$PROJECT_DIR$/node_modules/material-ui/Card/CardHeader.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="170" column="7" lean-forward="false" selection-start-line="170" selection-start-column="7" selection-end-line="170" selection-end-column="7" />
+        <state relative-caret-position="34">
+          <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/material-ui/Card/CardContent.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/locale/es.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="18" column="81" lean-forward="true" selection-start-line="18" selection-start-column="81" selection-end-line="18" selection-end-column="81" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="108" column="3" lean-forward="false" selection-start-line="108" selection-start-column="3" selection-end-line="108" selection-end-column="3" />
+        <state relative-caret-position="335">
+          <caret line="190" column="25" lean-forward="true" selection-start-line="190" selection-start-column="25" selection-end-line="190" selection-end-column="25" />
           <folding>
             <element signature="e#237#285#0" expanded="true" />
             <element signature="e#1475#1530#0" expanded="true" />
             <element signature="e#1591#1651#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/locale/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/post/PostComponent.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="459" column="29" lean-forward="false" selection-start-line="459" selection-start-column="15" selection-end-line="459" selection-end-column="29" />
+          <folding>
+            <element signature="e#457#545#0" expanded="true" />
+            <element signature="e#1906#1956#0" expanded="true" />
+            <element signature="e#2210#2266#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/postWrite/PostWriteComponent.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="544" column="94" lean-forward="false" selection-start-line="544" selection-start-column="79" selection-end-line="544" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles/components/_homeHeader.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="772">
+          <caret line="289" column="9" lean-forward="false" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="225" column="24" lean-forward="false" selection-start-line="225" selection-start-column="24" selection-end-line="225" selection-end-column="24" />
+          <folding>
+            <element signature="e#29#69#0" expanded="true" />
           </folding>
         </state>
       </provider>

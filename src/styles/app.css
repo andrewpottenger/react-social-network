@@ -738,8 +738,7 @@ g__input-underline::after {
     text-overflow: ellipsis; }
 
 .homeHeader__notify-menu {
-  background-color: #eee !important;
-  background: #e5e5e5 !important;
+  background: #ededed !important;
   border: 1px solid #ccc !important;
   color: #000 !important;
   min-width: 376px !important;
@@ -828,6 +827,110 @@ g__input-underline::after {
 
 .nav-links a:hover {
   color: #9b29a2; }
+
+.flex-wrapper {
+  background: #ccc;
+  display: flex;
+  flex-direction: column;
+  position: relative; }
+
+.flex-header, .flex-footer {
+  height: 50px;
+  background: #666; }
+
+.flex-content {
+  flex: 1;
+  background: #999;
+  display: flex;
+  color: #000; }
+
+.flex-columns {
+  display: flex;
+  flex: 1; }
+
+.flex-main {
+  flex: 1;
+  background: #fff; }
+
+.flex-sidebar {
+  width: 20%;
+  background: #eee; }
+
+.MuiCard-root-400 {
+  overflow: visible !important; }
+
+[class*="MuiCardHeader-action-"] {
+  position: absolute;
+  top: 0;
+  right: 10px; }
+
+[class*="MuiCardHeader-root-"] {
+  display: block !important; }
+
+[class*="MuiCardHeader-subheader-"] {
+  position: absolute !important;
+  top: 5px;
+  left: 24%;
+  color: #9b9b9b !important; }
+
+[class*="MuiAvatar-root-"] {
+  width: 50px !important;
+  height: 50px !important; }
+
+[class*="MuiCardHeader-action"] [class*="MuiSvgIcon-root-"] {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+svg.flipIcon {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH"; }
+
+[class*="MuiPaper-root-"] a {
+  color: #de64f6 !important; }
+  [class*="MuiPaper-root-"] a:hover {
+    color: #b94fce !important; }
+
+[class*="MuiPaper-root-"] [class*="MuiCardHeader-title"] a {
+  color: #9c27b0 !important; }
+  [class*="MuiPaper-root-"] [class*="MuiCardHeader-title"] a:hover {
+    color: #9b29a2 !important; }
+
+[class*="PostComponent-postBody-"] {
+  padding-top: 30px !important; }
+
+[class*="MuiCardActions-root-"] {
+  background: #ededed !important; }
+
+[class*="PostComponent-iconButton-"] {
+  width: 48px !important; }
+
+[class*="MuiCardActions-action-"] {
+  flex: 0 !important; }
+
+[class*="PostWriteComponent-fullPageXs-"] {
+  border: 2px solid #551360; }
+
+[class*="HomeComponent-content-"] [class*="MuiButtonBase-root-"][class*="MuiListItem-root-"] {
+  border: 2px solid #551360;
+  padding: 0 !important; }
+
+[class*="MuiCircularProgress-colorPrimary-"] {
+  color: #9b29a2 !important; }
+
+.fillBox {
+  background-color: #551360;
+  color: white !important;
+  padding: 10px 20px; }
+
+.streamPost {
+  margin: 50px 0 0 0 !important; }
 
 .home__main {
   background-color: #eeeeee;

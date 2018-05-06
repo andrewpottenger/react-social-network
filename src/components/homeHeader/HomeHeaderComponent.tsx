@@ -189,7 +189,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
       <AppBar position='fixed' color='secondary'>
         <Toolbar>
           {/* Left side */}
-          <img src='images/backyardelogo.png' width='120' alt='Backyarde' />
+          <a href='/'><img src='images/backyardelogo.png' width='120' alt='Backyarde' /></a>
           {/*<IconButton onClick={this.onToggleSidebar} >*/}
             {/*<SvgDehaze color='primary' style={{ cursor: 'pointer' }} />*/}
           {/*</IconButton>*/}

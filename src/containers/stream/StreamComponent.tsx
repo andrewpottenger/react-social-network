@@ -227,11 +227,20 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
                     style={this.styles.postWtireItem as any}
                     onClick={this.handleOpenPostWrite}
                   >
-                    <UserAvatarComponent fullName={this.props.fullName!} fileName={this.props.avatar!} size={36} />
-                    <ListItemText inset primary={<span style={this.styles.postWritePrimaryText as any}> {translate!('home.postWriteButtonText')}</span>} />
-                    <ListItemIcon>
+                    {/*<UserAvatarComponent fullName={this.props.fullName!} fileName={this.props.avatar!} size={36} />*/}
+                  <ListItemIcon className='fillBox'>
                       <SvgCamera />
-                    </ListItemIcon>
+                  </ListItemIcon>
+                  <ListItemText inset primary={<span style={this.styles.postWritePrimaryText as any}> {translate!('home.postWriteButtonText')}</span>} />
+                      <Button
+                          color='primary'
+                          style={{ backgroundColor: '#de64f6', color: '#fff'}}
+                          disableFocusRipple={true}
+                          disableRipple={true}
+                          className='streamPost'
+                      >
+                          {translate!('post.postButton')}
+                      </Button>
                   </ListItem>
 
                 </Paper>

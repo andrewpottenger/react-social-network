@@ -26,7 +26,7 @@
 
     },
     "home": {
-        "postWriteButtonText": "What's new with you?"
+        "postWriteButtonText": "Share your latest project, photo, videos or idea"
     },
     "post": {
         "edit": "Edit",
@@ -36,7 +36,7 @@
         "enableComments": "Enable Comments",
         "enableSharing": "Enable Sharing",
         "public": "public",
-        "textareaPlaceholder": "What's new with you?",
+        "textareaPlaceholder": "Share your latest project, photo, videos or idea",
         "moreTooltip": "more",
         "postButton": "POST",
         "cancelButton": "CANCEL",
