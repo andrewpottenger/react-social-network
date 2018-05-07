@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3dc71d38-e050-4d7f-93ab-e636e7b9db20" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx" afterPath="$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx" />
-      <change beforePath="$PROJECT_DIR$/src/containers/master/MasterComponent.tsx" afterPath="$PROJECT_DIR$/src/containers/master/MasterComponent.tsx" />
-      <change beforePath="$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx" afterPath="$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx" />
       <change beforePath="$PROJECT_DIR$/src/styles/app.css" afterPath="$PROJECT_DIR$/src/styles/app.css" />
       <change beforePath="$PROJECT_DIR$/src/styles/base/_grid.scss" afterPath="$PROJECT_DIR$/src/styles/base/_grid.scss" />
-      <change beforePath="$PROJECT_DIR$/src/styles/components/_master.scss" afterPath="$PROJECT_DIR$/src/styles/components/_master.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-135">
-              <caret line="188" column="25" lean-forward="true" selection-start-line="188" selection-start-column="25" selection-end-line="188" selection-end-column="25" />
+              <caret line="188" column="25" lean-forward="false" selection-start-line="188" selection-start-column="25" selection-end-line="188" selection-end-column="25" />
               <folding>
                 <element signature="e#237#285#0" expanded="true" />
                 <element signature="e#1475#1530#0" expanded="true" />
@@ -40,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/src/containers/home/HomeComponent.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1">
-              <caret line="236" column="9" lean-forward="true" selection-start-line="236" selection-start-column="9" selection-end-line="236" selection-end-column="9" />
+              <caret line="236" column="9" lean-forward="false" selection-start-line="236" selection-start-column="9" selection-end-line="236" selection-end-column="9" />
               <folding>
                 <element signature="e#29#64#0" expanded="true" />
                 <element signature="e#1315#1359#0" expanded="true" />
@@ -64,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/post/PostComponent.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="690">
-              <caret line="462" column="104" lean-forward="true" selection-start-line="462" selection-start-column="104" selection-end-line="462" selection-end-column="104" />
+              <caret line="462" column="104" lean-forward="false" selection-start-line="462" selection-start-column="104" selection-end-line="462" selection-end-column="104" />
               <folding>
                 <element signature="e#457#545#0" expanded="true" />
                 <element signature="e#1906#1956#0" expanded="true" />
@@ -89,10 +85,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StreamComponent.tsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StreamComponent.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
+            <state relative-caret-position="811">
               <caret line="267" column="78" lean-forward="false" selection-start-line="267" selection-start-column="67" selection-end-line="267" selection-end-column="78" />
               <folding>
                 <element signature="e#29#69#0" expanded="true" />
@@ -105,17 +101,17 @@
         <entry file="file://$PROJECT_DIR$/src/styles/components/_master.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="649">
-              <caret line="77" column="16" lean-forward="true" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+              <caret line="77" column="16" lean-forward="false" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_grid.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_grid.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/styles/base/_grid.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="110" column="18" lean-forward="true" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
+            <state relative-caret-position="610">
+              <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -198,10 +194,10 @@
         <option value="$PROJECT_DIR$/src/components/post/PostComponent.tsx" />
         <option value="$PROJECT_DIR$/src/containers/home/HomeComponent.tsx" />
         <option value="$PROJECT_DIR$/src/containers/master/MasterComponent.tsx" />
-        <option value="$PROJECT_DIR$/src/styles/base/_grid.scss" />
         <option value="$PROJECT_DIR$/src/styles/app.css" />
         <option value="$PROJECT_DIR$/src/styles/components/_master.scss" />
         <option value="$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx" />
+        <option value="$PROJECT_DIR$/src/styles/base/_grid.scss" />
       </list>
     </option>
   </component>
@@ -454,12 +450,12 @@
       <workItem from="1524680305974" duration="7888000" />
       <workItem from="1525224642924" duration="1157000" />
       <workItem from="1525228107305" duration="8192000" />
-      <workItem from="1525279158975" duration="25053000" />
+      <workItem from="1525279158975" duration="25474000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43870000" />
+    <option name="totallyTimeSpent" value="44291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
@@ -831,7 +827,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/post/PostComponent.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
-          <caret line="462" column="104" lean-forward="true" selection-start-line="462" selection-start-column="104" selection-end-line="462" selection-end-column="104" />
+          <caret line="462" column="104" lean-forward="false" selection-start-line="462" selection-start-column="104" selection-end-line="462" selection-end-column="104" />
           <folding>
             <element signature="e#457#545#0" expanded="true" />
             <element signature="e#1906#1956#0" expanded="true" />
@@ -876,7 +872,7 @@
     <entry file="file://$PROJECT_DIR$/src/containers/home/HomeComponent.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1">
-          <caret line="236" column="9" lean-forward="true" selection-start-line="236" selection-start-column="9" selection-end-line="236" selection-end-column="9" />
+          <caret line="236" column="9" lean-forward="false" selection-start-line="236" selection-start-column="9" selection-end-line="236" selection-end-column="9" />
           <folding>
             <element signature="e#29#64#0" expanded="true" />
             <element signature="e#1315#1359#0" expanded="true" />
@@ -905,14 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles/base/_grid.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="110" column="18" lean-forward="true" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/app.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="806">
@@ -924,7 +912,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/homeHeader/HomeHeaderComponent.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-135">
-          <caret line="188" column="25" lean-forward="true" selection-start-line="188" selection-start-column="25" selection-end-line="188" selection-end-column="25" />
+          <caret line="188" column="25" lean-forward="false" selection-start-line="188" selection-start-column="25" selection-end-line="188" selection-end-column="25" />
           <folding>
             <element signature="e#237#285#0" expanded="true" />
             <element signature="e#1475#1530#0" expanded="true" />
@@ -936,18 +924,26 @@
     <entry file="file://$PROJECT_DIR$/src/styles/components/_master.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="649">
-          <caret line="77" column="16" lean-forward="true" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+          <caret line="77" column="16" lean-forward="false" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/stream/StreamComponent.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
+        <state relative-caret-position="811">
           <caret line="267" column="78" lean-forward="false" selection-start-line="267" selection-start-column="67" selection-end-line="267" selection-end-column="78" />
           <folding>
             <element signature="e#29#69#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles/base/_grid.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

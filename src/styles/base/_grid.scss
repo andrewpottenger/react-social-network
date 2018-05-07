@@ -60,6 +60,14 @@ $gutter: 1em;
   flex: 0 0 100%;
 }
 
+@media (max-width: 400px) {
+  .side-container {
+    display: none;
+  }
+  .animate-top {
+    margin-top: 120px;
+  }
+}
 
 @media (min-width:400px) {
   .grid__cols-2 > .grid-cell,
