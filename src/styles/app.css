@@ -856,33 +856,28 @@ g__input-underline::after {
   width: 20%;
   background: #eee; }
 
-.MuiCard-root-400 {
+.modalOverflow {
   overflow: visible !important; }
 
-[class*="MuiCardHeader-action-"] {
-  position: absolute;
-  top: 0;
-  right: 10px; }
-
-[class*="MuiCardHeader-root-"] {
+.cardHeader {
   display: block !important; }
 
-[class*="MuiCardHeader-subheader-"] {
+.cardHeader div:nth-child(2n) span:nth-child(2n) {
   position: absolute !important;
   top: 5px;
   left: 24%;
   color: #9b9b9b !important; }
 
-[class*="MuiAvatar-root-"] {
-  width: 50px !important;
-  height: 50px !important; }
-
-[class*="MuiCardHeader-action"] [class*="MuiSvgIcon-root-"] {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg); }
+.cardHeader div:nth-child(3n) {
+  position: absolute;
+  top: 0;
+  right: 10px; }
+  .cardHeader div:nth-child(3n) svg {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg); }
 
 svg.flipIcon {
   -moz-transform: scaleX(-1);
@@ -892,37 +887,28 @@ svg.flipIcon {
   filter: FlipH;
   -ms-filter: "FlipH"; }
 
-[class*="MuiPaper-root-"] a {
-  color: #de64f6 !important; }
-  [class*="MuiPaper-root-"] a:hover {
-    color: #b94fce !important; }
-
-[class*="MuiPaper-root-"] [class*="MuiCardHeader-title"] a {
-  color: #9c27b0 !important; }
-  [class*="MuiPaper-root-"] [class*="MuiCardHeader-title"] a:hover {
-    color: #9b29a2 !important; }
-
-[class*="PostComponent-postBody-"] {
+.cardContent {
   padding-top: 30px !important; }
 
-[class*="MuiCardActions-root-"] {
+.socialActions {
   background: #ededed !important; }
+  .socialActions:first-child {
+    flex: 0 !important; }
+  .socialActions button {
+    width: 48px !important; }
 
-[class*="PostComponent-iconButton-"] {
-  width: 48px !important; }
-
-[class*="MuiCardActions-action-"] {
+.shortenWidth {
   flex: 0 !important; }
 
 [class*="PostWriteComponent-fullPageXs-"] {
   border: 2px solid #551360; }
 
+.icons {
+  width: 48px !important; }
+
 .streamPostBox div:first-child {
   border: 2px solid #551360;
   padding: 0 !important; }
-
-[class*="MuiCircularProgress-colorPrimary-"] {
-  color: #9b29a2 !important; }
 
 .fillBox {
   background-color: #551360;

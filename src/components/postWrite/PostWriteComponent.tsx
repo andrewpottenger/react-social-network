@@ -482,7 +482,6 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
           <DialogContent
             className={classes.content}
             style={{ paddingTop: 0 }}
-
           >
 
             <Card elevation={0}>

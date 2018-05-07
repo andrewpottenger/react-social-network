@@ -394,25 +394,27 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
     } = post.toJS()
     // Define variables
     return (
-      <Card key={`post-component-${id}`}>
+      <Card key={`post-component-${id}`} className='modalOverflow'>
           <div className='flex-wrapper'>
               <section className='flex-content'>
                   <div className='flex-columns'>
                       <aside className='flex-sidebar'>
                           <CardHeader
-                              title={<NavLink to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
+                              title={<NavLink style={{ color: '#9c27b0' }} className='postName' to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
                               subheader={creationDate ? moment.unix(creationDate!).fromNow() + ' | ' + translate!('post.public') : <LinearProgress color='primary' />}
-                              avatar={<NavLink to={`/${ownerUserId}`}><UserAvatar fullName={fullName!} fileName={avatar!} size={36} /></NavLink>}
+                              avatar={<NavLink to={`/${ownerUserId}`}><UserAvatar fullName={fullName!} fileName={avatar!} size={50} /></NavLink>}
                               action={isPostOwner ? rightIconMenu : ''}
+                              className='cardHeader'
                           >
                           </CardHeader>
                       </aside>
                       <main className='flex-main'>
-                          <CardContent className={classes.postBody}>
+                          <CardContent className={classes.postBody + ' cardContent'}>
                           <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
                               {reactStringReplace(body, /#(\w+)/g, (match: string, i: string) => (
                                   <NavLink
-                                      style={{ color: 'green' }}
+                                      className='tags'
+                                      style={{ color: '#de64f6' }}
                                       key={match + i}
                                       to={`/tag/${match}`}
                                       onClick={evt => {
@@ -437,14 +439,14 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
           <CardMedia image={image}>
             <Img fileName={image} />
           </CardMedia>) : ''}
-        <CardActions>
-          <div className={classes.vote}>
+        <CardActions className='socialActions'>
+          <div className={classes.vote + ' shortenWidth'}>
             <IconButton
-              className={classes.iconButton}
+              className={classes.iconButton + ' shortenWidth'}
               onClick={this.handleVote}
-              aria-label='Love'>
+              aria-label='Like'>
               <Checkbox
-                className={classes.iconButton}
+                className={classes.iconButton + ' shortenWidth'}
                 checkedIcon={<SvgThumbUp style={{ fill: '#551360' }} />}
                 icon={<SvgThumbUp style={{ fill: '#757575' }} />}
                 checked={this.props.currentUserVote}
