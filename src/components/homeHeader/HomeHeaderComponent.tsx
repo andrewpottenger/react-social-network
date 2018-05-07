@@ -187,7 +187,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
     return (
 
       <AppBar position='fixed' color='secondary'>
-        <Toolbar>
+        <Toolbar style={{ maxWidth: '1280px', margin: '0 auto'}}>
           {/* Left side */}
           <a href='/'><img src='images/backyardelogo.png' width='120' alt='Backyarde' /></a>
           {/*<IconButton onClick={this.onToggleSidebar} >*/}

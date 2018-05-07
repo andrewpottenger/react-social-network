@@ -210,6 +210,7 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
     const postList = this.postLoad() as { evenPostList: Post[], oddPostList: Post[], divided: boolean } | any
 
     return (
+
       <InfiniteScroll
         pageStart={0}
         loadMore={this.scrollLoad}
@@ -217,8 +218,71 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
         useWindow={true}
         loader={<LoadMoreProgressComponent key='stream-load-more-progress' />}
       >
-        <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
-          <div className='grid-cell animate-top' style={{ maxWidth: '530px', minWidth: '280px' }}>
+        <div className='grid grid__gutters grid__1of2 grid__space-around animate-top' style={{maxWidth: '960px', margin: '0 auto'}}>
+          <div className='grid-cell filter-feed' style={{ maxWidth: '200px', minWidth: '120px' }}>
+              <div className='side-container side-container-top-border'>
+                  <span className='card-title'>Filter Feed</span>
+                  <form action='#' id='filter-feed'>
+                      <p>
+                          <input type='checkbox' id='location' className='filled-in'/><label>Location</label>
+                      </p>
+                      <p>
+                          <input type='checkbox' id='post-type' className='filled-in'/><label>Post Type</label>
+                      </p>
+                      <p>
+                          <input type='checkbox' id='favorites' className='filled-in'/><label>Favorites</label>
+                      </p>
+                  </form>
+              </div>
+
+              <div className='side-container'>
+                  <div className='card-content grey-text'>
+                      <span className='card-title'>Trending</span>
+                      <p><a href='#homerenovation'>#homerenovation</a></p>
+                      <p><a href='#herringbone'>#herringbone</a></p>
+                      <p><a href='#minimalhome'>#minimalhome</a></p>
+                      <p><a href='#goldhardware'>#goldhardware</a></p>
+                      <p><a href='#dreamhome'>#dreamhome</a></p>
+                  </div>
+              </div>
+
+              <div className='side-container'>
+                  <div className='card-content grey-text'>
+                      <span className='card-title'>Sponsored</span>
+                      <div className='row valign-wrapper'>
+                          <div className='col s4'>
+                              <img src='images/location-1.png' alt='' className='circle responsive-img'/>
+                          </div>
+                          <div className='col s8'>
+                            <span className='small-text'>
+                              <a href='#homerenovation' className='purple-text'>Hillside Home<br/>Summersville, WV</a>
+                            </span>
+                          </div>
+                      </div>
+                      <div className='row valign-wrapper'>
+                          <div className='col s4'>
+                              <img src='images/location-2.png' alt='' className='circle responsive-img'/>
+                          </div>
+                          <div className='col s8'>
+                            <span className='small-text'>
+                              <a href='#homerenovation' className='purple-text'>Beach Bungalow<br/>San Diego, CA</a>
+                            </span>
+                          </div>
+                      </div>
+                      <div className='row valign-wrapper'>
+                          <div className='col s4'>
+                              <img src='images/location-3.png' alt='' className='circle responsive-img'/>
+                          </div>
+                          <div className='col s8'>
+                            <span className='small-text'>
+                              <a href='#homerenovation' className='purple-text'>Sunny Cottage<br/>San Diego, CA</a>
+                            </span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div className='grid-cell animate-top' style={{ maxWidth: '640px', minWidth: '280px' }}>
 
                 {displayWriting && !tag
               ? (<PostWriteComponent open={this.state.openPostWrite} onRequestClose={this.handleClosePostWrite} edit={false}>

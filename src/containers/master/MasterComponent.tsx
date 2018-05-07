@@ -124,10 +124,10 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
     return (
       <div id='master'>
       <Helmet>
-                <meta charSet='utf-8' />
-                <title>Backyarde - Every Home Has a Story. Tell Yours.</title>
-                <link rel='canonical' href='https://github.com/Qolzam/react-social-network' />
-            </Helmet>
+          <meta charSet='utf-8' />
+          <title>Backyarde - Every Home Has a Story. Tell Yours.</title>
+          <link rel='canonical' href='https://github.com/Qolzam/react-social-network' />
+      </Helmet>
        {sendFeedbackStatus ? <SendFeedback /> : ''}
         <div className='master__progress' style={{ display: (progress.visible ? 'block' : 'none') }}>
           <LinearProgress variant='determinate' value={progress.percent} />

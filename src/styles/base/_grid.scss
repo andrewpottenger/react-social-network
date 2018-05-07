@@ -107,6 +107,9 @@ $gutter: 1em;
   .grid__1of3 > .grid-cell {
     flex: 0 0 30%;
   }
+  .grid__2of3 > .grid-cell {
+    flex: 0 0 70%;
+  }
 
 }
 
