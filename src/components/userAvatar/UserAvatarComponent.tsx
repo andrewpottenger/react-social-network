@@ -18,10 +18,11 @@ import { IUserAvatarComponentState } from './IUserAvatarComponentState'
 /**
  * Create component class
  */
-export class UserAvatarComponent extends Component<IUserAvatarComponentProps,IUserAvatarComponentState> {
-
+export class UserAvatarComponent extends Component<
+  IUserAvatarComponentProps,
+  IUserAvatarComponentState
+> {
   static propTypes = {
-
     /**
      * Use for getting url address from server
      */
@@ -42,36 +43,54 @@ export class UserAvatarComponent extends Component<IUserAvatarComponentProps,IUs
      * Trigger on touch tap
      */
     onClick: PropTypes.func
-
   }
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IUserAvatarComponentProps) {
+  constructor(props: IUserAvatarComponentProps) {
     super(props)
 
     // Defaul state
-    this.state = {
-    }
+    this.state = {}
 
     // Binding functions to `this`
-
   }
 
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
+  render() {
     let { fileName, fullName, style, size, onClick } = this.props
 
     return (
-      <div style={{display: 'inherit'}}>
-       {(fileName && fileName !== '' && fileName !== 'noImage' )
-       ? ( <Avatar src={fileName ? fileName : ' '} style={{...style, backgroundColor: '#ffffff', width: size || 36, height: size || 36}} onClick={onClick} />)
-        : (<Avatar style={{...style, backgroundColor: '#00bcd4', width: size || 36, height: size || 36}} onClick={onClick}>{fullName ? fullName.slice(0, 1) : ''}</Avatar>) }
+      <div style={{ display: 'inherit' }}>
+        {fileName && fileName !== '' && fileName !== 'noImage' ? (
+          <Avatar
+            src={fileName ? fileName : ' '}
+            style={{
+              ...style,
+              backgroundColor: '#ffffff',
+              width: size || 36,
+              height: size || 36
+            }}
+            onClick={onClick}
+          />
+        ) : (
+          <Avatar
+            style={{
+              ...style,
+              backgroundColor: '#00bcd4',
+              width: size || 36,
+              height: size || 36
+            }}
+            onClick={onClick}
+          >
+            {fullName ? fullName.slice(0, 1) : ''}
+          </Avatar>
+        )}
       </div>
     )
   }
@@ -83,9 +102,11 @@ export class UserAvatarComponent extends Component<IUserAvatarComponentProps,IUs
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: IUserAvatarComponentProps) => {
-  return {
-  }
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IUserAvatarComponentProps
+) => {
+  return {}
 }
 
 /**
@@ -98,9 +119,10 @@ const mapStateToProps = (state: any, ownProps: IUserAvatarComponentProps) => {
   return {
     avatarURL: state.getIn(['imageGallery', 'imageURLList']),
     imageRequests: state.getIn(['imageGallery', 'imageRequests'])
-
   }
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(UserAvatarComponent as any)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  UserAvatarComponent as any
+)

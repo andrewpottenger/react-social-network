@@ -8,7 +8,7 @@ import moment from 'moment/moment'
 import Linkify from 'react-linkify'
 import Popover from 'material-ui/Popover'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import {Map} from 'immutable'
+import { Map } from 'immutable'
 
 import { Comment } from 'core/domain/comments'
 
@@ -24,7 +24,13 @@ import Menu, { MenuList, MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import { withStyles } from 'material-ui/styles'
 import { Manager, Target, Popper } from 'react-popper'
-import { Card, CardActions, CardHeader, CardMedia, CardContent } from 'material-ui'
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardContent
+} from 'material-ui'
 import Grow from 'material-ui/transitions/Grow'
 import ClickAwayListener from 'material-ui/utils/ClickAwayListener'
 import classNames from 'classnames'
@@ -62,7 +68,6 @@ const styles = (theme: any) => ({
     right: 4,
     flexDirection: 'row-reverse',
     position: 'absolute'
-
   },
   commentBody: {
     color: 'black',
@@ -81,7 +86,6 @@ const styles = (theme: any) => ({
     paddingRight: 6,
     paddingTop: 0,
     paddingBottom: 0
-
   },
   moreIcon: {
     width: '0.6em',
@@ -92,7 +96,10 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class CommentComponent extends Component<ICommentComponentProps, ICommentComponentState> {
+export class CommentComponent extends Component<
+  ICommentComponentProps,
+  ICommentComponentState
+> {
   static propTypes = {
     /**
      * Comment object
@@ -127,7 +134,6 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
       color: 'rgba(0,0,0,0.87)',
       textOverflow: 'ellipsis',
       overflow: 'hidden'
-
     },
     textarea: {
       fontWeight: 400,
@@ -161,11 +167,15 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: ICommentComponentProps) {
+  constructor(props: ICommentComponentProps) {
     super(props)
 
-    this.textareaRef = (i: any) => { this.inputText = i }
-    this.divCommentRef = (i: any) => { this.divComment = i }
+    this.textareaRef = (i: any) => {
+      this.inputText = i
+    }
+    this.divCommentRef = (i: any) => {
+      this.divComment = i
+    }
 
     // Defaul state
     this.state = {
@@ -193,7 +203,6 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
        * Anchor element
        */
       anchorEl: null
-
     }
 
     // Binding functions to `this`
@@ -202,7 +211,6 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
     this.handleOnChange = this.handleOnChange.bind(this)
     this.handleCancelEdit = this.handleCancelEdit.bind(this)
     this.handleEditComment = this.handleEditComment.bind(this)
-
   }
 
   /**
@@ -210,7 +218,7 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
    * @param  {event} evt is an event passed by clicking on edit button
    */
   handleEditComment = (evt: any) => {
-    this.setState({openMenu: false})
+    this.setState({ openMenu: false })
     this.props.openEditor!()
   }
 
@@ -219,7 +227,6 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
    * @param  {event} evt is an event passed by clicking on cancel button
    */
   handleCancelEdit = (evt: any) => {
-
     this.setState({
       text: this.state.initialText!
     })
@@ -237,7 +244,6 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
     this.setState({
       initialText: this.state.text
     })
-
   }
 
   /**
@@ -247,7 +253,11 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
    */
   handleOnChange = (evt: any) => {
     const data = evt.target.value
-    if (data.length === 0 || data.trim() === '' || data.trim() === this.state.initialText) {
+    if (
+      data.length === 0 ||
+      data.trim() === '' ||
+      data.trim() === this.state.initialText
+    ) {
       this.setState({
         text: data,
         editDisabled: true
@@ -258,7 +268,6 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
         editDisabled: false
       })
     }
-
   }
 
   /**
@@ -275,7 +284,7 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
    * Handle comment menu
    */
   handleCommentMenu = (event: any) => {
-    this.setState({ openMenu: true,  anchorEl: findDOMNode(this.buttonMenu!), })
+    this.setState({ openMenu: true, anchorEl: findDOMNode(this.buttonMenu!) })
   }
 
   /**
@@ -285,7 +294,7 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
     this.setState({ openMenu: false })
   }
 
-  componentWillMount () {
+  componentWillMount() {
     const { commentOwner } = this.props
     if (!this.props.isCommentOwner && !commentOwner) {
       this.props.getUserInfo!()
@@ -296,27 +305,33 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-
+  render() {
     /**
      * Comment object from props
      */
-    const { comment, classes, fullName, avatar, translate , editorStatus} = this.props
+    const {
+      comment,
+      classes,
+      fullName,
+      avatar,
+      translate,
+      editorStatus
+    } = this.props
 
     const { openMenu, anchorEl } = this.state
 
     const rightIconMenu = (
       <>
-          <IconButton
+        <IconButton
           buttonRef={(node: any) => {
             this.buttonMenu = node
           }}
-            aria-owns={openMenu! ? 'comment-menu' : ''}
-            aria-haspopup='true'
-            onClick={this.handleCommentMenu}
-          >
-            <MoreVertIcon className={classes.moreIcon} />
-          </IconButton>
+          aria-owns={openMenu! ? 'comment-menu' : ''}
+          aria-haspopup="true"
+          onClick={this.handleCommentMenu}
+        >
+          <MoreVertIcon className={classes.moreIcon} />
+        </IconButton>
         {/* <Popper
           placement='bottom-start'
           eventsEnabled={openMenu!}
@@ -324,86 +339,164 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
         >
           <ClickAwayListener onClickAway={this.handleCloseCommentMenu}>
             <Grow in={openMenu!} > */}
-            <Popover
-                open={openMenu!}
-                anchorEl={anchorEl}
-                anchorReference={'anchorEl'}
-                anchorPosition={{ top: 0, left: 0 }}
-                onClose={this.handleCloseCommentMenu}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center',
-                }}
-                transformOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center',
-                }}
-              >
-              <Paper>
-                <MenuList role='menu'>
-                  <MenuItem className={classes.rightIconMenuItem}>{translate!('comment.replyButton')}</MenuItem>
-                  {this.props.isCommentOwner ? (<MenuItem className={classes.rightIconMenuItem} onClick={this.handleEditComment}>{translate!('comment.editButton')}</MenuItem>) : ''}
-                  {(this.props.isCommentOwner || this.props.isPostOwner) ? (<MenuItem className={classes.rightIconMenuItem} onClick={(evt: any) => this.handleDelete(evt, comment.id, comment.postId)}>{translate!('comment.deleteButton')}</MenuItem>) : ''}
-                </MenuList>
-              </Paper>
-              </Popover>
-
-              </>
+        <Popover
+          open={openMenu!}
+          anchorEl={anchorEl}
+          anchorReference={'anchorEl'}
+          anchorPosition={{ top: 0, left: 0 }}
+          onClose={this.handleCloseCommentMenu}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+        >
+          <Paper>
+            <MenuList role="menu">
+              <MenuItem className={classes.rightIconMenuItem}>
+                {translate!('comment.replyButton')}
+              </MenuItem>
+              {this.props.isCommentOwner ? (
+                <MenuItem
+                  className={classes.rightIconMenuItem}
+                  onClick={this.handleEditComment}
+                >
+                  {translate!('comment.editButton')}
+                </MenuItem>
+              ) : (
+                ''
+              )}
+              {this.props.isCommentOwner || this.props.isPostOwner ? (
+                <MenuItem
+                  className={classes.rightIconMenuItem}
+                  onClick={(evt: any) =>
+                    this.handleDelete(evt, comment.id, comment.postId)
+                  }
+                >
+                  {translate!('comment.deleteButton')}
+                </MenuItem>
+              ) : (
+                ''
+              )}
+            </MenuList>
+          </Paper>
+        </Popover>
+      </>
     )
 
     const Author = () => (
       <div>
-        <NavLink to={`/${userId}`}> <span style={this.styles.author as any}>{comment.userDisplayName}</span></NavLink><span style={{
-          fontWeight: 400,
-          fontSize: '8px'
-        }}>{moment.unix(comment.creationDate!).fromNow()}</span>
+        <NavLink to={`/${userId}`}>
+          {' '}
+          <span style={this.styles.author as any}>
+            {comment.userDisplayName}
+          </span>
+        </NavLink>
+        <span
+          style={{
+            fontWeight: 400,
+            fontSize: '8px'
+          }}
+        >
+          {moment.unix(comment.creationDate!).fromNow()}
+        </span>
       </div>
     )
     const { userId } = comment
     const commentBody = (
       <div style={{ outline: 'none', flex: 'auto', flexGrow: 1 }}>
-      { editorStatus ? <TextField
-                placeholder={translate!('comment.updateCommentPlaceholder')}
-                multiline
-                autoFocus
-                rowsMax='4'
-                InputProps={{
-                  disableUnderline: true,
-                  autoFocus: true,
-                  fullWidth: true
-                }}
-                value={this.state.text}
-                onChange={this.handleOnChange}
-                className={classes.textField}
-                fullWidth={true}
-              /> : <div className={classNames('animate2-top10', classes.commentBody)}>{this.state.text}</div>}
+        {editorStatus ? (
+          <TextField
+            placeholder={translate!('comment.updateCommentPlaceholder')}
+            multiline
+            autoFocus
+            rowsMax="4"
+            InputProps={{
+              disableUnderline: true,
+              autoFocus: true,
+              fullWidth: true
+            }}
+            value={this.state.text}
+            onChange={this.handleOnChange}
+            className={classes.textField}
+            fullWidth={true}
+          />
+        ) : (
+          <div className={classNames('animate2-top10', classes.commentBody)}>
+            {this.state.text}
+          </div>
+        )}
 
-        <div style={{ display: (editorStatus ? 'flex' : 'none'), flexDirection: 'row-reverse' }}>
-          <Button color='primary' disabled={this.state.editDisabled}
-            style={{ float: 'right', clear: 'both', zIndex: 5, margin: '0px 5px 5px 0px', fontWeight: 400 }}
-            onClick={this.handleUpdateComment} > {translate!('comment.updateButton')} </Button>
-          <Button color='primary' style={this.styles.cancel as any} onClick={this.handleCancelEdit} > {translate!('comment.cancelButton')} </Button>
+        <div
+          style={{
+            display: editorStatus ? 'flex' : 'none',
+            flexDirection: 'row-reverse'
+          }}
+        >
+          <Button
+            color="primary"
+            disabled={this.state.editDisabled}
+            style={{
+              float: 'right',
+              clear: 'both',
+              zIndex: 5,
+              margin: '0px 5px 5px 0px',
+              fontWeight: 400
+            }}
+            onClick={this.handleUpdateComment}
+          >
+            {' '}
+            {translate!('comment.updateButton')}{' '}
+          </Button>
+          <Button
+            color="primary"
+            style={this.styles.cancel as any}
+            onClick={this.handleCancelEdit}
+          >
+            {' '}
+            {translate!('comment.cancelButton')}{' '}
+          </Button>
         </div>
       </div>
     )
     return (
-      <div className='animate-top' key={comment.id!}>
-        <Paper elevation={0} className='animate2-top10'
-          style={{ position: 'relative', padding: '', display: (!this.state.display ? 'block' : 'none') }}>
+      <div className="animate-top" key={comment.id!}>
+        <Paper
+          elevation={0}
+          className="animate2-top10"
+          style={{
+            position: 'relative',
+            padding: '',
+            display: !this.state.display ? 'block' : 'none'
+          }}
+        >
           <Card elevation={0}>
             <CardHeader
-            className={classes.header}
+              className={classes.header}
               title={editorStatus ? '' : <Author />}
               subheader={commentBody}
-              avatar={<NavLink to={`/${userId}`}><UserAvatar fullName={fullName!} fileName={avatar!} size={24} /></NavLink>}
-              action={(!this.props.isCommentOwner && !this.props.isPostOwner && this.props.disableComments) || editorStatus ? '' : rightIconMenu}
-            >
-            </CardHeader>
-
+              avatar={
+                <NavLink to={`/${userId}`}>
+                  <UserAvatar
+                    fullName={fullName!}
+                    fileName={avatar!}
+                    size={24}
+                  />
+                </NavLink>}
+              action={
+                (!this.props.isCommentOwner &&
+                  !this.props.isPostOwner &&
+                  this.props.disableComments) ||
+                editorStatus
+                  ? ''
+                  : rightIconMenu
+              }
+            />
           </Card>
-
         </Paper>
-
       </div>
     )
   }
@@ -415,15 +508,32 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: ICommentComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: ICommentComponentProps
+) => {
   return {
-    delete: (id: string | null, postId: string) => dispatch(commentActions.dbDeleteComment(id, postId)),
+    delete: (id: string | null, postId: string) =>
+      dispatch(commentActions.dbDeleteComment(id, postId)),
     update: (comment: Comment) => {
       dispatch(commentActions.dbUpdateComment(comment))
     },
-    openEditor: () => dispatch(commentActions.openCommentEditor({ id: ownProps.comment.id, postId: ownProps.comment.postId })),
-    closeEditor: () => dispatch(commentActions.closeCommentEditor({ id: ownProps.comment.id, postId: ownProps.comment.postId })),
-    getUserInfo: () => dispatch(userActions.dbGetUserInfoByUserId(ownProps.comment.userId!, ''))
+    openEditor: () =>
+      dispatch(
+        commentActions.openCommentEditor({
+          id: ownProps.comment.id,
+          postId: ownProps.comment.postId
+        })
+      ),
+    closeEditor: () =>
+      dispatch(
+        commentActions.closeCommentEditor({
+          id: ownProps.comment.id,
+          postId: ownProps.comment.postId
+        })
+      ),
+    getUserInfo: () =>
+      dispatch(userActions.dbGetUserInfoByUserId(ownProps.comment.userId!, ''))
   }
 }
 
@@ -436,12 +546,12 @@ const mapDispatchToProps = (dispatch: any, ownProps: ICommentComponentProps) => 
 const mapStateToProps = (state: any, ownProps: ICommentComponentProps) => {
   const commentOwnerId = ownProps.comment.userId
   const uid = state.getIn(['authorize', 'uid'])
-  const avatar =  ownProps.comment.userAvatar
+  const avatar = ownProps.comment.userAvatar
   const fullName = ownProps.comment.userDisplayName
   return {
     translate: getTranslate(state.get('locale')),
     uid: uid,
-    isCommentOwner: (uid === commentOwnerId),
+    isCommentOwner: uid === commentOwnerId,
     commentOwner: state.getIn(['user', 'info', commentOwnerId]),
     avatar,
     fullName
@@ -449,4 +559,6 @@ const mapStateToProps = (state: any, ownProps: ICommentComponentProps) => {
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(CommentComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(CommentComponent as any) as any)

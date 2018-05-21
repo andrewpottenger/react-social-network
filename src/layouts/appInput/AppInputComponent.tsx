@@ -12,8 +12,10 @@ import { TextField } from 'material-ui'
 /**
  * Create component class
  */
-export default class AppInputComponent extends Component<IAppInputComponentProps, IAppInputComponentState> {
-
+export default class AppInputComponent extends Component<
+  IAppInputComponentProps,
+  IAppInputComponentState
+> {
   /**
    * Fields
    */
@@ -27,11 +29,9 @@ export default class AppInputComponent extends Component<IAppInputComponentProps
     super(props)
 
     // Defaul state
-    this.state = {
-    }
+    this.state = {}
 
     // Binding functions to `this`
-
   }
   focus = () => {
     this.input.focus()
@@ -42,13 +42,8 @@ export default class AppInputComponent extends Component<IAppInputComponentProps
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-
     return (
-      <TextField
-        inputRef={el => (this.input = el)}
-        fullWidth
-        {...this.props}
-      />
+      <TextField inputRef={el => (this.input = el)} fullWidth {...this.props} />
     )
   }
 }

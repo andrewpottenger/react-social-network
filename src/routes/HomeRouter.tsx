@@ -13,61 +13,70 @@ import MasterLoadingComponent from 'components/masterLoading/MasterLoadingCompon
 // - Async Components
 const AsyncStream = Loadable({
   loader: () => import('containers/stream'),
-  loading: MasterLoadingComponent,
+  loading: MasterLoadingComponent
 })
 const AsyncProfile = Loadable({
   loader: () => import('containers/profile'),
-  loading: MasterLoadingComponent,
+  loading: MasterLoadingComponent
 })
 const AsyncPostPage = Loadable({
   loader: () => import('containers/postPage'),
-  loading: MasterLoadingComponent,
+  loading: MasterLoadingComponent
 })
 const AsyncPeople = Loadable({
   loader: () => import('containers/people'),
-  loading: MasterLoadingComponent,
+  loading: MasterLoadingComponent
 })
 
 /**
  * Home Router
  */
 export class HomeRouter extends Component<IRouterProps, any> {
-  render () {
+  render() {
     const { enabled, match, data, translate } = this.props
     const St = AsyncStream
-    return (
-          enabled ? (
-          <Switch>
-            <PrivateRoute path='/people/:tab?' component={<AsyncPeople />} />
+    return enabled ? (
+      <Switch>
+        <PrivateRoute path="/people/:tab?" component={<AsyncPeople />} />
 
-            <PrivateRoute path='/tag/:tag' component={(
-            <div><St displayWriting={false} homeTitle={`#${match.params.tag}`} posts={data.mergedPosts} /></div>
-            )} />
-            <Route path='/:userId/posts/:postId/:tag?' component={AsyncPostPage} />
-            <Route path='/:userId' component={AsyncProfile} />
-            <PrivateRoute path='/' component={(
+        <PrivateRoute
+          path="/tag/:tag"
+          component={
             <div>
-            <St
-            homeTitle={translate!('header.home')}
-            posts={data.mergedPosts}
-            loadStream={data.loadDataStream}
-            hasMorePosts={data.hasMorePosts}
-            displayWriting={true} />
+              <St
+                displayWriting={false}
+                homeTitle={`#${match.params.tag}`}
+                posts={data.mergedPosts}
+              />
             </div>
-            )} />
-          </Switch>
-          )
-          : ''
-
+          }
+        />
+        <Route path="/:userId/posts/:postId/:tag?" component={AsyncPostPage} />
+        <Route path="/:userId" component={AsyncProfile} />
+        <PrivateRoute
+          path="/"
+          component={
+            <div>
+              <St
+                homeTitle={translate!('header.home')}
+                posts={data.mergedPosts}
+                loadStream={data.loadDataStream}
+                hasMorePosts={data.hasMorePosts}
+                displayWriting={true}
+              />
+            </div>
+          }
+        />
+      </Switch>
+    ) : (
+      ''
     )
   }
 }
 
 // - Map dispatch to props
 const mapDispatchToProps = (dispatch: any, ownProps: IRouterProps) => {
-
   return {}
-
 }
 
 /**
@@ -76,8 +85,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: IRouterProps) => {
 const mapStateToProps = (state: Map<string, any>, ownProps: IRouterProps) => {
   return {
     translate: getTranslate(state.get('locale')),
-    currentLanguage: getActiveLanguage(state.get('locale')).code,
+    currentLanguage: getActiveLanguage(state.get('locale')).code
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeRouter as any) as any) as typeof HomeRouter
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
+  HomeRouter as any
+) as any) as typeof HomeRouter

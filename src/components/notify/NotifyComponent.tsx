@@ -9,7 +9,11 @@ import Grow from 'material-ui/transitions/Grow'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Paper from 'material-ui/Paper'
-import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List'
+import List, {
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText
+} from 'material-ui/List'
 import { Map } from 'immutable'
 
 // - Import app components
@@ -29,7 +33,7 @@ const styles = (theme: any) => ({
     maxWidth: 360,
     backgroundColor: '#efefef',
     minHeight: 376,
-    display: 'flex',
+    display: 'flex'
   },
   noNotify: {
     color: '#888888',
@@ -46,8 +50,7 @@ const styles = (theme: any) => ({
     maxWidth: 500,
     overflowY: 'auto'
   },
-  popper: {
-  },
+  popper: {},
   overflowHidden: {
     overflow: 'hidden'
   },
@@ -55,7 +58,6 @@ const styles = (theme: any) => ({
     maxHeight: 380,
     overflowY: 'auto',
     width: '98%'
-
   },
   fullPageXs: {
     [theme.breakpoints.down('xs')]: {
@@ -70,8 +72,10 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class NotifyComponent extends Component<INotifyComponentProps, INotifyComponentState> {
-
+export class NotifyComponent extends Component<
+  INotifyComponentProps,
+  INotifyComponentState
+> {
   static propTypes = {
     /**
      * It will be true if the notification is open
@@ -89,22 +93,19 @@ export class NotifyComponent extends Component<INotifyComponentProps, INotifyCom
      * If user's seen notification box or not (true/false)
      */
     isSeen: PropTypes.bool
-
   }
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: INotifyComponentProps) {
+  constructor(props: INotifyComponentProps) {
     super(props)
 
     // Defaul state
-    this.state = {
-    }
+    this.state = {}
 
     // Binding functions to `this`
-
   }
 
   notifyItemList = () => {
@@ -119,8 +120,8 @@ export class NotifyComponent extends Component<INotifyComponentProps, INotifyCom
           <NotifyItem
             key={key}
             description={notification!.get('description', '')}
-            fullName={(userInfo ? userInfo.fullName || '' : '')}
-            avatar={(userInfo ? userInfo.avatar || '' : '')}
+            fullName={userInfo ? userInfo.fullName || '' : ''}
+            avatar={userInfo ? userInfo.avatar || '' : ''}
             id={key!}
             isSeen={notification!.get('isSeen', false)}
             url={notification!.get('url')}
@@ -137,27 +138,33 @@ export class NotifyComponent extends Component<INotifyComponentProps, INotifyCom
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
+  render() {
     let { open, anchorEl, onRequestClose, classes } = this.props
-    const noNotify = ( 
-    <div className={classes.noNotify}>
-     All caught up! </div>
-     )
+    const noNotify = <div className={classes.noNotify}>All caught up! </div>
     const items = this.notifyItemList()
     return (
       <Popper
-        placement='bottom-start'
+        placement="bottom-start"
         eventsEnabled={open}
-        className={classNames({ [classes.popperClose]: !open }, { [classes.popperOpen]: open })}
+        className={classNames(
+          { [classes.popperClose]: !open },
+          { [classes.popperOpen]: open }
+        )}
       >
-
         <ClickAwayListener onClickAway={onRequestClose}>
-          <Grow in={open} >
-          <Paper className={classNames(classes.root, { [classes.overflowHidden]: !open })} elevation={4} >
-
-                {items.length > 0 ? <List className={classes.list} >{items}</List> : noNotify}
-
-              </Paper>
+          <Grow in={open}>
+            <Paper
+              className={classNames(classes.root, {
+                [classes.overflowHidden]: !open
+              })}
+              elevation={4}
+            >
+              {items.length > 0 ? (
+                <List className={classes.list}>{items}</List>
+              ) : (
+                noNotify
+              )}
+            </Paper>
           </Grow>
         </ClickAwayListener>
       </Popper>
@@ -172,9 +179,7 @@ export class NotifyComponent extends Component<INotifyComponentProps, INotifyCom
  * @return {object}          props of component
  */
 const mapDispatchToProps = (dispatch: any, ownProps: INotifyComponentProps) => {
-  return {
-
-  }
+  return {}
 }
 
 /**
@@ -183,7 +188,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: INotifyComponentProps) => {
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: INotifyComponentProps) => {
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: INotifyComponentProps
+) => {
   return {
     notifications: state.getIn(['notify', 'userNotifies']),
     info: state.getIn(['user', 'info'])
@@ -191,4 +199,6 @@ const mapStateToProps = (state: Map<string, any>, ownProps: INotifyComponentProp
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(NotifyComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(NotifyComponent as any) as any)

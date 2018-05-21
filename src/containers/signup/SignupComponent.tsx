@@ -27,7 +27,6 @@ const styles = (theme: any) => ({
   textField: {
     minWidth: 280,
     marginTop: 20
-
   },
   contain: {
     margin: '0 auto'
@@ -43,8 +42,10 @@ const styles = (theme: any) => ({
 })
 
 // - Create Signup component class
-export class SignupComponent extends Component<ISignupComponentProps, ISignupComponentState> {
-
+export class SignupComponent extends Component<
+  ISignupComponentProps,
+  ISignupComponentState
+> {
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
@@ -64,7 +65,6 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
     }
     // Binding function to `this`
     this.handleForm = this.handleForm.bind(this)
-
   }
 
   /**
@@ -108,7 +108,6 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
         })
         break
       default:
-
     }
   }
 
@@ -116,8 +115,12 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
    * Handle register form
    */
   handleForm = () => {
-
-    const { fullNameInput, emailInput, passwordInput, confirmInput } = this.state
+    const {
+      fullNameInput,
+      emailInput,
+      passwordInput,
+      confirmInput
+    } = this.state
     const { register, translate } = this.props
 
     let error = false
@@ -125,10 +128,12 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
     // Validate full name
     let fullNameCheck = fullNameInput.trim().toLowerCase()
 
-    if (fullNameCheck.indexOf('test') > -1
-      || fullNameCheck.indexOf('demo') > -1
-      || fullNameCheck.indexOf('asd') > -1
-      || fullNameCheck.length < 4) {
+    if (
+      fullNameCheck.indexOf('test') > -1 ||
+      fullNameCheck.indexOf('demo') > -1 ||
+      fullNameCheck.indexOf('asd') > -1 ||
+      fullNameCheck.length < 4
+    ) {
       this.setState({
         fullNameInputError: translate!('signup.validNameError')
       })
@@ -141,7 +146,6 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
         emailInputError: translate!('signup.validEmailError')
       })
       error = true
-
     }
 
     /* Check password */
@@ -150,21 +154,18 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
         passwordInputError: translate!('signup.passwordRequiredError')
       })
       error = true
-
     }
     if (confirmInput === '') {
       this.setState({
         confirmInputError: translate!('signup.confirmRequiredError')
       })
       error = true
-
     } else if (confirmInput !== passwordInput) {
       this.setState({
         passwordInputError: translate!('signup.passwordEqualConfirmError'),
         confirmInputError: translate!('signup.confirmEqualPasswordError')
       })
       error = true
-
     }
     if (!error) {
       register!({
@@ -173,7 +174,6 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
         fullName: fullNameInput
       })
     }
-
   }
 
   /**
@@ -181,24 +181,25 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-
     const { classes, translate } = this.props
 
     return (
-
       <Grid container spacing={24}>
         <Grid item xs={12} className={classes.contain}>
-          <h1 className='g__app-name'>{config.settings.appName}</h1>
+          <h1 className="g__app-name">{config.settings.appName}</h1>
 
-          <div className='animate-bottom'>
-            <Paper className={classes.paper} elevation={1} >
+          <div className="animate-bottom">
+            <Paper className={classes.paper} elevation={1}>
               <div style={{ padding: '48px 40px 36px' }}>
-                <div style={{
-                  paddingLeft: '40px',
-                  paddingRight: '40px'
-                }}>
-
-                  <h2 className='zoomOutLCorner animated g__paper-title'>{translate!('signup.title')}</h2>
+                <div
+                  style={{
+                    paddingLeft: '40px',
+                    paddingRight: '40px'
+                  }}
+                >
+                  <h2 className="zoomOutLCorner animated g__paper-title">
+                    {translate!('signup.title')}
+                  </h2>
                 </div>
 
                 <TextField
@@ -207,54 +208,63 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
                   onChange={this.handleInputChange}
                   helperText={this.state.fullNameInputError}
                   error={this.state.fullNameInputError.trim() !== ''}
-                  name='fullNameInput'
+                  name="fullNameInput"
                   label={translate!('signup.fullNameLabel')}
-                  type='text'
-                /><br />
+                  type="text"
+                />
+                <br />
                 <TextField
                   className={classes.textField}
                   onChange={this.handleInputChange}
                   helperText={this.state.emailInputError}
                   error={this.state.emailInputError.trim() !== ''}
-                  name='emailInput'
+                  name="emailInput"
                   label={translate!('signup.emailLabel')}
-                  type='email'
-                /><br />
+                  type="email"
+                />
+                <br />
                 <TextField
                   className={classes.textField}
                   onChange={this.handleInputChange}
                   helperText={this.state.passwordInputError}
                   error={this.state.passwordInputError.trim() !== ''}
-                  name='passwordInput'
+                  name="passwordInput"
                   label={translate!('signup.passwordLabel')}
-                  type='password'
-                /><br />
+                  type="password"
+                />
+                <br />
                 <TextField
                   className={classes.textField}
                   onChange={this.handleInputChange}
                   helperText={this.state.confirmInputError}
                   error={this.state.confirmInputError.trim() !== ''}
-                  name='confirmInput'
+                  name="confirmInput"
                   label={translate!('signup.confirmPasswordLabel')}
-                  type='password'
-                /><br />
+                  type="password"
+                />
                 <br />
-                <div className='signup__button-box'>
+                <br />
+                <div className="signup__button-box">
                   <div>
-                    <Button onClick={this.props.loginPage}>{translate!('signup.loginButton')}</Button>
+                    <Button onClick={this.props.loginPage}>
+                      {translate!('signup.loginButton')}
+                    </Button>
                   </div>
                   <div>
-                    <Button variant='raised' color='primary' onClick={this.handleForm}>{translate!('signup.createButton')}</Button>
-
+                    <Button
+                      variant="raised"
+                      color="primary"
+                      onClick={this.handleForm}
+                    >
+                      {translate!('signup.createButton')}
+                    </Button>
                   </div>
                 </div>
-
               </div>
             </Paper>
           </div>
         </Grid>
       </Grid>
-
     )
   }
 }
@@ -287,9 +297,11 @@ const mapDispatchToProps = (dispatch: any, ownProps: ISignupComponentProps) => {
  */
 const mapStateToProps = (state: any, ownProps: ISignupComponentProps) => {
   return {
-    translate: getTranslate(state.get('locale')),
+    translate: getTranslate(state.get('locale'))
   }
 }
 
 // - Connect component to redux store
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(SignupComponent as any) as any) as any)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles as any)(SignupComponent as any) as any
+) as any)

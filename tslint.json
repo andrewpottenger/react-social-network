@@ -26,6 +26,7 @@
         "jsx-no-bind": false,
         "jsx-boolean-value": false,
         "jsx-alignment": false,
+        "jsx-curly-spacing": {"when": "always"},
         "label-position": true,
         "member-ordering": [
         true,

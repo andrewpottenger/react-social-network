@@ -1,4 +1,3 @@
-
 // - Import react components
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
@@ -6,8 +5,8 @@ import { Route, Switch, NavLink, withRouter, Redirect } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import Snackbar from 'material-ui/Snackbar'
 import { LinearProgress } from 'material-ui/Progress'
-import {Helmet} from 'react-helmet'
-import {Map} from 'immutable'
+import { Helmet } from 'react-helmet'
+import { Map } from 'immutable'
 
 // - Import components
 
@@ -35,14 +34,16 @@ import {
 /* ------------------------------------ */
 
 // - Create Master component class
-export class MasterComponent extends Component<IMasterComponentProps, IMasterComponentState> {
-
+export class MasterComponent extends Component<
+  IMasterComponentProps,
+  IMasterComponentState
+> {
   static isPrivate = true
 
   private readonly _serviceProvider: IServiceProvider
   private readonly _authourizeService: IAuthorizeService
   // Constructor
-  constructor (props: IMasterComponentProps) {
+  constructor(props: IMasterComponentProps) {
     super(props)
 
     this._serviceProvider = new ServiceProvide()
@@ -56,7 +57,6 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
 
     // Binding functions to `this`
     this.handleMessage = this.handleMessage.bind(this)
-
   }
 
   // Handle click on message
@@ -64,49 +64,48 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
     this.props.closeMessage()
   }
 
-  componentDidCatch (error: any, info: any) {
+  componentDidCatch(error: any, info: any) {
     console.log('===========Catched by React componentDidCatch==============')
     console.log(error, info)
     console.log('====================================')
   }
 
-  componentDidMount () {
-
-    this._authourizeService.onAuthStateChanged((isVerifide: boolean, user: any) => {
-      const {
-        global,
-        clearData,
-        loadDataGuest,
-        defaultDataDisable,
-        defaultDataEnable,
-        login,
-        logout,
-        showMasterLoading,
-        hideMasterLoading
-      } = this.props
-      if (user) {
-        login(user.uid,isVerifide)
-        hideMasterLoading!()
-        this.setState({
-          loading: false,
-          isVerifide: true
-        })
-
-      } else {
-        logout()
-        hideMasterLoading!()
-        this.setState({
-          loading: false,
-          isVerifide: false
-        })
-        if (global.defaultLoadDataStatus) {
-          defaultDataDisable()
-          clearData()
+  componentDidMount() {
+    this._authourizeService.onAuthStateChanged(
+      (isVerifide: boolean, user: any) => {
+        const {
+          global,
+          clearData,
+          loadDataGuest,
+          defaultDataDisable,
+          defaultDataEnable,
+          login,
+          logout,
+          showMasterLoading,
+          hideMasterLoading
+        } = this.props
+        if (user) {
+          login(user.uid, isVerifide)
+          hideMasterLoading!()
+          this.setState({
+            loading: false,
+            isVerifide: true
+          })
+        } else {
+          logout()
+          hideMasterLoading!()
+          this.setState({
+            loading: false,
+            isVerifide: false
+          })
+          if (global.defaultLoadDataStatus) {
+            defaultDataDisable()
+            clearData()
+          }
+          loadDataGuest()
         }
-        loadDataGuest()
       }
-    })
-
+    )
   }
 
   /**
@@ -116,27 +115,43 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
    *
    * @memberof Master
    */
-  public render () {
-
-    const { progress, global, loaded, guest, uid, sendFeedbackStatus, hideMessage } = this.props
+  public render() {
+    const {
+      progress,
+      global,
+      loaded,
+      guest,
+      uid,
+      sendFeedbackStatus,
+      hideMessage
+    } = this.props
     const { loading, isVerifide } = this.state
 
     return (
-      <div id='master'>
-      <Helmet>
-          <meta charSet='utf-8' />
+      <div id="master">
+        <Helmet>
+          <meta charSet="utf-8" />
           <title>Backyarde - Every Home Has a Story. Tell Yours.</title>
-          <link rel='canonical' href='https://github.com/Qolzam/react-social-network' />
-      </Helmet>
-       {sendFeedbackStatus ? <SendFeedback /> : ''}
-        <div className='master__progress' style={{ display: (progress.visible ? 'block' : 'none') }}>
-          <LinearProgress variant='determinate' value={progress.percent} />
+          <link
+            rel="canonical"
+            href="https://github.com/Qolzam/react-social-network"
+          />
+        </Helmet>
+        {sendFeedbackStatus ? <SendFeedback /> : ''}
+        <div
+          className="master__progress"
+          style={{ display: progress.visible ? 'block' : 'none' }}
+        >
+          <LinearProgress variant="determinate" value={progress.percent} />
         </div>
-        <div className='master__loading animate-fading2' style={{ display: (global.showTopLoading ? 'flex' : 'none') }}>
-          <div className='title'>Loading ... </div>
+        <div
+          className="master__loading animate-fading2"
+          style={{ display: global.showTopLoading ? 'flex' : 'none' }}
+        >
+          <div className="title">Loading ... </div>
         </div>
-       {progress.visible ? <MasterLoading /> : ''}
-      <MasterRouter enabled={!loading} data={{uid}} />
+        {progress.visible ? <MasterLoading /> : ''}
+        <MasterRouter enabled={!loading} data={{ uid }} />
         <Snackbar
           open={this.props.global.messageOpen}
           message={this.props.global.message}
@@ -145,14 +160,12 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
           style={{ left: '1%', transform: 'none' }}
         />
       </div>
-
     )
   }
 }
 
 // - Map dispatch to props
 const mapDispatchToProps = (dispatch: any, ownProps: IMasterComponentProps) => {
-
   return {
     clearData: () => {
       dispatch(imageGalleryActions.clearAllData())
@@ -163,7 +176,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: IMasterComponentProps) => {
       dispatch(notifyActions.clearAllNotifications())
       dispatch(circleActions.clearAllCircles())
       dispatch(globalActions.clearTemp())
-
     },
     login: (userId: string, isVerifide: boolean) => {
       dispatch(authorizeActions.login(userId, isVerifide))
@@ -187,7 +199,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: IMasterComponentProps) => {
     hideMasterLoading: () => dispatch(globalActions.hideMasterLoading()),
     hideMessage: () => dispatch(globalActions.hideMessage())
   }
-
 }
 
 /**
@@ -195,7 +206,7 @@ const mapDispatchToProps = (dispatch: any, ownProps: IMasterComponentProps) => {
  * @param {object} state
  */
 const mapStateToProps = (state: Map<string, any>) => {
-  const  authorize = Map(state.get('authorize', {})).toJS()
+  const authorize = Map(state.get('authorize', {})).toJS()
   const global = Map(state.get('global', {})).toJS()
   const { sendFeedbackStatus, progress } = global
   return {
@@ -206,7 +217,8 @@ const mapStateToProps = (state: Map<string, any>) => {
     authed: authorize.authed,
     global: global
   }
-
 }
 // - Connect commponent to redux store
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MasterComponent as any) as any)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
+  MasterComponent as any
+) as any)

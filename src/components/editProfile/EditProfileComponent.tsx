@@ -7,9 +7,9 @@ import moment from 'moment/moment'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import MomentLocaleUtils, {
   formatDate,
-  parseDate,
+  parseDate
 } from 'react-day-picker/moment'
-import {Map} from 'immutable'
+import { Map } from 'immutable'
 
 import { grey } from 'material-ui/colors'
 import IconButton from 'material-ui/IconButton'
@@ -60,9 +60,8 @@ const styles = (theme: any) => ({
     maxHeight: 400,
     minWidth: 330,
     [theme.breakpoints.down('xs')]: {
-      maxHeight: '100%',
+      maxHeight: '100%'
     }
-
   },
   fullPageXs: {
     [theme.breakpoints.down('xs')]: {
@@ -89,7 +88,6 @@ const styles = (theme: any) => ({
   box: {
     padding: '0px 24px 0px',
     display: 'flex'
-
   },
   bottomTextSpace: {
     marginBottom: 15
@@ -103,10 +101,11 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class EditProfileComponent extends Component<IEditProfileComponentProps, IEditProfileComponentState> {
-
+export class EditProfileComponent extends Component<
+  IEditProfileComponentProps,
+  IEditProfileComponentState
+> {
   static propTypes = {
-
     /**
      * User avatar address
      */
@@ -119,7 +118,6 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
      * User full name
      */
     fullName: PropTypes.string.isRequired
-
   }
 
   styles = {
@@ -155,11 +153,8 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
       maxWidth: '530px',
       borderRadius: '4px'
     },
-    iconButtonSmall: {
-    },
-    iconButton: {
-    }
-
+    iconButtonSmall: {},
+    iconButton: {}
   }
 
   /**
@@ -189,7 +184,9 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
       /**
        * User banner address
        */
-      banner: props.banner || 'https://firebasestorage.googleapis.com/v0/b/open-social-33d92.appspot.com/o/images%2F751145a1-9488-46fd-a97e-04018665a6d3.JPG?alt=media&token=1a1d5e21-5101-450e-9054-ea4a20e06c57',
+      banner:
+        props.banner ||
+        'https://firebasestorage.googleapis.com/v0/b/open-social-33d92.appspot.com/o/images%2F751145a1-9488-46fd-a97e-04018665a6d3.JPG?alt=media&token=1a1d5e21-5101-450e-9054-ea4a20e06c57',
       /**
        * User avatar address
        */
@@ -205,7 +202,10 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
       /**
        * Default birth day
        */
-      defaultBirthday: (props.info && props.info.birthday) ? moment.unix(props.info!.birthday!).toDate() : '',
+      defaultBirthday:
+        props.info && props.info.birthday
+          ? moment.unix(props.info!.birthday!).toDate()
+          : '',
       /**
        * Seleted birth day
        */
@@ -213,23 +213,22 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
       /**
        * Web URL
        */
-      webUrl: (props.info && props.info.webUrl) ? props.info.webUrl : '',
+      webUrl: props.info && props.info.webUrl ? props.info.webUrl : '',
       /**
        * User company name
        */
-      companyName: (props.info && props.info.companyName) ? props.info.companyName : '',
+      companyName:
+        props.info && props.info.companyName ? props.info.companyName : '',
       /**
        * User twitter id
        */
-      twitterId: (props.info && props.info.twitterId) ? props.info.twitterId : ''
-
+      twitterId: props.info && props.info.twitterId ? props.info.twitterId : ''
     }
 
     // Binding functions to `this`
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleRequestSetAvatar = this.handleRequestSetAvatar.bind(this)
     this.handleRequestSetBanner = this.handleRequestSetBanner.bind(this)
-
   }
 
   /**
@@ -293,7 +292,16 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
    * @memberof EditProfile
    */
   handleUpdate = () => {
-    const { fullNameInput, tagLineInput, avatar, banner, selectedBirthday, companyName, webUrl, twitterId } = this.state
+    const {
+      fullNameInput,
+      tagLineInput,
+      avatar,
+      banner,
+      selectedBirthday,
+      companyName,
+      webUrl,
+      twitterId
+    } = this.state
     const { info, update } = this.props
 
     if (fullNameInput.trim() === '') {
@@ -314,7 +322,12 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
         webUrl: webUrl,
         twitterId: twitterId,
         creationDate: this.props.info!.creationDate,
-        birthday: selectedBirthday > 0 ? selectedBirthday : ((info && info.birthday) ? info!.birthday! : 0)
+        birthday:
+          selectedBirthday > 0
+            ? selectedBirthday
+            : info && info.birthday
+              ? info!.birthday!
+              : 0
       })
     }
   }
@@ -337,7 +350,6 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
    * @param  {any} event is the event is passed by winodw resize event
    */
   handleResize = (event: any) => {
-
     // Set initial state
     let width = window.innerWidth
 
@@ -345,7 +357,6 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
       this.setState({
         isSmall: false
       })
-
     } else {
       this.setState({
         isSmall: true
@@ -369,12 +380,25 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-
     const { classes, translate, currentLanguage } = this.props
     const { defaultBirthday, webUrl, twitterId, companyName } = this.state
     const iconButtonElement = (
-      <IconButton style={this.state.isSmall ? this.styles.iconButtonSmall : this.styles.iconButton}>
-        <MoreVertIcon style={{ ...(this.state.isSmall ? this.styles.iconButtonSmall : this.styles.iconButton), color: grey[400] }} viewBox='10 0 24 24' />
+      <IconButton
+        style={
+          this.state.isSmall
+            ? this.styles.iconButtonSmall
+            : this.styles.iconButton
+        }
+      >
+        <MoreVertIcon
+          style={{
+            ...(this.state.isSmall
+              ? this.styles.iconButtonSmall
+              : this.styles.iconButton),
+            color: grey[400]
+          }}
+          viewBox="10 0 24 24"
+        />
       </IconButton>
     )
 
@@ -388,78 +412,116 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
     )
 
     return (
-
       <div>
         {/* Edit profile dialog */}
         <Dialog
           PaperProps={{ className: classes.fullPageXs }}
-          key='Edit-Profile'
+          key="Edit-Profile"
           open={this.props.open!}
           onClose={this.props.onRequestClose}
-          maxWidth='sm'
+          maxWidth="sm"
         >
           <DialogContent className={classes.dialogContentRoot}>
             {/* Banner */}
             <div style={{ position: 'relative' }}>
-              <ImgCover width='100%' height='250px' borderRadius='2px' fileName={this.state.banner} />
-              <div className='g__circle-black' onClick={this.handleOpenBannerGallery} style={{ position: 'absolute', right: '10px', top: '10px' }}>
-                <SvgCamera style={{ fill: 'rgba(255, 255, 255, 0.88)', transform: 'translate(6px, 6px)' }} />
+              <ImgCover
+                width="100%"
+                height="250px"
+                borderRadius="2px"
+                fileName={this.state.banner}
+              />
+              <div
+                className="g__circle-black"
+                onClick={this.handleOpenBannerGallery}
+                style={{ position: 'absolute', right: '10px', top: '10px' }}
+              >
+                <SvgCamera
+                  style={{
+                    fill: 'rgba(255, 255, 255, 0.88)',
+                    transform: 'translate(6px, 6px)'
+                  }}
+                />
               </div>
             </div>
-            <div className='profile__edit'>
-              <EventListener
-                target='window'
-                onResize={this.handleResize}
-              />
-              <div className='left'>
+            <div className="profile__edit">
+              <EventListener target="window" onResize={this.handleResize} />
+              <div className="left">
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   {/* Avatar */}
-                  <div className='g__circle-black' onClick={this.handleOpenAvatarGallery} style={{ zIndex: 1, position: 'absolute', left: '50%', display: 'inline-block', top: '52px', margin: '-18px' }}>
-                    <SvgCamera style={{ fill: 'rgba(255, 255, 255, 0.88)', transform: 'translate(6px, 6px)' }} />
-
+                  <div
+                    className="g__circle-black"
+                    onClick={this.handleOpenAvatarGallery}
+                    style={{
+                      zIndex: 1,
+                      position: 'absolute',
+                      left: '50%',
+                      display: 'inline-block',
+                      top: '52px',
+                      margin: '-18px'
+                    }}
+                  >
+                    <SvgCamera
+                      style={{
+                        fill: 'rgba(255, 255, 255, 0.88)',
+                        transform: 'translate(6px, 6px)'
+                      }}
+                    />
                   </div>
-                  <UserAvatarComponent fullName={(this.props.info ? this.props.info.fullName : '')} fileName={this.state.avatar} size={90} style={this.styles.avatar} />
+                  <UserAvatarComponent
+                    fullName={this.props.info ? this.props.info.fullName : ''}
+                    fileName={this.state.avatar}
+                    size={90}
+                    style={this.styles.avatar}
+                  />
                 </div>
-                <div className='info'>
-                  <div className='fullName'>
-                    {this.props.fullName}
-                  </div>
-
+                <div className="info">
+                  <div className="fullName">{this.props.fullName}</div>
                 </div>
               </div>
-
             </div>
 
             {/* Edit user information box*/}
             <Paper style={this.styles.paper} elevation={1}>
-              <div style={this.styles.title as any}>{translate!('profile.personalInformationLabel')}</div>
+              <div style={this.styles.title as any}>
+                {translate!('profile.personalInformationLabel')}
+              </div>
               <div className={classes.box}>
-                <FormControl fullWidth aria-describedby='fullNameInputError'>
-                  <InputLabel htmlFor='fullNameInput'>{translate!('profile.fullName')}</InputLabel>
-                  <Input id='fullNameInput'
+                <FormControl fullWidth aria-describedby="fullNameInputError">
+                  <InputLabel htmlFor="fullNameInput">
+                    {translate!('profile.fullName')}
+                  </InputLabel>
+                  <Input
+                    id="fullNameInput"
                     onChange={this.handleInputChange}
-                    name='fullNameInput'
+                    name="fullNameInput"
                     value={this.state.fullNameInput}
                   />
-                  <FormHelperText id='fullNameInputError'>{this.state.fullNameInputError}</FormHelperText>
+                  <FormHelperText id="fullNameInputError">
+                    {this.state.fullNameInputError}
+                  </FormHelperText>
                 </FormControl>
               </div>
               <div className={classes.box}>
-                <FormControl fullWidth aria-describedby='tagLineInputError'>
-                  <InputLabel htmlFor='tagLineInput'>{translate!('profile.tagline')}</InputLabel>
-                  <Input id='tagLineInput'
+                <FormControl fullWidth aria-describedby="tagLineInputError">
+                  <InputLabel htmlFor="tagLineInput">
+                    {translate!('profile.tagline')}
+                  </InputLabel>
+                  <Input
+                    id="tagLineInput"
                     onChange={this.handleInputChange}
-                    name='tagLineInput'
+                    name="tagLineInput"
                     value={this.state.tagLineInput}
                   />
-                  <FormHelperText id='tagLineInputError'>{this.state.fullNameInputError}</FormHelperText>
+                  <FormHelperText id="tagLineInputError">
+                    {this.state.fullNameInputError}
+                  </FormHelperText>
                 </FormControl>
               </div>
               <div className={classes.box}>
                 <TextField
                   className={classes.bottomTextSpace}
                   onChange={this.handleInputChange}
-                  name='companyName'
+                  name="companyName"
                   value={companyName}
                   label={translate!('profile.companyName')}
                   fullWidth
@@ -469,7 +531,7 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
                 <TextField
                   className={classes.bottomTextSpace}
                   onChange={this.handleInputChange}
-                  name='twitterId'
+                  name="twitterId"
                   value={twitterId}
                   label={translate!('profile.twitterId')}
                   fullWidth
@@ -479,36 +541,46 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
                 <TextField
                   className={classes.bottomTextSpace}
                   onChange={this.handleInputChange}
-                  name='webUrl'
+                  name="webUrl"
                   value={webUrl}
                   label={translate!('profile.webUrl')}
                   fullWidth
                 />
               </div>
               <div className={classes.box}>
-              <DayPickerInput
-              classNames={{ container: classes.dayPicker, overlay: '' }}
-                value={defaultBirthday}
-                onDayChange={this.handleBirthdayDateChange}
-                formatDate={formatDate}
-                parseDate={parseDate}
-                component={AppInput}
-                format='LL'
-                placeholder={`${moment().format('LL')}`}
-                dayPickerProps={{
-                  locale: currentLanguage,
-                  localeUtils: MomentLocaleUtils,
-                }}
-              />
+                <DayPickerInput
+                  classNames={{ container: classes.dayPicker, overlay: '' }}
+                  value={defaultBirthday}
+                  onDayChange={this.handleBirthdayDateChange}
+                  formatDate={formatDate}
+                  parseDate={parseDate}
+                  component={AppInput}
+                  format="LL"
+                  placeholder={`${moment().format('LL')}`}
+                  dayPickerProps={{
+                    locale: currentLanguage,
+                    localeUtils: MomentLocaleUtils
+                  }}
+                />
               </div>
               <br />
-
             </Paper>
-            <div className={classes.bottomPaperSpace}></div>
+            <div className={classes.bottomPaperSpace} />
           </DialogContent>
           <DialogActions className={classes.fixedDownStickyXS}>
-            <Button onClick={this.props.onRequestClose} > {translate!('profile.cancelButton')} </Button>
-            <Button variant='raised' color='primary' onClick={this.handleUpdate} style={this.styles.updateButton}> {translate!('profile.updateButton')} </Button>
+            <Button onClick={this.props.onRequestClose}>
+              {' '}
+              {translate!('profile.cancelButton')}{' '}
+            </Button>
+            <Button
+              variant="raised"
+              color="primary"
+              onClick={this.handleUpdate}
+              style={this.styles.updateButton}
+            >
+              {' '}
+              {translate!('profile.updateButton')}{' '}
+            </Button>
           </DialogActions>
         </Dialog>
 
@@ -517,12 +589,17 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
           PaperProps={{ className: classes.fullPageXs }}
           open={this.state.openBanner}
           onClose={this.handleCloseBannerGallery}
-
         >
           <DialogTitle className={classes.dialogTitle}>
-            <AppDialogTitle title={translate!('profile.chooseBanerDialogTitle')} onRequestClose={this.handleCloseBannerGallery} />
+            <AppDialogTitle
+              title={translate!('profile.chooseBanerDialogTitle')}
+              onRequestClose={this.handleCloseBannerGallery}
+            />
           </DialogTitle>
-          <ImageGallery set={this.handleRequestSetBanner} close={this.handleCloseBannerGallery} />
+          <ImageGallery
+            set={this.handleRequestSetBanner}
+            close={this.handleCloseBannerGallery}
+          />
         </Dialog>
 
         {/* Image gallery for avatar */}
@@ -532,11 +609,16 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
           onClose={this.handleCloseAvatarGallery}
         >
           <DialogTitle className={classes.dialogTitle}>
-            <AppDialogTitle title={translate!('profile.chooseAvatarDialogTitle')} onRequestClose={this.handleCloseAvatarGallery} />
+            <AppDialogTitle
+              title={translate!('profile.chooseAvatarDialogTitle')}
+              onRequestClose={this.handleCloseAvatarGallery}
+            />
           </DialogTitle>
-          <ImageGallery set={this.handleRequestSetAvatar} close={this.handleCloseAvatarGallery} />
+          <ImageGallery
+            set={this.handleRequestSetAvatar}
+            close={this.handleCloseAvatarGallery}
+          />
         </Dialog>
-
       </div>
     )
   }
@@ -548,11 +630,13 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: IEditProfileComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: IEditProfileComponentProps
+) => {
   return {
     update: (info: Profile) => dispatch(userActions.dbUpdateUserInfo(info)),
     onRequestClose: () => dispatch(userActions.closeEditProfile())
-
   }
 }
 
@@ -562,7 +646,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: IEditProfileComponentProps)
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: IEditProfileComponentProps) => {
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IEditProfileComponentProps
+) => {
   const uid = state.getIn(['authorize', 'uid'])
   return {
     currentLanguage: getActiveLanguage(state.get('locale')).code,
@@ -570,9 +657,10 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IEditProfileComponen
     open: state.getIn(['user', 'openEditProfile'], false),
     info: state.getIn(['user', 'info', uid]),
     avatarURL: state.getIn(['imageGallery', 'imageURLList'])
-
   }
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(EditProfileComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(EditProfileComponent as any) as any)

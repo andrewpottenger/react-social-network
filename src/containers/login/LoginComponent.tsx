@@ -50,8 +50,10 @@ const styles = (theme: any) => ({
 })
 
 // - Create Login component class
-export class LoginComponent extends Component<ILoginComponentProps, ILoginComponentState> {
-
+export class LoginComponent extends Component<
+  ILoginComponentProps,
+  ILoginComponentState
+> {
   styles = {
     singinOptions: {
       paddingBottom: 10,
@@ -81,7 +83,6 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
 
     // Binding function to `this`
     this.handleForm = this.handleForm.bind(this)
-
   }
 
   /**
@@ -110,7 +111,6 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
 
         break
       default:
-
     }
   }
 
@@ -125,23 +125,17 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
         emailInputError: translate!('login.emailRequiredError')
       })
       error = true
-
     }
     if (this.state.passwordInput === '') {
       this.setState({
         passwordInputError: translate!('login.passwordRequiredError')
       })
       error = true
-
     }
 
     if (!error) {
-      this.props.login!(
-        this.state.emailInput,
-        this.state.passwordInput
-      )
+      this.props.login!(this.state.emailInput, this.state.passwordInput)
     }
-
   }
 
   /**
@@ -153,38 +147,41 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
 
     const OAuthLogin = (
       <div style={this.styles.singinOptions as any}>
-        <IconButton
-          onClick={() => loginWithOAuth!(OAuthType.FACEBOOK)}
-        ><div className='icon-fb icon'></div></IconButton>
-        <IconButton
-          onClick={() => loginWithOAuth!(OAuthType.GOOGLE)}
-        > <div className='icon-google icon'></div> </IconButton>
-        <IconButton
-          onClick={() => loginWithOAuth!(OAuthType.GITHUB)}
-        > <div className='icon-github icon'></div> </IconButton>
-  
+        <IconButton onClick={() => loginWithOAuth!(OAuthType.FACEBOOK)}>
+          <div className="icon-fb icon" />
+        </IconButton>
+        <IconButton onClick={() => loginWithOAuth!(OAuthType.GOOGLE)}>
+          {' '}
+          <div className="icon-google icon" />{' '}
+        </IconButton>
+        <IconButton onClick={() => loginWithOAuth!(OAuthType.GITHUB)}>
+          {' '}
+          <div className="icon-github icon" />{' '}
+        </IconButton>
       </div>
     )
 
     return (
       <Grid container spacing={24}>
         <Grid item xs={12} className={classes.contain}>
+          <h1 className="g__app-name">{config.settings.appName}</h1>
 
-          <h1 className='g__app-name'>{config.settings.appName}</h1>
-
-          <div className='animate-bottom'>
-            <Paper className={classes.paper} elevation={1} >
+          <div className="animate-bottom">
+            <Paper className={classes.paper} elevation={1}>
               <form>
                 <div style={{ padding: '48px 40px 36px' }}>
-                  <div style={{
-                    paddingLeft: '40px',
-                    paddingRight: '40px'
-                  }}>
-
-                    <h2 className='zoomOutLCorner animated g__paper-title'>{translate!('login.title')}</h2>
+                  <div
+                    style={{
+                      paddingLeft: '40px',
+                      paddingRight: '40px'
+                    }}
+                  >
+                    <h2 className="zoomOutLCorner animated g__paper-title">
+                      {translate!('login.title')}
+                    </h2>
                   </div>
                   {config.settings.enabledOAuthLogin ? OAuthLogin : ''}
-                
+
                   <Divider style={this.styles.divider} />
                   <TextField
                     className={classes.textField}
@@ -192,32 +189,48 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
                     onChange={this.handleInputChange}
                     helperText={this.state.emailInputError}
                     error={this.state.emailInputError.trim() !== ''}
-                    name='emailInput'
+                    name="emailInput"
                     label={translate!('login.emailLabel')}
-                    type='email'
+                    type="email"
                     tabIndex={1}
-                  /><br />
+                  />
+                  <br />
                   <TextField
                     className={classes.textField}
                     onChange={this.handleInputChange}
                     helperText={this.state.passwordInputError}
                     error={this.state.passwordInputError.trim() !== ''}
-                    name='passwordInput'
+                    name="passwordInput"
                     label={translate!('login.passwordLabel')}
-                    type='password'
+                    type="password"
                     tabIndex={2}
-                  /><br />
+                  />
                   <br />
                   <br />
-                  <div className='login__button-box'>
+                  <br />
+                  <div className="login__button-box">
                     <div>
-                      <Button onClick={this.props.signupPage} tabIndex={4}>{translate!('login.createAccountButton')}</Button>
+                      <Button onClick={this.props.signupPage} tabIndex={4}>
+                        {translate!('login.createAccountButton')}
+                      </Button>
                     </div>
-                    <div >
-                      <Button variant='raised' color='primary' onClick={this.handleForm} tabIndex={3} >{translate!('login.loginButton')}</Button>
+                    <div>
+                      <Button
+                        variant="raised"
+                        color="primary"
+                        onClick={this.handleForm}
+                        tabIndex={3}
+                      >
+                        {translate!('login.loginButton')}
+                      </Button>
                     </div>
                   </div>
-                  <span className={classes.bottomPaper}>{translate!('login.forgetPasswordMessage')} <NavLink to='/resetPassword' className={classes.link}>{translate!('login.resetPasswordLabel')}</NavLink></span>
+                  <span className={classes.bottomPaper}>
+                    {translate!('login.forgetPasswordMessage')}{' '}
+                    <NavLink to="/resetPassword" className={classes.link}>
+                      {translate!('login.resetPasswordLabel')}
+                    </NavLink>
+                  </span>
                 </div>
               </form>
             </Paper>
@@ -239,7 +252,8 @@ const mapDispatchToProps = (dispatch: any, ownProps: ILoginComponentProps) => {
     login: (email: string, password: string) => {
       dispatch(authorizeActions.dbLogin(email, password))
     },
-    loginWithOAuth: (type: OAuthType) => dispatch(authorizeActions.dbLoginWithOAuth(type)),
+    loginWithOAuth: (type: OAuthType) =>
+      dispatch(authorizeActions.dbLoginWithOAuth(type)),
     signupPage: () => {
       dispatch(push('/signup'))
     }
@@ -250,9 +264,12 @@ const mapDispatchToProps = (dispatch: any, ownProps: ILoginComponentProps) => {
  * Map state to props
  */
 const mapStateToProps = (state: any, ownProps: ILoginComponentProps) => {
-  return {
-  }
+  return {}
 }
 
 // - Connect component to redux store
-export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(localize(LoginComponent, 'locale', CommonAPI.getStateSlice) as any) as any)) as typeof LoginComponent
+export default withRouter<any>(
+  connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(
+    localize(LoginComponent, 'locale', CommonAPI.getStateSlice) as any
+  ) as any)
+) as typeof LoginComponent

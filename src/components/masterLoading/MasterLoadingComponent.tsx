@@ -11,13 +11,14 @@ import { Typography } from 'material-ui'
 // - Import app components
 
 // - Create MasterLoading component class
-export default class MasterLoadingComponent extends Component<IMasterLoadingComponentProps, IMasterLoadingComponentState> {
-
+export default class MasterLoadingComponent extends Component<
+  IMasterLoadingComponentProps,
+  IMasterLoadingComponentState
+> {
   // Constructor
   constructor(props: IMasterLoadingComponentProps) {
     super(props)
     // Binding functions to `this`
-
   }
 
   loadProgress() {
@@ -29,9 +30,13 @@ export default class MasterLoadingComponent extends Component<IMasterLoadingComp
             <CircularProgress style={{ color: red[500] }} size={50} />
           </Grid>
           <Grid item style={{ zIndex: 1 }}>
-            <Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >
+            <Typography
+              variant="title"
+              color="primary"
+              style={{ marginLeft: '15px' }}
+            >
               Unexpected Error Happened ...
-          </Typography>
+            </Typography>
           </Grid>
         </Grid>
       )
@@ -42,9 +47,13 @@ export default class MasterLoadingComponent extends Component<IMasterLoadingComp
             <CircularProgress style={{ color: red[500] }} size={50} />
           </Grid>
           <Grid item style={{ zIndex: 1 }}>
-            <Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >
+            <Typography
+              variant="title"
+              color="primary"
+              style={{ marginLeft: '15px' }}
+            >
               It takes long time ...
-          </Typography>
+            </Typography>
           </Grid>
         </Grid>
       )
@@ -55,9 +64,13 @@ export default class MasterLoadingComponent extends Component<IMasterLoadingComp
             <CircularProgress size={50} />
           </Grid>
           <Grid item style={{ zIndex: 1 }}>
-            <Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >
+            <Typography
+              variant="title"
+              color="primary"
+              style={{ marginLeft: '15px' }}
+            >
               Loading...
-          </Typography>
+            </Typography>
           </Grid>
         </Grid>
       )
@@ -68,9 +81,13 @@ export default class MasterLoadingComponent extends Component<IMasterLoadingComp
             <CircularProgress size={50} />
           </Grid>
           <Grid item style={{ zIndex: 1 }}>
-            <Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >
+            <Typography
+              variant="title"
+              color="primary"
+              style={{ marginLeft: '15px' }}
+            >
               Loading...
-          </Typography>
+            </Typography>
           </Grid>
         </Grid>
       )
@@ -79,16 +96,6 @@ export default class MasterLoadingComponent extends Component<IMasterLoadingComp
 
   // Render app DOM component
   render() {
-    return (
-
-      <div className='mLoading__loading'>
-        {
-          this.loadProgress()
-        }
-
-      </div>
-
-    )
+    return <div className="mLoading__loading">{this.loadProgress()}</div>
   }
-
 }

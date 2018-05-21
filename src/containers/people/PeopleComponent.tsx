@@ -9,7 +9,7 @@ import { push } from 'react-router-redux'
 import AppBar from 'material-ui/AppBar'
 import Typography from 'material-ui/Typography'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import {Map} from 'immutable'
+import { Map } from 'immutable'
 
 // - Import app components
 import FindPeople from 'src/components/findPeople'
@@ -27,7 +27,7 @@ import { IPeopleComponentState } from './IPeopleComponentState'
 
 const TabContainer = (props: any) => {
   return (
-    <Typography component='div' style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 3 }}>
       {props.children}
     </Typography>
   )
@@ -36,33 +36,32 @@ const TabContainer = (props: any) => {
 /**
  * Create component class
  */
-export class PeopleComponent extends Component<IPeopleComponentProps,IPeopleComponentState> {
-
-  static propTypes = {
-
-  }
+export class PeopleComponent extends Component<
+  IPeopleComponentProps,
+  IPeopleComponentState
+> {
+  static propTypes = {}
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IPeopleComponentProps) {
+  constructor(props: IPeopleComponentProps) {
     super(props)
-    const {tab} = this.props.match.params
+    const { tab } = this.props.match.params
     // Defaul state
     this.state = {
       tabIndex: this.getTabIndexByNav(tab)
     }
 
     // Binding functions to `this`
-
   }
 
   /**
    * Hadle on tab change
    */
   handleChangeTab = (event: any, value: any) => {
-    const {circlesLoaded, goTo, setHeaderTitle} = this.props
+    const { circlesLoaded, goTo, setHeaderTitle } = this.props
     this.setState({ tabIndex: value })
     switch (value) {
       case 0:
@@ -83,9 +82,9 @@ export class PeopleComponent extends Component<IPeopleComponentProps,IPeopleComp
     }
   }
 
-  componentWillMount () {
-    const { setHeaderTitle} = this.props
-    const {tab} = this.props.match.params
+  componentWillMount() {
+    const { setHeaderTitle } = this.props
+    const { tab } = this.props.match.params
     switch (tab) {
       case undefined:
       case '':
@@ -100,17 +99,16 @@ export class PeopleComponent extends Component<IPeopleComponentProps,IPeopleComp
       default:
         break
     }
-
   }
 
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-  /**
-   * Component styles
-   */
+  render() {
+    /**
+     * Component styles
+     */
     const styles = {
       people: {
         margin: '0 auto'
@@ -126,27 +124,35 @@ export class PeopleComponent extends Component<IPeopleComponentProps,IPeopleComp
       }
     }
 
-    const {circlesLoaded, goTo, setHeaderTitle, translate} = this.props
-    const {tabIndex} = this.state
+    const { circlesLoaded, goTo, setHeaderTitle, translate } = this.props
+    const { tabIndex } = this.state
     return (
       <div style={styles.people}>
-      <AppBar position='static' color='default'>
-      <Tabs indicatorColor={grey[50]}
-      onChange={this.handleChangeTab}
-      value={tabIndex} centered
-      textColor='primary'
-       >
-        <Tab label={translate!('people.findPeopleTab')} />
-        <Tab label={translate!('people.followingTab')} />
-        <Tab label={translate!('people.followersTab')} />
-      </Tabs>
-      </AppBar>
-      {tabIndex === 0 && <TabContainer>{circlesLoaded ? <FindPeople /> : ''}</TabContainer>}
-      {tabIndex === 1 && <TabContainer>
-        {circlesLoaded ? <Following/> : ''}
-        {circlesLoaded ? <YourCircles/> : ''}
-      </TabContainer>}
-      {tabIndex === 2 && <TabContainer>{circlesLoaded ? <Followers /> : ''}</TabContainer>}
+        <AppBar position="static" color="default">
+          <Tabs
+            indicatorColor={grey[50]}
+            onChange={this.handleChangeTab}
+            value={tabIndex}
+            centered
+            textColor="primary"
+          >
+            <Tab label={translate!('people.findPeopleTab')} />
+            <Tab label={translate!('people.followingTab')} />
+            <Tab label={translate!('people.followersTab')} />
+          </Tabs>
+        </AppBar>
+        {tabIndex === 0 && (
+          <TabContainer>{circlesLoaded ? <FindPeople /> : ''}</TabContainer>
+        )}
+        {tabIndex === 1 && (
+          <TabContainer>
+            {circlesLoaded ? <Following /> : ''}
+            {circlesLoaded ? <YourCircles /> : ''}
+          </TabContainer>
+        )}
+        {tabIndex === 2 && (
+          <TabContainer>{circlesLoaded ? <Followers /> : ''}</TabContainer>
+        )}
       </div>
     )
   }
@@ -174,11 +180,10 @@ export class PeopleComponent extends Component<IPeopleComponentProps,IPeopleComp
  * @return {object}          props of component
  */
 const mapDispatchToProps = (dispatch: any, ownProps: IPeopleComponentProps) => {
-
   return {
     goTo: (url: string) => dispatch(push(url)),
-    setHeaderTitle : (title: string) => dispatch(globalActions.setHeaderTitle(title))
-
+    setHeaderTitle: (title: string) =>
+      dispatch(globalActions.setHeaderTitle(title))
   }
 }
 
@@ -188,15 +193,18 @@ const mapDispatchToProps = (dispatch: any, ownProps: IPeopleComponentProps) => {
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: IPeopleComponentProps) => {
-
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IPeopleComponentProps
+) => {
   return {
     translate: getTranslate(state.get('locale')),
     uid: state.getIn(['authorize', 'uid'], 0),
     circlesLoaded: state.getIn(['circle', 'loaded'])
-
   }
 }
 
 // - Connect component to redux store
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PeopleComponent as any) as any)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
+  PeopleComponent as any
+) as any)

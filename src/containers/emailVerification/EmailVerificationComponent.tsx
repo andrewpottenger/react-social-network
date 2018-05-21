@@ -21,7 +21,6 @@ const styles = (theme: any) => ({
   textField: {
     minWidth: 280,
     marginTop: 20
-
   },
   contain: {
     margin: '0 auto'
@@ -43,8 +42,10 @@ const styles = (theme: any) => ({
  * @class EmailVerificationComponent
  * @extends {Component}
  */
-export class EmailVerificationComponent extends Component<IEmailVerificationComponentProps, IEmailVerificationComponentState> {
-
+export class EmailVerificationComponent extends Component<
+  IEmailVerificationComponentProps,
+  IEmailVerificationComponentState
+> {
   styles = {
     message: {
       fontWeight: 400
@@ -66,7 +67,6 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
       display: 'block',
       margin: 'auto'
     }
-
   }
 
   /**
@@ -77,7 +77,6 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
     super(props)
 
     // Binding function to `this`
-
   }
 
   /**
@@ -89,29 +88,44 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
     return (
       <Grid container spacing={24}>
         <Grid item xs={12} className={classes.contain}>
+          <h1 className="g__app-name">{config.settings.appName}</h1>
 
-          <h1 className='g__app-name'>{config.settings.appName}</h1>
-
-          <div className='animate-bottom'>
-            <Paper className={classes.paper} elevation={1} >
+          <div className="animate-bottom">
+            <Paper className={classes.paper} elevation={1}>
               <div style={{ padding: '48px 40px 36px' }}>
-                <div style={{
-                  paddingLeft: '40px',
-                  paddingRight: '40px'
-                }}>
-
-                  <h2 className='zoomOutLCorner animated g__paper-title'>{translate!('emailVerification.title')}</h2>
+                <div
+                  style={{
+                    paddingLeft: '40px',
+                    paddingRight: '40px'
+                  }}
+                >
+                  <h2 className="zoomOutLCorner animated g__paper-title">
+                    {translate!('emailVerification.title')}
+                  </h2>
                 </div>
                 <p style={this.styles.message as any}>
                   {translate!('emailVerification.description')}
                 </p>
                 <div style={this.styles.buttons}>
-                  <Button variant='raised' style={this.styles.homeButton} color='primary' onClick={() => this.props.homePage()}> {translate!('emailVerification.homeButton')} </Button>
-                  <Button variant='raised' color='primary' onClick={() => this.props.sendEmailVerification()}> {translate!('emailVerification.sendButton')} </Button>
+                  <Button
+                    variant="raised"
+                    style={this.styles.homeButton}
+                    color="primary"
+                    onClick={() => this.props.homePage()}
+                  >
+                    {' '}
+                    {translate!('emailVerification.homeButton')}{' '}
+                  </Button>
+                  <Button
+                    variant="raised"
+                    color="primary"
+                    onClick={() => this.props.sendEmailVerification()}
+                  >
+                    {' '}
+                    {translate!('emailVerification.sendButton')}{' '}
+                  </Button>
                 </div>
-                <div>
-                </div>
-
+                <div />
               </div>
             </Paper>
           </div>
@@ -127,12 +141,16 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: IEmailVerificationComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IEmailVerificationComponentProps
+) => {
   return {
     homePage: () => {
       dispatch(push('/'))
     },
-    sendEmailVerification: () => dispatch(authorizeActions.dbSendEmailVerfication())
+    sendEmailVerification: () =>
+      dispatch(authorizeActions.dbSendEmailVerfication())
   }
 }
 
@@ -142,11 +160,18 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IEmailVerificationComp
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: any, ownProps: IEmailVerificationComponentProps) => {
+const mapStateToProps = (
+  state: any,
+  ownProps: IEmailVerificationComponentProps
+) => {
   return {
     translate: getTranslate(state.get('locale'))
   }
 }
 
 // - Connect component to redux store
-export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(EmailVerificationComponent as any) as any)) as typeof EmailVerificationComponent
+export default withRouter<any>(
+  connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(
+    EmailVerificationComponent as any
+  ) as any)
+) as typeof EmailVerificationComponent

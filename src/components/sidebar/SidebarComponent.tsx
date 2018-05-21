@@ -18,16 +18,18 @@ import { ISidebarComponentState } from './ISidebarComponentState'
 // - Feilds
 const color: string = 'teal'
 const colorKey: string = 'blue'
-const sizeCondition = (width: number) => (width >= 750)
+const sizeCondition = (width: number) => width >= 750
 
 // - Create Sidebar component class
-export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarComponentState> {
-
+export class SidebarComponent extends Component<
+  ISidebarComponentProps,
+  ISidebarComponentState
+> {
   /**
    * Component constructor
    * @param  {ISidebarComponentProps} props is an object properties of component
    */
-  constructor (props: ISidebarComponentProps) {
+  constructor(props: ISidebarComponentProps) {
     super(props)
 
     // Binding functions to `this`
@@ -47,9 +49,7 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
       overlayOpen: false,
       // If side bar should be closed
       shouldBeClosed: false
-
     }
-
   }
 
   /**
@@ -58,7 +58,6 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
    * @param  {string} source is the element that fired the function
    */
   open = (status: boolean, source: string) => {
-
     const width = window.innerWidth
 
     if (status) {
@@ -72,9 +71,10 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
         open: true,
         mainStyle: { marginLeft: '210px' },
         sidebarStyle: openStyle,
-        sidebarClass: (sizeCondition(width)) ? 'sidebar  sidebar__large' : 'sidebar  sidebar__over',
-        overlay: (sizeCondition(width)) ? false : true
-
+        sidebarClass: sizeCondition(width)
+          ? 'sidebar  sidebar__large'
+          : 'sidebar  sidebar__over',
+        overlay: sizeCondition(width) ? false : true
       })
 
       if (sizeCondition(width)) {
@@ -82,7 +82,6 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
           auto: false,
           shouldBeClosed: false
         })
-
       } else {
         this.setState({
           overlayOpen: true
@@ -94,8 +93,8 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
        * @param {boolean} if true, the sidebar is open
        */
       this.props.status(true)
-
-    } else { // If it's false sidebar should be closed
+    } else {
+      // If it's false sidebar should be closed
       // Sidebar style when it's closed
       const closeStyle = {
         transform: 'translate(-100%, 0px)',
@@ -105,10 +104,12 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
         open: false,
         mainStyle: { marginLeft: '0px' },
         sidebarStyle: closeStyle,
-        sidebarClass: (sizeCondition(width)) ? 'sidebar  sidebar__large'
-          : ((source === 'auto') ? 'sidebar ' : 'sidebar  sidebar__over'),
+        sidebarClass: sizeCondition(width)
+          ? 'sidebar  sidebar__large'
+          : source === 'auto'
+            ? 'sidebar '
+            : 'sidebar  sidebar__over',
         overlay: false
-
       })
 
       switch (source) {
@@ -123,7 +124,6 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
           })
           break
         default:
-
       }
 
       if (sizeCondition(width)) {
@@ -139,9 +139,8 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
        * @param {boolean} if true, the sidebar is open
        */
       this.props.status(false)
-
     }
-    this.props.overlay(!(sizeCondition(width)) && this.state.open ? true : false)
+    this.props.overlay(!sizeCondition(width) && this.state.open ? true : false)
   }
 
   /**
@@ -149,12 +148,10 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
    * @param  {event} evt is the event is passed by winodw resize event
    */
   handleResize = () => {
-
     // Set initial state
     let width = window.innerWidth
 
     if (sizeCondition(width)) {
-
       this.setState({
         sidebarClass: 'sidebar  sidebar__large',
         overlay: false,
@@ -163,14 +160,13 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
 
       this.props.overlay(false)
       if (this.state.auto && !this.state.shouldBeClosed) {
-        this.open(true,'large')
+        this.open(true, 'large')
         this.setState({ auto: false })
       }
     } else {
       if (!this.state.overlayOpen) {
         if (!this.state.auto && this.state.open) {
           this.open(false, 'auto')
-
         } else {
           this.setState({
             overlayOpen: true,
@@ -178,10 +174,12 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
           })
         }
       } else {
-        this.setState({ sidebarClass: 'sidebar  sidebar__over', overlay: this.state.open })
+        this.setState({
+          sidebarClass: 'sidebar  sidebar__over',
+          overlay: this.state.open
+        })
         this.props.overlay(this.state.open!)
       }
-
     }
   }
 
@@ -192,12 +190,12 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
   handleKeyUp = (event: Event) => {
     if (this.state.overlayOpen) {
       if (this.state.open && keycode(event) === 'esc') {
-        this.open(false,'keyup')
+        this.open(false, 'keyup')
       }
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.props.open(this.open)
   }
 
@@ -214,12 +212,10 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
       } else if (childe.type.qcName === 'SidebarMain') {
         return React.cloneElement(childe, { cstyle: this.state.mainStyle })
       }
-
     })
-
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.handleResize()
   }
 
@@ -227,19 +223,16 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-
+  render() {
     return (
-      <div id='sidebar'>
+      <div id="sidebar">
         <EventListener
-          target='window'
+          target="window"
           onResize={this.handleResize}
           onKeyUp={this.handleKeyUp}
         />
         {this.getChildren()}
-
       </div>
-
     )
   }
 }
@@ -250,7 +243,10 @@ export class SidebarComponent extends Component<ISidebarComponentProps,ISidebarC
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: ISidebarComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: ISidebarComponentProps
+) => {
   return {
     logout: () => dispatch(authorizeActions.dbLogout())
   }
@@ -263,9 +259,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: ISidebarComponentProps) => 
  * @return {object}          props of component
  */
 const mapStateToProps = (state: any, ownProps: ISidebarComponentProps) => {
-  return {
-  }
+  return {}
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarComponent as any)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  SidebarComponent as any
+)
