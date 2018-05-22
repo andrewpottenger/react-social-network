@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Map } from 'immutable'
 
+const styless = require('./style.scss')
+console.log('styless', styless)
+
 // - Material UI
 import SvgDehaze from 'material-ui-icons/Dehaze'
 import { grey, blue } from 'material-ui/colors'
@@ -315,6 +318,7 @@ export class HomeHeaderComponent extends Component<
                 }}
               >
                 {' '}
+                <div className={styless.some}>adasasdasdasdas</div>
                 {translate!('header.my-properties')}{' '}
               </MenuItem>
               <MenuItem

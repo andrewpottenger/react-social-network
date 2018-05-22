@@ -31,7 +31,7 @@ const composeEnhancers = composeWithDevTools({
       // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
     })
 let store: Store<any> = createStore(rootReducer, fromJS(initialState), composeEnhancers(
-  applyMiddleware(logger,thunk, routerMiddleware(history), sagaMiddleware)
+  applyMiddleware(thunk, routerMiddleware(history), sagaMiddleware)
 ))
 
 export default {store, runSaga: sagaMiddleware.run, close: () => store.dispatch(END), history}
