@@ -5,7 +5,13 @@ import PropTypes from 'prop-types'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map } from 'immutable'
 
-import { Card, CardActions, CardHeader, CardMedia, CardContent } from 'material-ui'
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardContent
+} from 'material-ui'
 import List, {
   ListItem,
   ListItemAvatar,
@@ -92,14 +98,15 @@ const styles = (theme: any) => ({
 })
 
 // - Create PostWrite component class
-export class PostWriteComponent extends Component<IPostWriteComponentProps, IPostWriteComponentState> {
-
+export class PostWriteComponent extends Component<
+  IPostWriteComponentProps,
+  IPostWriteComponentState
+> {
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
   constructor(props: IPostWriteComponentProps) {
-
     super(props)
 
     const { postModel } = props
@@ -117,7 +124,8 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
       /**
        * The path identifier of image on the server
        */
-      imageFullPath: this.props.edit && postModel ? postModel.get('imageFullPath', '') : '',
+      imageFullPath:
+        this.props.edit && postModel ? postModel.get('imageFullPath', '') : '',
       /**
        * If it's true gallery will be open
        */
@@ -133,12 +141,13 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
       /**
        * If it's true comment will be disabled on post
        */
-      disableComments: this.props.edit && postModel ? postModel.get('disableComments') : false,
+      disableComments:
+        this.props.edit && postModel ? postModel.get('disableComments') : false,
       /**
        * If it's true share will be disabled on post
        */
-      disableSharing: this.props.edit && postModel ? postModel.get('disableSharing') : false
-
+      disableSharing:
+        this.props.edit && postModel ? postModel.get('disableSharing') : false
     }
 
     // Binding functions to `this`
@@ -150,7 +159,6 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
     this.handleRemoveImage = this.handleRemoveImage.bind(this)
     this.handleToggleComments = this.handleToggleComments.bind(this)
     this.handleToggleSharing = this.handleToggleSharing.bind(this)
-
   }
 
   /**
@@ -203,10 +211,11 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
       imageFullPath,
       disableComments,
       disableSharing,
-      postText } = this.state
+      postText
+    } = this.state
 
     const {
-        id,
+      id,
       ownerAvatar,
       ownerDisplayName,
       edit,
@@ -214,7 +223,7 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
       post,
       update,
       postModel
-      } = this.props
+    } = this.props
     if (image === '' && postText.trim() === '') {
       this.setState({
         disabledPost: false
@@ -227,39 +236,47 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
     // In edit status we should fire update if not we should fire post function
     if (!edit) {
       if (image !== '') {
-        post!({
-          body: postText,
-          tags: tags,
-          image: image,
-          imageFullPath: imageFullPath,
-          ownerAvatar: ownerAvatar,
-          ownerDisplayName: ownerDisplayName,
-          disableComments: disableComments,
-          disableSharing: disableSharing,
-          postTypeId: 1,
-          score: 0,
-          viewCount: 0
-        }, onRequestClose)
+        post!(
+          {
+            body: postText,
+            tags: tags,
+            image: image,
+            imageFullPath: imageFullPath,
+            ownerAvatar: ownerAvatar,
+            ownerDisplayName: ownerDisplayName,
+            disableComments: disableComments,
+            disableSharing: disableSharing,
+            postTypeId: 1,
+            score: 0,
+            viewCount: 0
+          },
+          onRequestClose
+        )
       } else {
-        post!({
-          body: postText,
-          tags: tags,
-          ownerAvatar: ownerAvatar,
-          ownerDisplayName: ownerDisplayName,
-          disableComments: disableComments,
-          disableSharing: disableSharing,
-          postTypeId: 0,
-          score: 0,
-          viewCount: 0
-        }, onRequestClose)
+        post!(
+          {
+            body: postText,
+            tags: tags,
+            ownerAvatar: ownerAvatar,
+            ownerDisplayName: ownerDisplayName,
+            disableComments: disableComments,
+            disableSharing: disableSharing,
+            postTypeId: 0,
+            score: 0,
+            viewCount: 0
+          },
+          onRequestClose
+        )
       }
-    } else { // In edit status we pass post to update functions
-     const updatedPost =  postModel!.set('body', postText)
-      .set('tags', tags)
-      .set('image', image)
-      .set('imageFullPath', imageFullPath)
-      .set('disableComments', disableComments)
-      .set('disableSharing', disableSharing)
+    } else {
+      // In edit status we pass post to update functions
+      const updatedPost = postModel!
+        .set('body', postText)
+        .set('tags', tags)
+        .set('image', image)
+        .set('imageFullPath', imageFullPath)
+        .set('disableComments', disableComments)
+        .set('disableSharing', disableSharing)
 
       update!(updatedPost, onRequestClose)
     }
@@ -284,7 +301,11 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
   handleOnChange = (event: any) => {
     const data = event.target.value
     this.setState({ postText: data })
-    if (data.length === 0 || data.trim() === '' || (this.props.edit && data.trim() === this.props.text)) {
+    if (
+      data.length === 0 ||
+      data.trim() === '' ||
+      (this.props.edit && data.trim() === this.props.text)
+    ) {
       this.setState({
         postText: data,
         disabledPost: true
@@ -295,7 +316,6 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
         disabledPost: false
       })
     }
-
   }
 
   /**
@@ -338,39 +358,45 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
     if (!nextProps.open) {
       const { postModel } = this.props
       this.setState({
-      /**
-       * Post text
-       */
-      postText: this.props.edit && postModel ? postModel.get('body', '') : '',
-      /**
-       * The URL image of the post
-       */
-      image: this.props.edit && postModel ? postModel.get('image', '') : '',
-      /**
-       * The path identifier of image on the server
-       */
-      imageFullPath: this.props.edit && postModel ? postModel.get('imageFullPath', '') : '',
-      /**
-       * If it's true gallery will be open
-       */
-      galleryOpen: false,
-      /**
-       * Whether menu is open
-       */
-      menuOpen: false,
-      /**
-       * If it's true post button will be disabled
-       */
-      disabledPost: true,
-      /**
-       * If it's true comment will be disabled on post
-       */
-      disableComments: this.props.edit && postModel ? postModel.get('disableComments') : false,
-      /**
-       * If it's true share will be disabled on post
-       */
-      disableSharing: this.props.edit && postModel ? postModel.get('disableSharing') : false
-
+        /**
+         * Post text
+         */
+        postText: this.props.edit && postModel ? postModel.get('body', '') : '',
+        /**
+         * The URL image of the post
+         */
+        image: this.props.edit && postModel ? postModel.get('image', '') : '',
+        /**
+         * The path identifier of image on the server
+         */
+        imageFullPath:
+          this.props.edit && postModel
+            ? postModel.get('imageFullPath', '')
+            : '',
+        /**
+         * If it's true gallery will be open
+         */
+        galleryOpen: false,
+        /**
+         * Whether menu is open
+         */
+        menuOpen: false,
+        /**
+         * If it's true post button will be disabled
+         */
+        disabledPost: true,
+        /**
+         * If it's true comment will be disabled on post
+         */
+        disableComments:
+          this.props.edit && postModel
+            ? postModel.get('disableComments')
+            : false,
+        /**
+         * If it's true share will be disabled on post
+         */
+        disableSharing:
+          this.props.edit && postModel ? postModel.get('disableSharing') : false
       })
     }
   }
@@ -380,32 +406,50 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-
     const { classes, translate } = this.props
     const { menuOpen } = this.state
 
     const rightIconMenu = (
       <Manager>
         <Target>
-          <Tooltip id='tooltip-icon' title={translate!('post.moreTooltip')} placement='bottom-start'>
-            <IconButton
-              onClick={this.handleOpenMenu}
-            >
+          <Tooltip
+            id="tooltip-icon"
+            title={translate!('post.moreTooltip')}
+            placement="bottom-start"
+          >
+            <IconButton onClick={this.handleOpenMenu}>
               <MoreVertIcon />
             </IconButton>
           </Tooltip>
         </Target>
         <Popper
-          placement='bottom-start'
+          placement="bottom-start"
           eventsEnabled={menuOpen}
-          className={classNames({ [classes.popperClose]: !menuOpen }, { [classes.popperOpen]: menuOpen })}
+          className={classNames(
+            { [classes.popperClose]: !menuOpen },
+            { [classes.popperOpen]: menuOpen }
+          )}
         >
           <ClickAwayListener onClickAway={this.handleCloseMenu}>
-            <Grow in={menuOpen} >
+            <Grow in={menuOpen}>
               <Paper>
-                <MenuList role='menu'>
-                  <MenuItem onClick={this.handleToggleComments} style={{ fontSize: '14px' }}>{!this.state.disableComments ? 'Disable comments' : 'Enable comments'} </MenuItem>
-                  <MenuItem onClick={this.handleToggleSharing} style={{ fontSize: '14px' }}>{!this.state.disableSharing ? 'Disable sharing' : 'Enable sharing'}</MenuItem>
+                <MenuList role="menu">
+                  <MenuItem
+                    onClick={this.handleToggleComments}
+                    style={{ fontSize: '14px' }}
+                  >
+                    {!this.state.disableComments
+                      ? 'Disable comments'
+                      : 'Enable comments'}{' '}
+                  </MenuItem>
+                  <MenuItem
+                    onClick={this.handleToggleSharing}
+                    style={{ fontSize: '14px' }}
+                  >
+                    {!this.state.disableSharing
+                      ? 'Disable sharing'
+                      : 'Enable sharing'}
+                  </MenuItem>
                 </MenuList>
               </Paper>
             </Grow>
@@ -413,53 +457,115 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
         </Popper>
       </Manager>
     )
-    let postAvatar = <UserAvatarComponent fullName={this.props.ownerDisplayName!} fileName={this.props.ownerAvatar!} size={36} />
+    let postAvatar = (
+      <UserAvatarComponent
+        fullName={this.props.ownerDisplayName!}
+        fileName={this.props.ownerAvatar!}
+        size={36}
+      />
+    )
 
     let author = (
       <div className={classes.author}>
-        <span style={{
-          fontSize: '14px',
-          paddingRight: '10px',
-          fontWeight: 400,
-          color: 'rgba(0,0,0,0.87)',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-          lineHeight: '25px'
-        }}>{this.props.ownerDisplayName}</span><span style={{
-          fontWeight: 400,
-          fontSize: '10px'
-        }}> | {translate!('post.public')}</span>
+        <span
+          style={{
+            fontSize: '14px',
+            paddingRight: '10px',
+            fontWeight: 400,
+            color: 'rgba(0,0,0,0.87)',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            lineHeight: '25px'
+          }}
+        >
+          {this.props.ownerDisplayName}
+        </span>
+        <span
+          style={{
+            fontWeight: 400,
+            fontSize: '10px'
+          }}
+        >
+          {' '}
+          | {translate!('post.public')}
+        </span>
       </div>
     )
 
     /**
      * Provide post image
      */
-    const loadImage = (this.state.image && this.state.image !== '')
-      ? (
+    const loadImage =
+      this.state.image && this.state.image !== '' ? (
         <div>
-          <div style={{ position: 'relative', overflowY: 'hidden', overflowX: 'auto' }}>
-            <ul style={{ position: 'relative', whiteSpace: 'nowrap', padding: '0 0 0 16px', margin: '8px 0 0 0', paddingRight: '16px', verticalAlign: 'bottom', flexShrink: 0, listStyleType: 'none' }}>
+          <div
+            style={{
+              position: 'relative',
+              overflowY: 'hidden',
+              overflowX: 'auto'
+            }}
+          >
+            <ul
+              style={{
+                position: 'relative',
+                whiteSpace: 'nowrap',
+                padding: '0 0 0 16px',
+                margin: '8px 0 0 0',
+                paddingRight: '16px',
+                verticalAlign: 'bottom',
+                flexShrink: 0,
+                listStyleType: 'none'
+              }}
+            >
               <div style={{ display: 'flex', position: 'relative' }}>
-                <span onClick={this.handleRemoveImage} style={{
-                  position: 'absolute', width: '28px', backgroundColor: 'rgba(255, 255, 255, 0.22)',
-                  height: '28px', right: 12, top: 4, cursor: 'pointer', borderRadius: '50%',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center'
-                }}>
+                <span
+                  onClick={this.handleRemoveImage}
+                  style={{
+                    position: 'absolute',
+                    width: '28px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.22)',
+                    height: '28px',
+                    right: 12,
+                    top: 4,
+                    cursor: 'pointer',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
                   <SvgRemoveImage style={{ color: 'rgba(0, 0, 0, 0.53)' }} />
                 </span>
 
-                <div style={{ display: 'inline-block', width: '100%', marginRight: '8px', transition: 'transform .25s' }}>
-                  <li style={{ width: '100%', margin: 0, verticalAlign: 'bottom', position: 'static' }}>
-                    <Img fileName={this.state.image} style={{ width: '100%', height: 'auto' }} />
+                <div
+                  style={{
+                    display: 'inline-block',
+                    width: '100%',
+                    marginRight: '8px',
+                    transition: 'transform .25s'
+                  }}
+                >
+                  <li
+                    style={{
+                      width: '100%',
+                      margin: 0,
+                      verticalAlign: 'bottom',
+                      position: 'static'
+                    }}
+                  >
+                    <Img
+                      fileName={this.state.image}
+                      style={{ width: '100%', height: 'auto' }}
+                    />
                   </li>
                 </div>
               </div>
-
             </ul>
           </div>
         </div>
-      ) : ''
+      ) : (
+        ''
+      )
 
     const styles = {
       dialog: {
@@ -474,89 +580,141 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
         {this.props.children}
         <Dialog
           BackdropProps={{ className: classes.backdrop } as any}
-          PaperProps={{className: classes.fullPageXs}}
+          PaperProps={{ className: classes.fullPageXs }}
           key={this.props.id || 0}
           open={this.props.open}
           onClose={this.props.onRequestClose}
         >
-          <DialogContent
-            className={classes.content}
-            style={{ paddingTop: 0 }}
-          >
-
+          <DialogContent className={classes.content} style={{ paddingTop: 0 }}>
             <Card elevation={0}>
               <CardHeader
                 title={author}
                 avatar={postAvatar}
                 action={rightIconMenu}
-              >
-              </CardHeader>
+              />
               <CardContent>
                 <Grid item xs={12}>
-                <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, overflow: 'hidden' }}>
-                  <div style={{ position: 'relative', flexDirection: 'column', display: 'flex', flexGrow: 1, overflow: 'hidden', overflowY: 'auto', maxHeight: '300px' }}>
-                    <TextField
-                      autoFocus
-                      value={this.state.postText}
-                      onChange={this.handleOnChange}
-                      placeholder={translate!('post.textareaPlaceholder')}
-                      multiline
-                      rows={2}
-                      rowsMax={4}
-                      style={{ fontWeight: 400, fontSize: '14px', margin: '0 16px', flexShrink: 0, width: 'initial', flexGrow: 1 }}
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      flexGrow: 1,
+                      overflow: 'hidden'
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: 'relative',
+                        flexDirection: 'column',
+                        display: 'flex',
+                        flexGrow: 1,
+                        overflow: 'hidden',
+                        overflowY: 'auto',
+                        maxHeight: '300px'
+                      }}
+                    >
+                      <TextField
+                        autoFocus
+                        value={this.state.postText}
+                        onChange={this.handleOnChange}
+                        placeholder={translate!('post.textareaPlaceholder')}
+                        multiline
+                        rows={2}
+                        rowsMax={4}
+                        style={{
+                          fontWeight: 400,
+                          fontSize: '14px',
+                          margin: '0 16px',
+                          flexShrink: 0,
+                          width: 'initial',
+                          flexGrow: 1
+                        }}
+                      />
 
-                    />
-
-                    {loadImage}
-                  </div>
-                  <div style={{ flexShrink: 0, boxFlex: 0, flexGrow: 0, maxHeight: '48px', width: '100%' }}>
-                    <div style={{ flexDirection: 'row', display: 'flex' }}>
-                      <div onClick={this.handleOpenGallery} style={{ outline: 'none', width: '48px', zIndex: 0, overflow: 'hidden', position: 'relative', textAlign: 'center', transition: 'background .3s', border: 0, borderRadius: '50%', display: 'inlineBlock', height: '48px' }}>
-                        <span style={{ top: '15px', display: 'block', position: 'relative', cursor: 'pointer' }}>
-                          <SvgCamera style={{ color: 'grey' }} />
-                        </span>
+                      {loadImage}
+                    </div>
+                    <div
+                      style={{
+                        flexShrink: 0,
+                        boxFlex: 0,
+                        flexGrow: 0,
+                        maxHeight: '48px',
+                        width: '100%'
+                      }}
+                    >
+                      <div style={{ flexDirection: 'row', display: 'flex' }}>
+                        <div
+                          onClick={this.handleOpenGallery}
+                          style={{
+                            outline: 'none',
+                            width: '48px',
+                            zIndex: 0,
+                            overflow: 'hidden',
+                            position: 'relative',
+                            textAlign: 'center',
+                            transition: 'background .3s',
+                            border: 0,
+                            borderRadius: '50%',
+                            display: 'inlineBlock',
+                            height: '48px'
+                          }}
+                        >
+                          <span
+                            style={{
+                              top: '15px',
+                              display: 'block',
+                              position: 'relative',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            <SvgCamera style={{ color: 'grey' }} />
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
                 </Grid>
               </CardContent>
             </Card>
           </DialogContent>
           <DialogActions>
             <Button
-              color='primary'
+              color="primary"
               disableFocusRipple={true}
               disableRipple={true}
               onClick={this.props.onRequestClose}
-              style={{ backgroundColor: grey[800], color: '#fff'}}
+              style={{ backgroundColor: grey[800], color: '#fff' }}
             >
               {translate!('post.cancelButton')}
             </Button>
             <Button
-              color='primary'
-              style={{ backgroundColor: '#de64f6', color: '#fff'}}
+              color="primary"
+              style={{ backgroundColor: '#de64f6', color: '#fff' }}
               disableFocusRipple={true}
               disableRipple={true}
               onClick={this.handlePost}
               disabled={this.state.disabledPost}
             >
-              {this.props.edit ? translate!('post.updateButton') : translate!('post.postButton')}
+              {this.props.edit
+                ? translate!('post.updateButton')
+                : translate!('post.postButton')}
             </Button>
           </DialogActions>
         </Dialog>
         <Dialog
-        PaperProps={{className: classes.fullPageXs}}
+          PaperProps={{ className: classes.fullPageXs }}
           open={this.state.galleryOpen}
           onClose={this.handleCloseGallery}
-
         >
           <DialogContent>
-            <ImageGallery set={this.onRequestSetImage} close={this.handleCloseGallery} />
+            <ImageGallery
+              set={this.onRequestSetImage}
+              close={this.handleCloseGallery}
+            />
           </DialogContent>
           <DialogActions>
             <Button
-              color='primary'
+              color="primary"
               disableFocusRipple={true}
               disableRipple={true}
               onClick={this.handleCloseGallery}
@@ -566,8 +724,7 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
             </Button>
           </DialogActions>
         </Dialog>
-
-      </div >
+      </div>
     )
   }
 }
@@ -578,10 +735,15 @@ export class PostWriteComponent extends Component<IPostWriteComponentProps, IPos
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: IPostWriteComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: IPostWriteComponentProps
+) => {
   return {
-    post: (post: Post, callBack: Function) => dispatch(postActions.dbAddImagePost(post, callBack)),
-    update: (post: Map<string, any>, callBack: Function) => dispatch(postActions.dbUpdatePost(post, callBack))
+    post: (post: Post, callBack: Function) =>
+      dispatch(postActions.dbAddImagePost(post, callBack)),
+    update: (post: Map<string, any>, callBack: Function) =>
+      dispatch(postActions.dbUpdatePost(post, callBack))
   }
 }
 
@@ -591,7 +753,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: IPostWriteComponentProps) =
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: IPostWriteComponentProps) => {
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IPostWriteComponentProps
+) => {
   const uid = state.getIn(['authorize', 'uid'])
   const user = state.getIn(['user', 'info', uid], {})
   return {
@@ -603,4 +768,6 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IPostWriteComponentP
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(PostWriteComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(PostWriteComponent as any) as any)

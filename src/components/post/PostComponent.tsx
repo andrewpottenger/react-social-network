@@ -11,8 +11,13 @@ import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map } from 'immutable'
 
 // - Material UI
-import Card, { CardActions, CardHeader, CardMedia, CardContent } from 'material-ui/Card'
-import {  LinearProgress } from 'material-ui/Progress'
+import Card, {
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardContent
+} from 'material-ui/Card'
+import { LinearProgress } from 'material-ui/Progress'
 import Typography from 'material-ui/Typography'
 import SvgShare from 'material-ui-icons/Share'
 import SvgReply from 'material-ui-icons/Reply'
@@ -109,22 +114,23 @@ const styles = (theme: any) => ({
 })
 
 // - Create component class
-export class PostComponent extends Component<IPostComponentProps, IPostComponentState> {
-
+export class PostComponent extends Component<
+  IPostComponentProps,
+  IPostComponentState
+> {
   styles = {
     dialog: {
       width: '',
       maxWidth: '530px',
       borderRadius: '4px'
     }
-
   }
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IPostComponentProps) {
+  constructor(props: IPostComponentProps) {
     super(props)
     const { post } = props
     this.state = {
@@ -265,7 +271,7 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
    * @memberof Post
    */
   handleCopyLink = () => {
-    const {translate} = this.props
+    const { translate } = this.props
     this.setState({
       openCopyLink: true,
       shareTitle: translate!('post.copyLinkButton')
@@ -279,8 +285,10 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
    * @memberof Post
    */
   handleOpenShare = () => {
-    const {post} = this.props
-    copy(`${location.origin}/${post.get('ownerUserId')}/posts/${post.get('id')}`)
+    const { post } = this.props
+    copy(
+      `${location.origin}/${post.get('ownerUserId')}/posts/${post.get('id')}`
+    )
     this.setState({
       shareOpen: true
     })
@@ -328,10 +336,9 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
    * Handle read more event
    * @param  {event} evt  is the event passed by click on read more
    */
-  handleReadMore (event: any) {
+  handleReadMore(event: any) {
     this.setState({
       readMoreState: !this.state.readMoreState
-
     })
   }
 
@@ -339,39 +346,71 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-    const { post, setHomeTitle, goTo, fullName, isPostOwner, commentList, avatar, classes , translate} = this.props
+  render() {
+    const {
+      post,
+      setHomeTitle,
+      goTo,
+      fullName,
+      isPostOwner,
+      commentList,
+      avatar,
+      classes,
+      translate
+    } = this.props
     const { postMenuAnchorEl, isPostMenuOpen } = this.state
     const rightIconMenu = (
       <Manager>
         <Target>
           <IconButton
             aria-owns={isPostMenuOpen! ? 'post-menu' : ''}
-            aria-haspopup='true'
+            aria-haspopup="true"
             onClick={this.openPostMenu.bind(this)}
           >
             <MoreVertIcon />
           </IconButton>
-
         </Target>
         <Popper
-          placement='bottom-start'
+          placement="bottom-start"
           eventsEnabled={isPostMenuOpen!}
-          className={classNames({ [classes.popperClose]: !isPostMenuOpen }, { [classes.popperOpen]: isPostMenuOpen })}
+          className={classNames(
+            { [classes.popperClose]: !isPostMenuOpen },
+            { [classes.popperOpen]: isPostMenuOpen }
+          )}
         >
           <ClickAwayListener onClickAway={this.closePostMenu}>
-            <Grow in={isPostMenuOpen} >
+            <Grow in={isPostMenuOpen}>
               <Paper>
-                <MenuList role='menu'>
-                  <MenuItem onClick={this.handleOpenPostWrite} > {translate!('post.edit')} </MenuItem>
-                  <MenuItem onClick={this.handleDelete} > {translate!('post.delete')} </MenuItem>
-                  <MenuItem
-                    onClick={() => this.props.toggleDisableComments!(!post.get('disableComments'))} >
-                    {post.get('disableComments') ? translate!('post.enableComments') : translate!('post.disableComments')}
+                <MenuList role="menu">
+                  <MenuItem onClick={this.handleOpenPostWrite}>
+                    {' '}
+                    {translate!('post.edit')}{' '}
+                  </MenuItem>
+                  <MenuItem onClick={this.handleDelete}>
+                    {' '}
+                    {translate!('post.delete')}{' '}
                   </MenuItem>
                   <MenuItem
-                    onClick={() => this.props.toggleSharingComments!(!post.get('disableSharing'))} >
-                    {post.get('disableSharing') ? translate!('post.enableSharing') : translate!('post.disableSharing')}
+                    onClick={() =>
+                      this.props.toggleDisableComments!(
+                        !post.get('disableComments')
+                      )
+                    }
+                  >
+                    {post.get('disableComments')
+                      ? translate!('post.enableComments')
+                      : translate!('post.disableComments')}
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      this.props.toggleSharingComments!(
+                        !post.get('disableSharing')
+                      )
+                    }
+                  >
+                    {post.get('disableSharing')
+                      ? translate!('post.enableSharing')
+                      : translate!('post.disableSharing')}
                   </MenuItem>
                 </MenuList>
               </Paper>
@@ -381,117 +420,167 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
       </Manager>
     )
 
-    const { 
-      ownerUserId, 
-      ownerDisplayName, 
-      creationDate, 
-      image, 
-      body, 
-      id, 
-      disableComments, 
-      commentCounter, 
-      disableSharing ,
+    const {
+      ownerUserId,
+      ownerDisplayName,
+      creationDate,
+      image,
+      body,
+      id,
+      disableComments,
+      commentCounter,
+      disableSharing
     } = post.toJS()
     // Define variables
     return (
-      <Card key={`post-component-${id}`} className='modalOverflow'>
-          <div className='flex-wrapper'>
-              <section className='flex-content'>
-                  <div className='flex-columns'>
-                      <aside className='flex-sidebar'>
-                          <CardHeader
-                              title={<NavLink style={{ color: '#9c27b0' }} className='postName' to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
-                              subheader={creationDate ? moment.unix(creationDate!).fromNow() + ' | ' + translate!('post.public') : <LinearProgress color='primary' />}
-                              avatar={<NavLink to={`/${ownerUserId}`}><UserAvatar fullName={fullName!} fileName={avatar!} size={50} /></NavLink>}
-                              action={isPostOwner ? rightIconMenu : ''}
-                              className='cardHeader'
-                          >
-                          </CardHeader>
-                      </aside>
-                      <main className='flex-main'>
-                          <CardContent className={classes.postBody + ' cardContent'}>
-                          <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
-                              {reactStringReplace(body, /#(\w+)/g, (match: string, i: string) => (
-                                  <NavLink
-                                      className='tags'
-                                      style={{ color: '#de64f6' }}
-                                      key={match + i}
-                                      to={`/tag/${match}`}
-                                      onClick={evt => {
-                                          evt.preventDefault()
-                                          goTo!(`/tag/${match}`)
-                                          setHomeTitle!(`#${match}`)
-                                      }}
-                                  >
-                                      #{match}
-
-                                  </NavLink>
-
-                              ))}
-                          </Linkify>
-                      </CardContent></main>
-                  </div>
-              </section>
-              {/*<footer className='flex-footer'>Footer: Fixed height</footer>*/}
-          </div>
+      <Card key={`post-component-${id}`} className="modalOverflow">
+        <div className="flex-wrapper">
+          <section className="flex-content">
+            <div className="flex-columns">
+              <aside className="flex-sidebar">
+                <CardHeader
+                  title={
+                    <NavLink
+                      style={{ color: '#9c27b0' }}
+                      className="postName"
+                      to={`/${ownerUserId}`}
+                    >
+                      {ownerDisplayName}
+                    </NavLink>
+                  }
+                  subheader={
+                    creationDate ? (
+                      moment.unix(creationDate!).fromNow() +
+                      ' | ' +
+                      translate!('post.public')
+                    ) : (
+                      <LinearProgress color="primary" />
+                    )
+                  }
+                  avatar={
+                    <NavLink to={`/${ownerUserId}`}>
+                      <UserAvatar
+                        fullName={fullName!}
+                        fileName={avatar!}
+                        size={50}
+                      />
+                    </NavLink>}
+                  action={isPostOwner ? rightIconMenu : ''}
+                  className="cardHeader"
+                />
+              </aside>
+              <main className="flex-main">
+                <CardContent className={classes.postBody + ' cardContent'}>
+                  <Linkify
+                    properties={{ target: '_blank', style: { color: 'blue' } }}
+                  >
+                    {reactStringReplace(
+                      body,
+                      /#(\w+)/g,
+                      (match: string, i: string) => (
+                        <NavLink
+                          className="tags"
+                          style={{ color: '#de64f6' }}
+                          key={match + i}
+                          to={`/tag/${match}`}
+                          onClick={evt => {
+                            evt.preventDefault()
+                            goTo!(`/tag/${match}`)
+                            setHomeTitle!(`#${match}`)
+                          }}
+                        >
+                          #{match}
+                        </NavLink>
+                      )
+                    )}
+                  </Linkify>
+                </CardContent>
+              </main>
+            </div>
+          </section>
+          {/*<footer className='flex-footer'>Footer: Fixed height</footer>*/}
+        </div>
 
         {image ? (
           <CardMedia image={image}>
             <Img fileName={image} />
-          </CardMedia>) : ''}
-        <CardActions className='socialActions'>
+          </CardMedia>
+        ) : (
+          ''
+        )}
+        <CardActions className="socialActions">
           <div className={classes.vote + ' shortenWidth'}>
             <IconButton
               className={classes.iconButton + ' shortenWidth'}
               onClick={this.handleVote}
-              aria-label='Like'>
+              aria-label="Like"
+            >
               <Checkbox
                 className={classes.iconButton + ' shortenWidth'}
                 checkedIcon={<SvgThumbUp style={{ fill: '#551360' }} />}
                 icon={<SvgThumbUp style={{ fill: '#757575' }} />}
                 checked={this.props.currentUserVote}
               />
-              <div className={classes.voteCounter}> {this.props.voteCount! > 0 ? this.props.voteCount : ''} </div>
+              <div className={classes.voteCounter}>
+                {' '}
+                {this.props.voteCount! > 0 ? this.props.voteCount : ''}{' '}
+              </div>
             </IconButton>
           </div>
-          {!disableComments ?
-            (<div style={{ display: 'inherit' }}><IconButton
+          {!disableComments ? (
+            <div style={{ display: 'inherit' }}>
+              <IconButton
+                className={classes.iconButton}
+                onClick={this.handleOpenComments}
+                aria-label="Comment"
+              >
+                <SvgModeComment />
+                <div className={classes.commentCounter}>
+                  {commentCounter! > 0 ? commentCounter : ''}{' '}
+                </div>
+              </IconButton>
+            </div>
+          ) : (
+            ''
+          )}
+          {!disableSharing ? (
+            <IconButton
               className={classes.iconButton}
-              onClick={this.handleOpenComments}
-              aria-label='Comment'>
-              <SvgModeComment />
-              <div className={classes.commentCounter}>{commentCounter! > 0 ? commentCounter : ''} </div>
+              onClick={this.handleOpenShare}
+              aria-label="Comment"
+            >
+              <SvgReply className="flipIcon" />
             </IconButton>
-            </div>) : ''}
-          {!disableSharing ? (<IconButton
-            className={classes.iconButton}
-            onClick={this.handleOpenShare}
-            aria-label='Comment'>
-            <SvgReply className='flipIcon' />
-          </IconButton>) : ''}
-
+          ) : (
+            ''
+          )}
         </CardActions>
 
-        <CommentGroup open={this.state.openComments} comments={commentList} ownerPostUserId={ownerUserId!} onToggleRequest={this.handleOpenComments} isPostOwner={this.props.isPostOwner!} disableComments={disableComments!} postId={id} />
-
-        <ShareDialog 
-        onClose={this.handleCloseShare} 
-        shareOpen={this.state.shareOpen} 
-        onCopyLink={this.handleCopyLink} 
-        openCopyLink={this.state.openCopyLink}
-        post={post} 
-
+        <CommentGroup
+          open={this.state.openComments}
+          comments={commentList}
+          ownerPostUserId={ownerUserId!}
+          onToggleRequest={this.handleOpenComments}
+          isPostOwner={this.props.isPostOwner!}
+          disableComments={disableComments!}
+          postId={id}
         />
-       
+
+        <ShareDialog
+          onClose={this.handleCloseShare}
+          shareOpen={this.state.shareOpen}
+          onCopyLink={this.handleCopyLink}
+          openCopyLink={this.state.openCopyLink}
+          post={post}
+        />
+
         <PostWrite
           open={this.state.openPostWrite}
           onRequestClose={this.handleClosePostWrite}
           edit={true}
           postModel={post}
         />
-
       </Card>
-
     )
   }
 }
@@ -505,19 +594,34 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
 const mapDispatchToProps = (dispatch: any, ownProps: IPostComponentProps) => {
   const { post } = ownProps
   return {
-    vote: () => dispatch(voteActions.dbAddVote(post.get('id'), post.get('ownerUserId'))),
-    unvote: () => dispatch(voteActions.dbDeleteVote(post.get('id'), post.get('ownerUserId'))),
+    vote: () =>
+      dispatch(voteActions.dbAddVote(post.get('id'), post.get('ownerUserId'))),
+    unvote: () =>
+      dispatch(
+        voteActions.dbDeleteVote(post.get('id'), post.get('ownerUserId'))
+      ),
     delete: (id: string) => dispatch(postActions.dbDeletePost(id)),
     toggleDisableComments: (status: boolean) => {
-      dispatch(postActions.dbUpdatePost(post.set('disableComments', status), (x: any) => x))
+      dispatch(
+        postActions.dbUpdatePost(
+          post.set('disableComments', status),
+          (x: any) => x
+        )
+      )
     },
     toggleSharingComments: (status: boolean) => {
-      dispatch(postActions.dbUpdatePost(post.set('disableSharing', status), (x: any) => x))
+      dispatch(
+        postActions.dbUpdatePost(
+          post.set('disableSharing', status),
+          (x: any) => x
+        )
+      )
     },
     goTo: (url: string) => dispatch(push(url)),
-    setHomeTitle: (title: string) => dispatch(globalActions.setHeaderTitle(title || '')),
-    getPostComments: (ownerUserId: string, postId: string) => dispatch(commentActions.dbFetchComments(ownerUserId, postId))
-
+    setHomeTitle: (title: string) =>
+      dispatch(globalActions.setHeaderTitle(title || '')),
+    getPostComments: (ownerUserId: string, postId: string) =>
+      dispatch(commentActions.dbFetchComments(ownerUserId, postId))
   }
 }
 
@@ -527,12 +631,27 @@ const mapDispatchToProps = (dispatch: any, ownProps: IPostComponentProps) => {
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: IPostComponentProps) => {
-
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IPostComponentProps
+) => {
   const uid = state.getIn(['authorize', 'uid'])
   let currentUserVote = ownProps.post.getIn(['votes', uid], false)
-  const voteCount = state.getIn(['post', 'userPosts', ownProps.post.get('ownerUserId'), ownProps.post.get('id'), 'score'], 0)
-  const commentList: { [commentId: string]: Comment } = state.getIn(['comment', 'postComments', ownProps.post.get('id')])
+  const voteCount = state.getIn(
+    [
+      'post',
+      'userPosts',
+      ownProps.post.get('ownerUserId'),
+      ownProps.post.get('id'),
+      'score'
+    ],
+    0
+  )
+  const commentList: { [commentId: string]: Comment } = state.getIn([
+    'comment',
+    'postComments',
+    ownProps.post.get('id')
+  ])
   const user = state.getIn(['user', 'info', ownProps.post.get('ownerUserId')])
   return {
     translate: getTranslate(state.get('locale')),
@@ -546,4 +665,6 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IPostComponentProps)
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(PostComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(PostComponent as any) as any)

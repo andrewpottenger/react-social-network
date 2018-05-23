@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {Map} from 'immutable'
+import { Map } from 'immutable'
 
 // - Material UI
 import { withStyles } from 'material-ui/styles'
@@ -31,8 +31,10 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class CommentListComponent extends Component<ICommentListComponentProps, ICommentListComponentState> {
-
+export class CommentListComponent extends Component<
+  ICommentListComponentProps,
+  ICommentListComponentState
+> {
   static propTypes = {
     /**
      * If it's true the post owner is the logged in user which this post be long to the comment
@@ -48,18 +50,15 @@ export class CommentListComponent extends Component<ICommentListComponentProps, 
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: ICommentListComponentProps) {
+  constructor(props: ICommentListComponentProps) {
     super(props)
 
     /**
      * Default state
      */
-    this.state = {
-
-    }
+    this.state = {}
 
     // Binding functions to `this`
-
   }
 
   /**
@@ -68,9 +67,10 @@ export class CommentListComponent extends Component<ICommentListComponentProps, 
    */
   commentList = () => {
     let comments = Map<string, Comment>(this.props.comments)
-    let commentsEditorStatus = Map<string, boolean>(this.props.commentsEditorStatus!)
+    let commentsEditorStatus = Map<string, boolean>(
+      this.props.commentsEditorStatus!
+    )
     if (!comments.isEmpty()) {
-
       let parsedComments: Comment[] = []
       comments.forEach((comment, commentId) => {
         parsedComments.push({
@@ -80,20 +80,19 @@ export class CommentListComponent extends Component<ICommentListComponentProps, 
       })
       let sortedComments = PostAPI.sortObjectsDate(parsedComments)
 
-      return sortedComments.map((comment: Comment, index: number, array: Comment) => {
-
-        return (
-             <CommentComponent 
-                key={comment.id!} 
-                comment={comment} 
-                isPostOwner={this.props.isPostOwner} 
-                disableComments={this.props.disableComments}
-                editorStatus={(commentsEditorStatus.get(comment.id!, false))}
-              />
-              )
-
-      })
-
+      return sortedComments.map(
+        (comment: Comment, index: number, array: Comment) => {
+          return (
+            <CommentComponent
+              key={comment.id!}
+              comment={comment}
+              isPostOwner={this.props.isPostOwner}
+              disableComments={this.props.disableComments}
+              editorStatus={commentsEditorStatus.get(comment.id!, false)}
+            />
+          )
+        }
+      )
     }
   }
 
@@ -101,13 +100,11 @@ export class CommentListComponent extends Component<ICommentListComponentProps, 
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-    const {classes, postId} = this.props
+  render() {
+    const { classes, postId } = this.props
 
     return (
-
       <List key={`comment-list-${postId}`} className={classes.list}>
-
         {this.commentList()}
       </List>
     )
@@ -120,10 +117,11 @@ export class CommentListComponent extends Component<ICommentListComponentProps, 
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: ICommentListComponentProps) => {
-  return {
-
-  }
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: ICommentListComponentProps
+) => {
+  return {}
 }
 
 /**
@@ -132,12 +130,20 @@ const mapDispatchToProps = (dispatch: any, ownProps: ICommentListComponentProps)
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: ICommentListComponentProps) => {
-  const commentsEditorStatus = state.getIn(['comment', 'editorStatus', ownProps.postId ], {})
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: ICommentListComponentProps
+) => {
+  const commentsEditorStatus = state.getIn(
+    ['comment', 'editorStatus', ownProps.postId],
+    {}
+  )
   return {
     commentsEditorStatus
   }
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles as any)(CommentListComponent as any))as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(CommentListComponent as any) as any)

@@ -13,7 +13,7 @@ import { grey } from 'material-ui/colors'
 import { withStyles } from 'material-ui/styles'
 import uuid from 'uuid'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import {Map} from 'immutable'
+import { Map } from 'immutable'
 
 // - Import actions
 import * as imageGalleryActions from 'store/actions/imageGalleryActions'
@@ -42,10 +42,11 @@ const styles = (theme: any) => ({
 /**
  * Create ImageGallery component class
  */
-export class ImageGalleryComponent extends Component<IImageGalleryComponentProps, IImageGalleryComponentState> {
-
+export class ImageGalleryComponent extends Component<
+  IImageGalleryComponentProps,
+  IImageGalleryComponentState
+> {
   static propTypes = {
-
     /**
      * Callback function to ser image url on parent component
      */
@@ -93,7 +94,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IImageGalleryComponentProps) {
+  constructor(props: IImageGalleryComponentProps) {
     super(props)
 
     // Binding function to `this`
@@ -109,8 +110,8 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
    * @param  {event} evt  passed by on click event on add image
    * @param  {string} name is the name of the image
    */
-  handleSetImage = (event: any, URL: string,fullPath: string) => {
-    this.props.set!(URL,fullPath)
+  handleSetImage = (event: any, URL: string, fullPath: string) => {
+    this.props.set!(URL, fullPath)
     this.close()
   }
 
@@ -123,11 +124,14 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
     this.props.deleteImage!(id)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('onSendResizedImage', this.handleSendResizedImage)
   }
-  componentWillUnmount () {
-    window.removeEventListener('onSendResizedImage', this.handleSendResizedImage)
+  componentWillUnmount() {
+    window.removeEventListener(
+      'onSendResizedImage',
+      this.handleSendResizedImage
+    )
   }
 
   /**
@@ -137,21 +141,18 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
    * @memberof ImageGallery
    */
   handleSendResizedImage = (event: any) => {
-
     const { resizedImage, fileName } = event.detail
-    const {uploadImage} = this.props
-    uploadImage!(resizedImage,fileName)
+    const { uploadImage } = this.props
+    uploadImage!(resizedImage, fileName)
   }
 
   /**
    * Handle on change file upload
    */
   onFileChange = (event: any) => {
-
     const extension = FileAPI.getExtension(event.target.files[0].name)
-    let fileName = (`${uuid()}.${extension}`)
+    let fileName = `${uuid()}.${extension}`
     let image = FileAPI.constraintImage(event.target.files[0], fileName)
-
   }
 
   /**
@@ -163,40 +164,72 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
 
   imageList = () => {
     return this.props.images!.map((image: Image, index) => {
-
       return (
-      <GridListTile
-        key={image.id!}
-      >
-        <div>
-          <div style={{ overflowY: 'hidden', overflowX: 'auto' }}>
-            <ul style={{ whiteSpace: 'nowrap', padding: '0 6px', margin: '8px 0 0 0', verticalAlign: 'bottom', flexShrink: 0, listStyleType: 'none' }}>
-              <div style={{ display: 'block' }}>
-                <div style={{ display: 'block', marginRight: '8px', transition: 'transform .25s' }}>
-                  <li style={{ width: '100%', margin: 0, verticalAlign: 'bottom', position: 'static', display: 'inline-block' }}>
-                    <Img fileName={image.URL} style={{ width: '100%', height: 'auto' }} />
-
-                  </li>
+        <GridListTile key={image.id!}>
+          <div>
+            <div style={{ overflowY: 'hidden', overflowX: 'auto' }}>
+              <ul
+                style={{
+                  whiteSpace: 'nowrap',
+                  padding: '0 6px',
+                  margin: '8px 0 0 0',
+                  verticalAlign: 'bottom',
+                  flexShrink: 0,
+                  listStyleType: 'none'
+                }}
+              >
+                <div style={{ display: 'block' }}>
+                  <div
+                    style={{
+                      display: 'block',
+                      marginRight: '8px',
+                      transition: 'transform .25s'
+                    }}
+                  >
+                    <li
+                      style={{
+                        width: '100%',
+                        margin: 0,
+                        verticalAlign: 'bottom',
+                        position: 'static',
+                        display: 'inline-block'
+                      }}
+                    >
+                      <Img
+                        fileName={image.URL}
+                        style={{ width: '100%', height: 'auto' }}
+                      />
+                    </li>
+                  </div>
                 </div>
-              </div>
-
-            </ul>
+              </ul>
+            </div>
           </div>
-        </div>
-        <GridListTileBar
-              title={<SvgDelete style={this.styles.deleteImage as any} onClick={evt => this.handleDeleteImage(evt, image.id!)} />}
-              titlePosition='top'
-              actionIcon={
-                <SvgAddImage style={this.styles.addImage as any} onClick={evt => this.handleSetImage(evt, image.URL,image.fullPath)} />}
-              actionPosition='left'
-            />
-      </GridListTile>)
+          <GridListTileBar
+            title={
+              <SvgDelete
+                style={this.styles.deleteImage as any}
+                onClick={evt => this.handleDeleteImage(evt, image.id!)}
+              />
+            }
+            titlePosition="top"
+            actionIcon={
+              <SvgAddImage
+                style={this.styles.addImage as any}
+                onClick={evt =>
+                  this.handleSetImage(evt, image.URL, image.fullPath)
+                }
+              />
+            }
+            actionPosition="left"
+          />
+        </GridListTile>
+      )
     })
   }
 
-  render () {
-
-    const {translate} = this.props
+  render() {
+    const { translate } = this.props
     /**
      * Component styles
      * @type {Object}
@@ -204,25 +237,33 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
 
     return (
       <div style={this.styles.root as any}>
-        <GridList
-          cellHeight={180}
-          style={this.styles.gridList as any}
-        >
-          <GridListTile key='upload-image-gallery' >
-
-            <div style={{ display: 'flex', backgroundColor: 'rgba(222, 222, 222, 0.52)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-
+        <GridList cellHeight={180} style={this.styles.gridList as any}>
+          <GridListTile key="upload-image-gallery">
+            <div
+              style={{
+                display: 'flex',
+                backgroundColor: 'rgba(222, 222, 222, 0.52)',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%'
+              }}
+            >
               <input
-                accept='image/*'
+                accept="image/*"
                 style={this.styles.uploadInput as any}
-                id='raised-button-file'
+                id="raised-button-file"
                 onChange={this.onFileChange}
-                type='file'
+                type="file"
               />
-              <label htmlFor='raised-button-file'>
-                <Button variant='raised' component='span' style={this.styles.uploadButton as any}>
+              <label htmlFor="raised-button-file">
+                <Button
+                  variant="raised"
+                  component="span"
+                  style={this.styles.uploadButton as any}
+                >
                   {translate!('imageGallery.uploadButton')}
-        </Button>
+                </Button>
               </label>
             </div>
           </GridListTile>
@@ -239,12 +280,17 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: IImageGalleryComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: IImageGalleryComponentProps
+) => {
   return {
-    uploadImage: (image: any, imageName: string) => dispatch(imageGalleryActions.dbUploadImage(image,imageName)),
-    deleteImage: (id: string) => dispatch(imageGalleryActions.dbDeleteImage(id)),
-    progressChange : (percent: number,status: boolean) => dispatch(globalActions.progressChange(percent, status))
-
+    uploadImage: (image: any, imageName: string) =>
+      dispatch(imageGalleryActions.dbUploadImage(image, imageName)),
+    deleteImage: (id: string) =>
+      dispatch(imageGalleryActions.dbDeleteImage(id)),
+    progressChange: (percent: number, status: boolean) =>
+      dispatch(globalActions.progressChange(percent, status))
   }
 }
 
@@ -261,9 +307,10 @@ const mapStateToProps = (state: Map<string, any>) => {
     translate: getTranslate(state.get('locale')),
     images: state.getIn(['imageGallery', 'images']),
     avatar: currentUser ? currentUser.avatar : ''
-
   }
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(ImageGalleryComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(ImageGalleryComponent as any) as any)

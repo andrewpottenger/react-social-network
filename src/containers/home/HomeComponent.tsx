@@ -63,18 +63,18 @@ const styles = (theme: any) => ({
     width: '100%',
     marginTop: theme.spacing.unit * 3,
     zIndex: 1,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   appFrame: {
     position: 'relative',
     display: 'flex',
     width: '100%',
-    height: '100%',
+    height: '100%'
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   drawerHeader: theme.mixins.toolbar,
   drawerPaper: {
@@ -83,21 +83,21 @@ const styles = (theme: any) => ({
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
       position: 'relative',
-      height: '100%',
-    },
+      height: '100%'
+    }
   },
   drawerPaperLarge: {
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
-      height: '100%',
+      height: '100%'
     },
     top: 70,
     backgroundColor: '#fafafa',
     borderRight: 0
   },
   menu: {
-    height: '100%',
+    height: '100%'
   },
   content: {
     backgroundColor: 'transparent',
@@ -106,26 +106,26 @@ const styles = (theme: any) => ({
     padding: theme.spacing.unit * 1,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
     height: 'calc(100% - 56px)',
     marginTop: 56,
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
-      marginTop: 64,
-    },
+      marginTop: 64
+    }
   },
   'content-left': {
-    marginLeft: 0,
+    marginLeft: 0
   },
   'content-right': {
-    marginRight: 0,
+    marginRight: 0
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   'contentShift-left': {
     marginLeft: 0,
@@ -142,8 +142,10 @@ const styles = (theme: any) => ({
 })
 
 // - Create Home component class
-export class HomeComponent extends Component<IHomeComponentProps, IHomeComponentState> {
-
+export class HomeComponent extends Component<
+  IHomeComponentProps,
+  IHomeComponentState
+> {
   // Constructor
   constructor(props: IHomeComponentProps) {
     super(props)
@@ -154,7 +156,6 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
     }
 
     // Binding function to `this`
-
   }
 
   /**
@@ -165,16 +166,22 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
   }
 
   componentWillMount() {
-    const { global, clearData, loadData, authed, defaultDataEnable, isVerifide, goTo } = this.props
+    const {
+      global,
+      clearData,
+      loadData,
+      authed,
+      defaultDataEnable,
+      isVerifide,
+      goTo
+    } = this.props
     if (!authed) {
       goTo!('/login')
       return
     }
     if (!isVerifide) {
       goTo!('/emailVerification')
-
     } else if (!global.get('defaultLoadDataStatus')) {
-
       clearData!()
       loadData!()
       defaultDataEnable!()
@@ -190,50 +197,62 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
    */
   render() {
     const HR = HomeRouter
-    const { loaded, authed, loadDataStream, mergedPosts, hasMorePosts, showSendFeedback, translate, classes, theme } = this.props
+    const {
+      loaded,
+      authed,
+      loadDataStream,
+      mergedPosts,
+      hasMorePosts,
+      showSendFeedback,
+      translate,
+      classes,
+      theme
+    } = this.props
     const { drawerOpen } = this.state
     const drawer = (
       <>
-
-      <NavLink to='/'>
-        <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
+        <NavLink to="/">
+          <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
+            <ListItemIcon>
+              <SvgHome />
+            </ListItemIcon>
+            <ListItemText inset primary={translate!('sidebar.home')} />
+          </MenuItem>
+        </NavLink>
+        <NavLink to={`/${this.props.uid}`}>
+          <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
+            <ListItemIcon>
+              <SvgAccountCircle />
+            </ListItemIcon>
+            <ListItemText inset primary={translate!('sidebar.profile')} />
+          </MenuItem>
+        </NavLink>
+        <NavLink to="/people">
+          <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
+            <ListItemIcon>
+              <SvgPeople />
+            </ListItemIcon>
+            <ListItemText inset primary={translate!('sidebar.people')} />
+          </MenuItem>
+        </NavLink>
+        <Divider />
+        <NavLink to="/settings">
+          <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
+            <ListItemIcon>
+              <SvgSettings />
+            </ListItemIcon>
+            <ListItemText inset primary={translate!('sidebar.settings')} />
+          </MenuItem>
+        </NavLink>
+        <MenuItem
+          onClick={() => showSendFeedback!()}
+          style={{ color: 'rgb(117, 117, 117)' }}
+        >
           <ListItemIcon>
-            <SvgHome />
+            <SvgFeedback />
           </ListItemIcon>
-          <ListItemText inset primary={translate!('sidebar.home')} />
+          <ListItemText inset primary={translate!('sidebar.sendFeedback')} />
         </MenuItem>
-      </NavLink>
-      <NavLink to={`/${this.props.uid}`}>
-        <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
-          <ListItemIcon>
-            <SvgAccountCircle />
-          </ListItemIcon>
-          <ListItemText inset primary={translate!('sidebar.profile')} />
-        </MenuItem>
-      </NavLink>
-      <NavLink to='/people'>
-        <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
-          <ListItemIcon>
-            <SvgPeople />
-          </ListItemIcon>
-          <ListItemText inset primary={translate!('sidebar.people')} />
-        </MenuItem>
-      </NavLink>
-      <Divider />
-      <NavLink to='/settings'>
-        <MenuItem style={{ color: 'rgb(117, 117, 117)' }}>
-          <ListItemIcon>
-            <SvgSettings />
-          </ListItemIcon>
-          <ListItemText inset primary={translate!('sidebar.settings')} />
-        </MenuItem>
-      </NavLink>
-      <MenuItem onClick={() => showSendFeedback!()} style={{ color: 'rgb(117, 117, 117)' }}>
-        <ListItemIcon>
-          <SvgFeedback />
-        </ListItemIcon>
-        <ListItemText inset primary={translate!('sidebar.sendFeedback')} />
-      </MenuItem>
       </>
     )
 
@@ -241,64 +260,77 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <HomeHeader onToggleDrawer={this.handleDrawerToggle} drawerStatus={this.state.drawerOpen} />
+          <HomeHeader
+            onToggleDrawer={this.handleDrawerToggle}
+            drawerStatus={this.state.drawerOpen}
+          />
           <Hidden mdUp>
             <Drawer
-              variant='temporary'
+              variant="temporary"
               open={this.state.drawerOpen}
               classes={{
-                paper: classes.drawerPaper,
+                paper: classes.drawerPaper
               }}
               onClose={this.handleDrawerToggle}
               ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
+                keepMounted: true // Better open performance on mobile.
               }}
             >
               <div>
                 <div className={classes.drawerHeader} />
-                <MenuList style={{ color: 'rgb(117, 117, 117)', width: '210px' }}>
+                <MenuList
+                  style={{ color: 'rgb(117, 117, 117)', width: '210px' }}
+                >
                   <Divider />
                   {drawer}
                 </MenuList>
               </div>
             </Drawer>
           </Hidden>
-          <Hidden smDown implementation='js'>
+          <Hidden smDown implementation="js">
             <Drawer
-              variant='persistent'
+              variant="persistent"
               open={this.state.drawerOpen}
               classes={{
-                paper: classes.drawerPaperLarge,
+                paper: classes.drawerPaperLarge
               }}
             >
               <div>
-                <MenuList className={classes.menu} style={{ color: 'rgb(117, 117, 117)', width: '210px' }}>
+                <MenuList
+                  className={classes.menu}
+                  style={{ color: 'rgb(117, 117, 117)', width: '210px' }}
+                >
                   {drawer}
                 </MenuList>
               </div>
             </Drawer>
           </Hidden>
           <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
-              [classes.contentShift]: drawerOpen,
-              [classes[`contentShift-${anchor}`]]: drawerOpen,
-            })}
+            className={classNames(
+              classes.content,
+              classes[`content-${anchor}`],
+              {
+                [classes.contentShift]: drawerOpen,
+                [classes[`contentShift-${anchor}`]]: drawerOpen
+              }
+            )}
           >
-            <HR enabled={loaded!} data={{ mergedPosts, loadDataStream, hasMorePosts }} />
+            <HR
+              enabled={loaded!}
+              data={{ mergedPosts, loadDataStream, hasMorePosts }}
+            />
           </main>
         </div>
       </div>
-
     )
   }
 }
 
 // - Map dispatch to props
 const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
-
   return {
-    loadDataStream:
-      (page: number, limit: number) => dispatch(postActions.dbGetPosts(page, limit)),
+    loadDataStream: (page: number, limit: number) =>
+      dispatch(postActions.dbGetPosts(page, limit)),
     loadData: () => {
       dispatch(postActions.dbGetPosts())
       dispatch(imageGalleryActions.dbGetImageGallery())
@@ -307,7 +339,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
       dispatch(circleActions.dbGetCircles())
       dispatch(circleActions.dbGetUserTies())
       dispatch(circleActions.dbGetFollowers())
-
     },
     clearData: () => {
       dispatch(imageGalleryActions.clearAllData())
@@ -316,7 +347,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
       dispatch(notifyActions.clearAllNotifications())
       dispatch(circleActions.clearAllCircles())
       dispatch(globalActions.clearTemp())
-
     },
     defaultDataDisable: () => {
       dispatch(globalActions.defaultDataDisable())
@@ -327,9 +357,7 @@ const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
     goTo: (url: string) => dispatch(push(url)),
     showSendFeedback: () => dispatch(globalActions.showSendFeedback()),
     hideSendFeedback: () => dispatch(globalActions.hideSendFeedback())
-
   }
-
 }
 
 /**
@@ -338,17 +366,23 @@ const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: IHomeComponentProps) => {
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IHomeComponentProps
+) => {
   const uid = state.getIn(['authorize', 'uid'], {})
   const global = state.get('global', {})
   let mergedPosts = Map({})
   const circles = state.getIn(['circle', 'circleList'], {})
-  const followingUsers: Map<string, any> = state.getIn(['circle', 'userTies'], {})
-  const posts = state.getIn(['post', 'userPosts', uid ], {})
-  const hasMorePosts = state.getIn(['post', 'stream', 'hasMoreData' ], true)
+  const followingUsers: Map<string, any> = state.getIn(
+    ['circle', 'userTies'],
+    {}
+  )
+  const posts = state.getIn(['post', 'userPosts', uid], {})
+  const hasMorePosts = state.getIn(['post', 'stream', 'hasMoreData'], true)
   followingUsers.forEach((user, userId) => {
     let newPosts = state.getIn(['post', 'userPosts', userId], {})
-   mergedPosts = mergedPosts.merge(newPosts)
+    mergedPosts = mergedPosts.merge(newPosts)
   })
   mergedPosts = mergedPosts.merge(posts)
   return {
@@ -359,9 +393,17 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IHomeComponentProps)
     mergedPosts,
     global,
     hasMorePosts,
-    loaded: state.getIn(['user', 'loaded']) && state.getIn(['imageGallery', 'loaded']) && state.getIn(['notify', 'loaded']) && state.getIn(['circle', 'loaded'])
+    loaded:
+      state.getIn(['user', 'loaded']) &&
+      state.getIn(['imageGallery', 'loaded']) &&
+      state.getIn(['notify', 'loaded']) &&
+      state.getIn(['circle', 'loaded'])
   }
 }
 
 // - Connect component to redux store
-export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any, { withTheme: true })(HomeComponent as any) as any)) as typeof HomeComponent
+export default withRouter<any>(
+  connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any, {
+    withTheme: true
+  })(HomeComponent as any) as any)
+) as typeof HomeComponent

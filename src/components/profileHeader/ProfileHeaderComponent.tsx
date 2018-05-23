@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import config from 'src/config'
-import {Map} from 'immutable'
+import { Map } from 'immutable'
 
 // - Material UI
 import { grey } from 'material-ui/colors'
@@ -31,43 +31,41 @@ import { IProfileHeaderComponentState } from './IProfileHeaderComponentState'
 /**
  * Create component class
  */
-export class ProfileHeaderComponent extends Component<IProfileHeaderComponentProps, IProfileHeaderComponentState> {
-
-    /**
-     * Component constructor
-     * @param  {object} props is an object properties of component
-     */
-  constructor (props: IProfileHeaderComponentProps) {
+export class ProfileHeaderComponent extends Component<
+  IProfileHeaderComponentProps,
+  IProfileHeaderComponentState
+> {
+  /**
+   * Component constructor
+   * @param  {object} props is an object properties of component
+   */
+  constructor(props: IProfileHeaderComponentProps) {
     super(props)
 
-        /**
-         * Defaul state
-         */
+    /**
+     * Defaul state
+     */
     this.state = {
-            /**
-             * If it's true , the window is in small size
-             */
+      /**
+       * If it's true , the window is in small size
+       */
       isSmall: false
-
     }
 
-        // Binding functions to `this`
-
+    // Binding functions to `this`
   }
-    /**
-     * Handle resize event for window to change sidebar status
-     * @param  {event} evt is the event is passed by winodw resize event
-     */
+  /**
+   * Handle resize event for window to change sidebar status
+   * @param  {event} evt is the event is passed by winodw resize event
+   */
   handleResize = () => {
-
-        // Set initial state
+    // Set initial state
     let width = window.innerWidth
 
     if (width > 900) {
       this.setState({
         isSmall: false
       })
-
     } else {
       this.setState({
         isSmall: true
@@ -75,16 +73,16 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.handleResize()
   }
 
-    /**
-     * Reneder component DOM
-     * @return {react element} return the DOM which rendered by component
-     */
-  render () {
-    const {translate, isAuthedUser, editProfileOpen} = this.props
+  /**
+   * Reneder component DOM
+   * @return {react element} return the DOM which rendered by component
+   */
+  render() {
+    const { translate, isAuthedUser, editProfileOpen } = this.props
     const styles = {
       avatar: {
         border: '2px solid rgb(255, 255, 255)'
@@ -93,7 +91,6 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
         fill: 'rgb(255, 255, 255)',
         height: '24px',
         width: '24px'
-
       },
       iconButtonSmall: {
         fill: 'rgb(0, 0, 0)',
@@ -102,16 +99,12 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
       },
 
       editButton: {
-
         marginLeft: '20px'
-
       },
       editButtonSmall: {
-
         marginLeft: '20px',
         color: 'white',
         fill: 'blue'
-
       },
       aboutButton: {
         color: 'white'
@@ -122,64 +115,100 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
     }
 
     const iconButtonElement = (
-            <IconButton style={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton}>
-                <MoreVertIcon style={{...(this.state.isSmall ? styles.iconButtonSmall : styles.iconButton), color: grey[400]}} viewBox='10 0 24 24' />
-            </IconButton>
-        )
+      <IconButton
+        style={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton}
+      >
+        <MoreVertIcon
+          style={{
+            ...(this.state.isSmall
+              ? styles.iconButtonSmall
+              : styles.iconButton),
+            color: grey[400]
+          }}
+          viewBox="10 0 24 24"
+        />
+      </IconButton>
+    )
 
     const RightIconMenu = () => (
       <div>
-           {iconButtonElement}
-                <MenuItem style={{ fontSize: '14px' }}>Reply</MenuItem>
-                <MenuItem style={{ fontSize: '14px' }}>Edit</MenuItem>
-                <MenuItem style={{ fontSize: '14px' }}>Delete</MenuItem>
+        {iconButtonElement}
+        <MenuItem style={{ fontSize: '14px' }}>Reply</MenuItem>
+        <MenuItem style={{ fontSize: '14px' }}>Edit</MenuItem>
+        <MenuItem style={{ fontSize: '14px' }}>Delete</MenuItem>
       </div>
-        )
+    )
 
     return (
-
-            <div>
-                <Parallax strength={500} className='profile__parallax' bgStyle={{ position: 'relative' }}>
-                    <Background>
-                        <ImgCover width='100%' height='510px' borderRadius='2px'
-                        fileName={this.props.banner || config.settings.defaultProfileCover} />
-                    </Background>
-
-                </Parallax>
-                <div className={this.state.isSmall ? 'profile__head-info-s' : 'profile__head-info'}>
-                    <EventListener
-                        target='window'
-                        onResize={this.handleResize}
-                    />
-                    <div className='left'>
-                        {/* User avatar*/}
-                        <div style={{ display: 'flex', justifyContent: 'center' }}><UserAvatar fullName={this.props.fullName || ' '} fileName={this.props.avatar} size={60} style={styles.avatar} /></div>
-                        <div className='info'>
-                            <div className='fullName'>
-                                {this.props.fullName}
-                            </div>
-                            <div className='tagLine'>
-                               {this.props.tagLine}
-                            </div>
-                            {/*<div className='followers'>
+      <div>
+        <Parallax
+          strength={500}
+          className="profile__parallax"
+          bgStyle={{ position: 'relative' }}
+        >
+          <Background>
+            <ImgCover
+              width="100%"
+              height="510px"
+              borderRadius="2px"
+              fileName={
+                this.props.banner || config.settings.defaultProfileCover
+              }
+            />
+          </Background>
+        </Parallax>
+        <div
+          className={
+            this.state.isSmall ? 'profile__head-info-s' : 'profile__head-info'
+          }
+        >
+          <EventListener target="window" onResize={this.handleResize} />
+          <div className="left">
+            {/* User avatar*/}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <UserAvatar
+                fullName={this.props.fullName || ' '}
+                fileName={this.props.avatar}
+                size={60}
+                style={styles.avatar}
+              />
+            </div>
+            <div className="info">
+              <div className="fullName">{this.props.fullName}</div>
+              <div className="tagLine">{this.props.tagLine}</div>
+              {/*<div className='followers'>
                                 {this.props.followerCount} Followers
                 </div>*/}
-                        </div>
-                    </div>
-                    <div className='right'>
-                        {isAuthedUser ? (<div style={this.state.isSmall ? styles.editButtonSmall : styles.editButton}>
-                        <Button variant='raised' onClick={this.props.openEditor}>
-                        {translate!('profile.editProfileButton')}
-                        </Button>
-                        </div>) : ''}
-                    </div>
-                </div>
-                {isAuthedUser && editProfileOpen ? (<EditProfile
-                    avatar={this.props.avatar}
-                    banner={this.props.banner}
-                    fullName={this.props.fullName}
-                />) : ''}
             </div>
+          </div>
+          <div className="right">
+            {isAuthedUser ? (
+              <div
+                style={
+                  this.state.isSmall
+                    ? styles.editButtonSmall
+                    : styles.editButton
+                }
+              >
+                <Button variant="raised" onClick={this.props.openEditor}>
+                  {translate!('profile.editProfileButton')}
+                </Button>
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+        {isAuthedUser && editProfileOpen ? (
+          <EditProfile
+            avatar={this.props.avatar}
+            banner={this.props.banner}
+            fullName={this.props.fullName}
+          />
+        ) : (
+          ''
+        )}
+      </div>
     )
   }
 }
@@ -190,7 +219,10 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: IProfileHeaderComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: IProfileHeaderComponentProps
+) => {
   return {
     openEditor: () => dispatch(userActions.openEditProfile())
   }
@@ -202,8 +234,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: IProfileHeaderComponentProp
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: IProfileHeaderComponentProps) => {
-
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IProfileHeaderComponentProps
+) => {
   return {
     translate: getTranslate(state.get('locale')),
     editProfileOpen: state.getIn(['user', 'openEditProfile'])
@@ -211,4 +245,6 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IProfileHeaderCompon
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileHeaderComponent as any)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ProfileHeaderComponent as any
+)

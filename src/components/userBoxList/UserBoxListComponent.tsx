@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {Map} from 'immutable'
+import { Map } from 'immutable'
 
 // - Import app components
 import UserBox from 'components/userBox'
@@ -18,29 +18,28 @@ import { UserTie } from 'core/domain/circles/userTie'
 /**
  * Create component class
  */
-export class UserBoxListComponent extends Component<IUserBoxListComponentProps,IUserBoxListComponentState> {
-
+export class UserBoxListComponent extends Component<
+  IUserBoxListComponentProps,
+  IUserBoxListComponentState
+> {
   static propTypes = {
-        /**
-         * List of users
-         */
+    /**
+     * List of users
+     */
     users: PropTypes.object
   }
 
-    /**
-     * Component constructor
-     * @param  {object} props is an object properties of component
-     */
-  constructor (props: IUserBoxListComponentProps) {
+  /**
+   * Component constructor
+   * @param  {object} props is an object properties of component
+   */
+  constructor(props: IUserBoxListComponentProps) {
     super(props)
 
-        // Defaul state
-    this.state = {
+    // Defaul state
+    this.state = {}
 
-    }
-
-        // Binding functions to `this`
-
+    // Binding functions to `this`
   }
 
   userList = () => {
@@ -48,31 +47,26 @@ export class UserBoxListComponent extends Component<IUserBoxListComponentProps,I
     const users = this.props.users
     const userBoxList: any[] = []
     if (users) {
-       users.forEach((user: UserTie, key: string) => {
+      users.forEach((user: UserTie, key: string) => {
         if (uid !== key) {
-          userBoxList.push(<UserBox key={key} userId={key} user={user}/>)
+          userBoxList.push(<UserBox key={key} userId={key} user={user} />)
         }
       })
     }
     return userBoxList
   }
 
-    /**
-     * Reneder component DOM
-     * @return {react element} return the DOM which rendered by component
-     */
-  render () {
-
-    const styles = {
-
-    }
+  /**
+   * Reneder component DOM
+   * @return {react element} return the DOM which rendered by component
+   */
+  render() {
+    const styles = {}
 
     return (
-
-                <div className='grid grid__1of4 grid__space-around'>
-                  {this.userList()}
-                </div>
-
+      <div className="grid grid__1of4 grid__space-around">
+        {this.userList()}
+      </div>
     )
   }
 }
@@ -83,10 +77,11 @@ export class UserBoxListComponent extends Component<IUserBoxListComponentProps,I
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: IUserBoxListComponentProps) => {
-  return {
-
-  }
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IUserBoxListComponentProps
+) => {
+  return {}
 }
 
 /**
@@ -103,4 +98,6 @@ const mapStateToProps = (state: any, ownProps: IUserBoxListComponentProps) => {
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(UserBoxListComponent as any)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  UserBoxListComponent as any
+)

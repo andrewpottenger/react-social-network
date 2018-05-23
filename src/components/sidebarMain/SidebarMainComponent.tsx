@@ -8,15 +8,17 @@ import { ISidebarMainComponentState } from './ISidebarMainComponentState'
 // - Import actions
 
 // - Create component class
-export default class SidebarMainComponent extends Component<ISidebarMainComponentProps,ISidebarMainComponentState> {
-
+export default class SidebarMainComponent extends Component<
+  ISidebarMainComponentProps,
+  ISidebarMainComponentState
+> {
   static qcName = 'SidebarMain'
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: ISidebarMainComponentProps) {
+  constructor(props: ISidebarMainComponentProps) {
     super(props)
 
     // Default state
@@ -27,12 +29,12 @@ export default class SidebarMainComponent extends Component<ISidebarMainComponen
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
+  render() {
     return (
-      <div className='home__main' style={this.props.cstyle} >
-        <div style={{height: '80px', width: '100%'}}></div>
+      <div className="home__main" style={this.props.cstyle}>
+        <div style={{ height: '80px', width: '100%' }} />
         {this.props.children}
-        </div>
+      </div>
     )
   }
 }

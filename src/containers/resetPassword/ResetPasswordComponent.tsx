@@ -24,7 +24,6 @@ const styles = (theme: any) => ({
   textField: {
     minWidth: 280,
     marginTop: 20
-
   },
   caption: {
     marginTop: 30
@@ -49,23 +48,23 @@ const styles = (theme: any) => ({
  * @class ResetPasswordComponent
  * @extends {Component}
  */
-export class ResetPasswordComponent extends Component<IResetPasswordComponentProps,IResetPasswordComponentState> {
-
+export class ResetPasswordComponent extends Component<
+  IResetPasswordComponentProps,
+  IResetPasswordComponentState
+> {
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IResetPasswordComponentProps) {
+  constructor(props: IResetPasswordComponentProps) {
     super(props)
 
     this.state = {
       emailInput: '',
       emailInputError: ''
-
     }
     // Binding function to `this`
     this.handleForm = this.handleForm.bind(this)
-
   }
 
   /**
@@ -79,14 +78,13 @@ export class ResetPasswordComponent extends Component<IResetPasswordComponentPro
     this.setState({
       [name]: value
     })
-
   }
 
   /**
    * Handle register form
    */
   handleForm = () => {
-    const {translate} = this.props
+    const { translate } = this.props
     let error = false
     if (this.state.emailInput === '') {
       this.setState({
@@ -103,53 +101,67 @@ export class ResetPasswordComponent extends Component<IResetPasswordComponentPro
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-
-    const {classes, translate} = this.props
+  render() {
+    const { classes, translate } = this.props
 
     return (
       <Grid container spacing={24}>
-      <Grid item xs={12} className={classes.contain}>
+        <Grid item xs={12} className={classes.contain}>
+          <h1 className="g__app-name">{config.settings.appName}</h1>
 
-        <h1 className='g__app-name'>{config.settings.appName}</h1>
-
-        <div className='animate-bottom'>
-          <Paper className={classes.paper} elevation={1}>
-            <div style={{ padding: '48px 40px 36px' }}>
-              <div style={{
-                paddingLeft: '40px',
-                paddingRight: '40px'
-              }}>
-
-                <h2 className='zoomOutLCorner animated g__paper-title'>{translate!('resetPassword.title')}</h2>
-              </div>
-
-              <TextField
-              className={classes.textField}
-              autoFocus
-                onChange={this.handleInputChange}
-                helperText={this.state.emailInputError}
-                error={this.state.emailInputError.trim() !== ''}
-                name='emailInput'
-                label={translate!('resetPassword.emailLabel')}
-                type='email'
-              /><br />
-              <br />
-              <br />
-              <div className='settings__button-box'>
-                <div>
-                  <Button onClick={this.props.loginPage}>{translate!('resetPassword.backButton')}</Button>
+          <div className="animate-bottom">
+            <Paper className={classes.paper} elevation={1}>
+              <div style={{ padding: '48px 40px 36px' }}>
+                <div
+                  style={{
+                    paddingLeft: '40px',
+                    paddingRight: '40px'
+                  }}
+                >
+                  <h2 className="zoomOutLCorner animated g__paper-title">
+                    {translate!('resetPassword.title')}
+                  </h2>
                 </div>
-                <div>
-                  <Button variant='raised' color='primary' onClick={this.handleForm}>{translate!('resetPassword.resetPasswordButton')} </Button>
+
+                <TextField
+                  className={classes.textField}
+                  autoFocus
+                  onChange={this.handleInputChange}
+                  helperText={this.state.emailInputError}
+                  error={this.state.emailInputError.trim() !== ''}
+                  name="emailInput"
+                  label={translate!('resetPassword.emailLabel')}
+                  type="email"
+                />
+                <br />
+                <br />
+                <br />
+                <div className="settings__button-box">
+                  <div>
+                    <Button onClick={this.props.loginPage}>
+                      {translate!('resetPassword.backButton')}
+                    </Button>
+                  </div>
+                  <div>
+                    <Button
+                      variant="raised"
+                      color="primary"
+                      onClick={this.handleForm}
+                    >
+                      {translate!('resetPassword.resetPasswordButton')}{' '}
+                    </Button>
+                  </div>
                 </div>
+                <Typography
+                  className={classes.caption}
+                  variant="caption"
+                  component="p"
+                >
+                  {translate!('resetPassword.description')}
+                </Typography>
               </div>
-              <Typography className={classes.caption} variant='caption' component='p'>
-              {translate!('resetPassword.description')}
-          </Typography>
-            </div>
-          </Paper>
-        </div>
+            </Paper>
+          </div>
         </Grid>
       </Grid>
     )
@@ -162,12 +174,16 @@ export class ResetPasswordComponent extends Component<IResetPasswordComponentPro
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: IResetPasswordComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IResetPasswordComponentProps
+) => {
   return {
     loginPage: () => {
       dispatch(push('/login'))
     },
-    resetPassword: (emailAddress: string) => dispatch(authorizeActions.dbResetPassword(emailAddress))
+    resetPassword: (emailAddress: string) =>
+      dispatch(authorizeActions.dbResetPassword(emailAddress))
   }
 }
 
@@ -177,11 +193,18 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IResetPasswordComponen
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: any, ownProps: IResetPasswordComponentProps) => {
+const mapStateToProps = (
+  state: any,
+  ownProps: IResetPasswordComponentProps
+) => {
   return {
-    translate: getTranslate(state.get('locale')),
+    translate: getTranslate(state.get('locale'))
   }
 }
 
 // - Connect component to redux store
-export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(ResetPasswordComponent as any) as any)) as typeof ResetPasswordComponent
+export default withRouter<any>(
+  connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(
+    ResetPasswordComponent as any
+  ) as any)
+) as typeof ResetPasswordComponent

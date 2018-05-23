@@ -51,14 +51,15 @@ const styles = {
 }
 
 // - Create HomeHeader component class
-export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IHomeHeaderComponentState> {
-
+export class HomeHeaderComponent extends Component<
+  IHomeHeaderComponentProps,
+  IHomeHeaderComponentState
+> {
   styles = {
     avatarStyle: {
       margin: 5,
       cursor: 'pointer'
     }
-
   }
 
   /**
@@ -87,7 +88,6 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
     // Binding functions to `this`
     this.onToggleSidebar = this.onToggleSidebar.bind(this)
     this.handleCloseNotify = this.handleCloseNotify.bind(this)
-
   }
 
   /**
@@ -104,8 +104,8 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
 
   // On click toggle sidebar
   onToggleSidebar = () => {
-   const {onToggleDrawer} = this.props
-   // onToggleDrawer()
+    const { onToggleDrawer } = this.props
+    // onToggleDrawer()
   }
 
   /**
@@ -165,88 +165,96 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
    * @param  {event} evt is the event is passed by winodw resize event
    */
   handleResize = (event: any) => {
-    const {drawerStatus} = this.props
+    const { drawerStatus } = this.props
     // Set initial state
     let width = window.innerWidth
 
     if (width >= 600 && !drawerStatus) {
       this.onToggleSidebar()
     } else if (width < 600) {
-
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.handleResize(null)
   }
 
   // Render app DOM component
-  render () {
-    const { classes , translate, theme} = this.props
+  render() {
+    const { classes, translate, theme } = this.props
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
     return (
-
-      <AppBar position='fixed' color='secondary'>
-        <Toolbar style={{ maxWidth: '1280px', margin: '0 auto'}}>
+      <AppBar position="fixed" color="secondary">
+        <Toolbar style={{ maxWidth: '1280px', margin: '0 auto' }}>
           {/* Left side */}
-          <a href='/'><img src='images/backyardelogo.png' width='120' alt='Backyarde' /></a>
+          <a href="/">
+            <img src="images/backyardelogo.png" width="120" alt="Backyarde" />
+          </a>
           {/*<IconButton onClick={this.onToggleSidebar} >*/}
-            {/*<SvgDehaze color='primary' style={{ cursor: 'pointer' }} />*/}
+          {/*<SvgDehaze color='primary' style={{ cursor: 'pointer' }} />*/}
           {/*</IconButton>*/}
           {/* Header title */}
           {/*<Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >*/}
-            {/*{config.settings.appName}*/}
+          {/*{config.settings.appName}*/}
           {/*</Typography>*/}
-          <div className='homeHeader__title-root'>
-          <Hidden smDown>
-           <div className={classNames({'homeHeader__title-left': anchor === 'left', 'homeHeader__title-right': anchor === 'right' })}>
-               {/*{this.props.title}*/}
-               </div>
-           </Hidden>
+          <div className="homeHeader__title-root">
+            <Hidden smDown>
+              <div
+                className={classNames({
+                  'homeHeader__title-left': anchor === 'left',
+                  'homeHeader__title-right': anchor === 'right'
+                })}
+              >
+                {/*{this.props.title}*/}
+              </div>
+            </Hidden>
           </div>
 
           {/* Notification */}
-          <div className='homeHeader__right'>
-            <nav className='nav-links'>
+          <div className="homeHeader__right">
+            <nav className="nav-links">
               {/*<NavLink to='/'>*/}
-                  {/*<MenuItem>*/}
-                      {/*<ListItemIcon>*/}
-                          {/*<SvgHome />*/}
-                      {/*</ListItemIcon>*/}
-                      {/*<ListItemText inset primary={translate!('header.home')} />*/}
-                  {/*</MenuItem>*/}
+              {/*<MenuItem>*/}
+              {/*<ListItemIcon>*/}
+              {/*<SvgHome />*/}
+              {/*</ListItemIcon>*/}
+              {/*<ListItemText inset primary={translate!('header.home')} />*/}
+              {/*</MenuItem>*/}
               {/*</NavLink>*/}
-              <NavLink to='/find-a-property'>
-                  <MenuItem>
-                      <ListItemIcon>
-                          <SvgHome />
-                      </ListItemIcon>
-                      <ListItemText inset primary={translate!('header.find-a-property')} />
-                  </MenuItem>
+              <NavLink to="/find-a-property">
+                <MenuItem>
+                  <ListItemIcon>
+                    <SvgHome />
+                  </ListItemIcon>
+                  <ListItemText
+                    inset
+                    primary={translate!('header.find-a-property')}
+                  />
+                </MenuItem>
               </NavLink>
-              <NavLink to='/explore'>
-                  <MenuItem>
-                      <ListItemIcon>
-                          <SvgExplore />
-                      </ListItemIcon>
-                      <ListItemText inset primary={translate!('header.explore')} />
-                  </MenuItem>
+              <NavLink to="/explore">
+                <MenuItem>
+                  <ListItemIcon>
+                    <SvgExplore />
+                  </ListItemIcon>
+                  <ListItemText inset primary={translate!('header.explore')} />
+                </MenuItem>
               </NavLink>
-              <NavLink to='/people'>
-                  <MenuItem>
-                      <ListItemIcon>
-                          <SvgPeople />
-                      </ListItemIcon>
-                      <ListItemText inset primary={translate!('header.people')} />
-                  </MenuItem>
+              <NavLink to="/people">
+                <MenuItem>
+                  <ListItemIcon>
+                    <SvgPeople />
+                  </ListItemIcon>
+                  <ListItemText inset primary={translate!('header.people')} />
+                </MenuItem>
               </NavLink>
-              <NavLink to='/settings'>
-                  <MenuItem>
-                      <ListItemIcon>
-                          <SvgSettings />
-                      </ListItemIcon>
-                      <ListItemText inset primary={translate!('header.settings')} />
-                  </MenuItem>
+              <NavLink to="/settings">
+                <MenuItem>
+                  <ListItemIcon>
+                    <SvgSettings />
+                  </ListItemIcon>
+                  <ListItemText inset primary={translate!('header.settings')} />
+                </MenuItem>
               </NavLink>
             </nav>
             <Manager>
@@ -254,18 +262,26 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                 {this.props.notifyCount! > 0 ? (
                   <Tooltip title={translate!('header.notificationTooltip')}>
                     <IconButton onClick={this.handleNotifyTouchTap}>
-                      <div className='homeHeader__notify'>
-                        <div className='title'>{this.props.notifyCount}</div>
+                      <div className="homeHeader__notify">
+                        <div className="title">{this.props.notifyCount}</div>
                       </div>
                     </IconButton>
-                  </Tooltip>)
-                  : (<Tooltip title={translate!('header.notificationTooltip')}>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title={translate!('header.notificationTooltip')}>
                     <IconButton onClick={this.handleNotifyTouchTap}>
-                      <NotificationsIcon style={{ color: 'rgba(255, 255, 255, 0.87)' }} />
+                      <NotificationsIcon
+                        style={{ color: 'rgba(255, 255, 255, 0.87)' }}
+                      />
                     </IconButton>
-                  </Tooltip>)}
+                  </Tooltip>
+                )}
               </Target>
-              <Notify open={this.state.openNotifyMenu} anchorEl={this.state.anchorEl} onRequestClose={this.handleCloseNotify} />
+              <Notify
+                open={this.state.openNotifyMenu}
+                anchorEl={this.state.anchorEl}
+                onRequestClose={this.handleCloseNotify}
+              />
             </Manager>
 
             {/* User avatar*/}
@@ -289,44 +305,128 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                 horizontal: 'right'
               }}
               onClose={this.handleRequestClose}
-              className='dropdown'
+              className="dropdown"
             >
-                <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '14px' }} > {translate!('header.my-properties')} </MenuItem>
-                <MenuItem style={{ backgroundColor: '#b450bb', color: 'white', fontSize: '12px' }} > {translate!('header.add-property')} </MenuItem>
-                <MenuItem style={{ backgroundColor: '#9b9b9b', color: 'white', fontSize: '14px' }} > {translate!('header.my-favorites')} </MenuItem>
-                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.profile')} </MenuItem>
-                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.edit-profile')} </MenuItem>
-                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} > {translate!('header.settings')} </MenuItem>
-                <MenuItem style={{ backgroundColor: '#d8d8d8', color: '#4a4a4a', fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
-<MenuItem style={{ backgroundColor: 'white', color: blue[500], fontSize: '14px' }} > {translate!('header.myAccount')} </MenuItem>
-<MenuItem style={{ fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: '#b450bb',
+                  color: 'white',
+                  fontSize: '14px'
+                }}
+              >
+                {' '}
+                {translate!('header.my-properties')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: '#b450bb',
+                  color: 'white',
+                  fontSize: '12px'
+                }}
+              >
+                {' '}
+                {translate!('header.add-property')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: '#9b9b9b',
+                  color: 'white',
+                  fontSize: '14px'
+                }}
+              >
+                {' '}
+                {translate!('header.my-favorites')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: '#d8d8d8',
+                  color: '#4a4a4a',
+                  fontSize: '14px'
+                }}
+              >
+                {' '}
+                {translate!('header.profile')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: '#d8d8d8',
+                  color: '#4a4a4a',
+                  fontSize: '14px'
+                }}
+              >
+                {' '}
+                {translate!('header.edit-profile')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: '#d8d8d8',
+                  color: '#4a4a4a',
+                  fontSize: '14px'
+                }}
+              >
+                {' '}
+                {translate!('header.settings')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: '#d8d8d8',
+                  color: '#4a4a4a',
+                  fontSize: '14px'
+                }}
+                onClick={this.handleLogout.bind(this)}
+              >
+                {' '}
+                {translate!('header.logout')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: 'white',
+                  color: blue[500],
+                  fontSize: '14px'
+                }}
+              >
+                {' '}
+                {translate!('header.myAccount')}{' '}
+              </MenuItem>
+              <MenuItem
+                style={{ fontSize: '14px' }}
+                onClick={this.handleLogout.bind(this)}
+              >
+                {' '}
+                {translate!('header.logout')}{' '}
+              </MenuItem>
             </Menu>
-              <SvgKeyboardArrowDown />
+            <SvgKeyboardArrowDown />
           </div>
-
         </Toolbar>
-      </AppBar >
+      </AppBar>
     )
   }
 }
 
 // - Map dispatch to props
-const mapDispatchToProps = (dispatch: Function, ownProps: IHomeHeaderComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IHomeHeaderComponentProps
+) => {
   return {
     logout: () => dispatch(authorizeActions.dbLogout())
   }
 }
 
 // - Map state to props
-const mapStateToProps = (state: Map<string,any>, ownProps: IHomeHeaderComponentProps) => {
-
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IHomeHeaderComponentProps
+) => {
   const uid = state.getIn(['authorize', 'uid'], 0)
-  const userNotifies: Map<string, any> = state.getIn(['notify','userNotifies'])
+  const userNotifies: Map<string, any> = state.getIn(['notify', 'userNotifies'])
   let notifyCount = userNotifies
     ? userNotifies
-      .filter((notification) => !notification.get('isSeen', false)).count()
+        .filter(notification => !notification.get('isSeen', false))
+        .count()
     : 0
-    const user = state.getIn(['user', 'info', uid], {})
+  const user = state.getIn(['user', 'info', uid], {})
   return {
     translate: getTranslate(state.get('locale')),
     avatar: user.avatar || '',
@@ -337,4 +437,6 @@ const mapStateToProps = (state: Map<string,any>, ownProps: IHomeHeaderComponentP
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(HomeHeaderComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, {
+  withTheme: true
+})(HomeHeaderComponent as any) as any)

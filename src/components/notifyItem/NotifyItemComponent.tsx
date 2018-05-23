@@ -7,7 +7,11 @@ import { push } from 'react-router-redux'
 import SvgClose from 'material-ui-icons/Close'
 import { grey } from 'material-ui/colors'
 import { withStyles } from 'material-ui/styles'
-import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List'
+import List, {
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText
+} from 'material-ui/List'
 
 // - Import app components
 import UserAvatar from 'components/userAvatar'
@@ -26,8 +30,8 @@ const styles = (theme: any) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper
   },
-  closeButton: {color: 'black'},
-  closeIcon: {width: 12, height: 12},
+  closeButton: { color: 'black' },
+  closeIcon: { width: 12, height: 12 },
   listItem: {
     backgroundColor: 'white',
     marginBottom: '6px'
@@ -37,55 +41,56 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class NotifyItemComponent extends Component<INotifyItemComponentProps,INotifyItemComponentState> {
-
+export class NotifyItemComponent extends Component<
+  INotifyItemComponentProps,
+  INotifyItemComponentState
+> {
   static propTypes = {
-        /**
-         * Notification description
-         */
+    /**
+     * Notification description
+     */
     description: PropTypes.string,
-        /**
-         * Which user relates to the notification item
-         */
+    /**
+     * Which user relates to the notification item
+     */
     fullName: PropTypes.string,
-        /**
-         * Avatar of the user who relate to the notification item
-         */
+    /**
+     * Avatar of the user who relate to the notification item
+     */
     avatar: PropTypes.string,
-        /**
-         * Notification identifier
-         */
+    /**
+     * Notification identifier
+     */
     id: PropTypes.string,
-        /**
-         * If user's seen the notification or not (true/false)
-         */
+    /**
+     * If user's seen the notification or not (true/false)
+     */
     isSeen: PropTypes.bool,
-        /**
-         * Which address notification refers
-         */
+    /**
+     * Which address notification refers
+     */
     url: PropTypes.string,
-        /**
-         * The notifier user identifier
-         */
+    /**
+     * The notifier user identifier
+     */
     notifierUserId: PropTypes.string,
-        /**
-         * Close notification popover
-         */
+    /**
+     * Close notification popover
+     */
     closeNotify: PropTypes.func
   }
 
-    /**
-     * Component constructor
-     * @param  {object} props is an object properties of component
-     */
-  constructor (props: INotifyItemComponentProps) {
+  /**
+   * Component constructor
+   * @param  {object} props is an object properties of component
+   */
+  constructor(props: INotifyItemComponentProps) {
     super(props)
 
-        // Defaul state
-    this.state = {
-    }
+    // Defaul state
+    this.state = {}
 
-        // Binding functions to `this`
+    // Binding functions to `this`
     this.handleSeenNotify = this.handleSeenNotify.bind(this)
   }
 
@@ -101,41 +106,59 @@ export class NotifyItemComponent extends Component<INotifyItemComponentProps,INo
     }
   }
 
-    /**
-     * Reneder component DOM
-     * @return {react element} return the DOM which rendered by component
-     */
-  render () {
-    let { description, fullName, avatar, isSeen, id, goTo,closeNotify, notifierUserId, url, deleteNotiy, classes } = this.props
+  /**
+   * Reneder component DOM
+   * @return {react element} return the DOM which rendered by component
+   */
+  render() {
+    let {
+      description,
+      fullName,
+      avatar,
+      isSeen,
+      id,
+      goTo,
+      closeNotify,
+      notifierUserId,
+      url,
+      deleteNotiy,
+      classes
+    } = this.props
 
     return (
-
-        <ListItem key={notifierUserId} dense button className={classes.listItem} style={isSeen ? { opacity: 0.6 } : {}}>
-              <NavLink
-                        to={`/${notifierUserId}`}
-                        onClick={(evt) => {
-                          evt.preventDefault()
-                          closeNotify!()
-                          goTo!(`/${notifierUserId}`)
-                        }}
-                    >
-                        <UserAvatar fullName={fullName} fileName={avatar} />
-                    </NavLink>
-              <ListItemText primary={<NavLink to={url} onClick={this.handleSeenNotify}>
-                        <div className='user-name'>
-                            {fullName}
-                        </div>
-                        <div className='description'>
-                            {description}
-                        </div>
-                    </NavLink>} />
-              <ListItemSecondaryAction className={classes.closeButton}>
-              <div onClick={() => deleteNotiy!(id)}>
-                    <SvgClose className={classes.closeIcon} style={{ cursor: 'pointer' }} />
-                </div>
-              </ListItemSecondaryAction>
-            </ListItem>
-
+      <ListItem
+        key={notifierUserId}
+        dense
+        button
+        className={classes.listItem}
+        style={isSeen ? { opacity: 0.6 } : {}}
+      >
+        <NavLink
+          to={`/${notifierUserId}`}
+          onClick={evt => {
+            evt.preventDefault()
+            closeNotify!()
+            goTo!(`/${notifierUserId}`)
+          }}
+        >
+          <UserAvatar fullName={fullName} fileName={avatar} />
+        </NavLink>
+        <ListItemText
+          primary={
+            <NavLink to={url} onClick={this.handleSeenNotify}>
+              <div className="user-name">{fullName}</div>
+              <div className="description">{description}</div>
+            </NavLink>}
+        />
+        <ListItemSecondaryAction className={classes.closeButton}>
+          <div onClick={() => deleteNotiy!(id)}>
+            <SvgClose
+              className={classes.closeIcon}
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
+        </ListItemSecondaryAction>
+      </ListItem>
     )
   }
 }
@@ -146,11 +169,15 @@ export class NotifyItemComponent extends Component<INotifyItemComponentProps,INo
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: INotifyItemComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: INotifyItemComponentProps
+) => {
   return {
     goTo: (url: string) => dispatch(push(url)),
     seenNotify: (id: string) => dispatch(notifyActions.dbSeenNotification(id)),
-    deleteNotiy: (id: string) => dispatch(notifyActions.dbDeleteNotification(id))
+    deleteNotiy: (id: string) =>
+      dispatch(notifyActions.dbDeleteNotification(id))
   }
 }
 
@@ -161,10 +188,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: INotifyItemComponentProps) 
  * @return {object}          props of component
  */
 const mapStateToProps = (state: any, ownProps: INotifyItemComponentProps) => {
-  return {
-
-  }
+  return {}
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(NotifyItemComponent as any) as any )
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(NotifyItemComponent as any) as any)

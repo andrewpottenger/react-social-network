@@ -11,8 +11,10 @@ import { IDialogTitleComponentState } from './IDialogTitleComponentState'
 /**
  * Create component class
  */
-export default class DialogTitleComponent extends Component<IDialogTitleComponentProps,IDialogTitleComponentState> {
-
+export default class DialogTitleComponent extends Component<
+  IDialogTitleComponentProps,
+  IDialogTitleComponentState
+> {
   static propTypes = {
     /**
      * The label of right button
@@ -53,37 +55,49 @@ export default class DialogTitleComponent extends Component<IDialogTitleComponen
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IDialogTitleComponentProps) {
+  constructor(props: IDialogTitleComponentProps) {
     super(props)
 
     // Defaul state
-    this.state = {
-    }
+    this.state = {}
 
     // Binding functions to `this`
-
   }
 
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-
-    const { buttonLabel, disabledButton, onClickButton, onRequestClose, title } = this.props
+  render() {
+    const {
+      buttonLabel,
+      disabledButton,
+      onClickButton,
+      onRequestClose,
+      title
+    } = this.props
 
     return (
-      <div className='g__dialog-title'>
+      <div className="g__dialog-title">
         <div style={this.styles.contain as any}>
           <div style={{ paddingRight: '10px' }}>
             <SvgClose onClick={onRequestClose} style={{ cursor: 'pointer' }} />
           </div>
-          <div style={this.styles.title}>
-            {title || ''}
-          </div>
-        { buttonLabel ? (<div style={{ marginTop: '-9px' }}>
-            <Button color='primary' disabled={disabledButton ? disabledButton : false} onClick={onClickButton || (x => x)}> {buttonLabel || ''} </Button>
-          </div>) : ''}
+          <div style={this.styles.title}>{title || ''}</div>
+          {buttonLabel ? (
+            <div style={{ marginTop: '-9px' }}>
+              <Button
+                color="primary"
+                disabled={disabledButton ? disabledButton : false}
+                onClick={onClickButton || (x => x)}
+              >
+                {' '}
+                {buttonLabel || ''}{' '}
+              </Button>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
         <Divider />
       </div>

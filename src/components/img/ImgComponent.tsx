@@ -28,8 +28,10 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class ImgComponent extends Component<IImgComponentProps,IImgComponentState> {
-
+export class ImgComponent extends Component<
+  IImgComponentProps,
+  IImgComponentState
+> {
   styles = {
     loding: {
       display: 'flex',
@@ -57,7 +59,7 @@ export class ImgComponent extends Component<IImgComponentProps,IImgComponentStat
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IImgComponentProps) {
+  constructor(props: IImgComponentProps) {
     super(props)
 
     // Defaul state
@@ -67,7 +69,6 @@ export class ImgComponent extends Component<IImgComponentProps,IImgComponentStat
 
     // Binding functions to `this`
     this.handleLoadImage = this.handleLoadImage.bind(this)
-
   }
 
   /**
@@ -85,15 +86,25 @@ export class ImgComponent extends Component<IImgComponentProps,IImgComponentStat
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-
+  render() {
     let { fileName, style, translate } = this.props
     let { isImageLoaded } = this.state
-    const {classes} = this.props
+    const { classes } = this.props
     return (
       <div>
-        <img className={classes.image} onLoad={this.handleLoadImage} src={fileName || ''} style={isImageLoaded ? style : { display: 'none' }} />
-        <div style={Object.assign({},{ backgroundColor: 'white' }, isImageLoaded ? { display: 'none' } : this.styles.loding)}>
+        <img
+          className={classes.image}
+          onLoad={this.handleLoadImage}
+          src={fileName || ''}
+          style={isImageLoaded ? style : { display: 'none' }}
+        />
+        <div
+          style={Object.assign(
+            {},
+            { backgroundColor: 'white' },
+            isImageLoaded ? { display: 'none' } : this.styles.loding
+          )}
+        >
           <div style={this.styles.loadingContent as any}>
             <SvgImage style={this.styles.loadingImage} />
             <div>{translate!('image.notLoaded')}</div>
@@ -111,9 +122,7 @@ export class ImgComponent extends Component<IImgComponentProps,IImgComponentStat
  * @return {object}          props of component
  */
 const mapDispatchToProps = (dispatch: any, ownProps: IImgComponentProps) => {
-  return {
-
-  }
+  return {}
 }
 
 /**
@@ -122,7 +131,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: IImgComponentProps) => {
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: IImgComponentProps) => {
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: IImgComponentProps
+) => {
   return {
     translate: getTranslate(state.get('locale')),
     avatarURL: state.getIn(['imageGallery', 'imageURLList']),
@@ -131,4 +143,6 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IImgComponentProps) 
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(ImgComponent as any)as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(ImgComponent as any) as any)

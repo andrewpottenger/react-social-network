@@ -10,10 +10,8 @@ import { grey } from 'material-ui/colors'
  *
  * @memberof Post
  */
-const styles = {
-  
-}
+const styles = {}
 // TODO: Delete the component
-const IconButtonElementComponent = (<div> </div>)
+const IconButtonElementComponent = <div> </div>
 
 export default IconButtonElementComponent

@@ -17,7 +17,13 @@ import { grey, teal } from 'material-ui/colors'
 import { LinearProgress } from 'material-ui/Progress'
 import { withStyles } from 'material-ui/styles'
 import { Manager, Target, Popper } from 'react-popper'
-import { Card, CardActions, CardHeader, CardMedia, CardContent } from 'material-ui'
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardContent
+} from 'material-ui'
 import Grow from 'material-ui/transitions/Grow'
 import ClickAwayListener from 'material-ui/utils/ClickAwayListener'
 import classNames from 'classnames'
@@ -63,7 +69,6 @@ const styles = (theme: any) => ({
     color: 'rgba(0,0,0,0.87)',
     textOverflow: 'ellipsis',
     overflow: 'hidden'
-
   },
   noUnderline: {
     display: 'none'
@@ -76,8 +81,10 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class CommentGroupComponent extends Component<ICommentGroupComponentProps, ICommentGroupComponentState> {
-
+export class CommentGroupComponent extends Component<
+  ICommentGroupComponentProps,
+  ICommentGroupComponentState
+> {
   static propTypes = {
     /**
      * If it's true comment box will be open
@@ -103,7 +110,6 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
      * The user identifier of the post owner which comment belong to
      */
     ownerPostUserId: PropTypes.string
-
   }
 
   styles = {
@@ -147,7 +153,7 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: ICommentGroupComponentProps) {
+  constructor(props: ICommentGroupComponentProps) {
     super(props)
 
     /**
@@ -156,7 +162,6 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
     this.state = {
       commentText: '',
       postDisable: true
-
     }
 
     // Binding functions to `this`
@@ -179,8 +184,11 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
    * Post comment
    */
   handlePostComment = () => {
-
-    this.props.send!(this.state.commentText, this.props.postId, this.clearCommentWrite)
+    this.props.send!(
+      this.state.commentText,
+      this.props.postId,
+      this.clearCommentWrite
+    )
 
     this.clearCommentWrite()
   }
@@ -204,7 +212,6 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
         postDisable: false
       })
     }
-
   }
 
   /**
@@ -212,13 +219,17 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
    * @return {DOM} list of comments' DOM
    */
   commentList = () => {
-    const {classes, postId} = this.props
+    const { classes, postId } = this.props
     let comments = Map(this.props.commentSlides!).toJS()
     if (comments) {
-      comments = _.fromPairs(_.toPairs(comments)
-        .sort((a: any, b: any) => parseInt(b[1].creationDate, 10) - parseInt(a[1].creationDate, 10)))
+      comments = _.fromPairs(
+        _.toPairs(comments).sort(
+          (a: any, b: any) =>
+            parseInt(b[1].creationDate, 10) - parseInt(a[1].creationDate, 10)
+        )
+      )
       let parsedComments: Comment[] = []
-      Object.keys(comments).forEach((commentId) => {
+      Object.keys(comments).forEach(commentId => {
         parsedComments.push({
           id: commentId,
           ...comments![commentId]
@@ -231,39 +242,54 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
         parsedComments.push(parsedComments[0])
       }
       return parsedComments.map((comment, index) => {
-        const commentAvatar =  comment.userAvatar
+        const commentAvatar = comment.userAvatar
         const commentFullName = comment.userDisplayName
 
         const commentBody = (
           <div style={{ outline: 'none', flex: 'auto', flexGrow: 1 }}>
-              <div className={classNames('animate2-top10', classes.commentBody)} >
+            <div className={classNames('animate2-top10', classes.commentBody)}>
               {comment.text}
-              </div>
+            </div>
           </div>
         )
 
         const Author = () => (
           <div>
-            <NavLink to={`/${comment.userId!}`}> <span className={classes.author}>{comment.userDisplayName}</span></NavLink><span style={{
-              fontWeight: 400,
-              fontSize: '8px'
-            }}>{moment.unix(comment.creationDate!).fromNow()}</span>
+            <NavLink to={`/${comment.userId!}`}>
+              {' '}
+              <span className={classes.author}>{comment.userDisplayName}</span>
+            </NavLink>
+            <span
+              style={{
+                fontWeight: 400,
+                fontSize: '8px'
+              }}
+            >
+              {moment.unix(comment.creationDate!).fromNow()}
+            </span>
           </div>
         )
         return (
-        <Paper key={comment.id! + '-index:' + index} elevation={0} className='animate2-top10'>
-          <Card elevation={0}>
-            <CardHeader
-            className={classes.header}
-              title={<Author />}
-              avatar={<UserAvatar fullName={commentFullName!} fileName={commentAvatar!} size={24} />}
-              subheader={commentBody}
-            >
-            </CardHeader>
-
-          </Card>
-
-        </Paper>
+          <Paper
+            key={comment.id! + '-index:' + index}
+            elevation={0}
+            className="animate2-top10"
+          >
+            <Card elevation={0}>
+              <CardHeader
+                className={classes.header}
+                title={<Author />}
+                avatar={
+                  <UserAvatar
+                    fullName={commentFullName!}
+                    fileName={commentAvatar!}
+                    size={24}
+                  />
+                }
+                subheader={commentBody}
+              />
+            </Card>
+          </Paper>
         )
       })
     }
@@ -273,82 +299,127 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-    const { classes, postId, fullName, avatar, commentsRequestStatus, open, commentSlides, translate } = this.props
+  render() {
+    const {
+      classes,
+      postId,
+      fullName,
+      avatar,
+      commentsRequestStatus,
+      open,
+      commentSlides,
+      translate
+    } = this.props
     const comments: Map<string, Comment> = this.props.comments || Map({})
     /**
      * Comment list box
      */
     const commentWriteBox = (
-    <div>
-      <Divider />
-      <Paper key={postId! + '-commentwrite'} elevation={0} className='animate2-top10'>
+      <div>
+        <Divider />
+        <Paper
+          key={postId! + '-commentwrite'}
+          elevation={0}
+          className="animate2-top10"
+        >
           <Card elevation={0}>
             <CardHeader
-            className={classes.header}
+              className={classes.header}
               avatar={<UserAvatar fullName={fullName!} fileName={avatar!} size={24} />}
-              subheader={<TextField
-                autoFocus
-                placeholder={translate!('comment.addCommentPlaceholder')}
-                multiline
-                rowsMax='4'
-                InputProps={{
-                  disableUnderline: true,
-                  autoFocus: true,
-                  fullWidth: true
-                }}
-                value={this.state.commentText}
-                onChange={this.handleChange}
-                className={classes.textField}
-                fullWidth={true}
-              />}
-            >
-            </CardHeader>
-                <CardActions className={classes.postButton} >
-          <Button color='primary' disabled={this.state.postDisable} onClick={this.handlePostComment}>
-        {translate!('comment.postButton')}
-        </Button>
-                  </CardActions>
+              subheader={
+                <TextField
+                  autoFocus
+                  placeholder={translate!('comment.addCommentPlaceholder')}
+                  multiline
+                  rowsMax="4"
+                  InputProps={{
+                    disableUnderline: true,
+                    autoFocus: true,
+                    fullWidth: true
+                  }}
+                  value={this.state.commentText}
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  fullWidth={true}
+                />
+              }
+            />
+            <CardActions className={classes.postButton}>
+              <Button
+                color="primary"
+                disabled={this.state.postDisable}
+                onClick={this.handlePostComment}
+              >
+                {translate!('comment.postButton')}
+              </Button>
+            </CardActions>
           </Card>
         </Paper>
-        </div>
-)
+      </div>
+    )
 
-    const showComments = ( !comments.isEmpty()
-    ? (
-    <Paper elevation={0} style={open ? { display: 'block', padding: '0px 0px' } : { display: 'none', padding: '12px 16px' }}>
-      <CommentListComponent comments={comments!} isPostOwner={this.props.isPostOwner} disableComments={this.props.disableComments} postId={postId}/>
-    </Paper>)
-    : '')
-    const loadComments = ((commentsRequestStatus === ServerRequestStatusType.OK) || !comments.isEmpty() ? showComments : <LinearProgress style={this.styles.progressbar} variant='indeterminate' />)
+    const showComments = !comments.isEmpty() ? (
+      <Paper
+        elevation={0}
+        style={
+          open
+            ? { display: 'block', padding: '0px 0px' }
+            : { display: 'none', padding: '12px 16px' }
+        }
+      >
+        <CommentListComponent
+          comments={comments!}
+          isPostOwner={this.props.isPostOwner}
+          disableComments={this.props.disableComments}
+          postId={postId}
+        />
+      </Paper>
+    ) : (
+      ''
+    )
+    const loadComments =
+      commentsRequestStatus === ServerRequestStatusType.OK ||
+      !comments.isEmpty() ? (
+        showComments
+      ) : (
+        <LinearProgress
+          style={this.styles.progressbar}
+          variant="indeterminate"
+        />
+      )
     /**
      * Return Elements
      */
     return (
       <div key={postId + '-comments-group'}>
-          <Divider />
-        <div style={commentSlides && !commentSlides.isEmpty() ? { display: 'block' } : { display: 'none' }}>
-          <Paper elevation={0} className='animate-top' style={!open ? { display: 'block' } : { display: 'none' }}>
+        <Divider />
+        <div
+          style={
+            commentSlides && !commentSlides.isEmpty()
+              ? { display: 'block' }
+              : { display: 'none' }
+          }
+        >
+          <Paper
+            elevation={0}
+            className="animate-top"
+            style={!open ? { display: 'block' } : { display: 'none' }}
+          >
+            <div style={{ position: 'relative', height: '60px' }}>
+              <Button
+                style={this.styles.toggleShowList}
+                fullWidth={true}
+                onClick={this.props.onToggleRequest}
+              >
+                {' '}
+              </Button>
 
-            <div style={{ position: 'relative', height: '60px' }} >
-              <Button style={this.styles.toggleShowList} fullWidth={true} onClick={this.props.onToggleRequest} > {' '}</Button>
-
-              <div className='comment__list-show'>
-                {this.commentList()}
-
-              </div>
+              <div className="comment__list-show">{this.commentList()}</div>
             </div>
           </Paper>
-
         </div>
-          {
-            open ? loadComments : ''
-          }
-        {
-          (!this.props.disableComments && open )
-            ? commentWriteBox
-            : ''
-        }
+        {open ? loadComments : ''}
+        {!this.props.disableComments && open ? commentWriteBox : ''}
       </div>
     )
   }
@@ -360,13 +431,22 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: any, ownProps: ICommentGroupComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: any,
+  ownProps: ICommentGroupComponentProps
+) => {
   return {
     send: (text: string, postId: string, callBack: Function) => {
-      dispatch(commentActions.dbAddComment(ownProps.ownerPostUserId, {
-        postId: postId,
-        text: text
-      }, callBack))
+      dispatch(
+        commentActions.dbAddComment(
+          ownProps.ownerPostUserId,
+          {
+            postId: postId,
+            text: text
+          },
+          callBack
+        )
+      )
     }
   }
 }
@@ -377,23 +457,38 @@ const mapDispatchToProps = (dispatch: any, ownProps: ICommentGroupComponentProps
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: ICommentGroupComponentProps) => {
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: ICommentGroupComponentProps
+) => {
   const { ownerPostUserId, postId } = ownProps
   const uid = state.getIn(['authorize', 'uid'], 0)
-  const requestId = StringAPI.createServerRequestId(ServerRequestType.CommentGetComments, postId)
+  const requestId = StringAPI.createServerRequestId(
+    ServerRequestType.CommentGetComments,
+    postId
+  )
   const commentsRequestStatus = state.getIn(['server', 'request', requestId])
-  const commentSlides = state.getIn(['post', 'userPosts', ownerPostUserId, postId, 'comments'])
+  const commentSlides = state.getIn([
+    'post',
+    'userPosts',
+    ownerPostUserId,
+    postId,
+    'comments'
+  ])
   const user = state.getIn(['user', 'info', uid])
   return {
     translate: getTranslate(state.get('locale')),
-    commentsRequestStatus : commentsRequestStatus ? commentsRequestStatus.status : ServerRequestStatusType.NoAction,
+    commentsRequestStatus: commentsRequestStatus
+      ? commentsRequestStatus.status
+      : ServerRequestStatusType.NoAction,
     commentSlides,
     avatar: user.avatar || '',
     fullName: user.fullName || '',
     userInfo: state.getIn(['user', 'info'])
-
   }
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(CommentGroupComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(CommentGroupComponent as any) as any)

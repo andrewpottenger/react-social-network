@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import {Map, List as ImuList} from 'immutable'
+import { Map, List as ImuList } from 'immutable'
 
 // - Material UI
 import List, {
@@ -78,8 +78,10 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class CircleComponent extends Component<ICircleComponentProps, ICircleComponentState> {
-
+export class CircleComponent extends Component<
+  ICircleComponentProps,
+  ICircleComponentState
+> {
   styles = {
     userListItem: {
       backgroundColor: '#e2e2e2'
@@ -110,7 +112,7 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: ICircleComponentProps) {
+  constructor(props: ICircleComponentProps) {
     super(props)
 
     // Defaul state
@@ -151,7 +153,7 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
     const { value } = evt.target
     this.setState({
       circleName: value,
-      disabledSave: (!value || value.trim() === '')
+      disabledSave: !value || value.trim() === ''
     })
   }
 
@@ -226,8 +228,8 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
           >
             <UserAvatar fullName={fullName!} fileName={avatar} />
             <ListItemText inset primary={fullName} />
-            </ListItem>)
-
+          </ListItem>
+        )
       })
       return usersParsed
     }
@@ -237,8 +239,7 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-
+  render() {
     const { circle, classes } = this.props
     const { isMenuOpen } = this.state
     /**
@@ -251,23 +252,32 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
         <Target>
           <IconButton
             aria-owns={isMenuOpen! ? 'circle-menu' : ''}
-            aria-haspopup='true'
+            aria-haspopup="true"
             onClick={this.handleOpenMenu}
           >
             <MoreVertIcon />
           </IconButton>
         </Target>
         <Popper
-          placement='bottom-start'
+          placement="bottom-start"
           eventsEnabled={isMenuOpen}
-          className={classNames({ [classes.popperClose]: !isMenuOpen }, { [classes.popperOpen]: isMenuOpen })}
+          className={classNames(
+            { [classes.popperClose]: !isMenuOpen },
+            { [classes.popperOpen]: isMenuOpen }
+          )}
         >
           <ClickAwayListener onClickAway={this.handleCloseMenu}>
-            <Grow in={isMenuOpen} >
+            <Grow in={isMenuOpen}>
               <Paper>
-                <MenuList role='menu'>
-                  <MenuItem onClick={this.handleDeleteCircle} > Delete circle </MenuItem>
-                  <MenuItem onClick={this.props.openCircleSettings}> Circle settings </MenuItem>
+                <MenuList role="menu">
+                  <MenuItem onClick={this.handleDeleteCircle}>
+                    {' '}
+                    Delete circle{' '}
+                  </MenuItem>
+                  <MenuItem onClick={this.props.openCircleSettings}>
+                    {' '}
+                    Circle settings{' '}
+                  </MenuItem>
                 </MenuList>
               </Paper>
             </Grow>
@@ -278,26 +288,44 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
 
     const circleTitle = (
       <div>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}
+        >
           <div style={{ paddingRight: '10px' }}>
-            <SvgClose onClick={this.props.closeCircleSettings} style={{ cursor: 'pointer' }} />
+            <SvgClose
+              onClick={this.props.closeCircleSettings}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
-          <div style={{
-            color: 'rgba(0,0,0,0.87)',
-            flex: '1 1',
-            font: '500 20px Roboto,RobotoDraft,Helvetica,Arial,sans-serif'
-          }}>
+          <div
+            style={{
+              color: 'rgba(0,0,0,0.87)',
+              flex: '1 1',
+              font: '500 20px Roboto,RobotoDraft,Helvetica,Arial,sans-serif'
+            }}
+          >
             Circle settings
-        </div>
+          </div>
           <div style={{ marginTop: '-9px' }}>
-            <Button color='primary' disabled={this.state.disabledSave} onClick={this.handleUpdateCircle} > SAVE </Button>
+            <Button
+              color="primary"
+              disabled={this.state.disabledSave}
+              onClick={this.handleUpdateCircle}
+            >
+              {' '}
+              SAVE{' '}
+            </Button>
           </div>
         </div>
         <Divider />
       </div>
     )
     return (
-    <div>
+      <div>
         <ListItem
           className={classes.root}
           key={this.props.id + '-CircleComponent'}
@@ -306,18 +334,27 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
           <ListItemIcon className={classes.icon}>
             <SvgGroup />
           </ListItemIcon>
-          <ListItemText inset primary={<span style={this.styles as any}>{this.props.circle.get('name')}</span>} />
+          <ListItemText
+            inset
+            primary={
+              <span style={this.styles as any}>
+                {this.props.circle.get('name')}
+              </span>}
+          />
           <ListItemSecondaryAction>
             {circle.get('isSystem') ? null : rightIconMenu}
           </ListItemSecondaryAction>
         </ListItem>
-        <Collapse component='li' in={this.state.open} timeout='auto' unmountOnExit>
-          <List disablePadding>
-          {this.userList()}
-          </List>
+        <Collapse
+          component="li"
+          in={this.state.open}
+          timeout="auto"
+          unmountOnExit
+        >
+          <List disablePadding>{this.userList()}</List>
         </Collapse>
         <Dialog
-        PaperProps={{className: classes.fullPageXs}}
+          PaperProps={{ className: classes.fullPageXs }}
           key={this.props.id}
           open={this.props.openSetting!}
           onClose={this.props.closeCircleSettings}
@@ -325,19 +362,19 @@ export class CircleComponent extends Component<ICircleComponentProps, ICircleCom
             paper: classes.dialogPaper
           }}
         >
-          <DialogTitle >{circleTitle}</DialogTitle>
+          <DialogTitle>{circleTitle}</DialogTitle>
           <DialogContent>
             <TextField
-            fullWidth
+              fullWidth
               autoFocus
-              placeholder='Circle name'
-              label='Circle name'
+              placeholder="Circle name"
+              label="Circle name"
               onChange={this.handleChangeCircleName}
               value={this.state.circleName}
             />
           </DialogContent>
         </Dialog>
-        </div>
+      </div>
     )
   }
 }
@@ -352,11 +389,13 @@ const mapDispatchToProps = (dispatch: any, ownProps: ICircleComponentProps) => {
   let { uid } = ownProps
   return {
     deleteCircle: (id: string) => dispatch(circleActions.dbDeleteCircle(id)),
-    updateCircle: (circle: Circle) => dispatch(circleActions.dbUpdateCircle(circle)),
-    closeCircleSettings: () => dispatch(circleActions.closeCircleSettings(ownProps.id)),
-    openCircleSettings: () => dispatch(circleActions.openCircleSettings(ownProps.id)),
+    updateCircle: (circle: Circle) =>
+      dispatch(circleActions.dbUpdateCircle(circle)),
+    closeCircleSettings: () =>
+      dispatch(circleActions.closeCircleSettings(ownProps.id)),
+    openCircleSettings: () =>
+      dispatch(circleActions.openCircleSettings(ownProps.id)),
     goTo: (url: string) => dispatch(push(url))
-
   }
 }
 
@@ -366,27 +405,34 @@ const mapDispatchToProps = (dispatch: any, ownProps: ICircleComponentProps) => {
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: ICircleComponentProps) => {
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: ICircleComponentProps
+) => {
   const userTies: Map<string, any> = state.getIn(['circle', 'userTies'])
   const uid = state.getIn(['authorize', 'uid'])
-  const circles: Map<string, Map<string, any>> = state.getIn(['circle', 'circleList'], {})
+  const circles: Map<string, Map<string, any>> = state.getIn(
+    ['circle', 'circleList'],
+    {}
+  )
   const currentCircle: Map<string, any> = circles.get(ownProps.id, Map({}))
   const circleId = ownProps.circle.get('id')
   let usersOfCircle: Map<string, any> = Map({})
-  userTies.forEach((userTie , userTieId) => {
+  userTies.forEach((userTie, userTieId) => {
     const theUserTie: Map<string, any> = userTie
     const circleList: ImuList<string> = theUserTie.getIn(['circleIdList'])
-    if ( circleList.indexOf(ownProps.id) > -1) {
-      usersOfCircle =  usersOfCircle.set(userTieId!, theUserTie)
+    if (circleList.indexOf(ownProps.id) > -1) {
+      usersOfCircle = usersOfCircle.set(userTieId!, theUserTie)
     }
   })
   return {
     usersOfCircle,
     openSetting: state.getIn(['circle', 'openSetting', circleId], false),
     userInfo: state.getIn(['user', 'info'])
-
   }
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(CircleComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(CircleComponent as any) as any)
