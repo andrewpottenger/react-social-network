@@ -10,7 +10,8 @@ import { Map } from 'immutable'
 
 import ProfileHeader from 'src/components/profileHeader'
 import StreamComponent from 'containers/stream'
-import ProfileInformation from 'components/Profile/Information'
+
+import ProfileInformationContainer from './ProfileInfoContainer'
 import Neighbours from 'components/Profile/Neighbours'
 import Projects from 'components/Profile/Projects'
 import Feed from 'components/Profile/Feed'
@@ -52,13 +53,13 @@ export class ProfileComponent extends Component<
       }
     }
 
-    const { loadPosts, hasMorePosts, translate, userProfile } = this.props
+    const { translate, userProfile, isAuthedUser } = this.props
     // const St = StreamComponent as any
     // const posts = Map(this.props.posts)
     return (
       <div className={s.container}>
         <div className={s.leftPanel}>
-          <ProfileInformation profile={userProfile} />
+          <ProfileInformationContainer />
           <Neighbours />
         </div>
         <div className={s.rightPanel}>
@@ -145,8 +146,7 @@ const mapStateToProps = (
     isAuthedUser: userId === uid,
     userId,
     posts,
-    hasMorePosts,
-    userProfile
+    hasMorePosts
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(
