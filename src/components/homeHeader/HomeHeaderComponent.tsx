@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
+import cx from 'classnames'
 import { Map } from 'immutable'
 
 // - Material UI
@@ -11,17 +11,13 @@ import { grey, blue } from 'material-ui/colors'
 import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
 import SvgHome from 'material-ui-icons/Home'
-import SvgFeedback from 'material-ui-icons/Feedback'
 import SvgExplore from 'material-ui-icons/Explore'
 import SvgSettings from 'material-ui-icons/Settings'
-import SvgAccountCircle from 'material-ui-icons/AccountCircle'
 import SvgPeople from 'material-ui-icons/People'
 import SvgKeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown'
-import Popover from 'material-ui/Popover'
 import AppBar from 'material-ui/AppBar'
 import Menu, { MenuList, MenuItem } from 'material-ui/Menu'
 import { ListItemIcon, ListItemText } from 'material-ui/List'
-import Paper from 'material-ui/Paper'
 import Hidden from 'material-ui/Hidden'
 import NotificationsIcon from 'material-ui-icons/Notifications'
 import Tooltip from 'material-ui/Tooltip'
@@ -41,12 +37,34 @@ import { authorizeActions } from 'store/actions'
 import { IHomeHeaderComponentProps } from './IHomeHeaderComponentProps'
 import { IHomeHeaderComponentState } from './IHomeHeaderComponentState'
 
+import { COLORS } from 'components/ui-constants'
+
+const s = require('./styles.scss')
+
 const styles = {
   root: {
     backgroundColor: '#a5792a'
   },
   flex: {
     flex: 1
+  },
+  menuItemDefault: {
+    fontSize: 14
+  },
+  myProps: {
+    backgroundColor: COLORS.BRAND_LIGHT,
+    color: COLORS.WHITE
+  },
+  addProp: {
+    fontSize: 12
+  },
+  myFave: {
+    backgroundColor: COLORS.GEY_DARK,
+    color: COLORS.WHITE
+  },
+  restMenuItems: {
+    backgroundColor: COLORS.GREY_LIGHT,
+    color: '#4a4a4a'
   }
 }
 
@@ -179,13 +197,64 @@ export class HomeHeaderComponent extends Component<
     this.handleResize(null)
   }
 
+  renderDropdownMenu = () => {
+    const { translate, classes } = this.props
+    const { openAvatarMenu, anchorEl } = this.state
+
+    const styleBrand = cx(classes.menuItemDefault, classes.myProps)
+
+    return (
+      <Menu
+        open={openAvatarMenu}
+        anchorEl={this.state.anchorEl!}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        onClose={this.handleRequestClose}
+        className={cx('dropdown')}
+      >
+        <MenuItem className={styleBrand}>
+          {translate!('header.my-properties')}
+        </MenuItem>
+        <MenuItem className={cx(styleBrand, classes.addProp)}>
+          {translate!('header.add-property')}
+        </MenuItem>
+        <MenuItem className={cx(classes.menuItemDefault, classes.myFave)}>
+          {translate!('header.my-favorites')}
+        </MenuItem>
+        <MenuItem
+          className={cx(classes.menuItemDefault, classes.restMenuItems)}
+        >
+          {translate!('header.edit-profile')}
+        </MenuItem>
+        <MenuItem
+          className={cx(classes.menuItemDefault, classes.restMenuItems)}
+        >
+          {translate!('header.settings')}
+        </MenuItem>
+        <MenuItem
+          className={cx(classes.menuItemDefault, classes.restMenuItems)}
+          onClick={this.handleLogout}
+        >
+          {translate!('header.logout')}
+        </MenuItem>
+      </Menu>
+    )
+  }
+
   // Render app DOM component
   render() {
     const { classes, translate, theme } = this.props
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
+
     return (
-      <AppBar position="fixed" color="secondary">
-        <Toolbar style={{ maxWidth: '1280px', margin: '0 auto' }}>
+      <AppBar position="fixed" color="secondary" className={s.container}>
+        <Toolbar className={s.toolbar}>
           {/* Left side */}
           <a href="/">
             <img src="images/backyardelogo.png" width="120" alt="Backyarde" />
@@ -200,7 +269,7 @@ export class HomeHeaderComponent extends Component<
           <div className="homeHeader__title-root">
             <Hidden smDown>
               <div
-                className={classNames({
+                className={cx({
                   'homeHeader__title-left': anchor === 'left',
                   'homeHeader__title-right': anchor === 'right'
                 })}
@@ -284,7 +353,6 @@ export class HomeHeaderComponent extends Component<
               />
             </Manager>
 
-            {/* User avatar*/}
             <UserAvatarComponent
               onClick={this.handleAvatarTouchTap}
               fullName={this.props.fullName!}
@@ -292,110 +360,7 @@ export class HomeHeaderComponent extends Component<
               size={32}
               style={this.styles.avatarStyle}
             />
-
-            <Menu
-              open={this.state.openAvatarMenu}
-              anchorEl={this.state.anchorEl!}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              onClose={this.handleRequestClose}
-              className="dropdown"
-            >
-              <MenuItem
-                style={{
-                  backgroundColor: '#b450bb',
-                  color: 'white',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.my-properties')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#b450bb',
-                  color: 'white',
-                  fontSize: '12px'
-                }}
-              >
-                {' '}
-                {translate!('header.add-property')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#9b9b9b',
-                  color: 'white',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.my-favorites')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.profile')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.edit-profile')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.settings')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-                onClick={this.handleLogout.bind(this)}
-              >
-                {' '}
-                {translate!('header.logout')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: 'white',
-                  color: blue[500],
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.myAccount')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{ fontSize: '14px' }}
-                onClick={this.handleLogout.bind(this)}
-              >
-                {' '}
-                {translate!('header.logout')}{' '}
-              </MenuItem>
-            </Menu>
+            {this.renderDropdownMenu()}
             <SvgKeyboardArrowDown />
           </div>
         </Toolbar>
@@ -404,7 +369,6 @@ export class HomeHeaderComponent extends Component<
   }
 }
 
-// - Map dispatch to props
 const mapDispatchToProps = (
   dispatch: Function,
   ownProps: IHomeHeaderComponentProps
@@ -414,7 +378,6 @@ const mapDispatchToProps = (
   }
 }
 
-// - Map state to props
 const mapStateToProps = (
   state: Map<string, any>,
   ownProps: IHomeHeaderComponentProps
@@ -436,7 +399,6 @@ const mapStateToProps = (
   }
 }
 
-// - Connect component to redux store
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, {
   withTheme: true
 })(HomeHeaderComponent as any) as any)

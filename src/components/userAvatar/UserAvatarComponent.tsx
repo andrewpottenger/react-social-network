@@ -42,7 +42,7 @@ export class UserAvatarComponent extends Component<
     /**
      * Trigger on touch tap
      */
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
   }
 
   /**
@@ -63,8 +63,8 @@ export class UserAvatarComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    let { fileName, fullName, style, size, onClick } = this.props
-
+    let { fileName, fullName, style, size, onClick, className } = this.props
+    console.log('className', className)
     return (
       <div style={{ display: 'inherit' }}>
         {fileName && fileName !== '' && fileName !== 'noImage' ? (
@@ -76,6 +76,7 @@ export class UserAvatarComponent extends Component<
               width: size || 36,
               height: size || 36
             }}
+            className={className}
             onClick={onClick}
           />
         ) : (
