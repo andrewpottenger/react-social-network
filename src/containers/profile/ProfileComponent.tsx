@@ -8,13 +8,13 @@ import RaisedButton from 'material-ui/Button'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map } from 'immutable'
 
-// - Import app components
 import ProfileHeader from 'src/components/profileHeader'
 import StreamComponent from 'containers/stream'
+import ProfileInformation from 'components/Profile/Information'
+import Neighbours from 'components/Profile/Neighbours'
+import Projects from 'components/Profile/Projects'
+import Feed from 'components/Profile/Feed'
 
-// - Import API
-
-// - Import actions
 import * as postActions from 'src/store/actions/postActions'
 import * as userActions from 'src/store/actions/userActions'
 import * as globalActions from 'src/store/actions/globalActions'
@@ -22,41 +22,24 @@ import { IProfileComponentProps } from './IProfileComponentProps'
 import { IProfileComponentState } from './IProfileComponentState'
 import { Profile } from 'core/domain/users'
 
-/**
- * Create component class
- */
+const s = require('./styles.scss')
+
 export class ProfileComponent extends Component<
   IProfileComponentProps,
   IProfileComponentState
 > {
-  static propTypes = {}
-
-  /**
-   * Component constructor
-   * @param  {object} props is an object properties of component
-   */
   constructor(props: IProfileComponentProps) {
     super(props)
 
-    // Defaul state
     this.state = {}
-
-    // Binding functions to `this`
   }
 
   componentWillMount() {
-    this.props.loadPosts()
+    // this.props.loadPosts()
     this.props.loadUserInfo()
   }
 
-  /**
-   * Reneder component DOM
-   * @return {react element} return the DOM which rendered by component
-   */
   render() {
-    /**
-     * Component styles
-     */
     const styles = {
       profile: {},
       header: {},
@@ -68,12 +51,21 @@ export class ProfileComponent extends Component<
         border: '2px solid rgb(255, 255, 255)'
       }
     }
-    const { loadPosts, hasMorePosts, translate } = this.props
-    const St = StreamComponent as any
-    const posts = Map(this.props.posts)
+
+    const { loadPosts, hasMorePosts, translate, userProfile } = this.props
+    // const St = StreamComponent as any
+    // const posts = Map(this.props.posts)
     return (
-      <div style={styles.profile}>
-        <div style={styles.header}>
+      <div className={s.container}>
+        <div className={s.leftPanel}>
+          <ProfileInformation profile={userProfile} />
+          <Neighbours />
+        </div>
+        <div className={s.rightPanel}>
+          <Projects />
+          <Feed />
+        </div>
+        {/* <div style={styles.header}>
           <ProfileHeader
             tagLine={this.props.tagLine}
             avatar={this.props.avatar}
@@ -83,8 +75,8 @@ export class ProfileComponent extends Component<
             followerCount={0}
             userId={this.props.userId}
           />
-        </div>
-        {posts ? (
+        </div> */}
+        {/* {posts ? (
           <div style={styles.content}>
             <div className="profile__title">
               {translate!('profile.headPostsLabel', {
@@ -104,7 +96,7 @@ export class ProfileComponent extends Component<
           <div className="profile__title">
             {translate!('profile.nothingSharedLabel')}
           </div>
-        )}
+        )} */}
       </div>
     )
   }
@@ -143,6 +135,7 @@ const mapStateToProps = (
   const hasMorePosts = state.getIn(['post', 'profile', 'hasMoreData'])
   const posts = state.getIn(['post', 'userPosts', userId])
   const userProfile = state.getIn(['user', 'info', userId], {}) as Profile
+
   return {
     translate: getTranslate(state.get('locale')),
     avatar: userProfile.avatar,
@@ -152,11 +145,10 @@ const mapStateToProps = (
     isAuthedUser: userId === uid,
     userId,
     posts,
-    hasMorePosts
+    hasMorePosts,
+    userProfile
   }
 }
-
-// - Connect component to redux store
 export default connect(mapStateToProps, mapDispatchToProps)(
   ProfileComponent as any
 )

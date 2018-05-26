@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  padding: 0 40px;
+
+  .leftPanel {
+    width: 30%;
+  }
+
+  .rightPanel {
+    width: 70%;
+  }
+}
