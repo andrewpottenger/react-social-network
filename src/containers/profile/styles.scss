@@ -1,12 +1,17 @@
 .container {
   display: flex;
   padding: 0 40px;
+  max-width: 1000px;
+  margin: 0 auto;
 
   .leftPanel {
-    width: 30%;
+    flex: 1;
+    min-width: 220px;
+    max-width: 300px;
   }
 
   .rightPanel {
-    width: 70%;
+    flex: 2;
+    padding-left: 20px;
   }
 }
