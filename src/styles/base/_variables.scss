@@ -1,14 +1,16 @@
 // Colors
 $grey: #333333;
 $light-grey: #fafafa;
-$light-grey2:#f7f7f7;
-$light-grey3:#ada7a7;
-$green-teal:#00ab6b;
-$teal:#58d09f;
-$gold: #FFD700;
-$green: #4CAF50;
+$light-grey2: #f7f7f7;
+$light-grey3: #ada7a7;
+$light-grey4: #e9e9e9;
+$green-teal: #00ab6b;
+$teal: #58d09f;
+$gold: #ffd700;
+$green: #4caf50;
 $primary-color: #9b29a2;
 $secondary-color: #3e134d;
+$white: #ffffff;
 
 $light-grey-border: #eeeeee;
 $light-color: #aaa;
@@ -18,5 +20,5 @@ $nav-background: $grey;
 $nav-text-color: $primary-color;
 
 // Shadow
-$glob-box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
-
+$glob-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2),
+  0 4px 20px 0 rgba(0, 0, 0, 0.19);

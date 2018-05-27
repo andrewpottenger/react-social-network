@@ -1,11 +1,9 @@
-.home__main{
-  background-color: #eeeeee;
-  transition: margin-left .4s;
+.home__main {
+  background-color: #ffffff;
+  transition: margin-left 0.4s;
 
-  @media screen and (max-width: 750px){
-      margin-left: 0!important;
-      margin-right: 0!important;
-    
+  @media screen and (max-width: 750px) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
-
 }

@@ -17,7 +17,7 @@ type IProps = {
 
 export default class Information extends Component<IProps> {
   render() {
-    console.log('profile', this.props)
+    // console.log('profile', this.props)
     const {
       profile: { avatar, fullName, banner },
       isAuthedUser,

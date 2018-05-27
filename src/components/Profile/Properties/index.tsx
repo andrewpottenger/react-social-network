@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Projects from './Projects'
 
-const s = require('./styles.scss')
+const s = require('./index.scss')
 
 type IProps = {
   properties: Array<any>
@@ -17,7 +17,8 @@ export default class Properties extends Component<IProps> {
     return (
       <div key={property.uid} className={s.propertyContainer}>
         <div className={s.propertyInfo}>
-          <img className={s.banner} />
+          <img className={s.banner} src="http://via.placeholder.com/300x420" />
+          {/* <img className={s.banner} /> */}
           <div className={s.description}>
             <div>{name}</div>
             <div>{location}</div>
