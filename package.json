@@ -17,8 +17,6 @@
   "author": "Amir Movahedi",
   "license": "MIT",
   "dependencies": {
-    "@material-ui/core": "^1.1.0",
-    "@material-ui/icons": "^1.1.0",
     "@types/react-helmet": "^5.0.5",
     "@types/redux-devtools": "^3.0.43",
     "@types/redux-devtools-dock-monitor": "^1.1.32",

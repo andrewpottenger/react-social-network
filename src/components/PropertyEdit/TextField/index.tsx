@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Field } from 'react-final-form'
 
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import FormControl from '@material-ui/core/FormControl'
+import Input from 'material-ui/Input'
+import { InputLabel } from 'material-ui/Input'
+import { FormHelperText, FormControl } from 'material-ui/Form'
 
 const s = require('./styles.scss')
 

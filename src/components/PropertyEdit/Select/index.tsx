@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Field } from 'react-final-form'
 
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
+import Input from 'material-ui/Input'
+import { InputLabel } from 'material-ui/Input'
+import { FormControl } from 'material-ui/Form'
+import Select from 'material-ui/Select'
+import { MenuItem } from 'material-ui/Menu'
 
 const s = require('./styles.scss')
 
@@ -61,7 +61,7 @@ export default class PropertyEdit extends Component<IProps, IState> {
                 value={value}
                 onChange={onChange}
               >
-                {this.renderOptions}
+                {this.renderOptions()}
               </Select>
             </FormControl>
           )
@@ -74,9 +74,7 @@ export default class PropertyEdit extends Component<IProps, IState> {
     const { options } = this.props
 
     return options.map(option => (
-      <MenuItem key={option.value} value={option.value}>
-        {option.label}
-      </MenuItem>
+      <MenuItem value={option.value}>{option.label}</MenuItem>
     ))
   }
 

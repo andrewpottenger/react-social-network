@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Field } from 'react-final-form'
 
-import LocationSVG from '@material-ui/icons/Room'
+import LocationSVG from 'material-ui-icons/Room'
 
 import { visibilityOptions } from './options'
 import TextField from './TextField'
@@ -122,6 +122,7 @@ export default class PropertyEdit extends Component<IProps> {
                   options={visibilityOptions}
                   name="visibility"
                   label="Profile Visibility"
+                  fullWidth
                 />
               </div>
 

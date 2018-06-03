@@ -4,7 +4,7 @@ export const visibilityOptions = [
     label: 'Hidden'
   },
   {
-    value: 0,
+    value: 1,
     label: 'Visible to all registered users'
   }
 ]
