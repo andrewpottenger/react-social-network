@@ -21,7 +21,7 @@ const jsStyles = {
   }
 }
 
-export default class PropertyEdit extends PureComponent<IProps> {
+export default class FieldText extends PureComponent<IProps> {
   render() {
     const { label, placeholder, name, multiline, fullWidth } = this.props
 

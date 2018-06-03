@@ -5,6 +5,7 @@ import LocationSVG from 'material-ui-icons/Room'
 import Button from 'material-ui/Button'
 
 import { visibilityOptions } from './options'
+import Image from './Image'
 import TextField from './TextField'
 import Select from './Select'
 import Checkbox from './Checkbox'
@@ -66,6 +67,10 @@ export default class PropertyEdit extends Component<IProps> {
           }}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit} className={s.container}>
+              <div className={s.images}>
+                <Image name="avatar" label="Edit avatar" />
+                <Image name="banner" label="Edit banner" />
+              </div>
               <TextField name="address" label="Ender you address" fullWidth />
 
               <div className={s.currentLocation}>
@@ -164,7 +169,6 @@ export default class PropertyEdit extends Component<IProps> {
                   Save
                 </Button>
               </div>
-              <pre>{JSON.stringify(values)}</pre>
             </form>
           )}
         />

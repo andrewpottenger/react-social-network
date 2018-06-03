@@ -17,7 +17,7 @@ const jsStyles = {
   }
 }
 
-export default class PropertyEdit extends Component<IProps> {
+export default class FieldCheckbox extends Component<IProps> {
   render() {
     const { label, name } = this.props
 

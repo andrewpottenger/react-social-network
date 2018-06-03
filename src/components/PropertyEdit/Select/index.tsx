@@ -33,7 +33,7 @@ const jsStyles = {
   }
 }
 
-export default class PropertyEdit extends Component<IProps, IState> {
+export default class FieldSelect extends Component<IProps, IState> {
   public state = {
     open: false
   }

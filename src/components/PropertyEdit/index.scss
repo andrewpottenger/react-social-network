@@ -3,6 +3,11 @@
   flex: 1;
   flex-direction: column;
 
+  .images {
+    display: flex;
+    height: 125px;
+  }
+
   .currentLocation {
     display: flex;
     align-items: center;
