@@ -73,8 +73,10 @@ export default class PropertyEdit extends Component<IProps, IState> {
   private renderOptions = () => {
     const { options } = this.props
 
-    return options.map(option => (
-      <MenuItem value={option.value}>{option.label}</MenuItem>
+    return options.map(({ value, label }) => (
+      <MenuItem key={value} value={value}>
+        {label}
+      </MenuItem>
     ))
   }
 

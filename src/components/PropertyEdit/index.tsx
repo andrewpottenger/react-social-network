@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Form, Field } from 'react-final-form'
 
 import LocationSVG from 'material-ui-icons/Room'
+import Button from 'material-ui/Button'
 
 import { visibilityOptions } from './options'
 import TextField from './TextField'
 import Select from './Select'
+import Checkbox from './Checkbox'
 
 const s = require('./index.scss')
 
@@ -36,7 +38,7 @@ type Values = {
 }
 
 const onSubmit = (values: any): any => {
-  console.log('values')
+  console.log('values', values)
 }
 
 export default class PropertyEdit extends Component<IProps> {
@@ -126,17 +128,41 @@ export default class PropertyEdit extends Component<IProps> {
                 />
               </div>
 
-              <div className="buttons">
-                <button type="submit" disabled={submitting}>
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={form.reset}
-                  disabled={submitting || pristine}
+              <TextField
+                fullWidth
+                name="upgrades"
+                label="Changes/Upgrades"
+                multiline
+              />
+
+              <div className={s.checkboxes}>
+                <Checkbox
+                  name="changesVisible"
+                  label="Make my changes visible on my network’s News Feed"
+                />
+                <Checkbox name="openToOffers" label="Open to offers" />
+              </div>
+
+              <div className={s.buttons}>
+                <Button type="submit" variant="raised" color="primary">
+                  Back
+                </Button>
+                <Button
+                  type="submit"
+                  variant="raised"
+                  color="primary"
+                  disabled={submitting}
                 >
-                  Reset
-                </button>
+                  Add another property
+                </Button>
+                <Button
+                  type="submit"
+                  variant="raised"
+                  color="primary"
+                  disabled={submitting}
+                >
+                  Save
+                </Button>
               </div>
               <pre>{JSON.stringify(values)}</pre>
             </form>

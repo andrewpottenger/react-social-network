@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Field } from 'react-final-form'
 
 import Input from 'material-ui/Input'
@@ -21,7 +21,7 @@ const jsStyles = {
   }
 }
 
-export default class PropertyEdit extends Component<IProps> {
+export default class PropertyEdit extends PureComponent<IProps> {
   render() {
     const { label, placeholder, name, multiline, fullWidth } = this.props
 
@@ -39,11 +39,12 @@ export default class PropertyEdit extends Component<IProps> {
             >
               <InputLabel htmlFor="name-error">{label}</InputLabel>
               <Input
+                autoComplete="off"
                 multiline={multiline}
                 id="name-error"
                 value={value}
                 onChange={onChange}
-                rowsMax={4}
+                rows={multiline ? 4 : 1}
               />
               <FormHelperText>{error}</FormHelperText>
             </FormControl>

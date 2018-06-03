@@ -5,13 +5,11 @@
   margin: 20px auto;
 
   .leftPanel {
-    flex: 1;
-    min-width: 220px;
-    max-width: 300px;
+    width: 250px;
   }
 
   .rightPanel {
-    flex: 2;
+    display: flex;
     padding-left: 20px;
     max-width: 800px;
   }
