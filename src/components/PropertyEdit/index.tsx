@@ -14,6 +14,7 @@ const s = require('./index.scss')
 
 type IProps = {
   property: any
+  onClose: () => void
 }
 
 type Values = {
@@ -44,6 +45,7 @@ const onSubmit = (values: any): any => {
 
 export default class PropertyEdit extends Component<IProps> {
   render() {
+    const { onClose } = this.props
     return (
       <div className={s.container}>
         <Form
@@ -149,7 +151,12 @@ export default class PropertyEdit extends Component<IProps> {
               </div>
 
               <div className={s.buttons}>
-                <Button type="submit" variant="raised" color="primary">
+                <Button
+                  type="submit"
+                  variant="raised"
+                  color="primary"
+                  onClick={onClose}
+                >
                   Back
                 </Button>
                 <Button

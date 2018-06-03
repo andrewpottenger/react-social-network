@@ -10,6 +10,7 @@
 
   .rightPanel {
     display: flex;
+    flex-direction: column;
     padding-left: 20px;
     max-width: 800px;
   }

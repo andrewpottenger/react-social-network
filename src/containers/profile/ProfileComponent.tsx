@@ -1,12 +1,9 @@
 // - Import react components
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Dialog from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
-import RaisedButton from 'material-ui/Button'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import { Map } from 'immutable'
 
 import StreamComponent from 'containers/stream'
 
@@ -25,13 +22,29 @@ import { Profile } from 'core/domain/users'
 
 const s = require('./styles.scss')
 
-export class ProfileComponent extends Component<IProfileComponentProps> {
+type IState = {
+  editorOpen: boolean
+}
+
+export class ProfileComponent extends Component<
+  IProfileComponentProps,
+  IState
+> {
+  state = {
+    editorOpen: false
+  }
+
   componentWillMount() {
     // this.props.loadPosts()
     this.props.loadUserInfo()
   }
 
+  handleOpenEditor = () => this.setState({ editorOpen: true })
+  handleCloseEditor = () => this.setState({ editorOpen: false })
+
   render() {
+    const { editorOpen } = this.state
+
     return (
       <div className={s.container}>
         <div className={s.leftPanel}>
@@ -39,9 +52,18 @@ export class ProfileComponent extends Component<IProfileComponentProps> {
           <Neighbours />
         </div>
         <div className={s.rightPanel}>
-          {/* <PropertiesContainer />
-          <Feed /> */}
-          <PropertyEdit property={{}} />
+          {!editorOpen && (
+            <Button onClick={this.handleOpenEditor}>Open editor</Button>
+          )}
+          {this.state.editorOpen ? (
+            <PropertyEdit property={{}} onClose={this.handleCloseEditor} />
+          ) : (
+            <Fragment>
+              {/* tslint:disable */}
+              <PropertiesContainer />
+              <Feed />
+            </Fragment>
+          )}
         </div>
       </div>
     )

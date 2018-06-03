@@ -7,6 +7,7 @@ const s = require('./index.scss')
 type IProps = {
   properties: Array<any>
   isAuthedUser: boolean
+  openEditor: () => void
 }
 
 export default class Properties extends Component<IProps> {
