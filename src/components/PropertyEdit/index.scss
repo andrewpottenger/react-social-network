@@ -1,4 +1,24 @@
 .container {
   display: flex;
   flex: 1;
+  flex-direction: column;
+
+  .currentLocation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .wrap {
+      width: 90%;
+    }
+  }
+
+  .areas {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .visibility {
+    width: 250px;
+  }
 }

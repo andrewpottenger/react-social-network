@@ -15,6 +15,8 @@ import PropertiesContainer from './PropertiesContainer'
 import Neighbours from 'components/Profile/Neighbours'
 import Feed from 'components/Profile/Feed'
 
+import PropertyEdit from 'components/PropertyEdit'
+
 import * as postActions from 'src/store/actions/postActions'
 import * as userActions from 'src/store/actions/userActions'
 import * as globalActions from 'src/store/actions/globalActions'
@@ -37,8 +39,9 @@ export class ProfileComponent extends Component<IProfileComponentProps> {
           <Neighbours />
         </div>
         <div className={s.rightPanel}>
-          <PropertiesContainer />
-          <Feed />
+          {/* <PropertiesContainer />
+          <Feed /> */}
+          <PropertyEdit property={{}} />
         </div>
       </div>
     )
