@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    height: 50px;
+  }
+
+  .propertyContainer {
+    display: flex;
+
+    .propertyInfo {
+      position: relative;
+      display: flex;
+
+      .description {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+    }
+  }
+}

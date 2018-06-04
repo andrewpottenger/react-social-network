@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  padding: 0 40px;
+  max-width: 1000px;
+  margin: 20px auto;
+
+  .leftPanel {
+    width: 250px;
+  }
+
+  .rightPanel {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    max-width: 800px;
+  }
+}

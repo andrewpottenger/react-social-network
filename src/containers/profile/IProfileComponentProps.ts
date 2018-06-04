@@ -1,7 +1,6 @@
 import { Post } from 'src/core/domain/posts'
 
 export interface IProfileComponentProps {
-
   /**
    * Router match
    *
@@ -16,7 +15,7 @@ export interface IProfileComponentProps {
    * @type {{[postId: string]: Post}}
    * @memberof IProfileComponentProps
    */
-  posts: {[postId: string]: Post}
+  posts: { [postId: string]: Post }
 
   /**
    * String user full name
@@ -89,4 +88,5 @@ export interface IProfileComponentProps {
    * Translate to locale string
    */
   translate?: (state: any, params?: {}) => any
+  userProfile: any
 }

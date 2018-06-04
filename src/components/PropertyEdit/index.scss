@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .images {
+    display: flex;
+    height: 125px;
+  }
+
+  .currentLocation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .wrap {
+      width: 90%;
+    }
+  }
+
+  .areas {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .visibility {
+    width: 250px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 100px;
+  }
+}
