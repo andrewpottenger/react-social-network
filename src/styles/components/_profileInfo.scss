@@ -1,0 +1,46 @@
+.profileInfo {
+  width: 261px;
+  height: 320px;
+  padding: 65px 12px 50px;
+  margin-bottom: 20px;
+  background: #E7E7E7;
+
+  &__avatar {
+    width: 152px;
+    height: 152px;
+    margin: 0 auto 20px;
+  }
+
+  &__title {
+    color: #912099;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    margin-left: 38px;
+    margin-bottom: 10px;
+
+    & > img {
+      width: 18px;
+      height: auto;
+    }
+
+    p {
+      color: #4A4A4A;
+      font-size: 16px;
+      margin: 0 10px 0 15px;
+    }
+  }
+
+  &__iconButton {
+    &-img{
+      width: 33px;
+      height: 33px;
+    }
+  }
+
+
+}

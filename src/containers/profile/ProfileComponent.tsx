@@ -10,6 +10,7 @@ import { Map } from 'immutable'
 
 // - Import app components
 import ProfileHeader from 'src/components/profileHeader'
+import { Info, Neighbors, Property } from 'src/components/profile'
 import StreamComponent from 'containers/stream'
 
 // - Import API
@@ -45,8 +46,8 @@ export class ProfileComponent extends Component<
   }
 
   componentWillMount() {
-    this.props.loadPosts()
-    this.props.loadUserInfo()
+    // this.props.loadPosts()
+    // this.props.loadUserInfo()
   }
 
   /**
@@ -58,7 +59,21 @@ export class ProfileComponent extends Component<
      * Component styles
      */
     const styles = {
-      profile: {},
+      profile: {
+        display: 'flex',
+        maxWidth: '1217px',
+        margin: '0 auto',
+      },
+
+      sideContainer: {
+        width: '285px',
+        marginRight: 26,
+      },
+
+      mainContainer: {
+        flex: 1,
+      },
+
       header: {},
       content: {},
       showcover: {
@@ -66,14 +81,33 @@ export class ProfileComponent extends Component<
       },
       avatar: {
         border: '2px solid rgb(255, 255, 255)'
-      }
+      },
     }
+
+    const propertyData = {
+      image: 'images/Section3_image1.jpg',
+      projects: [
+        {
+          image: 'images/Section3_image2.jpg',
+          name: 'Kitchen',
+          date: 'Start Date: 1/4/18',
+          progress: 50,
+        },
+        {
+          image: 'images/Section3_image3.jpg',
+          name: 'Patio',
+          date: 'Start Date: 6/12/17',
+          progress: 100,
+        }
+      ]
+    }
+
     const { loadPosts, hasMorePosts, translate } = this.props
     const St = StreamComponent as any
     const posts = Map(this.props.posts)
     return (
       <div style={styles.profile}>
-        <div style={styles.header}>
+        {/* <div style={styles.header}>
           <ProfileHeader
             tagLine={this.props.tagLine}
             avatar={this.props.avatar}
@@ -83,8 +117,38 @@ export class ProfileComponent extends Component<
             followerCount={0}
             userId={this.props.userId}
           />
+        </div> */}
+        
+        <div style={styles.sideContainer}>
+          <Info
+            userId=""
+            isAuthedUser={true}
+            fullName="Brian D’Ambrosio"
+            avatar="images/profile-image.jpg"
+            address1="Austin, TX"
+            address2="Casa Austin"
+            followerCount={573}
+          />
+          <Neighbors
+            userId=""
+            isAuthedUser={true}
+            fullName="Brian D’Ambrosio"
+            avatar="images/profile-image.jpg"
+            address1="Austin, TX"
+            address2="Casa Austin"
+            followerCount={573}
+          />
+          
         </div>
-        {posts ? (
+        <div style={styles.mainContainer}>
+          Main Container (on developing)
+          {/* <Property
+            image={propertyData.image}
+            projects={propertyData.projects}
+          /> */}
+        </div>
+        
+        {/* {posts ? (
           <div style={styles.content}>
             <div className="profile__title">
               {translate!('profile.headPostsLabel', {
@@ -92,7 +156,6 @@ export class ProfileComponent extends Component<
               })}
             </div>
             <div style={{ height: '24px' }} />
-
             <St
               posts={posts}
               loadStream={loadPosts}
@@ -104,7 +167,7 @@ export class ProfileComponent extends Component<
           <div className="profile__title">
             {translate!('profile.nothingSharedLabel')}
           </div>
-        )}
+        )} */}
       </div>
     )
   }
