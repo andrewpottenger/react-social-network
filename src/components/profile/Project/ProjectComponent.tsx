@@ -21,6 +21,7 @@ import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import ImgCover from 'components/imgCover'
 import EditProfile from 'components/editProfile'
 import UserAvatar from 'components/userAvatar'
+import { ProgressBar } from 'components/widgets'
 
 // - Import API
 
@@ -39,11 +40,11 @@ const styles = (theme: any) => ({
     flex: '1 0 auto',
   },
   details: {
-    width: '217px',
-    height: '100%',
+    position: 'relative',
+    width: '169px',
     display: 'flex',
     flexDirection: 'column',
-    padding: '34px 18px',
+    padding: '34px 24px',
   },
 
 })
@@ -115,7 +116,8 @@ export class ProjectComponent extends Component<
           <CardContent className={classes.details}>
             <p className="project__label project__label--primary">{name}</p>
             <p className="project__label">{date}</p>
-            <p className="project__label">{progress}</p>
+            <ProgressBar progress={progress}/>
+            <div className="project__triangle" />
           </CardContent>
         </Card>
       </div>

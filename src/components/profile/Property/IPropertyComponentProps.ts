@@ -1,3 +1,5 @@
+import { Post } from 'src/core/domain/posts'
+
 export interface IPropertyComponentProps {
 
   /**
@@ -15,6 +17,14 @@ export interface IPropertyComponentProps {
    * @memberof IPropertyComponentProps
    */
   projects: any
+
+  /**
+   * Posts for stream
+   *
+   * @type {{[postId: string]: Post}}
+   * @memberof IStreamComponentProps
+   */
+  // mergedPosts: Map<string, Map<string, any>>
 
   /**
    * Styles

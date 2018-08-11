@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import config from 'src/config'
-import { Map } from 'immutable'
+import { Map, List as ImuList } from 'immutable'
 
 // - Material UI
 import { withStyles } from 'material-ui/styles'
@@ -21,12 +21,16 @@ import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import ImgCover from 'components/imgCover'
 import EditProfile from 'components/editProfile'
 import UserAvatar from 'components/userAvatar'
+import PostComponent from 'src/components/post'
 import { Project } from 'components/profile'
+
 // - Import API
+import * as PostAPI from 'src/api/PostAPI'
 
 // - Import actions
 import * as globalActions from 'store/actions/globalActions'
 import * as userActions from 'store/actions/userActions'
+import { Post } from 'src/core/domain/posts'
 import { IPropertyComponentProps } from './IPropertyComponentProps'
 import { IPropertyComponentState } from './IPropertyComponentState'
 
@@ -99,14 +103,77 @@ export class PropertyComponent extends Component<
   }
 
   /**
+   * Create a list of posts
+   * @return {DOM} posts
+   */
+  // postLoad = () => {
+  //   // let { match } = this.props
+  //   let posts: any = this.props.mergedPosts
+  //   // let { tag } = match.params
+  //   if (posts === undefined || !(posts.keySeq().count() > 0)) {
+  //     return <h1>'Nothing has shared.'</h1>
+  //   } else {
+  //     let postBack = { divided: false, oddPostList: [], evenPostList: [] }
+  //     let parsedPosts: ImuList<any> = ImuList()
+  //     posts.forEach((post: Map<string, any>) => {
+  //       // if (tag) {
+  //       //   let regex = new RegExp('#' + tag, 'g')
+  //       //   let postMatch = String(post.get('body', '')).match(regex)
+  //       //   if (postMatch !== null) {
+  //       //     parsedPosts = parsedPosts.push(post)
+  //       //   }
+  //       // } else {
+  //         parsedPosts = parsedPosts.push(post)
+  //       // }
+  //     })
+  //     const sortedPosts = PostAPI.sortImuObjectsDate(parsedPosts)
+  //     if (sortedPosts.count() > 6) {
+  //       postBack.divided = true
+  //     } else {
+  //       postBack.divided = false
+  //     }
+  //     let index = 0
+  //     sortedPosts.forEach(post => {
+  //       let newPost: any = (
+  //         <div key={`${post!.get('id')!}-stream-div`}>
+  //           {index > 1 || (!postBack.divided && index > 0) ? (
+  //             <div style={{ height: '16px' }} />
+  //           ) : (
+  //             ''
+  //           )}
+  //           <PostComponent
+  //             key={`${post!.get('id')}-stream-div-post`}
+  //             post={post! as any}
+  //           />
+  //         </div>
+  //       )
+
+  //       if (index % 2 === 1 && postBack.divided) {
+  //         postBack.oddPostList.push(newPost as never)
+  //       } else {
+  //         postBack.evenPostList.push(newPost as never)
+  //       }
+  //       ++index
+  //     })
+  //     return postBack
+  //   }
+  // }
+
+  /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
   render() {
     const { translate, classes, image, projects } = this.props
+    // const postList = this.postLoad() as
+    //   | { evenPostList: Post[]; oddPostList: Post[]; divided: boolean }
+    //   | any
 
     return (
       <div className="property">
+        {/* <div className="">
+          {postList.evenPostList}
+        </div> */}
         <Card className={classes.card}>
           <CardMedia
             className={classes.cover}
@@ -158,9 +225,23 @@ const mapStateToProps = (
   state: Map<string, any>,
   ownProps: IPropertyComponentProps
 ) => {
-  return {
-    translate: getTranslate(state.get('locale')),
-  }
+  // const uid = state.getIn(['authorize', 'uid'], {})
+  // const global = state.get('global', {})
+  // let mergedPosts = Map({})
+  // const circles = state.getIn(['circle', 'circleList'], {})
+  // const followingUsers: Map<string, any> = state.getIn(
+  //   ['circle', 'userTies'],
+  //   {}
+  // )
+  // const posts = state.getIn(['post', 'userPosts', uid], {})
+  // followingUsers.forEach((user, userId) => {
+  //   let newPosts = state.getIn(['post', 'userPosts', userId], {})
+  //   mergedPosts = mergedPosts.merge(newPosts)
+  // })
+  // mergedPosts = mergedPosts.merge(posts)
+  // return {
+  //   mergedPosts,
+  // }
 }
 
 // - Connect component to redux store
