@@ -40,11 +40,11 @@ const styles = (theme: any) => ({
     flex: '1 0 auto',
   },
   details: {
-    width: '514px',
-    height: '100%',
+    width: '474px',
     display: 'flex',
     flexDirection: 'column',
     padding: '27px 20px 5px 20px',
+    backgroundColor: '#E7E7E7',
   },
 
 })
@@ -106,22 +106,25 @@ export class PropertyComponent extends Component<
     const { translate, classes, image, projects } = this.props
 
     return (
-      <div className="project">
+      <div className="property">
         <Card className={classes.card}>
           <CardMedia
             className={classes.cover}
             image={image}
             title="Casa Austin Austin, Tx"
-          />
+          >
+            <p className="property__label">Casa Austin</p>
+            <p className="property__label">Austin, TX</p>
+          </CardMedia>
           <CardContent className={classes.details}>
             {
               projects.map((item: any, index: number) => (
                 <Project
-                  // key={`project-${index.toString()}`}
-                  // image={item.image}
-                  // name={item.name}
-                  // date={item.date}
-                  // progress={item.progress}
+                  key={`project-${index.toString()}`}
+                  image={item.image}
+                  name={item.name}
+                  date={item.date}
+                  progress={item.progress}
                 />
               ))
             }
@@ -140,6 +143,7 @@ export class PropertyComponent extends Component<
  */
 const mapDispatchToProps = (
   dispatch: any,
+  ownProps: IPropertyComponentProps
 ) => {
   return {}
 }
@@ -151,7 +155,8 @@ const mapDispatchToProps = (
  * @return {object}          props of component
  */
 const mapStateToProps = (
-  state: Map<string, any>
+  state: Map<string, any>,
+  ownProps: IPropertyComponentProps
 ) => {
   return {
     translate: getTranslate(state.get('locale')),

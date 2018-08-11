@@ -33,7 +33,6 @@ import { IProjectComponentState } from './IProjectComponentState'
 const styles = (theme: any) => ({
   card: {
     display: 'flex',
-    maxWidth: '473px',
     height: '204px',
   },
   cover: {
@@ -103,20 +102,20 @@ export class ProjectComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { translate, classes } = this.props
+    const { translate, classes, image, name, date, progress } = this.props
 
     return (
       <div className="project">
         <Card className={classes.card}>
           <CardMedia
             className={classes.cover}
-            image="images/Section3_image2.jpg"
-            title="Live from space album cover"
+            image={image}
+            title=""
           />
           <CardContent className={classes.details}>
-            <p className="project__label project__label--primary">card content</p>
-            <p className="project__label">card content</p>
-            <p className="project__label">card content</p>
+            <p className="project__label project__label--primary">{name}</p>
+            <p className="project__label">{date}</p>
+            <p className="project__label">{progress}</p>
           </CardContent>
         </Card>
       </div>
@@ -132,6 +131,7 @@ export class ProjectComponent extends Component<
  */
 const mapDispatchToProps = (
   dispatch: any,
+  ownProps: IProjectComponentProps
 ) => {
   return {}
 }
@@ -143,7 +143,8 @@ const mapDispatchToProps = (
  * @return {object}          props of component
  */
 const mapStateToProps = (
-  state: Map<string, any>
+  state: Map<string, any>,
+  ownProps: IProjectComponentProps
 ) => {
   return {
     translate: getTranslate(state.get('locale')),

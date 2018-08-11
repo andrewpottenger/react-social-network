@@ -1,7 +1,7 @@
 export interface IPropertyComponentProps {
 
   /**
-   * User's avatar address
+   * Property Image
    *
    * @type {string}
    * @memberof IPropertyComponentProps
@@ -9,9 +9,9 @@ export interface IPropertyComponentProps {
   image: string
 
   /**
-   * User's avatar address
+   * Latest Projects
    *
-   * @type {string}
+   * @type {any}
    * @memberof IPropertyComponentProps
    */
   projects: any

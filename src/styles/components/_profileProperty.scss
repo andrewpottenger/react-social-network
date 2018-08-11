@@ -1,0 +1,13 @@
+.property {
+  &__label {
+    font-size: 26px;
+    line-height: 34px;
+    color: white;
+    font-weight: 300;
+    margin: 0 0 0 15px;
+
+    &:first-child {
+      margin-top: 11px;
+    }
+  }
+}

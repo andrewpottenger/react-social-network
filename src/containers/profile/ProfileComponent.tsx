@@ -142,10 +142,10 @@ export class ProfileComponent extends Component<
         </div>
         <div style={styles.mainContainer}>
           Main Container (on developing)
-          {/* <Property
+          <Property
             image={propertyData.image}
             projects={propertyData.projects}
-          /> */}
+          />
         </div>
         
         {/* {posts ? (
