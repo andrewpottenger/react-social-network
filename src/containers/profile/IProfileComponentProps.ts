@@ -86,6 +86,11 @@ export interface IProfileComponentProps {
   hasMorePosts: boolean
 
   /**
+   * Styles
+   */
+  classes?: any
+
+  /**
    * Translate to locale string
    */
   translate?: (state: any, params?: {}) => any

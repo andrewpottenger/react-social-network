@@ -40,9 +40,11 @@ const styles = (theme: any) => ({
     maxWidth: '906px',
     height: '537px',
   },
+
   cover: {
     flex: '1 0 auto',
   },
+
   details: {
     width: '474px',
     display: 'flex',
@@ -51,6 +53,19 @@ const styles = (theme: any) => ({
     backgroundColor: '#E7E7E7',
   },
 
+  newButton: {
+    padding: 0,
+    fontSize: '14px',
+    color: '#4A4A4A',
+    textTransform: 'capitalize',
+  },
+
+  moreButton: {
+    padding: 0,
+    minWidth: 'unset',
+    fontSize: '14px',
+    textTransform: 'lowercase',
+  }
 })
 
 /**
@@ -102,62 +117,13 @@ export class PropertyComponent extends Component<
     this.handleResize()
   }
 
-  /**
-   * Create a list of posts
-   * @return {DOM} posts
-   */
-  // postLoad = () => {
-  //   // let { match } = this.props
-  //   let posts: any = this.props.mergedPosts
-  //   // let { tag } = match.params
-  //   if (posts === undefined || !(posts.keySeq().count() > 0)) {
-  //     return <h1>'Nothing has shared.'</h1>
-  //   } else {
-  //     let postBack = { divided: false, oddPostList: [], evenPostList: [] }
-  //     let parsedPosts: ImuList<any> = ImuList()
-  //     posts.forEach((post: Map<string, any>) => {
-  //       // if (tag) {
-  //       //   let regex = new RegExp('#' + tag, 'g')
-  //       //   let postMatch = String(post.get('body', '')).match(regex)
-  //       //   if (postMatch !== null) {
-  //       //     parsedPosts = parsedPosts.push(post)
-  //       //   }
-  //       // } else {
-  //         parsedPosts = parsedPosts.push(post)
-  //       // }
-  //     })
-  //     const sortedPosts = PostAPI.sortImuObjectsDate(parsedPosts)
-  //     if (sortedPosts.count() > 6) {
-  //       postBack.divided = true
-  //     } else {
-  //       postBack.divided = false
-  //     }
-  //     let index = 0
-  //     sortedPosts.forEach(post => {
-  //       let newPost: any = (
-  //         <div key={`${post!.get('id')!}-stream-div`}>
-  //           {index > 1 || (!postBack.divided && index > 0) ? (
-  //             <div style={{ height: '16px' }} />
-  //           ) : (
-  //             ''
-  //           )}
-  //           <PostComponent
-  //             key={`${post!.get('id')}-stream-div-post`}
-  //             post={post! as any}
-  //           />
-  //         </div>
-  //       )
+  addNewProject = () => {
 
-  //       if (index % 2 === 1 && postBack.divided) {
-  //         postBack.oddPostList.push(newPost as never)
-  //       } else {
-  //         postBack.evenPostList.push(newPost as never)
-  //       }
-  //       ++index
-  //     })
-  //     return postBack
-  //   }
-  // }
+  }
+
+  moreProject = () => {
+
+  }
 
   /**
    * Reneder component DOM
@@ -165,15 +131,9 @@ export class PropertyComponent extends Component<
    */
   render() {
     const { translate, classes, image, projects } = this.props
-    // const postList = this.postLoad() as
-    //   | { evenPostList: Post[]; oddPostList: Post[]; divided: boolean }
-    //   | any
 
     return (
       <div className="property">
-        {/* <div className="">
-          {postList.evenPostList}
-        </div> */}
         <Card className={classes.card}>
           <CardMedia
             className={classes.cover}
@@ -184,6 +144,16 @@ export class PropertyComponent extends Component<
             <p className="property__label">Austin, TX</p>
           </CardMedia>
           <CardContent className={classes.details}>
+            <div className="grid grid__space-between grid__center property__project-header">
+              <p className="p-lg--primary">My Latest Project</p>
+              <Button
+                variant="flat"
+                onClick={this.addNewProject}
+                className={classes.newButton}
+              >
+                Add New +
+              </Button>
+            </div>
             {
               projects.map((item: any, index: number) => (
                 <Project
@@ -195,6 +165,16 @@ export class PropertyComponent extends Component<
                 />
               ))
             }
+            <div className="grid grid__right property__project-footer">
+              <Button
+                variant="flat"
+                color="primary"
+                onClick={this.moreProject}
+                className={classes.moreButton}
+              >
+                More >
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -242,6 +222,7 @@ const mapStateToProps = (
   // return {
   //   mergedPosts,
   // }
+  return {}
 }
 
 // - Connect component to redux store

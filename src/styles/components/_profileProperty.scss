@@ -1,4 +1,6 @@
 .property {
+  margin-bottom: 56px;
+
   &__label {
     font-size: 26px;
     line-height: 34px;
@@ -9,5 +11,13 @@
     &:first-child {
       margin-top: 11px;
     }
+  }
+
+  &__project-header {
+    margin-bottom: 12px;
+  }
+
+  &__project-footer {
+    margin-top: -15px;
   }
 }

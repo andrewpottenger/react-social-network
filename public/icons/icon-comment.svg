@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Profile-v1" transform="translate(-511.000000, -938.000000)" fill="#5C0E61">
+            <g id="Section-4" transform="translate(421.000000, 792.000000)">
+                <g id="Comment" transform="translate(90.000000, 146.000000)">
+                    <path d="M0.433476408,0 L0.433476408,0.0720920252 L0,0.505260347 L0,10.4699803 L0.505568433,10.9755487 L4.40500759,10.9755487 L7.65407809,16.0300007 L8.44832271,16.0300007 L11.6980094,10.9755487 L15.5968324,10.9755487 L16.1024008,10.4699803 L16.1024008,0.505260347 L15.5968324,0 L0.433476408,0 Z M0.93904484,1.01082878 L15.0918801,1.01082878 L15.0918801,9.96410375 L11.4093332,9.96410375 L10.9755487,10.180996 L8.01546247,14.8746798 L5.05476007,10.180996 L4.62159175,9.96410375 L0.93904484,9.96410375 L0.93904484,1.01082878 Z" id="icon"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

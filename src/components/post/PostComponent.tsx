@@ -63,9 +63,14 @@ import { IPostComponentProps } from './IPostComponentProps'
 import { IPostComponentState } from './IPostComponentState'
 
 const styles = (theme: any) => ({
+  postHeader: {
+    display: 'block',
+    textAlign: 'center',
+    paddingTop: '13px',
+  },
   iconButton: {
-    width: 27,
-    marginLeft: 5
+    width: 'auto',
+    margin: '0 8px',
   },
   vote: {
     display: 'flex',
@@ -93,11 +98,13 @@ const styles = (theme: any) => ({
   },
   postBody: {
     wordWrap: 'break-word',
-    color: 'rgba(0, 0, 0, 0.87)',
-    fontSize: '0.875rem',
+    color: '#4A4A4A',
+    fontSize: '14px',
     fontWeight: 400,
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    lineHeight: '1.46429em'
+    lineHeight: '1.46429em',
+    padding: '15px 20px 25px',
+    flex: 1,
   },
   image: {
     width: '100%',
@@ -433,154 +440,163 @@ export class PostComponent extends Component<
     } = post.toJS()
     // Define variables
     return (
-      <Card key={`post-component-${id}`} className="modalOverflow">
-        <div className="flex-wrapper">
-          <section className="flex-content">
-            <div className="flex-columns">
-              <aside className="flex-sidebar">
-                <CardHeader
-                  title={
-                    <NavLink
-                      style={{ color: '#9c27b0' }}
-                      className="postName"
-                      to={`/${ownerUserId}`}
-                    >
-                      {ownerDisplayName}
-                    </NavLink>
-                  }
-                  subheader={
-                    creationDate ? (
-                      moment.unix(creationDate!).fromNow() +
-                      ' | ' +
-                      translate!('post.public')
-                    ) : (
-                      <LinearProgress color="primary" />
-                    )
-                  }
-                  avatar={
-                    <NavLink to={`/${ownerUserId}`}>
-                      <UserAvatar
-                        fullName={fullName!}
-                        fileName={avatar!}
-                        size={50}
-                      />
-                    </NavLink>}
-                  action={isPostOwner ? rightIconMenu : ''}
-                  className="cardHeader"
-                />
-              </aside>
-              <main className="flex-main">
-                <CardContent className={classes.postBody + ' cardContent'}>
-                  <Linkify
-                    properties={{ target: '_blank', style: { color: 'blue' } }}
+      <div className="post">
+        <Card key={`post-component-${id}`} className="modalOverflow">
+          <div className="post__content">
+            <aside className="post__content-sidebar">
+              <CardHeader
+                title={
+                  <NavLink
+                    style={{ color: '#9c27b0' }}
+                    className="postName"
+                    to={`/${ownerUserId}`}
                   >
-                    {reactStringReplace(
-                      body,
-                      /#(\w+)/g,
-                      (match: string, i: string) => (
-                        <NavLink
-                          className="tags"
-                          style={{ color: '#de64f6' }}
-                          key={match + i}
-                          to={`/tag/${match}`}
-                          onClick={evt => {
-                            evt.preventDefault()
-                            goTo!(`/tag/${match}`)
-                            setHomeTitle!(`#${match}`)
-                          }}
-                        >
-                          #{match}
-                        </NavLink>
-                      )
-                    )}
-                  </Linkify>
-                </CardContent>
-              </main>
-            </div>
-          </section>
-          {/*<footer className='flex-footer'>Footer: Fixed height</footer>*/}
-        </div>
-
-        {image ? (
-          <CardMedia image={image}>
-            <Img fileName={image} />
-          </CardMedia>
-        ) : (
-          ''
-        )}
-        <CardActions className="socialActions">
-          <div className={classes.vote + ' shortenWidth'}>
-            <IconButton
-              className={classes.iconButton + ' shortenWidth'}
-              onClick={this.handleVote}
-              aria-label="Like"
-            >
-              <Checkbox
-                className={classes.iconButton + ' shortenWidth'}
-                checkedIcon={<SvgThumbUp style={{ fill: '#551360' }} />}
-                icon={<SvgThumbUp style={{ fill: '#757575' }} />}
-                checked={this.props.currentUserVote}
+                    {ownerDisplayName}
+                  </NavLink>
+                }
+                // subheader={
+                //   creationDate ? (
+                //     moment.unix(creationDate!).fromNow() +
+                //     ' | ' +
+                //     translate!('post.public')
+                //   ) : (
+                //     <LinearProgress color="primary" />
+                //   )
+                // }
+                avatar={
+                  <NavLink to={`/${ownerUserId}`}>
+                    <UserAvatar
+                      fullName={fullName!}
+                      fileName={avatar!}
+                      size={69}
+                    />
+                  </NavLink>}
+                action={isPostOwner ? rightIconMenu : ''}
+                className={`${classes.postHeader} post__content-header`}
               />
-              <div className={classes.voteCounter}>
-                {' '}
-                {this.props.voteCount! > 0 ? this.props.voteCount : ''}{' '}
-              </div>
-            </IconButton>
+            </aside>
+            <main className="post__content-main">
+              <CardContent className={classes.postBody}>
+                <p className="p-sm--light post__content-date">{creationDate && moment.unix(creationDate!).fromNow()}</p>
+                <Linkify
+                  properties={{ target: '_blank', style: { color: 'blue' } }}
+                >
+                  {reactStringReplace(
+                    body,
+                    /#(\w+)/g,
+                    (match: string, i: string) => (
+                      <NavLink
+                        className="tags"
+                        style={{ color: '#de64f6' }}
+                        key={match + i}
+                        to={`/tag/${match}`}
+                        onClick={evt => {
+                          evt.preventDefault()
+                          goTo!(`/tag/${match}`)
+                          setHomeTitle!(`#${match}`)
+                        }}
+                      >
+                        #{match}
+                      </NavLink>
+                    )
+                  )}
+                </Linkify>
+              </CardContent>
+            </main>
           </div>
-          {!disableComments ? (
-            <div style={{ display: 'inherit' }}>
+          {/*<footer className='flex-footer'>Footer: Fixed height</footer>*/}
+
+          {image ? (
+            <CardMedia image={image}>
+              <Img fileName={image} />
+            </CardMedia>
+          ) : (
+            ''
+          )}
+          <CardActions className="post__socialActions">
+            <div className={classes.vote + ' shortenWidth'}>
               <IconButton
                 className={classes.iconButton}
-                onClick={this.handleOpenComments}
-                aria-label="Comment"
+                onClick={this.handleVote}
+                aria-label="Like"
               >
-                <SvgModeComment />
-                <div className={classes.commentCounter}>
-                  {commentCounter! > 0 ? commentCounter : ''}{' '}
-                </div>
+                <img src="icons/icon-like.svg" alt="like icon" />{' '}
+                <p className="p-sm--primary post__socialActions-label">Like</p>
+                {/* <Checkbox
+                  className={classes.iconButton}
+                  checkedIcon={<img src="icons/icon-like.svg" alt="like icon" />}
+                  icon={<img src="icons/icon-like.svg" alt="like icon" />}
+                  checked={this.props.currentUserVote}
+                />
+                <div className={classes.voteCounter}>
+                  {' '}
+                  {this.props.voteCount! > 0 ? this.props.voteCount : ''}{' '}
+                </div> */}
               </IconButton>
             </div>
-          ) : (
-            ''
-          )}
-          {!disableSharing ? (
-            <IconButton
-              className={classes.iconButton}
-              onClick={this.handleOpenShare}
-              aria-label="Comment"
-            >
-              <SvgReply className="flipIcon" />
-            </IconButton>
-          ) : (
-            ''
-          )}
-        </CardActions>
+            {!disableComments ? (
+              <div style={{ display: 'inherit' }}>
+                <IconButton
+                  className={classes.iconButton}
+                  onClick={this.handleOpenComments}
+                  aria-label="Comment"
+                >
+                  <img src="icons/icon-comment.svg" alt="like icon" />
+                  <p className="p-sm--primary post__socialActions-label">{' '}Comment</p>
+                  {/* <div className={classes.commentCounter}>
+                    {commentCounter! > 0 ? commentCounter : ''}{' '}
+                  </div> */}
+                </IconButton>
+              </div>
+            ) : (
+              ''
+            )}
+            {!disableSharing ? (
+              <IconButton
+                className={classes.iconButton}
+                onClick={this.handleOpenShare}
+                aria-label="Comment"
+              >
+                <img src="icons/icon-like.svg" alt="like icon" />
+                <p className="p-sm--primary post__socialActions-label">{' '}Share</p>
+              </IconButton>
+            ) : (
+              ''
+            )}
+            
+            {
+              this.props.voteCount! > 0 ?
+              <p className="p-sm--light post__socialActions-like">{this.props.voteCount} likes</p> :
+              ''
+            }
+          </CardActions>
 
-        <CommentGroup
-          open={this.state.openComments}
-          comments={commentList}
-          ownerPostUserId={ownerUserId!}
-          onToggleRequest={this.handleOpenComments}
-          isPostOwner={this.props.isPostOwner!}
-          disableComments={disableComments!}
-          postId={id}
-        />
+          <CommentGroup
+            open={this.state.openComments}
+            comments={commentList}
+            ownerPostUserId={ownerUserId!}
+            onToggleRequest={this.handleOpenComments}
+            isPostOwner={this.props.isPostOwner!}
+            disableComments={disableComments!}
+            postId={id}
+          />
 
-        <ShareDialog
-          onClose={this.handleCloseShare}
-          shareOpen={this.state.shareOpen}
-          onCopyLink={this.handleCopyLink}
-          openCopyLink={this.state.openCopyLink}
-          post={post}
-        />
+          <ShareDialog
+            onClose={this.handleCloseShare}
+            shareOpen={this.state.shareOpen}
+            onCopyLink={this.handleCopyLink}
+            openCopyLink={this.state.openCopyLink}
+            post={post}
+          />
 
-        <PostWrite
-          open={this.state.openPostWrite}
-          onRequestClose={this.handleClosePostWrite}
-          edit={true}
-          postModel={post}
-        />
-      </Card>
+          <PostWrite
+            open={this.state.openPostWrite}
+            onRequestClose={this.handleClosePostWrite}
+            edit={true}
+            postModel={post}
+          />
+        </Card>
+      </div>
     )
   }
 }

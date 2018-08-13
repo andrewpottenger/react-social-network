@@ -29,7 +29,7 @@ img {
 
 html,
 body {
-    font-family: Verdana, sans-serif;
+    font-family: Helvetica, Verdana, sans-serif;
     font-size: 15px;
     line-height: 1.5
 }
@@ -220,3 +220,57 @@ g__input-underline {
 //    rotate(180deg);
 //    scaleY(-1);
 //}
+
+.p-sm {
+    font-size: 14px;
+    color: $dark-grey;
+    margin: 0;
+
+    &--primary {
+        font-size: 14px;
+        color: $primary-color;
+        margin: 0;
+    }
+
+    &--light {
+        font-size: 14px;
+        color: $light-grey4;
+        margin: 0;
+    }
+}
+
+.p-md {
+    font-size: 16px;
+    color: $dark-grey;
+    margin: 0;
+
+    &--primary {
+        font-size: 16px;
+        color: $primary-color;
+        margin: 0;
+    }
+
+    &--light {
+        font-size: 16px;
+        color: $light-grey4;
+        margin: 0;
+    }
+}
+
+.p-lg {
+    font-size: 18px;
+    color: $dark-grey;
+    margin: 0;
+
+    &--primary {
+        font-size: 18px;
+        color: $primary-color;
+        margin: 0;
+    }
+
+    &--light {
+        font-size: 18px;
+        color: $light-grey4;
+        margin: 0;
+    }
+}

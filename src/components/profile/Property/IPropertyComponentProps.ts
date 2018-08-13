@@ -17,15 +17,7 @@ export interface IPropertyComponentProps {
    * @memberof IPropertyComponentProps
    */
   projects: any
-
-  /**
-   * Posts for stream
-   *
-   * @type {{[postId: string]: Post}}
-   * @memberof IStreamComponentProps
-   */
-  // mergedPosts: Map<string, Map<string, any>>
-
+ 
   /**
    * Styles
    */
