@@ -1,11 +1,11 @@
 
-export interface IPropertyComponentState {
+export interface ISimplePropertyComponentState {
 
   /**
    * Window size is small {true} or not {false}
    *
    * @type {boolean}
-   * @memberof IPropertyComponentState
+   * @memberof ISimplePropertyComponentState
    */
   isSmall: boolean
 }

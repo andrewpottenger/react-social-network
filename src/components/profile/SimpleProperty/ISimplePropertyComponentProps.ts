@@ -1,12 +1,12 @@
 import { Post } from 'src/core/domain/posts'
 
-export interface IPropertyComponentProps {
+export interface ISimplePropertyComponentProps {
 
   /**
    * Property Image
    *
    * @type {string}
-   * @memberof IPropertyComponentProps
+   * @memberof ISimplePropertyComponentProps
    */
   image: string
 
@@ -14,7 +14,7 @@ export interface IPropertyComponentProps {
    * Latest Projects
    *
    * @type {any}
-   * @memberof IPropertyComponentProps
+   * @memberof ISimplePropertyComponentProps
    */
   projects: any
  

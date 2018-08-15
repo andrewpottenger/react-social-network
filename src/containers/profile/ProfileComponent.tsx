@@ -11,7 +11,7 @@ import { Map, List as ImuList } from 'immutable'
 
 // - Import app components
 import ProfileHeader from 'src/components/profileHeader'
-import { Info, Neighbors, Property } from 'src/components/profile'
+import { Info, Neighbors, SimpleProperty } from 'src/components/profile'
 import PostComponent from 'src/components/post'
 import StreamComponent from 'containers/stream'
 
@@ -218,7 +218,7 @@ export class ProfileComponent extends Component<
           >
             Add New Property +
           </Button>
-          <Property
+          <SimpleProperty
             image={propertyData.image}
             projects={propertyData.projects}
           />
@@ -282,9 +282,7 @@ const mapStateToProps = (
   const { userId } = ownProps.match.params
   const uid = state.getIn(['authorize', 'uid'], 0)
   const hasMorePosts = state.getIn(['post', 'profile', 'hasMoreData'])
-  // Todo | we should use userId instead of uid here.
-  // const posts = state.getIn(['post', 'userPosts', userId])
-  const posts = state.getIn(['post', 'userPosts', uid])
+  const posts = state.getIn(['post', 'userPosts', userId])
   const userProfile = state.getIn(['user', 'info', uid], {}) as Profile
   return {
     translate: getTranslate(state.get('locale')),

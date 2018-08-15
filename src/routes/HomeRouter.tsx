@@ -27,6 +27,10 @@ const AsyncPeople = Loadable({
   loader: () => import('containers/people'),
   loading: MasterLoadingComponent
 })
+const AsyncProperty = Loadable({
+  loader: () => import('containers/property'),
+  loading: MasterLoadingComponent
+})
 
 /**
  * Home Router
@@ -52,7 +56,8 @@ export class HomeRouter extends Component<IRouterProps, any> {
           }
         />
         <Route path="/:userId/posts/:postId/:tag?" component={AsyncPostPage} />
-        <Route path="/:userId" component={AsyncProfile} />
+        <Route exact path="/:userId" component={AsyncProfile} />
+        <Route path="/:userId/property" component={AsyncProperty} />
         <PrivateRoute
           path="/"
           component={

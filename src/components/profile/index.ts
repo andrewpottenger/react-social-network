@@ -1,11 +1,11 @@
 import Info from './Info'
 import Neighbors from './Neighbors'
-import Property from './Property'
+import SimpleProperty from './SimpleProperty'
 import Project from './Project'
 
 export {
   Info,
   Neighbors,
-  Property,
+  SimpleProperty,
   Project,
 }

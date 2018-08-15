@@ -31,8 +31,8 @@ import * as PostAPI from 'src/api/PostAPI'
 import * as globalActions from 'store/actions/globalActions'
 import * as userActions from 'store/actions/userActions'
 import { Post } from 'src/core/domain/posts'
-import { IPropertyComponentProps } from './IPropertyComponentProps'
-import { IPropertyComponentState } from './IPropertyComponentState'
+import { ISimplePropertyComponentProps } from './ISimplePropertyComponentProps'
+import { ISimplePropertyComponentState } from './ISimplePropertyComponentState'
 
 const styles = (theme: any) => ({
   card: {
@@ -71,15 +71,15 @@ const styles = (theme: any) => ({
 /**
  * Create component class
  */
-export class PropertyComponent extends Component<
-  IPropertyComponentProps,
-  IPropertyComponentState
+export class SimplePropertyComponent extends Component<
+  ISimplePropertyComponentProps,
+  ISimplePropertyComponentState
 > {
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor(props: IPropertyComponentProps) {
+  constructor(props: ISimplePropertyComponentProps) {
     super(props)
 
     /**
@@ -190,7 +190,7 @@ export class PropertyComponent extends Component<
  */
 const mapDispatchToProps = (
   dispatch: any,
-  ownProps: IPropertyComponentProps
+  ownProps: ISimplePropertyComponentProps
 ) => {
   return {}
 }
@@ -203,7 +203,7 @@ const mapDispatchToProps = (
  */
 const mapStateToProps = (
   state: Map<string, any>,
-  ownProps: IPropertyComponentProps
+  ownProps: ISimplePropertyComponentProps
 ) => {
   // const uid = state.getIn(['authorize', 'uid'], {})
   // const global = state.get('global', {})
@@ -228,4 +228,4 @@ const mapStateToProps = (
 // - Connect component to redux store
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
   styles as any
-)(PropertyComponent as any) as any)
+)(SimplePropertyComponent as any) as any)
