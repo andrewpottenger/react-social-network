@@ -1,4 +1,8 @@
 @import url(~react-day-picker/lib/style.css);
+.container {
+  max-width: 1214px;
+  margin: 0 auto; }
+
 .grid {
   display: flex;
   flex-flow: row;
@@ -326,6 +330,78 @@
 .flaticon-happy:before {
   content: "\f106"; }
 
+.l-xs {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  color: #912099;
+  font-family: "Helvetica"; }
+  .l-xs--secondary {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: #340E42;
+    font-family: "Helvetica"; }
+
+.l-sm {
+  font-size: 1.4rem;
+  line-height: 2rem;
+  color: #912099;
+  font-family: "Helvetica"; }
+  .l-sm--secondary {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: #340E42;
+    font-family: "Helvetica"; }
+
+.l-base {
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  color: #912099;
+  font-family: "Helvetica"; }
+  .l-base--secondary {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #340E42;
+    font-family: "Helvetica"; }
+
+.l-md {
+  font-size: 1.8rem;
+  line-height: 2.6rem;
+  color: #912099;
+  font-family: "Helvetica"; }
+  .l-md--secondary {
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    color: #340E42;
+    font-family: "Helvetica"; }
+
+.l-lg {
+  font-size: 2rem;
+  line-height: 2.6rem;
+  color: #912099;
+  font-family: "Helvetica"; }
+  .l-lg--secondary {
+    font-size: 2rem;
+    line-height: 2.6rem;
+    color: #340E42;
+    font-family: "Helvetica"; }
+
+.l-xl {
+  font-size: 2.6rem;
+  line-height: 3rem;
+  color: #912099;
+  font-family: "Helvetica"; }
+  .l-xl--secondary {
+    font-size: 2.6rem;
+    line-height: 3rem;
+    color: #340E42;
+    font-family: "Helvetica"; }
+
+.bold {
+  font-weight: "Helvetica"; }
+
+.light {
+  font-weight: "Helvetica"; }
+
 html {
   box-sizing: border-box; }
 
@@ -348,6 +424,11 @@ a:hover {
 
 img {
   border-style: none; }
+
+.full-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; }
 
 html,
 body {
@@ -486,10 +567,10 @@ input[type="file"] {
   margin: 3px auto 15px;
   border-radius: 9px; }
 
-g__input-underline::before {
+.g__input-underline::before {
   display: none; }
 
-g__input-underline::after {
+.g__input-underline::after {
   display: none; }
 
 .g__app-name {

@@ -27,6 +27,12 @@ img {
     border-style: none
 }
 
+.full-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 html,
 body {
     font-family: Helvetica, Verdana, sans-serif;
@@ -188,7 +194,7 @@ input[type="file"] {
     border-radius: 9px;
 }
 
-g__input-underline {
+.g__input-underline {
     &::before {
         display: none;
     }

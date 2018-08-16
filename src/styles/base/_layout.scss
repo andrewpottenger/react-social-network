@@ -1,3 +1,7 @@
+.container {
+  max-width: 1214px;
+  margin: 0 auto;
+}
 
 .grid {
   display: flex;
@@ -5,14 +9,12 @@
   flex-wrap: wrap;
 }
 
-
 $gutter: 1em;
 .grid__gutters {
   margin-left: -$gutter;
   .grid-cell {
     padding-left: $gutter;
   }
-    
 }
 
 /* Justify per row*/
@@ -32,7 +34,6 @@ $gutter: 1em;
   justify-content: space-between;
 }
 
- 
 /* Alignment per row */
 .grid__top {
   align-items: flex-start;
@@ -54,7 +55,6 @@ $gutter: 1em;
 .grid-cell__center {
   align-self: center;
 }
-
 
 .grid__fit > .grid-cell {
   flex: 1;
@@ -95,7 +95,6 @@ $gutter: 1em;
   }
 
 }
-
 
 @media (min-width:600px) {
   .grid__cols-2 > .grid-cell,
@@ -149,7 +148,6 @@ $gutter: 1em;
   }
 
 }
-
 
 @mixin justify-flex($pos){
     display: flex;

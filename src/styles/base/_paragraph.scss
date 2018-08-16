@@ -1,0 +1,77 @@
+@function map-fetch($map, $keys) {
+  $key: nth($keys, 1);
+  $length: length($keys);
+  $value: map-get($map, $key);
+  @if ($length > 1) {
+    $rest: ();
+    @for $i from 2 through $length {
+      $rest: append($rest, nth($keys, $i))
+    }
+    @return map-fetch($value, $rest)
+  } @else {
+    @return $value;
+  }
+}
+
+@mixin typography($size, $color: $primary-color, $font-family: $regular) {
+  font-size: map-fetch($font-scale, $size font-size);
+  line-height: map-fetch($font-scale, $size line-height);
+  color: $color;
+  font-family: $font-family;
+}
+
+.l-xs {
+  @include typography(xs, $primary-color, $bold);
+
+  &--secondary {
+    @include typography(xs, $secondary-color, $bold);
+  }
+}
+
+.l-sm {
+  @include typography(sm);
+
+  &--secondary {
+    @include typography(sm, $secondary-color, $bold);
+  }
+}
+
+.l-base {
+  @include typography(base);
+
+  &--secondary {
+    @include typography(base, $secondary-color, $bold);
+  }
+}
+
+.l-md {
+  @include typography(md);
+
+  &--secondary {
+    @include typography(md, $secondary-color, $bold);
+  }
+}
+
+.l-lg {
+  @include typography(lg);
+
+  &--secondary {
+    @include typography(lg, $secondary-color, $bold);
+  }
+}
+
+.l-xl {
+  @include typography(xl);
+
+  &--secondary {
+    @include typography(xl, $secondary-color, $bold);
+  }
+}
+
+.bold {
+  font-weight: $bold;
+}
+
+.light {
+  font-weight: $light;
+}

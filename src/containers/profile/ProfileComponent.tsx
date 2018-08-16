@@ -35,8 +35,6 @@ import { Profile } from 'core/domain/users'
 const styles = (theme: any) => ({
   profile: {
     display: 'flex',
-    maxWidth: '1217px',
-    margin: '0 auto',
   },
 
   sideContainer: {
@@ -175,77 +173,79 @@ export class ProfileComponent extends Component<
       | any
 
     return (
-      <div className={classes.profile}>
-        {/* <div style={styles.header}>
-          <ProfileHeader
-            tagLine={this.props.tagLine}
-            avatar={this.props.avatar}
-            isAuthedUser={this.props.isAuthedUser}
-            banner={this.props.banner}
-            fullName={this.props.name}
-            followerCount={0}
-            userId={this.props.userId}
-          />
-        </div> */}
-        
-        <div className={classes.sideContainer}>
-          <Info
-            userId=""
-            isAuthedUser={true}
-            fullName="Brian D’Ambrosio"
-            avatar="images/profile-image.jpg"
-            address1="Austin, TX"
-            address2="Casa Austin"
-            followerCount={573}
-          />
-          <Neighbors
-            userId=""
-            isAuthedUser={true}
-            fullName="Brian D’Ambrosio"
-            avatar="images/profile-image.jpg"
-            address1="Austin, TX"
-            address2="Casa Austin"
-            followerCount={573}
-          />
-          
-        </div>
-        <div className={classes.mainContainer}>
-          <Button
-            variant="raised"
-            color="primary"
-            onClick={this.addNewProperty}
-            className={classes.addButton}
-          >
-            Add New Property +
-          </Button>
-          <SimpleProperty
-            image={propertyData.image}
-            projects={propertyData.projects}
-          />
-
-          {postList.evenPostList}
-        </div>
-        
-        {/* {posts ? (
-          <div style={styles.content}>
-            <div className="profile__title">
-              {translate!('profile.headPostsLabel', {
-                userName: this.props.name
-              })}
-            </div>
-            <div style={{ height: '24px' }} />
-            <St
-              posts={posts}
-              loadStream={loadPosts}
-              hasMorePosts={hasMorePosts}
-              displayWriting={false}
+      <div className="container">
+        <div className={classes.profile}>
+          {/* <div style={styles.header}>
+            <ProfileHeader
+              tagLine={this.props.tagLine}
+              avatar={this.props.avatar}
+              isAuthedUser={this.props.isAuthedUser}
+              banner={this.props.banner}
+              fullName={this.props.name}
+              followerCount={0}
+              userId={this.props.userId}
             />
+          </div> */}
+          
+          <div className={classes.sideContainer}>
+            <Info
+              userId=""
+              isAuthedUser={true}
+              fullName="Brian D’Ambrosio"
+              avatar="images/profile-image.jpg"
+              address1="Austin, TX"
+              address2="Casa Austin"
+              followerCount={573}
+            />
+            <Neighbors
+              userId=""
+              isAuthedUser={true}
+              fullName="Brian D’Ambrosio"
+              avatar="images/profile-image.jpg"
+              address1="Austin, TX"
+              address2="Casa Austin"
+              followerCount={573}
+            />
+            
           </div>
-        ) : (
-          <div className="profile__title">
-            {translate!('profile.nothingSharedLabel')}
+          <div className={classes.mainContainer}>
+            <Button
+              variant="raised"
+              color="primary"
+              onClick={this.addNewProperty}
+              className={classes.addButton}
+            >
+              Add New Property +
+            </Button>
+            <SimpleProperty
+              image={propertyData.image}
+              projects={propertyData.projects}
+            />
+
+            {postList.evenPostList}
           </div>
-        )} */}
+          
+          {/* {posts ? (
+            <div style={styles.content}>
+              <div className="profile__title">
+                {translate!('profile.headPostsLabel', {
+                  userName: this.props.name
+                })}
+              </div>
+              <div style={{ height: '24px' }} />
+              <St
+                posts={posts}
+                loadStream={loadPosts}
+                hasMorePosts={hasMorePosts}
+                displayWriting={false}
+              />
+            </div>
+          ) : (
+            <div className="profile__title">
+              {translate!('profile.nothingSharedLabel')}
+            </div>
+          )} */}
+        </div>
       </div>
     )
   }

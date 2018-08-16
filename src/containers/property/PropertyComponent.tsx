@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Dialog from 'material-ui/Dialog'
+import IconButton from 'material-ui/IconButton'
 import Button from 'material-ui/Button'
 import RaisedButton from 'material-ui/Button'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map, List as ImuList } from 'immutable'
+import cx from 'classnames'
 
 // - Import app components
 import ProfileHeader from 'src/components/profileHeader'
@@ -29,32 +31,35 @@ import { IPropertyComponentProps } from './IPropertyComponentProps'
 import { IPropertyComponentState } from './IPropertyComponentState'
 import { Profile } from 'core/domain/users'
 
+// Styles
+import styles from './styles'
+
 /**
  * Component styles
  */
-const styles = (theme: any) => ({
-  property: {
-    display: 'flex',
-    maxWidth: '1217px',
-    margin: '0 auto',
-  },
+// const styles = (theme: any) => ({
+//   property: {
+//     display: 'flex',
+//     maxWidth: '1217px',
+//     margin: '0 auto',
+//   },
 
-  sideContainer: {
-    width: '285px',
-    marginRight: 26,
-  },
+//   sideContainer: {
+//     width: '285px',
+//     marginRight: 26,
+//   },
 
-  mainContainer: {
-    flex: 1,
-  },
+//   mainContainer: {
+//     flex: 1,
+//   },
 
-  addButton: {
-    fontSize: '14px',
-    padding: '8px 24px',
-    marginBottom: '29px',
-    textTransform: 'capitalize',
-  },
-})
+//   addButton: {
+//     fontSize: '14px',
+//     padding: '8px 24px',
+//     marginBottom: '29px',
+//     textTransform: 'capitalize',
+//   },
+// })
 
 const propertyData = {
   image: 'images/Section3_image1.jpg',
@@ -100,6 +105,10 @@ export class PropertyComponent extends Component<
 
   }
 
+  editPhoto = () => {
+
+  }
+
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
@@ -108,8 +117,29 @@ export class PropertyComponent extends Component<
     const { loadPosts, hasMorePosts, translate, posts, classes } = this.props
 
     return (
-      <div className={classes.property}>
-        dsfsd
+      <div className="container grid">
+        <div className={classes.leftSection}>
+          <p className={cx('l-xl--secondary')}>Property's Profile</p>
+          <div className={classes.imageContainer}>
+            <img className="full-img" src="/images/Section3_image1.jpg" alt="Property Image" />
+            <IconButton className={classes.editIcon}>
+              <img className="full-img" src="/icons/icon-edit.png" />
+            </IconButton>
+          </div>
+          <div className="">
+adsfa
+          </div>
+          <Button
+            variant="flat"
+            onClick={this.editPhoto}
+            className={classes.plusButton}
+          >
+            Edit/Add Photos &nbsp; +
+          </Button>
+        </div>
+        <div className={classes.rightSection}>
+          dsf
+        </div>
       </div>
     )
   }
@@ -127,6 +157,7 @@ const mapDispatchToProps = (
 ) => {
   const { userId } = ownProps.match.params
   return {
+    
   }
 }
 
