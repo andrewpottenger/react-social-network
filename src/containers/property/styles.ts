@@ -1,4 +1,5 @@
 import { buttons } from 'src/styles/inline'
+import { color } from 'src/styles/inline/variables'
 
 const styles = (theme: any) => ({
   ...buttons,
@@ -10,6 +11,8 @@ const styles = (theme: any) => ({
 
   rightSection: {
     flex: 1,
+    paddingTop: '60px',
+    paddingBottom: '70px',
   },
 
   imageContainer: {
@@ -25,6 +28,57 @@ const styles = (theme: any) => ({
     width: 23,
     height: 23,
   },
+
+  carouselContainer: {
+    padding: 8,
+    borderBottom: 'solid 1px #B9B9B9',
+    marginBottom: 20,
+
+    '& .slick-next, & .slick-prev': {
+      width: '25px',
+      height: '25px',
+      fill: color['grey-dark-border'],
+    },
+
+    '& .slick-next': {
+      right: '-20px',
+    },
+
+    '& .slick-prev': {
+      left: '-20px',
+    },
+  },
+
+  itemImage: {
+    height: '160px',
+    width: 'calc(100% - 24px) !important',
+    padding: '12px',
+
+    '&:focus': {
+      outline: 'none',
+    },
+
+    '& > img': {
+      width: '100%',
+      height: '100%',
+      'object-fit': 'cover',
+    }
+  },
+
+  saveButton: {
+    ...buttons.plusButton,
+    marginRight: '49px',
+
+    '& > span > span': {
+      display: 'flex',
+    }
+  },
+
+  addPropertyButton: {
+    ...buttons.plusButton,
+    backgroundColor: color['light-grey-bg'],
+    color: color['primary-color'],
+  }
 
 })
 

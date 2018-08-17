@@ -13,6 +13,8 @@ import IconButton from 'material-ui/IconButton'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
 import { MenuList, MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
+import FormControlLabel from 'material-ui/Form/FormControlLabel'
+import Checkbox from 'material-ui/Checkbox'
 import Button from 'material-ui/Button'
 import RaisedButton from 'material-ui/Button'
 import EventListener, { withOptions } from 'react-event-listener'
@@ -33,25 +35,25 @@ import * as PostAPI from 'src/api/PostAPI'
 import * as globalActions from 'store/actions/globalActions'
 import * as userActions from 'store/actions/userActions'
 import { Post } from 'src/core/domain/posts'
-import { ITextFieldComponentProps } from './ITextFieldComponentProps'
-import { ITextFieldComponentState } from './ITextFieldComponentState'
+import { ICheckboxComponentProps } from './ICheckboxComponentProps'
+import { ICheckboxComponentState } from './ICheckboxComponentState'
 
 // - Import styles
 import styles from './styles'
 
-export class TextFieldComponent extends Component<ITextFieldComponentProps, ITextFieldComponentState> {
+export class CheckboxComponent extends Component<ICheckboxComponentProps, ICheckboxComponentState> {
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor(props: ITextFieldComponentProps) {
+  constructor(props: ICheckboxComponentProps) {
     super(props)
 
     /**
      * Defaul state
      */
     this.state = {
-      value: this.props.defaultValue || '',
+      value: this.props.defaultValue || false,
     }
 
     // Binding functions to `this`
@@ -61,7 +63,7 @@ export class TextFieldComponent extends Component<ITextFieldComponentProps, ITex
   }
 
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
+    const value = event.target.checked
     this.setState({value})
     this.props.handleChange(value)
   }
@@ -71,22 +73,21 @@ export class TextFieldComponent extends Component<ITextFieldComponentProps, ITex
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { classes, id, label, multiline } = this.props
+    const { classes, id, label } = this.props
     const { value } = this.state
 
     return (
-      <TextField
-        id={id}
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={value}
+            onChange={this.handleChange}
+            value={label}
+          />
+        }
         label={label}
-        rows={multiline ? 4 : 1}
-        multiline={multiline}
-        className={cx(classes.textField, multiline ? classes.multilineTextField : '')}
-        value={value}
-        onChange={this.handleChange}
-        margin="normal"
-        InputLabelProps={{
-          shrink: true,
-        }}
+        color="primary"
+        className={classes.checkBox}
       />
     )
   }
@@ -100,7 +101,7 @@ export class TextFieldComponent extends Component<ITextFieldComponentProps, ITex
  */
 const mapDispatchToProps = (
   dispatch: any,
-  ownProps: ITextFieldComponentProps
+  ownProps: ICheckboxComponentProps
 ) => {
   return {}
 }
@@ -113,7 +114,7 @@ const mapDispatchToProps = (
  */
 const mapStateToProps = (
   state: Map<string, any>,
-  ownProps: ITextFieldComponentProps
+  ownProps: ICheckboxComponentProps
 ) => {
   // const { userId } = ownProps.match.params
   return {
@@ -123,4 +124,4 @@ const mapStateToProps = (
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
   styles as any
-)(TextFieldComponent as any) as any)
+)(CheckboxComponent as any) as any)

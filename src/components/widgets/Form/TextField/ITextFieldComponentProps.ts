@@ -42,6 +42,6 @@ export interface ITextFieldComponentProps {
   /**
    * Value Change handler
    */
-  handleChange: (value: string) => string
+  handleChange: (value: string) => void
 
 }

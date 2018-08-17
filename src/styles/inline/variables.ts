@@ -15,10 +15,12 @@ const color = {
   'secondary-color': '#340E42',
   'light-grey-border': '#EDEDED',
   'light-grey-dark-border': '#CFCCCC',
+  'grey-dark-border': '#B9B9B9',
   'light-color': '#aaa',
 
   // Background color
   'light-bg': '#EDEDED',
+  'light-grey-bg': '#D8D8D8',
 
   // Shadow
   'glob-box-shadow': '0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19)',

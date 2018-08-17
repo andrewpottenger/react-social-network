@@ -12,7 +12,7 @@
 $gutter: 1em;
 .grid__gutters {
   margin-left: -$gutter;
-  .grid-cell {
+  & > .grid-cell {
     padding-left: $gutter;
   }
 }
