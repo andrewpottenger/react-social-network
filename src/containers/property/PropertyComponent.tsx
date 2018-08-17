@@ -10,12 +10,14 @@ import RaisedButton from 'material-ui/Button'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map, List as ImuList } from 'immutable'
 import cx from 'classnames'
+import Slider from 'react-slick'
 
 // - Import app components
 import ProfileHeader from 'src/components/profileHeader'
 import { Info, Neighbors } from 'src/components/profile'
 import PostComponent from 'src/components/post'
 import StreamComponent from 'containers/stream'
+import { TextField } from 'components/widgets'
 
 // - Import API
 import * as PostAPI from 'src/api/PostAPI'
@@ -32,6 +34,8 @@ import { IPropertyComponentState } from './IPropertyComponentState'
 import { Profile } from 'core/domain/users'
 
 // Styles
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import styles from './styles'
 
 /**
@@ -115,7 +119,13 @@ export class PropertyComponent extends Component<
    */
   render() {
     const { loadPosts, hasMorePosts, translate, posts, classes } = this.props
-
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    }
     return (
       <div className="container grid">
         <div className={classes.leftSection}>
@@ -127,7 +137,26 @@ export class PropertyComponent extends Component<
             </IconButton>
           </div>
           <div className="">
-adsfa
+            <Slider {...settings}>
+              <div>
+                <h3>1</h3>
+              </div>
+              <div>
+                <h3>2</h3>
+              </div>
+              <div>
+                <h3>3</h3>
+              </div>
+              <div>
+                <h3>4</h3>
+              </div>
+              <div>
+                <h3>5</h3>
+              </div>
+              <div>
+                <h3>6</h3>
+              </div>
+            </Slider>
           </div>
           <Button
             variant="flat"
@@ -138,7 +167,10 @@ adsfa
           </Button>
         </div>
         <div className={classes.rightSection}>
-          dsf
+          <TextField
+            id="name"
+            label="Property’s name"
+          />
         </div>
       </div>
     )

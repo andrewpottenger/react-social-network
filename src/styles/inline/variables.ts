@@ -39,28 +39,28 @@ const fontFamily = {
 // Font Scale
 const fontScale = {
   xs: {
-    fontSize: 12,
-    lineHeight: 16,
+    fontSize: '12px',
+    lineHeight: '16px',
   },
   sm: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: '14px',
+    lineHeight: '20px',
   },
   base: {
-    fontSize: 16,
-    lineHeight: 22,
+    fontSize: '16px',
+    lineHeight: '22px',
   },
   md: {
-    fontSize: 18,
-    lineHeight: 26,
+    fontSize: '18px',
+    lineHeight: '26px',
   },
   lg: {
-    fontSize: 20,
-    lineHeight: 26,
+    fontSize: '20px',
+    lineHeight: '26px',
   },
   xl: {
-    fontSize: 26,
-    lineHeight: 30,
+    fontSize: '26px',
+    lineHeight: '30px',
   },
 }
 // End Font Scale
