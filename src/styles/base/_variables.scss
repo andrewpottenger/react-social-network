@@ -1,4 +1,8 @@
-// Colors
+/**
+ * ***************************
+ * Colors   ******************
+ * ***************************
+ */
 $white: #fff;
 $grey: #333333;
 $light-grey: #fafafa;
@@ -16,26 +20,32 @@ $light-grey-border: #EDEDED;
 $light-grey-dark-border: #CFCCCC;
 $grey-dark-border: #B9B9B9;
 $light-color: #aaa;
-
 // Background color
 $light-bg: #EDEDED;
-
 // Navigation colors
 $nav-background: $grey;
 $nav-text-color: $primary-color;
-
 // Shadow
 $glob-box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
 
+
+
+/**
+ * ***************************
+ * Font Family   *************
+ * ***************************
+ */
 // Todo | We'll use the correct font here.
-// Font Family
 $regular: 'Helvetica';
 $bold: 'Helvetica';
 $light: 'Helvetica';
-// End Font Family
 
 
-// Font Scale
+/**
+ * ***************************
+ * Font Scale   **************
+ * ***************************
+ */
 $font-scale: (
   xs: (
     font-size: 12px,
@@ -62,4 +72,12 @@ $font-scale: (
     line-height: 30px,
   ),
 );
-// End Font Scale
+
+
+/**
+ * ***************************
+ * Dimension   ***************
+ * ***************************
+ */
+$main-contianer: 1214px;
+$header-container: 1334px;

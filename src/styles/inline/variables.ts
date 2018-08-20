@@ -1,4 +1,8 @@
-// Colors
+/**
+ * ***************************
+ * Colors   ******************
+ * ***************************
+ */
 const color = {
   'white': '#fff',
   'grey': '#333333',
@@ -17,28 +21,31 @@ const color = {
   'light-grey-dark-border': '#CFCCCC',
   'grey-dark-border': '#B9B9B9',
   'light-color': '#aaa',
-
-  // Background color
   'light-bg': '#EDEDED',
   'light-grey-bg': '#D8D8D8',
-
-  // Shadow
   'glob-box-shadow': '0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19)',
 }
 // Navigation colors
 color['nav-backgroun'] = color['grey']
 color['nav-text-color'] = color['primary-color']
 
+/**
+ * ***************************
+ * Font Family   *************
+ * ***************************
+ */
 // Todo | We'll use the correct font here.
-// Font Family
 const fontFamily = {
   regular: 'Helvetica',
   bold: 'Helvetica',
   light: 'Helvetica',
 }
-// End Font Family
 
-// Font Scale
+/**
+ * ***************************
+ * Font Scale   **************
+ * ***************************
+ */
 const fontScale = {
   xs: {
     fontSize: '12px',
@@ -65,10 +72,22 @@ const fontScale = {
     lineHeight: '30px',
   },
 }
-// End Font Scale
+
+/**
+ * ***************************
+ * Dimension   ***************
+ * ***************************
+ */
+const dimension = {
+  mainContianerMaxWidth: '1214px',
+  headerContainerMaxWidth: '1334px',
+  headerHeight: '91px',
+  drawerWidth: '220px',
+}
 
 export {
   color,
   fontFamily,
   fontScale,
+  dimension,
 }

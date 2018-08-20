@@ -20,4 +20,14 @@ export interface IUserAvatarComponentProps {
      * Trigger on touch tap
      */
   onClick?: (event: any) => any
+
+  /**
+   * Trigger on touch tap
+   */
+  onMouseEnter?: (event: any) => any
+
+  /**
+   * Trigger on touch tap
+   */
+  onMouseLeave?: (event: any) => any
 }

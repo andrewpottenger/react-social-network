@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Map } from 'immutable'
+import cx from 'classnames'
 
 // - Material UI
 import SvgDehaze from 'material-ui-icons/Dehaze'
@@ -25,6 +26,7 @@ import Paper from 'material-ui/Paper'
 import Hidden from 'material-ui/Hidden'
 import NotificationsIcon from 'material-ui-icons/Notifications'
 import Tooltip from 'material-ui/Tooltip'
+import Badge from 'material-ui/Badge'
 import Typography from 'material-ui/Typography'
 import { Manager, Target, Popper } from 'react-popper'
 import { withStyles } from 'material-ui/styles'
@@ -41,14 +43,8 @@ import { authorizeActions } from 'store/actions'
 import { IHomeHeaderComponentProps } from './IHomeHeaderComponentProps'
 import { IHomeHeaderComponentState } from './IHomeHeaderComponentState'
 
-const styles = {
-  root: {
-    backgroundColor: '#a5792a'
-  },
-  flex: {
-    flex: 1
-  }
-}
+// - Import styles
+import styles from './styles'
 
 // - Create HomeHeader component class
 export class HomeHeaderComponent extends Component<
@@ -56,10 +52,7 @@ export class HomeHeaderComponent extends Component<
   IHomeHeaderComponentState
 > {
   styles = {
-    avatarStyle: {
-      margin: 5,
-      cursor: 'pointer'
-    }
+
   }
 
   /**
@@ -184,11 +177,11 @@ export class HomeHeaderComponent extends Component<
     const { classes, translate, theme } = this.props
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
     return (
-      <AppBar position="fixed" color="secondary">
-        <Toolbar style={{ maxWidth: '1280px', margin: '0 auto' }}>
+      <AppBar position="fixed" className={classes.root} >
+        <Toolbar className={cx(classes.toolBar, 'container-header')}>
           {/* Left side */}
           <a href="/">
-            <img src="images/backyardelogo.png" width="120" alt="Backyarde" />
+            <img src="/images/backyardelogo.png" width="120" alt="Backyarde" />
           </a>
           {/*<IconButton onClick={this.onToggleSidebar} >*/}
           {/*<SvgDehaze color='primary' style={{ cursor: 'pointer' }} />*/}
@@ -285,13 +278,22 @@ export class HomeHeaderComponent extends Component<
             </Manager>
 
             {/* User avatar*/}
-            <UserAvatarComponent
+            <div
+              className="grid grid__center"
               onClick={this.handleAvatarTouchTap}
-              fullName={this.props.fullName!}
-              fileName={this.props.avatar!}
-              size={32}
-              style={this.styles.avatarStyle}
-            />
+            >
+              <Badge className={classes.badge} badgeContent={4}>
+                <UserAvatarComponent
+                  fullName={this.props.fullName!}
+                  fileName={this.props.avatar!}
+                  size={61}
+                  style={classes.avatarStyle}
+                  onMouseEnter={this.handleAvatarTouchTap}
+                />
+              </Badge>
+              <SvgKeyboardArrowDown color="primary"/>
+
+            </div>
 
             <Menu
               open={this.state.openAvatarMenu}
@@ -305,7 +307,7 @@ export class HomeHeaderComponent extends Component<
                 horizontal: 'right'
               }}
               onClose={this.handleRequestClose}
-              className="dropdown"
+              className={classes.dropDown}
             >
               <MenuItem
                 style={{
@@ -396,7 +398,7 @@ export class HomeHeaderComponent extends Component<
                 {translate!('header.logout')}{' '}
               </MenuItem>
             </Menu>
-            <SvgKeyboardArrowDown />
+            
           </div>
         </Toolbar>
       </AppBar>

@@ -63,10 +63,10 @@ export class UserAvatarComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    let { fileName, fullName, style, size, onClick } = this.props
+    let { fileName, fullName, style, size, onClick, onMouseEnter, onMouseLeave} = this.props
 
     return (
-      <div style={{ display: 'inherit' }}>
+      <div style={{ display: 'inherit' }} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         {fileName && fileName !== '' && fileName !== 'noImage' ? (
           <Avatar
             src={fileName ? fileName : ' '}

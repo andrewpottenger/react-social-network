@@ -1,6 +1,11 @@
 .container {
-  max-width: 1214px;
+  max-width: $main-contianer;
   margin: 0 auto;
+
+  &-header {
+    max-width: $header-container;
+    margin: 0 auto;
+  }
 }
 
 .grid {

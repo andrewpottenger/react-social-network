@@ -1,7 +1,30 @@
 @import url(~react-day-picker/lib/style.css);
+/**
+ * ***************************
+ * Colors   ******************
+ * ***************************
+ */
+/**
+ * ***************************
+ * Font Family   *************
+ * ***************************
+ */
+/**
+ * ***************************
+ * Font Scale   **************
+ * ***************************
+ */
+/**
+ * ***************************
+ * Dimension   ***************
+ * ***************************
+ */
 .container {
   max-width: 1214px;
   margin: 0 auto; }
+  .container-header {
+    max-width: 1334px;
+    margin: 0 auto; }
 
 .grid {
   display: flex;
@@ -894,7 +917,7 @@ input[type="file"] {
     position: absolute;
     top: calc(50% - 20px);
     left: -20px;
-    z-index: 9999;
+    z-index: 9;
     width: 0;
     height: 0;
     border: 0 solid transparent;
@@ -1134,15 +1157,6 @@ input[type="file"] {
           top: 3px;
           height: 10px;
           width: 10px; }
-
-.dropdown ul {
-  padding-top: 0;
-  padding-bottom: 0;
-  width: 170px; }
-  .dropdown ul li {
-    padding-left: 28px !important; }
-    .dropdown ul li:hover {
-      background-color: #9b9b9b !important; }
 
 .nav-links li {
   display: inline-flex; }
