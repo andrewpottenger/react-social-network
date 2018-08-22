@@ -6,6 +6,11 @@
  */
 /**
  * ***************************
+ * Shadow   ******************
+ * ***************************
+ */
+/**
+ * ***************************
  * Font Family   *************
  * ***************************
  */
@@ -1041,6 +1046,11 @@ input[type="file"] {
   -webkit-font-smoothing: antialiased;
   color: #fff; }
 
+.homeHeader__search {
+  width: 236px;
+  height: 40px;
+  margin-left: 70px; }
+
 .homeHeader__title-right {
   border-right: 1px solid #fff;
   padding-right: 24px; }
@@ -1050,10 +1060,8 @@ input[type="file"] {
   padding-left: 24px; }
 
 .homeHeader__right {
-  padding-left: 30px;
-  padding-right: 30px;
   position: relative;
-  margin-left: -24px;
+  margin-left: auto;
   display: flex;
   justify-content: space-between;
   align-items: center; }
@@ -1158,17 +1166,22 @@ input[type="file"] {
           height: 10px;
           width: 10px; }
 
-.nav-links li {
-  display: inline-flex; }
+.nav-links {
+  margin-right: 20px; }
+  .nav-links li {
+    display: inline-flex;
+    margin: 10px; }
+  .nav-links svg {
+    margin-right: 0; }
+  .nav-links a h3, .nav-links a svg {
+    color: #912099; }
+  .nav-links a:hover h3 {
+    color: #EF4FFB; }
+  .nav-links a:hover svg {
+    fill: #EF4FFB !important; }
 
-.nav-links svg {
-  margin-right: 0; }
-
-.nav-links a h3, .nav-links a svg {
-  color: #b450bb; }
-
-.nav-links a:hover {
-  color: #9b29a2; }
+.header__avatar {
+  margin-left: 70px; }
 
 .flex-wrapper {
   background: #ccc;

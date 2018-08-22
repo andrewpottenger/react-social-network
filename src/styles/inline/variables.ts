@@ -3,31 +3,28 @@
  * Colors   ******************
  * ***************************
  */
+
 const color = {
-  'white': '#fff',
+  'white': 'white',
   'grey': '#333333',
-  'light-grey': '#fafafa',
-  'light-grey2': '#f7f7f7',
-  'light-grey3': '#ada7a7',
-  'light-grey4': '#9B9B9B',
-  'dark-grey': '#4A4A4A',
+  'grey4A': '#4A4A4A',
+  'grey9B': '#9B9B9B',
+  'greyAA': '#aaaaaa',
+  'greyAD': '#ada7a7',
+  'greyB9': '#B9B9B9',
+  'greyCF': '#CFCCCC',
+  'greyD8': '#D8D8D8',
+  'greyED': '#EDEDED',
+  'greyFA': '#fafafa',
+  'greyF7': '#f7f7f7',
+  'green': '#4CAF50',
   'green-teal': '#00ab6b',
   'teal': '#58d09f',
   'gold': '#FFD700',
-  'green': '#4CAF50',
   'primary-color': '#912099',
   'secondary-color': '#340E42',
-  'light-grey-border': '#EDEDED',
-  'light-grey-dark-border': '#CFCCCC',
-  'grey-dark-border': '#B9B9B9',
-  'light-color': '#aaa',
-  'light-bg': '#EDEDED',
-  'light-grey-bg': '#D8D8D8',
-  'glob-box-shadow': '0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19)',
+  'primary-color-light': '#EF4FFB',
 }
-// Navigation colors
-color['nav-backgroun'] = color['grey']
-color['nav-text-color'] = color['primary-color']
 
 /**
  * ***************************

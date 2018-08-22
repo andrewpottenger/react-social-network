@@ -9,11 +9,12 @@ const styles = {
   toolBar: {
     ...layouts.headerContainer,
     minHeight: dimension.headerHeight,
+    width: '1334px',
   },
 
   badge: {
     ...fontScale.sm,
-    
+
     '& > span': {
       right: '-2px',
       top: '-2px',

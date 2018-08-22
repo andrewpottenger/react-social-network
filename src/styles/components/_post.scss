@@ -2,7 +2,7 @@
 
   &__label {
     font-size: 14px;
-    color: $dark-grey;
+    color: $grey4A;
     margin: 0;
 
     &--primary {
@@ -10,7 +10,7 @@
     }
 
     &--grey {
-      color: $light-grey4;
+      color: $grey9B;
     }
   }
   
@@ -24,8 +24,8 @@
       flex-direction: column;
       justify-content: center;
       width: 210px;
-      background-color: $light-bg;
-      border-bottom: solid 1px $light-grey-dark-border;
+      background-color: $greyED;
+      border-bottom: solid 1px $greyCF;
     }
 
     &-header {
@@ -68,7 +68,7 @@
 
   &__socialActions {
     padding: 0 !important;
-    background-color: $light-bg;
+    background-color: $greyED;
 
     &-label {
       margin-left: 8px;

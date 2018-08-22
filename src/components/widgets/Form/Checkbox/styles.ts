@@ -5,7 +5,7 @@ const styles = (theme: any) => ({
     width: '100%',
 
     '& > span svg': {
-      fill: color['grey-dark-border'],
+      fill: color['greyB9'],
     },
 
     '& > span:nth-child(2)': {

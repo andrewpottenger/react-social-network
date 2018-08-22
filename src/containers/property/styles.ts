@@ -37,7 +37,7 @@ const styles = (theme: any) => ({
     '& .slick-next, & .slick-prev': {
       width: '25px',
       height: '25px',
-      fill: color['grey-dark-border'],
+      fill: color['greyB9'],
     },
 
     '& .slick-next': {
@@ -76,7 +76,7 @@ const styles = (theme: any) => ({
 
   addPropertyButton: {
     ...buttons.plusButton,
-    backgroundColor: color['light-grey-bg'],
+    backgroundColor: color['greyD8'],
     color: color['primary-color'],
   }
 

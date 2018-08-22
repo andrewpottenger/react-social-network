@@ -24,7 +24,7 @@ import Menu, { MenuList, MenuItem } from 'material-ui/Menu'
 import { ListItemIcon, ListItemText } from 'material-ui/List'
 import Paper from 'material-ui/Paper'
 import Hidden from 'material-ui/Hidden'
-import NotificationsIcon from 'material-ui-icons/Notifications'
+import MailOutline from 'material-ui-icons/MailOutline'
 import Tooltip from 'material-ui/Tooltip'
 import Badge from 'material-ui/Badge'
 import Typography from 'material-ui/Typography'
@@ -36,6 +36,7 @@ import config from 'src/config'
 // - Import components
 import UserAvatarComponent from 'components/userAvatar'
 import Notify from 'components/notify'
+import { SearchTextField } from 'components/widgets/Form'
 
 // - Import actions
 import * as globalActions from 'store/actions/globalActions'
@@ -183,14 +184,7 @@ export class HomeHeaderComponent extends Component<
           <a href="/">
             <img src="/images/backyardelogo.png" width="120" alt="Backyarde" />
           </a>
-          {/*<IconButton onClick={this.onToggleSidebar} >*/}
-          {/*<SvgDehaze color='primary' style={{ cursor: 'pointer' }} />*/}
-          {/*</IconButton>*/}
-          {/* Header title */}
-          {/*<Typography variant='title' color='primary' style={{ marginLeft: '15px' }} >*/}
-          {/*{config.settings.appName}*/}
-          {/*</Typography>*/}
-          <div className="homeHeader__title-root">
+          {/* <div className="homeHeader__title-root">
             <Hidden smDown>
               <div
                 className={classNames({
@@ -198,57 +192,41 @@ export class HomeHeaderComponent extends Component<
                   'homeHeader__title-right': anchor === 'right'
                 })}
               >
-                {/*{this.props.title}*/}
+                {this.props.title}
               </div>
             </Hidden>
+          </div> */}
+          <div className="homeHeader__search">
+            <SearchTextField
+              id="change"
+              label=""
+              handleChange={(value: string) => {}}
+            />
           </div>
 
           {/* Notification */}
           <div className="homeHeader__right">
             <nav className="nav-links">
-              {/*<NavLink to='/'>*/}
-              {/*<MenuItem>*/}
-              {/*<ListItemIcon>*/}
-              {/*<SvgHome />*/}
-              {/*</ListItemIcon>*/}
-              {/*<ListItemText inset primary={translate!('header.home')} />*/}
-              {/*</MenuItem>*/}
-              {/*</NavLink>*/}
               <NavLink to="/find-a-property">
                 <MenuItem>
-                  <ListItemIcon>
-                    <SvgHome />
-                  </ListItemIcon>
-                  <ListItemText
-                    inset
-                    primary={translate!('header.find-a-property')}
-                  />
+                  <ListItemText primary={translate!('header.find-a-property')}/>
                 </MenuItem>
               </NavLink>
               <NavLink to="/explore">
                 <MenuItem>
-                  <ListItemIcon>
-                    <SvgExplore />
-                  </ListItemIcon>
-                  <ListItemText inset primary={translate!('header.explore')} />
+                  <ListItemText primary={translate!('header.explore')} />
                 </MenuItem>
               </NavLink>
               <NavLink to="/people">
                 <MenuItem>
-                  <ListItemIcon>
-                    <SvgPeople />
-                  </ListItemIcon>
-                  <ListItemText inset primary={translate!('header.people')} />
+                  <ListItemText primary={translate!('header.people')} />
                 </MenuItem>
               </NavLink>
-              <NavLink to="/settings">
+              {/* <NavLink to="/settings">
                 <MenuItem>
-                  <ListItemIcon>
-                    <SvgSettings />
-                  </ListItemIcon>
-                  <ListItemText inset primary={translate!('header.settings')} />
+                  <ListItemText primary={translate!('header.settings')} />
                 </MenuItem>
-              </NavLink>
+              </NavLink> */}
             </nav>
             <Manager>
               <Target>
@@ -263,9 +241,7 @@ export class HomeHeaderComponent extends Component<
                 ) : (
                   <Tooltip title={translate!('header.notificationTooltip')}>
                     <IconButton onClick={this.handleNotifyTouchTap}>
-                      <NotificationsIcon
-                        style={{ color: 'rgba(255, 255, 255, 0.87)' }}
-                      />
+                      <MailOutline color="primary" />
                     </IconButton>
                   </Tooltip>
                 )}
@@ -279,7 +255,7 @@ export class HomeHeaderComponent extends Component<
 
             {/* User avatar*/}
             <div
-              className="grid grid__center"
+              className="grid grid__center header__avatar"
               onClick={this.handleAvatarTouchTap}
             >
               <Badge className={classes.badge} badgeContent={4}>

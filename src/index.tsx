@@ -7,6 +7,7 @@ import 'reflect-metadata'
 import 'typeface-roboto'
 import registerServiceWorker from './registerServiceWorker'
 import config from 'src/config'
+import { color } from 'src/styles/inline/variables'
 
 import { Provider } from 'react-redux'
 import configureStore from 'store/configureStore'
@@ -34,8 +35,8 @@ try {
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: config.theme.primaryColor },
-    secondary: { main: config.theme.secondaryColor }
+    primary: { main: color['primary-color'] },
+    secondary: { main: color['secondary-color'] }
   }
 })
 

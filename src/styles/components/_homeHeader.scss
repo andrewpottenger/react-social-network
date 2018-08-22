@@ -12,6 +12,12 @@
   color: #fff;
 }
 
+.homeHeader__search {
+  width: 236px;
+  height: 40px;
+  margin-left: 70px;
+}
+
 .homeHeader__title-right {
   @extend .homeHeader__title;
   border-right: 1px solid #fff;
@@ -24,10 +30,8 @@
 }
 
 .homeHeader__right {
-  padding-left: 30px;
-  padding-right: 30px;
   position: relative;
-  margin-left: -24px;
+  margin-left: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -147,21 +151,34 @@
 }
 
 .nav-links {
+  margin-right: 20px;
+  
   li {
     display: inline-flex;
+    margin: 10px;
   }
+
   svg {
     margin-right: 0;
   }
+
   a {
     h3, svg {
-      color: #b450bb;
+      color: $primary-color;
     }
 
-    &:hover {
-      color: #9b29a2;
+    &:hover h3 {
+      color: $primary-color-light;
+    }
+
+    &:hover svg {
+      fill: $primary-color-light !important;
     }
   }
+}
+
+.header__avatar {
+  margin-left: 70px;
 }
 
 .flex-wrapper {

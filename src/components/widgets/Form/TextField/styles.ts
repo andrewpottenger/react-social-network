@@ -20,7 +20,7 @@ const styles = (theme: any) => ({
     '& > div': {
       marginTop: '30px',
       border: 'solid 1px',
-      borderColor: color['grey-dark-border'],
+      borderColor: color['greyB9'],
     },
 
     '& > div:before, & > div:after': {
