@@ -1,13 +1,14 @@
 import { LanguageType } from 'store/reducers/locale/langugeType'
 
+// Dev prod
 export const environment = {
   firebase: {
-    apiKey: 'AIzaSyAHOZ7rWGDODCwJMB3WIt63CAIa90qI-jg',
-    authDomain: 'test-4515a.firebaseapp.com',
-    databaseURL: 'https://test-4515a.firebaseio.com',
-    projectId: 'test-4515a',
-    storageBucket: 'test-4515a.appspot.com',
-    messagingSenderId: '964743099489'
+    apiKey: 'AIzaSyDsQzKPXP46TYwOEpAou4WVJYraHtY6nWY',
+    authDomain: 'backyarde-20291.firebaseapp.com',
+    databaseURL: 'https://backyarde-20291.firebaseio.com',
+    projectId: 'backyarde-20291',
+    storageBucket: 'backyarde-20291.appspot.com',
+    messagingSenderId: '481596042040'
   },
   settings: {
     enabledOAuthLogin: true,
@@ -20,3 +21,25 @@ export const environment = {
     secondaryColor: '#3e134d'
   }
 }
+
+// Client prod
+// export const environment = {
+//   firebase: {
+//     apiKey: 'AIzaSyA9RKbeR9uVGyrYoRqbySfrCq6IQJwN3zM',
+//     authDomain: 'backyarde123.firebaseapp.com',
+//     databaseURL: 'https://backyarde123.firebaseio.com',
+//     projectId: 'backyarde123',
+//     storageBucket: 'backyarde123.appspot.com',
+//     messagingSenderId: '26421752801'
+//   },
+//   settings: {
+//     enabledOAuthLogin: true,
+//     appName: 'Backyarde',
+//     defaultProfileCover: 'https://firebasestorage.googleapis.com/v0/b/open-social-33d92.appspot.com/o/images%2F751145a1-9488-46fd-a97e-04018665a6d3.JPG?alt=media&token=1a1d5e21-5101-450e-9054-ea4a20e06c57',
+//     defaultLanguage: LanguageType.English
+//   },
+//   theme: {
+//     primaryColor: '#9b29a2',
+//     secondaryColor: '#3e134d'
+//   }
+// }

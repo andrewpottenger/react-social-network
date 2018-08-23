@@ -24,7 +24,7 @@ export interface IProfileComponentProps {
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  name: string
+  fullName: string
 
   /**
    * User tag line

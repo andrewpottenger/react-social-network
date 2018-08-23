@@ -1,22 +1,11 @@
 // - Import react components
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { Map } from 'immutable'
-
-import List from 'material-ui/List'
 
 // - Import app components
-import CircleComponent from 'components/circle'
 import { IProgressBarComponentProps } from './IProgressBarComponentProps'
 
 // - Import API
-
 // - Import actions
-
-/**
- * Create component class
- */
 
 export const ProgressBarComponent = (props: IProgressBarComponentProps) => {
   
@@ -46,33 +35,5 @@ export const ProgressBarComponent = (props: IProgressBarComponentProps) => {
     </div>
   )
 }
-
-// export class ProgressBarComponent extends Component<
-//   IProgressBarComponentProps
-// > {
-//   static propTypes = {}
-
-//   /**
-//    * Component constructor
-//    * @param  {object} props is an object properties of component
-//    */
-//   constructor(props: IProgressBarComponentProps) {
-//     super(props)
-
-//     // Binding functions to `this`
-//   }
-
-//   /**
-//    * Reneder component DOM
-//    * @return {react element} return the DOM which rendered by component
-//    */
-//   render() {
-//     return (
-//       <div>
-        
-//       </div>
-//     )
-//   }
-// }
 
 export default ProgressBarComponent

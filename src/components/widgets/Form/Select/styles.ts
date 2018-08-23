@@ -11,16 +11,24 @@ const styles = (theme: any) => ({
       marginBottom: '15px',
     },
 
-    '& input, & > div > div': {
-      padding: '12px 10px 9px',
-      ...fontScale.base,
-      color: color['grey'],
-    },
-
     '& > div': {
       marginTop: '30px',
       border: 'solid 1px',
       borderColor: color['greyB9'],
+    },
+
+    '& select': {
+      padding: '12px 10px 9px 10px',
+      ...fontScale.base,
+      color: color['grey'],
+
+      '&:focus': {
+        background: 'transparent',
+      },
+    },
+
+    '& > svg': {
+      right: '5px',
     },
 
     '& > div:before, & > div:after': {
@@ -28,11 +36,6 @@ const styles = (theme: any) => ({
     },
   },
 
-  multilineTextField: {
-    '& > div': {
-      padding: '12px 10px 9px',
-    },
-  },
 })
 
 export default styles

@@ -2,7 +2,6 @@
 import React, { Component, ChangeEvent } from 'react'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
-import cx from 'classnames'
 
 // - Material UI
 import { withStyles } from 'material-ui/styles'
@@ -13,18 +12,18 @@ import { getTranslate } from 'react-localize-redux'
 // - Import API
 
 // - Import actions
-import { ITextFieldComponentProps } from './ITextFieldComponentProps'
-import { ITextFieldComponentState } from './ITextFieldComponentState'
+import { ISelectComponentProps } from './ISelectComponentProps'
+import { ISelectComponentState } from './ISelectComponentState'
 
 // - Import styles
 import styles from './styles'
 
-export class TextFieldComponent extends Component<ITextFieldComponentProps, ITextFieldComponentState> {
+export class SelectComponent extends Component<ISelectComponentProps, ISelectComponentState> {
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor(props: ITextFieldComponentProps) {
+  constructor(props: ISelectComponentProps) {
     super(props)
 
     /**
@@ -51,23 +50,31 @@ export class TextFieldComponent extends Component<ITextFieldComponentProps, ITex
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { classes, id, label, multiline } = this.props
+    const { classes, id, label, options } = this.props
     const { value } = this.state
 
     return (
       <TextField
         id={id}
+        select
         label={label}
-        rows={multiline ? 4 : 1}
-        multiline={multiline}
-        className={cx(classes.textField, multiline ? classes.multilineTextField : '')}
+        className={classes.textField}
         value={value}
         onChange={this.handleChange}
-        margin="normal"
-        InputLabelProps={{
-          shrink: true,
+        SelectProps={{
+          native: true,
+          MenuProps: {
+            className: classes.menu,
+          },
         }}
-      />
+        margin="normal"
+      >
+        {options.map((option: {value: string, label: string}) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </TextField>
     )
   }
 }
@@ -80,7 +87,7 @@ export class TextFieldComponent extends Component<ITextFieldComponentProps, ITex
  */
 const mapDispatchToProps = (
   dispatch: any,
-  ownProps: ITextFieldComponentProps
+  ownProps: ISelectComponentProps
 ) => {
   return {}
 }
@@ -93,7 +100,7 @@ const mapDispatchToProps = (
  */
 const mapStateToProps = (
   state: Map<string, any>,
-  ownProps: ITextFieldComponentProps
+  ownProps: ISelectComponentProps
 ) => {
   // const { userId } = ownProps.match.params
   return {
@@ -103,4 +110,4 @@ const mapStateToProps = (
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
   styles as any
-)(TextFieldComponent as any) as any)
+)(SelectComponent as any) as any)

@@ -9,7 +9,7 @@ const styles = {
   toolBar: {
     ...layouts.headerContainer,
     minHeight: dimension.headerHeight,
-    width: '1334px',
+    minWidth: '1200px',
   },
 
   badge: {

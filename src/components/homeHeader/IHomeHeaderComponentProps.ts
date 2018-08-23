@@ -2,6 +2,14 @@ import StringAPI from 'api/StringAPI'
 export interface IHomeHeaderComponentProps {
 
   /**
+   * User identifier
+   *
+   * @type {string}
+   * @memberof IProfileComponentProps
+   */
+  userId?: string
+
+  /**
    * Sidebar is open {true} or not {false}
    *
    * @type {boolean}

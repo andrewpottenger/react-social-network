@@ -768,6 +768,15 @@ input[type="file"] {
   .post__content-date {
     margin-bottom: 12px; }
 
+.post__mediaContent {
+  display: flex;
+  flex-wrap: wrap; }
+  .post__mediaContent img {
+    max-height: 300px;
+    object-fit: cover;
+    width: 50%;
+    min-width: unset; }
+
 .post__socialActions {
   padding: 0 !important;
   background-color: #EDEDED; }
@@ -1095,6 +1104,10 @@ input[type="file"] {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis; }
+  .homeHeader__notify-wrapper svg {
+    fill: #912099; }
+  .homeHeader__notify-wrapper:hover svg {
+    fill: #EF4FFB; }
 
 .homeHeader__notify-menu {
   background: #ededed !important;

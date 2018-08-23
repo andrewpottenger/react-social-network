@@ -1,12 +1,10 @@
 // - Import react components
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
-import Dialog from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
-import RaisedButton from 'material-ui/Button'
-import { getTranslate, getActiveLanguage } from 'react-localize-redux'
+import { getTranslate } from 'react-localize-redux'
 import { Map, List as ImuList } from 'immutable'
 
 // - Import app components
@@ -24,7 +22,6 @@ import { Post } from 'src/core/domain/posts'
 // - Import actions
 import * as postActions from 'src/store/actions/postActions'
 import * as userActions from 'src/store/actions/userActions'
-import * as globalActions from 'src/store/actions/globalActions'
 import { IProfileComponentProps } from './IProfileComponentProps'
 import { IProfileComponentState } from './IProfileComponentState'
 import { Profile } from 'core/domain/users'
@@ -166,7 +163,7 @@ export class ProfileComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { loadPosts, hasMorePosts, translate, posts, classes } = this.props
+    const { fullName, avatar, isAuthedUser, classes } = this.props
     const St = StreamComponent as any
     const postList = this.postLoad() as
       | { evenPostList: Post[]; oddPostList: Post[]; divided: boolean }
@@ -190,16 +187,16 @@ export class ProfileComponent extends Component<
           <div className={classes.sideContainer}>
             <Info
               userId=""
-              isAuthedUser={true}
-              fullName="Brian D’Ambrosio"
-              avatar="images/profile-image.jpg"
+              isAuthedUser={isAuthedUser}
+              fullName={fullName}
+              avatar={avatar}
               address1="Austin, TX"
               address2="Casa Austin"
               followerCount={573}
             />
             <Neighbors
               userId=""
-              isAuthedUser={true}
+              isAuthedUser={isAuthedUser}
               fullName="Brian D’Ambrosio"
               avatar="images/profile-image.jpg"
               address1="Austin, TX"
@@ -209,14 +206,16 @@ export class ProfileComponent extends Component<
             
           </div>
           <div className={classes.mainContainer}>
-            <Button
-              variant="raised"
-              color="primary"
-              onClick={this.addNewProperty}
-              className={classes.addButton}
-            >
-              Add New Property +
-            </Button>
+            <NavLink to={`/${this.props.userId}/property`}>
+              <Button
+                variant="raised"
+                color="primary"
+                onClick={this.addNewProperty}
+                className={classes.addButton}
+              >
+                Add New Property +
+              </Button>
+            </NavLink>
             <SimpleProperty
               image={propertyData.image}
               projects={propertyData.projects}
@@ -284,10 +283,11 @@ const mapStateToProps = (
   const hasMorePosts = state.getIn(['post', 'profile', 'hasMoreData'])
   const posts = state.getIn(['post', 'userPosts', userId])
   const userProfile = state.getIn(['user', 'info', uid], {}) as Profile
+  console.log('userProfile ==>', userProfile)
   return {
     translate: getTranslate(state.get('locale')),
     avatar: userProfile.avatar,
-    name: userProfile.fullName,
+    fullName: userProfile.fullName,
     banner: userProfile.banner,
     tagLine: userProfile.tagLine,
     isAuthedUser: userId === uid,

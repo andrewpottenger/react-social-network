@@ -1,43 +1,29 @@
 // - Import react components
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
-import Dialog from 'material-ui/Dialog'
 import IconButton from 'material-ui/IconButton'
 import Button from 'material-ui/Button'
-import RaisedButton from 'material-ui/Button'
 import ChevronLeft from 'material-ui-icons/ChevronLeft'
 import ChevronRight from 'material-ui-icons/ChevronRight'
-import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import { Map, List as ImuList } from 'immutable'
+import { getTranslate } from 'react-localize-redux'
+import { Map } from 'immutable'
 import cx from 'classnames'
 import Slider from 'react-slick'
 
 // - Import app components
-import ProfileHeader from 'src/components/profileHeader'
-import { Info, Neighbors } from 'src/components/profile'
-import PostComponent from 'src/components/post'
-import StreamComponent from 'containers/stream'
-import { TextField, Checkbox } from 'components/widgets'
+import { TextField, Select, Checkbox } from 'components/widgets'
 
 // - Import API
-import * as PostAPI from 'src/api/PostAPI'
-
 // - Import domain
-import { Post } from 'src/core/domain/posts'
 
 // - Import actions
-import * as postActions from 'src/store/actions/postActions'
-import * as userActions from 'src/store/actions/userActions'
-import * as globalActions from 'src/store/actions/globalActions'
 import { IPropertyComponentProps } from './IPropertyComponentProps'
 import { IPropertyComponentState } from './IPropertyComponentState'
-import { Profile } from 'core/domain/users'
 
-// Styles
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+// - Styles
+// import 'slick-carousel/slick/slick.css'
+// import 'slick-carousel/slick/slick-theme.css'
 import styles from './styles'
 
 const settings = {
@@ -55,6 +41,13 @@ const photos = [
   '/images/Section3_image3.jpg',
   '/images/Section3_image2.jpg',
   '/images/Section3_image3.jpg',
+]
+
+const stateOptions = [
+  {
+    value: '',
+    label: '',
+  }
 ]
 
 /**
@@ -108,8 +101,8 @@ export class PropertyComponent extends Component<
             <Slider {...settings}>
               {
                 photos.map((item: string, index: number) => (
-                  <div className={classes.itemImage}>
-                    <img key={`property-photo-${index.toString()}`} src={item} alt="Slider Image" />
+                  <div className={classes.itemImage} key={`property-photo-${index.toString()}`} >
+                    <img src={item} alt="Slider Image" />
                   </div>
                 ))
               }
@@ -150,9 +143,10 @@ export class PropertyComponent extends Component<
               />
             </div>
             <div className="grid-cell">
-              <TextField
+              <Select
                 id="state"
                 label="Select State"
+                options={stateOptions}
                 handleChange={(value: string) => {}}
               />
             </div>

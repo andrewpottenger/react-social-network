@@ -507,7 +507,7 @@ export class PostComponent extends Component<
           {/*<footer className='flex-footer'>Footer: Fixed height</footer>*/}
 
           {image ? (
-            <CardMedia image={image}>
+            <CardMedia className="post__mediaContent" >
               <Img fileName={image} />
             </CardMedia>
           ) : (

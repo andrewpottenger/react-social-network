@@ -66,6 +66,18 @@
     }
   }
 
+  &__mediaContent {
+    display: flex;
+    flex-wrap: wrap;
+
+    & img {
+      max-height: 300px;
+      object-fit: cover;
+      width: 50%;
+      min-width: unset;
+    }
+  }
+
   &__socialActions {
     padding: 0 !important;
     background-color: $greyED;

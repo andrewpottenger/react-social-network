@@ -51,10 +51,10 @@ const styles = (theme: any) => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     height: 'calc(100% - 56px)',
-    marginTop: 56,
+    marginTop: 34,
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
-      marginTop: 64
+      marginTop: 44
     }
   },
   'content-left': {

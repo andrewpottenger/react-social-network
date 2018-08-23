@@ -68,6 +68,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  &-wrapper {
+    svg {
+      fill: $primary-color;
+    }
+
+    &:hover svg {
+      fill: $primary-color-light;
+    }
+  }
 }
 
 .homeHeader__notify-menu {

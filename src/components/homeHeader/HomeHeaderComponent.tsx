@@ -175,7 +175,7 @@ export class HomeHeaderComponent extends Component<
 
   // Render app DOM component
   render() {
-    const { classes, translate, theme } = this.props
+    const { classes, translate, theme, userId } = this.props
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
     return (
       <AppBar position="fixed" className={classes.root} >
@@ -229,7 +229,7 @@ export class HomeHeaderComponent extends Component<
               </NavLink> */}
             </nav>
             <Manager>
-              <Target>
+              <Target className="homeHeader__notify-wrapper">
                 {this.props.notifyCount! > 0 ? (
                   <Tooltip title={translate!('header.notificationTooltip')}>
                     <IconButton onClick={this.handleNotifyTouchTap}>
@@ -302,8 +302,10 @@ export class HomeHeaderComponent extends Component<
                   fontSize: '12px'
                 }}
               >
-                {' '}
-                {translate!('header.add-property')}{' '}
+                <NavLink to={`/${userId}/property`} onClick={() => {this.setState({openAvatarMenu: false})}}>
+                  {' '}
+                  {translate!('header.add-property')}{' '}
+                </NavLink>
               </MenuItem>
               <MenuItem
                 style={{
@@ -322,8 +324,10 @@ export class HomeHeaderComponent extends Component<
                   fontSize: '14px'
                 }}
               >
-                {' '}
-                {translate!('header.profile')}{' '}
+                <NavLink to={`/${userId}`} onClick={() => {this.setState({openAvatarMenu: false})}}>
+                  {' '}
+                  {translate!('header.profile')}{' '}
+                </NavLink>
               </MenuItem>
               <MenuItem
                 style={{
@@ -406,6 +410,7 @@ const mapStateToProps = (
     : 0
   const user = state.getIn(['user', 'info', uid], {})
   return {
+    userId: uid,
     translate: getTranslate(state.get('locale')),
     avatar: user.avatar || '',
     fullName: user.fullName || '',
