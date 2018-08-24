@@ -163,7 +163,7 @@ export class ProfileComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { fullName, avatar, isAuthedUser, classes } = this.props
+    const { fullName, companyName, avatar, isAuthedUser, classes } = this.props
     const St = StreamComponent as any
     const postList = this.postLoad() as
       | { evenPostList: Post[]; oddPostList: Post[]; divided: boolean }
@@ -190,8 +190,8 @@ export class ProfileComponent extends Component<
               isAuthedUser={isAuthedUser}
               fullName={fullName}
               avatar={avatar}
-              address1="Austin, TX"
-              address2="Casa Austin"
+              address="Austin, TX"
+              companyName={companyName}
               followerCount={573}
             />
             <Neighbors
@@ -288,6 +288,7 @@ const mapStateToProps = (
     translate: getTranslate(state.get('locale')),
     avatar: userProfile.avatar,
     fullName: userProfile.fullName,
+    companyName: userProfile.companyName,
     banner: userProfile.banner,
     tagLine: userProfile.tagLine,
     isAuthedUser: userId === uid,

@@ -33,20 +33,20 @@ export interface IInfoComponentProps {
   avatar: string
 
   /**
-   * User's address1
+   * User's address
    *
    * @type {string}
    * @memberof IInfoComponentProps
    */
-  address1: string
+  address: string
 
   /**
-   * User's address2
+   * User's companyName
    *
    * @type {string}
    * @memberof IInfoComponentProps
    */
-  address2: string
+  companyName: string
 
   /**
    * Number of user followers
@@ -57,16 +57,21 @@ export interface IInfoComponentProps {
   followerCount?: number
 
   /**
+   * Whether edit profile is open
+   */
+  editProfileOpen?: boolean
+
+  /**
+   * Styles
+   */
+  classes?: any
+
+  /**
    * Open edit profile dialog
    *
    * @memberof IInfoComponentProps
    */
   openEditor?: () => void
-
-  /**
-   * Whether edit profile is open
-   */
-  editProfileOpen?: boolean
 
   /**
    * Translate to locale string

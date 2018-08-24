@@ -6,6 +6,7 @@ import { Map } from 'immutable'
 
 // - Material UI
 import { grey } from 'material-ui/colors'
+import { withStyles } from 'material-ui/styles'
 import IconButton from 'material-ui/IconButton'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
 import { MenuList, MenuItem } from 'material-ui/Menu'
@@ -19,6 +20,7 @@ import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import ImgCover from 'components/imgCover'
 import EditProfile from 'components/editProfile'
 import UserAvatar from 'components/userAvatar'
+import { EditIcon } from 'components/SvgIcons'
 
 // - Import API
 
@@ -28,32 +30,8 @@ import * as userActions from 'store/actions/userActions'
 import { IInfoComponentProps } from './IInfoComponentProps'
 import { IInfoComponentState } from './IInfoComponentState'
 
-const styles = {
-  avatar: {
-    border: '2px solid rgb(255, 255, 255)',
-  },
-  iconButton: {
-    fill: 'rgb(255, 255, 255)',
-    height: '33px',
-    width: '33px',
-    marginRight: '7px',
-  },
-
-  editButton: {
-    marginLeft: '20px'
-  },
-  editButtonSmall: {
-    marginLeft: '20px',
-    color: 'white',
-    fill: 'blue'
-  },
-  aboutButton: {
-    color: 'white'
-  },
-  aboutButtonSmall: {
-    color: 'black'
-  }
-}
+// - Import styles
+import styles from './styles'
 
 /**
  * Create component class
@@ -76,7 +54,7 @@ export class InfoComponent extends Component<
       /**
        * If it's true , the window is in small size
        */
-      isSmall: false
+      isSmall: false,
     }
 
     // Binding functions to `this`
@@ -109,7 +87,7 @@ export class InfoComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { avatar, fullName, address1, address2, followerCount, translate, isAuthedUser, editProfileOpen } = this.props
+    const { avatar, fullName, address, companyName, followerCount, classes, translate, isAuthedUser, editProfileOpen } = this.props
 
     return (
       <div>
@@ -121,26 +99,31 @@ export class InfoComponent extends Component<
               size={152}
             />
           </div>
-          <p className="profileInfo__title">{this.props.fullName}</p>
+          
+          <p className="profileInfo__title">{this.props.fullName || 'NA'}</p>
           <div className="profileInfo__info">
             <img src="icons/icon-location.png" />
-            <p className="">{address1}</p>
+            <p className="">{address || 'NA'}</p>
           </div>
           <div className="profileInfo__info">
             <img src="icons/icon-house.png" />
-            <p className="">{address2}</p>
-            <IconButton style={styles.iconButton}>
+            <p className="">{companyName || 'NA'}</p>
+            <IconButton className={classes.iconButton}>
               <img className="profileInfo__iconButton-img" src="icons/icon-airbnb.png" />
             </IconButton>
-            <IconButton style={styles.iconButton}>
+            <IconButton className={classes.iconButton}>
               <img className="profileInfo__iconButton-img" src="icons/icon-open-to-offers.png" alt="" />
             </IconButton>
           </div>
 
           <div className="profileInfo__info">
             <img src="icons/icon-follow.png" />
-            <p className="">{followerCount} followers</p>
+            <p className="">{followerCount || 0} followers</p>
           </div>
+
+          <IconButton className={classes.editButton}>
+            <div className={classes.editIcon} dangerouslySetInnerHTML={{__html: EditIcon.element.innerHTML}}/>
+          </IconButton>
 
           {/* <div className="right">
             {isAuthedUser ? (
@@ -160,6 +143,7 @@ export class InfoComponent extends Component<
             )}
           </div> */}
         </div>
+        
       </div>
         // {isAuthedUser && editProfileOpen ? (
         //   <EditProfile
@@ -206,6 +190,6 @@ const mapStateToProps = (
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(
-  InfoComponent as any
-)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(InfoComponent as any) as any)

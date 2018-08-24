@@ -27,6 +27,14 @@ export interface IProfileComponentProps {
   fullName: string
 
   /**
+   * String user company name
+   *
+   * @type {string}
+   * @memberof IProfileComponentProps
+   */
+  companyName: string
+
+  /**
    * User tag line
    *
    * @type {string}

@@ -961,6 +961,7 @@ input[type="file"] {
     margin-top: -15px; }
 
 .profileInfo {
+  position: relative;
   width: 261px;
   height: 320px;
   padding: 65px 12px 50px;
