@@ -15,6 +15,7 @@ import * as globalActions from 'store/actions/globalActions'
 import { IPropertyService } from 'src/core/services/properties'
 
 import { SocialProviderTypes } from 'src/core/socialProviderTypes'
+import { resolve } from 'path'
 
 /**
  * Get service providers
@@ -52,55 +53,29 @@ const propertyService: IPropertyService = provider.get<IPropertyService>(SocialP
 // }
 
 /**
- *  Get user info from database
+ *  Get Property from database
  */
-// export const dbGetUserInfoByUserId = (uid: string, callerKey: string) => {
-//   return (dispatch: Function, getState: Function) => {
-//     if (uid) {
+export const dbGetProperty = () => {
+  return (dispatch: Function, getState: Function) => {
+    const state: Map<string, any>  = getState()
+    let uid: string = state.getIn(['authorize', 'uid'])
 
-//       const state: Map<string, any>  = getState()
-//     let caller = state.getIn(['global', 'temp', 'caller'])
-//       if ( caller && caller.indexOf(`dbGetUserInfoByUserId-${uid}`) > -1) {
-//         return undefined
-//       }
-//       dispatch(globalActions.temp({caller: `dbGetUserInfoByUserId-${uid}`}))
-//       return userService.getUserProfile(uid).then((userProfile: Property) => {
+    return propertyService.getProperty(uid).then((result) => {
+      console.log('result =======>', result)
 
-//         dispatch(addUserInfo(uid, {
-//           avatar: userProfile.avatar,
-//           email: userProfile.email,
-//           fullName: userProfile.fullName,
-//           banner: userProfile.banner,
-//           tagLine: userProfile.tagLine,
-//           creationDate: userProfile.creationDate,
-//           birthday: userProfile.birthday,
-//           companyName: userProfile.companyName,
-//           webUrl: userProfile.webUrl,
-//           twitterId: userProfile.twitterId,
-//         }))
-
-//         switch (callerKey) {
-//           case 'header':
-//             dispatch(globalActions.setHeaderTitle(userProfile.fullName))
-
-//             break
-
-//           default:
-//             break
-//         }
-//       })
-//       .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
-
-//     }
-//   }
-// }
+      // dispatch(updateUserInfo(uid, updatedProperty))
+      // dispatch(closeEditProfile())
+    })
+    .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
+  }
+}
 
 /**
  * 
  * Updata property information
  * @param {object} newProperty
  */
-export const dbAddProperty = (userId: string, newProperty: Property) => {
+export const dbAddProperty = (newProperty: Property) => {
   return (dispatch: any, getState: Function) => {
     const state: Map<string, any>  = getState()
     let uid: string = state.getIn(['authorize', 'uid'])
@@ -108,7 +83,7 @@ export const dbAddProperty = (userId: string, newProperty: Property) => {
     // let profile: Property = state.getIn(['user', 'info', uid])
     let updatedProperty: Property = {
       ...newProperty,
-      ownerUserId: userId,
+      ownerUserId: uid,
     }
     return propertyService.addProperty(uid, updatedProperty).then(() => {
 
@@ -126,7 +101,7 @@ export const dbAddProperty = (userId: string, newProperty: Property) => {
  * Updata property information
  * @param {object} newProperty
  */
-export const dbUpdateProperty = (userId: string, newProperty: Property) => {
+export const dbUpdateProperty = (newProperty: Property) => {
   return (dispatch: any, getState: Function) => {
     const state: Map<string, any>  = getState()
     let uid: string = state.getIn(['authorize', 'uid'])
@@ -134,7 +109,7 @@ export const dbUpdateProperty = (userId: string, newProperty: Property) => {
     // let profile: Property = state.getIn(['user', 'info', uid])
     let updatedProperty: Property = {
       ...newProperty,
-      ownerUserId: userId,
+      ownerUserId: uid,
 
       // avatar: newProperty.avatar || profile.avatar || '',
       // banner: newProperty.banner || profile.banner || 'https://firebasestorage.googleapis.com/v0/b/open-social-33d92.appspot.com/o/images%2F751145a1-9488-46fd-a97e-04018665a6d3.JPG?alt=media&token=1a1d5e21-5101-450e-9054-ea4a20e06c57',

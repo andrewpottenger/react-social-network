@@ -1,5 +1,7 @@
 import { Property } from 'core/domain/properties'
 
+export type GalleryType = 'ProfileImageGallery' | 'ShowcaseImagesGallery'
+
 export interface IPropertyComponentState {
 
   /**
@@ -14,16 +16,16 @@ export interface IPropertyComponentState {
    * Image gallery dialog is open for choosing banner image {true} or not {false}
    *
    * @type {boolean}
-   * @memberof IEditProfileComponentState
+   * @memberof IPropertyComponentState
    */
-  openBanner: boolean
+  openImageGallery: boolean
 
   /**
-   * User's banner URL
+   * Image gallery dialog type: ProfileImageGallery | ShowcaseImagesGallery
    *
-   * @type {string}
-   * @memberof IEditProfileComponentState
+   * @type {GalleryType}
+   * @memberof IPropertyComponentState
    */
-  banner: string
+  galleryType: GalleryType
 
 }

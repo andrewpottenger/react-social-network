@@ -12,52 +12,12 @@ export interface IPropertyComponentProps {
   match: any
 
   /**
-   * User's post
-   *
-   * @type {{[postId: string]: Post}}
-   * @memberof IPropertyComponentProps
-   */
-  posts: {[postId: string]: Post}
-
-  /**
-   * String user full name
-   *
-   * @type {string}
-   * @memberof IPropertyComponentProps
-   */
-  name: string
-
-  /**
-   * User tag line
-   *
-   * @type {string}
-   * @memberof IPropertyComponentProps
-   */
-  tagLine: string
-
-  /**
-   * User's avatar address
-   *
-   * @type {string}
-   * @memberof IPropertyComponentProps
-   */
-  avatar: string
-
-  /**
    * It's current user profile {true} or not {false}
    *
    * @type {boolean}
    * @memberof IPropertyComponentProps
    */
   isAuthedUser: boolean
-
-  /**
-   * User's banner
-   *
-   * @type {string}
-   * @memberof IPropertyComponentProps
-   */
-  banner: string
 
   /**
    * User identifier
@@ -68,18 +28,25 @@ export interface IPropertyComponentProps {
   userId: string
 
   /**
+   * get property
+   *
+   * @memberof IPropertyComponentProps
+   */
+  getProperty: () => any
+
+  /**
    * add property
    *
    * @memberof IPropertyComponentProps
    */
-  add: (property: Property) => any
+  addProperty: (property: Property) => any
 
   /**
    * update property
    *
    * @memberof IPropertyComponentProps
    */
-  update: (property: Property) => any
+  updateProperty: (property: Property) => any
 
   /**
    * Styles

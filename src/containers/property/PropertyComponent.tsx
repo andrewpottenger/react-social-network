@@ -28,7 +28,7 @@ import AppDialogTitle from 'layouts/dialogTitle'
 // - Import actions
 import * as propertyActions from 'store/actions/propertyActions'
 import { IPropertyComponentProps } from './IPropertyComponentProps'
-import { IPropertyComponentState } from './IPropertyComponentState'
+import { IPropertyComponentState, GalleryType } from './IPropertyComponentState'
 import { Property } from 'core/domain/properties'
 
 // - Styles
@@ -101,8 +101,8 @@ export class PropertyComponent extends Component<
         visibleToAll: '',
         changes: '',
       },
-      openBanner: false,
-      banner: '',
+      openImageGallery: false,
+      galleryType: 'ProfileImageGallery',
     }
 
     // Binding functions to `this`
@@ -110,6 +110,11 @@ export class PropertyComponent extends Component<
 
   componentWillMount() {
 
+  }
+
+  componentDidMount() {
+    const { getProperty } = this.props
+    getProperty!()
   }
 
   handleChange = (name: string, value: string) => {
@@ -123,34 +128,54 @@ export class PropertyComponent extends Component<
   }
 
   saveProperty = () => {
-    const { add } = this.props
+    const { addProperty } = this.props
     const { property } = this.state
-    add!(property)
+    addProperty!(property)
   }
 
-  handleOpenBannerGallery = () => {
+  handleOpenImageGallery = (galleryType: GalleryType) => {
     this.setState({
-      openBanner: true,
+      openImageGallery: true,
+      galleryType,
     })
   }
 
   /**
    * Close image gallery of banner
    */
-  handleCloseBannerGallery = () => {
+  handleCloseImageGallery = () => {
     this.setState({
-      openBanner: false
+      openImageGallery: false,
+      galleryType: 'ProfileImageGallery',
     })
   }
 
   /**
-   * Set banner image url
+   * Set image url
    */
-  handleRequestSetBanner = (url: string) => {
+  handleRequestSetImage = (url: string) => {
+    const { galleryType, property } = this.state
     console.log('url ==>', url)
-    this.setState({
-      banner: url
-    })
+    if (galleryType === 'ProfileImageGallery') {
+      property.profileImage = url
+      this.setState({property})
+    } else if (galleryType === 'ShowcaseImagesGallery') {
+      const { showcaseImages } = property
+      let duplicated = false
+      showcaseImages.forEach((item: string) => {
+        if (item === url) {
+          duplicated = true
+        }
+      })
+      if (!duplicated) {
+        showcaseImages.push(url)
+        const newProperty = {
+          ...property,
+          showcaseImages,
+        }
+        this.setState({property: newProperty})
+      }
+    }
   }
 
   /**
@@ -158,7 +183,8 @@ export class PropertyComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { translate, posts, classes } = this.props
+    const { translate, classes } = this.props
+    const { galleryType } = this.state
 
     return (
       <div className="container grid">
@@ -166,7 +192,7 @@ export class PropertyComponent extends Component<
           <p className={cx('l-xl--secondary')}>Property's Profile</p>
           <div className={classes.imageContainer}>
             <img className="full-img" src="/images/Section3_image1.jpg" alt="Property Image" />
-            <IconButton className={classes.editIcon} onClick={this.handleOpenBannerGallery}>
+            <IconButton className={classes.editIcon} onClick={() => this.handleOpenImageGallery('ProfileImageGallery')}>
               <img className="full-img" src="/icons/icon-edit.png" />
             </IconButton>
           </div>
@@ -184,6 +210,7 @@ export class PropertyComponent extends Component<
           <Button
             variant="flat"
             className={classes.plusButton}
+            onClick={() => this.handleOpenImageGallery('ShowcaseImagesGallery')}
           >
             Edit/Add Photos &nbsp; +
           </Button>
@@ -386,21 +413,20 @@ export class PropertyComponent extends Component<
 
         </div>
 
-        {/* Image gallery for banner*/}
         <Dialog
           PaperProps={{ className: classes.fullPageXs }}
-          open={this.state.openBanner}
-          onClose={this.handleCloseBannerGallery}
+          open={this.state.openImageGallery}
+          onClose={this.handleCloseImageGallery}
         >
           <DialogTitle className={classes.dialogTitle}>
             <AppDialogTitle
-              title={translate!('profile.chooseBanerDialogTitle')}
-              onRequestClose={this.handleCloseBannerGallery}
+              title={translate!(galleryType === 'ProfileImageGallery' ? 'property.chooseProfileImageDialogTitle' : 'property.chooseShowcaseImagesDialogTitle')}
+              onRequestClose={this.handleCloseImageGallery}
             />
           </DialogTitle>
           <ImageGallery
-            set={this.handleRequestSetBanner}
-            close={this.handleCloseBannerGallery}
+            set={(url: string) => this.handleRequestSetImage(url)}
+            close={this.handleCloseImageGallery}
           />
         </Dialog>
       </div>
@@ -420,8 +446,9 @@ const mapDispatchToProps = (
 ) => {
   const { userId } = ownProps.match.params
   return {
-    add: (property: Property) => dispatch(propertyActions.dbAddProperty(userId, property)),
-    update: (property: Property) => dispatch(propertyActions.dbUpdateProperty(userId, property)),
+    getProperty: () => dispatch(propertyActions.dbGetProperty()),
+    addProperty: (property: Property) => dispatch(propertyActions.dbAddProperty(property)),
+    updateProperty: (property: Property) => dispatch(propertyActions.dbUpdateProperty(property)),
   }
 }
 

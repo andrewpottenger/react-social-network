@@ -63,6 +63,10 @@
         "chooseAvatarDialogTitle": "Choose an avatar image",
         "chooseBanerDialogTitle": "Choose an baner image"
     },
+    "property": {
+        "chooseProfileImageDialogTitle": "Choose a property image",
+        "chooseShowcaseImagesDialogTitle": "Choose the showcase images"
+    },
     "people": {
         "findPeopleTab": "FIND PEOPLE",
         "followingTab": "FOLLOWING",
