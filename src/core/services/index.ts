@@ -6,6 +6,7 @@ import { IImageGalleryService } from './imageGallery'
 import { INotificationService } from './notifications'
 import { IPostService } from './posts'
 import { IUserService } from './users'
+import { IPropertyService } from './properties'
 import { IVoteService } from './votes'
 import { IStorageService } from './files'
 
@@ -18,6 +19,7 @@ export {
     INotificationService,
     IPostService,
     IUserService,
+    IPropertyService,
     IVoteService,
     IStorageService
 }

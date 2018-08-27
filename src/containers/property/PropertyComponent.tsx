@@ -10,16 +10,26 @@ import { getTranslate } from 'react-localize-redux'
 import { Map } from 'immutable'
 import cx from 'classnames'
 import Slider from 'react-slick'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from 'material-ui/Dialog'
 
 // - Import app components
 import { TextField, Select, Checkbox } from 'components/widgets'
+import ImageGallery from 'components/imageGallery'
+import AppDialogTitle from 'layouts/dialogTitle'
 
 // - Import API
 // - Import domain
 
 // - Import actions
+import * as propertyActions from 'store/actions/propertyActions'
 import { IPropertyComponentProps } from './IPropertyComponentProps'
 import { IPropertyComponentState } from './IPropertyComponentState'
+import { Property } from 'core/domain/properties'
 
 // - Styles
 // import 'slick-carousel/slick/slick.css'
@@ -67,7 +77,33 @@ export class PropertyComponent extends Component<
     super(props)
 
     // Defaul state
-    this.state = {}
+    this.state = {
+      property: {
+        ownerUserId: '',
+        profileImage: '',
+        showcaseImages: [],
+        name: '',
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+        location: '',
+        aboutHouse: '',
+        aboutNeighborhood: '',
+        square: '',
+        beds: '',
+        baths: '',
+        yearPurchased: '',
+        nearBySchools: '',
+        lotSize: '',
+        pros: '',
+        cons: '',
+        visibleToAll: '',
+        changes: '',
+      },
+      openBanner: false,
+      banner: '',
+    }
 
     // Binding functions to `this`
   }
@@ -76,8 +112,45 @@ export class PropertyComponent extends Component<
 
   }
 
-  editPhoto = () => {
+  handleChange = (name: string, value: string) => {
+    const { property } = this.state
+    property[name] = value
+    this.setState({proeprty : property} as any)
 
+    // this.setState({
+    //   [name]: value,
+    // } as Pick<IPropertyComponentState, keyof IPropertyComponentState>)
+  }
+
+  saveProperty = () => {
+    const { add } = this.props
+    const { property } = this.state
+    add!(property)
+  }
+
+  handleOpenBannerGallery = () => {
+    this.setState({
+      openBanner: true,
+    })
+  }
+
+  /**
+   * Close image gallery of banner
+   */
+  handleCloseBannerGallery = () => {
+    this.setState({
+      openBanner: false
+    })
+  }
+
+  /**
+   * Set banner image url
+   */
+  handleRequestSetBanner = (url: string) => {
+    console.log('url ==>', url)
+    this.setState({
+      banner: url
+    })
   }
 
   /**
@@ -85,7 +158,7 @@ export class PropertyComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { loadPosts, hasMorePosts, translate, posts, classes } = this.props
+    const { translate, posts, classes } = this.props
 
     return (
       <div className="container grid">
@@ -93,7 +166,7 @@ export class PropertyComponent extends Component<
           <p className={cx('l-xl--secondary')}>Property's Profile</p>
           <div className={classes.imageContainer}>
             <img className="full-img" src="/images/Section3_image1.jpg" alt="Property Image" />
-            <IconButton className={classes.editIcon}>
+            <IconButton className={classes.editIcon} onClick={this.handleOpenBannerGallery}>
               <img className="full-img" src="/icons/icon-edit.png" />
             </IconButton>
           </div>
@@ -110,7 +183,6 @@ export class PropertyComponent extends Component<
           </div>
           <Button
             variant="flat"
-            onClick={this.editPhoto}
             className={classes.plusButton}
           >
             Edit/Add Photos &nbsp; +
@@ -122,7 +194,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="name"
               label="Property’s name"
-              handleChange={(value: string) => {}}
+              handleChange={(value: string) => {this.handleChange('name', value)}}
             />
           </div>
 
@@ -130,7 +202,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="address"
               label="Address"
-              handleChange={(value: string) => {}}
+              handleChange={(value: string) => {this.handleChange('address', value)}}
             />
           </div>
 
@@ -139,7 +211,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="city"
                 label="City"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('city', value)}}
               />
             </div>
             <div className="grid-cell">
@@ -147,21 +219,21 @@ export class PropertyComponent extends Component<
                 id="state"
                 label="Select State"
                 options={stateOptions}
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('state', value)}}
               />
             </div>
             <div className="grid-cell">
               <TextField
                 id="zip"
                 label="Zip"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('zip', value)}}
               />
             </div>
             <div className="grid-cell">
               <TextField
-                id="name"
+                id="location"
                 label="Location"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('location', value)}}
               />
             </div>
           </div>
@@ -170,7 +242,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="aboutHouse"
               label="Favorite things about the house"
-              handleChange={(value: string) => {}}
+              handleChange={(value: string) => {this.handleChange('aboutHouse', value)}}
             />
           </div>
 
@@ -178,7 +250,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="aboutNeighborhood"
               label="Favorite things about the neighborhood"
-              handleChange={(value: string) => {}}
+              handleChange={(value: string) => {this.handleChange('aboutNeighborhood', value)}}
             />
           </div>
 
@@ -187,28 +259,28 @@ export class PropertyComponent extends Component<
               <TextField
                 id="square"
                 label="Square feet"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('square', value)}}
               />
             </div>
             <div className="grid-cell">
               <TextField
                 id="beds"
                 label="Beds"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('beds', value)}}
               />
             </div>
             <div className="grid-cell">
               <TextField
                 id="baths"
                 label="Baths"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('baths', value)}}
               />
             </div>
             <div className="grid-cell">
               <TextField
                 id="yearPurchased"
                 label="Year Purchased"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('yearPurchased', value)}}
               />
             </div>
           </div>
@@ -216,9 +288,9 @@ export class PropertyComponent extends Component<
           <div className="grid grid__gutters grid__fit">
             <div className="grid-cell">
               <TextField
-                id="schools"
+                id="nearBySchools"
                 label="Nearby Schools"
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('nearBySchools', value)}}
               />
             </div>
             <div className="grid-cell">
@@ -227,7 +299,7 @@ export class PropertyComponent extends Component<
                   <TextField
                     id="lotSize"
                     label="Lot size"
-                    handleChange={(value: string) => {}}
+                    handleChange={(value: string) => {this.handleChange('lotSize', value)}}
                   />
                 </div>
               </div>
@@ -240,7 +312,7 @@ export class PropertyComponent extends Component<
                 id="pros"
                 label="Pros"
                 multiline
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('pros', value)}}
               />
             </div>
             <div className="grid-cell">
@@ -248,7 +320,7 @@ export class PropertyComponent extends Component<
                 id="cons"
                 label="Cons"
                 multiline
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('cons', value)}}
               />
             </div>
           </div>
@@ -256,9 +328,9 @@ export class PropertyComponent extends Component<
           <div className="grid grid__fit">
             <div className="grid-cell">
               <TextField
-                id="pros"
+                id="visibleToAll"
                 label=""                
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('visibleToAll', value)}}
               />
             </div>
           </div>
@@ -266,10 +338,10 @@ export class PropertyComponent extends Component<
           <div className="grid grid__gutters grid__fit">
             <div className="grid-cell">
               <TextField
-                id="change"
+                id="changes"
                 label="Changes/Upgrades"
                 multiline
-                handleChange={(value: string) => {}}
+                handleChange={(value: string) => {this.handleChange('changes', value)}}
               />
             </div>
           </div>
@@ -298,15 +370,14 @@ export class PropertyComponent extends Component<
           <div className="grid" style={{marginTop: '40px'}}>
             <Button
               variant="flat"
-              onClick={this.editPhoto}
               className={classes.saveButton}
+              onClick={this.saveProperty}
             >
               <span>Save &nbsp; &nbsp;</span> <span><img src="/icons/icon-cloud-down.png"/></span>
             </Button>
 
             <Button
               variant="flat"
-              onClick={this.editPhoto}
               className={classes.addPropertyButton}
             >
               Add Another Property &nbsp; +
@@ -314,6 +385,24 @@ export class PropertyComponent extends Component<
           </div>
 
         </div>
+
+        {/* Image gallery for banner*/}
+        <Dialog
+          PaperProps={{ className: classes.fullPageXs }}
+          open={this.state.openBanner}
+          onClose={this.handleCloseBannerGallery}
+        >
+          <DialogTitle className={classes.dialogTitle}>
+            <AppDialogTitle
+              title={translate!('profile.chooseBanerDialogTitle')}
+              onRequestClose={this.handleCloseBannerGallery}
+            />
+          </DialogTitle>
+          <ImageGallery
+            set={this.handleRequestSetBanner}
+            close={this.handleCloseBannerGallery}
+          />
+        </Dialog>
       </div>
     )
   }
@@ -331,7 +420,8 @@ const mapDispatchToProps = (
 ) => {
   const { userId } = ownProps.match.params
   return {
-    
+    add: (property: Property) => dispatch(propertyActions.dbAddProperty(userId, property)),
+    update: (property: Property) => dispatch(propertyActions.dbUpdateProperty(userId, property)),
   }
 }
 

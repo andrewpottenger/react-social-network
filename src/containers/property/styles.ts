@@ -78,7 +78,15 @@ const styles = (theme: any) => ({
     ...buttons.plusButton,
     backgroundColor: color['greyD8'],
     color: color['primary-color'],
-  }
+  },
+
+  fullPageXs: {
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      height: '100%',
+      margin: 0
+    }
+  },
 
 })
 

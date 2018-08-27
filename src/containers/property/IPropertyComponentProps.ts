@@ -1,4 +1,5 @@
 import { Post } from 'src/core/domain/posts'
+import { Property } from 'core/domain/properties'
 
 export interface IPropertyComponentProps {
 
@@ -67,23 +68,18 @@ export interface IPropertyComponentProps {
   userId: string
 
   /**
-   * Load user's post
+   * add property
    *
    * @memberof IPropertyComponentProps
    */
-  loadPosts: () => any
+  add: (property: Property) => any
 
   /**
-   * Load user's profile
+   * update property
    *
    * @memberof IPropertyComponentProps
    */
-  loadUserInfo: () => any
-
-  /**
-   * If there is more posts to show in profile
-   */
-  hasMorePosts: boolean
+  update: (property: Property) => any
 
   /**
    * Styles

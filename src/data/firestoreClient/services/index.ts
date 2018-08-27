@@ -6,6 +6,7 @@ import { ImageGalleryService } from './imageGallery'
 import { NotificationService } from './notifications'
 import { PostService } from './posts'
 import { UserService } from './users'
+import { PropertyService } from './properties'
 import { VoteService } from './votes'
 import { StorageService } from './files'
 
@@ -18,6 +19,7 @@ export {
   NotificationService,
   PostService,
   UserService,
+  PropertyService,
   VoteService,
   StorageService
 
