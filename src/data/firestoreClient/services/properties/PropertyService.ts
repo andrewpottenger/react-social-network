@@ -48,6 +48,25 @@ export class PropertyService implements IPropertyService {
   /**
    * Add new property
    */
+  public getProperty: (userId: string)
+    => Promise<Property> = (userId) => {
+      return new Promise<Property>((resolve, reject) => {
+        // const batch = db.batch()
+        // const propertyRef = db.doc(`propertyInfo/${userId}`)
+        // let propertyRef = db.collection(`propertyInfo`).doc()
+        // propertyRef.set({ ...profile, id: propertyRef.id })
+        //   .then(() => {
+        //     resolve()
+        //   })
+        //   .catch((error: any) => {
+        //     reject(new SocialError(error.code, error.message))
+        //   })
+      })
+    }
+
+  /**
+   * Add new property
+   */
   public addProperty: (userId: string, property: Property)
     => Promise<void> = (userId, profile) => {
       return new Promise<void>((resolve, reject) => {
