@@ -2,6 +2,7 @@ import { BaseDomain } from 'core/domain/common'
 
 export class Property extends BaseDomain {
   constructor (
+    public id: string,
     public ownerUserId: string,
     public profileImage: string,
     public showcaseImages: string[],

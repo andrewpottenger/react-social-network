@@ -303,7 +303,7 @@ const mapStateToProps = (
     mergedPosts = mergedPosts.merge(newPosts)
   })
   mergedPosts = mergedPosts.merge(posts)
-  console.log('home uid ==>', uid)
+  
   return {
     authed: state.getIn(['authorize', 'authed'], false),
     isVerifide: state.getIn(['authorize', 'isVerifide'], false),

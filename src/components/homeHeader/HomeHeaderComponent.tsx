@@ -263,7 +263,7 @@ export class HomeHeaderComponent extends Component<
                   fullName={this.props.fullName!}
                   fileName={this.props.avatar!}
                   size={61}
-                  style={classes.avatarStyle}
+                  style={styles.avatarStyle}
                   onMouseEnter={this.handleAvatarTouchTap}
                 />
               </Badge>

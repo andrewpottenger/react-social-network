@@ -11,6 +11,7 @@ import { globalReducer } from './global'
 import { imageGalleryReducer } from './imageGallery'
 import { notificationReducer } from './notifications'
 import { postReducer } from './posts'
+import { propertyReducer } from './properties'
 import { userReducer } from './users'
 import { voteReducer } from './votes'
 import { serverReducer } from './server'
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
     locale,
     imageGallery: imageGalleryReducer,
     post: postReducer,
+    property: propertyReducer,
     circle: circleReducer,
     comment: commentReducer,
     vote: voteReducer,

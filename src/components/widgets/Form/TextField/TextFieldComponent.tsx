@@ -40,6 +40,13 @@ export class TextFieldComponent extends Component<ITextFieldComponentProps, ITex
   componentDidMount() {
   }
 
+  componentWillReceiveProps(nextProps: ITextFieldComponentProps) {
+    const { defaultValue } = nextProps
+    if (defaultValue !== this.props.defaultValue) {
+      this.setState({value: defaultValue || ''})
+    }
+  }
+
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     this.setState({value})

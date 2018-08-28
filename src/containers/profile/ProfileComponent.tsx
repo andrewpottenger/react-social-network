@@ -18,38 +18,18 @@ import * as PostAPI from 'src/api/PostAPI'
 
 // - Import domain
 import { Post } from 'src/core/domain/posts'
+import { Property } from 'src/core/domain/properties'
 
 // - Import actions
 import * as postActions from 'src/store/actions/postActions'
 import * as userActions from 'src/store/actions/userActions'
+import * as propertyActions from 'store/actions/propertyActions'
 import { IProfileComponentProps } from './IProfileComponentProps'
 import { IProfileComponentState } from './IProfileComponentState'
 import { Profile } from 'core/domain/users'
 
-/**
- * Component styles
- */
-const styles = (theme: any) => ({
-  profile: {
-    display: 'flex',
-  },
-
-  sideContainer: {
-    width: '285px',
-    marginRight: 26,
-  },
-
-  mainContainer: {
-    flex: 1,
-  },
-
-  addButton: {
-    fontSize: '14px',
-    padding: '8px 24px',
-    marginBottom: '29px',
-    textTransform: 'capitalize',
-  },
-})
+// - Import styles
+import styles from './styles'
 
 const propertyData = {
   image: 'images/Section3_image1.jpg',
@@ -94,6 +74,7 @@ export class ProfileComponent extends Component<
   componentWillMount() {
     this.props.loadPosts()
     this.props.loadUserInfo()
+    this.props.loadProperties()
   }
 
   /**
@@ -163,7 +144,7 @@ export class ProfileComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { fullName, companyName, avatar, isAuthedUser, classes } = this.props
+    const { fullName, companyName, avatar, isAuthedUser, userId, properties, classes } = this.props
     const St = StreamComponent as any
     const postList = this.postLoad() as
       | { evenPostList: Post[]; oddPostList: Post[]; divided: boolean }
@@ -216,11 +197,18 @@ export class ProfileComponent extends Component<
                 Add New Property +
               </Button>
             </NavLink>
-            <SimpleProperty
-              image={propertyData.image}
-              projects={propertyData.projects}
-            />
-
+            {
+              properties!.map((property: Property, index: number) => (
+                <NavLink to={`/${this.props.userId}/property/${property.id}`}>
+                  <SimpleProperty
+                    key={`property-${userId}-${index.toString()}`}
+                    image={property.profileImage}
+                    // Todo | We should add the real projects after edit project module is done.
+                    projects={propertyData.projects}
+                  />
+                </NavLink>
+              ))
+            }
             {postList.evenPostList}
           </div>
           
@@ -263,8 +251,8 @@ const mapDispatchToProps = (
   const { userId } = ownProps.match.params
   return {
     loadPosts: () => dispatch(postActions.dbGetPostsByUserId(userId)),
-    loadUserInfo: () =>
-      dispatch(userActions.dbGetUserInfoByUserId(userId, 'header'))
+    loadUserInfo: () => dispatch(userActions.dbGetUserInfoByUserId(userId, 'header')),
+    loadProperties: () => dispatch(propertyActions.dbGetProperty()),
   }
 }
 
@@ -283,16 +271,19 @@ const mapStateToProps = (
   const hasMorePosts = state.getIn(['post', 'profile', 'hasMoreData'])
   const posts = state.getIn(['post', 'userPosts', userId])
   const userProfile = state.getIn(['user', 'info', uid], {}) as Profile
-  console.log('userProfile ==>', userProfile)
+  const properties = state.getIn(['property', 'properties'])
+  console.log('properties ==>', properties)
+  
   return {
     translate: getTranslate(state.get('locale')),
     avatar: userProfile.avatar,
     fullName: userProfile.fullName,
     companyName: userProfile.companyName,
-    banner: userProfile.banner,
-    tagLine: userProfile.tagLine,
+    // banner: userProfile.banner,
+    // tagLine: userProfile.tagLine,
     isAuthedUser: userId === uid,
     userId,
+    properties,
     posts,
     hasMorePosts
   }

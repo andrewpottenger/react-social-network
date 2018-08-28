@@ -31,6 +31,9 @@ import { IPropertyComponentProps } from './IPropertyComponentProps'
 import { IPropertyComponentState, GalleryType } from './IPropertyComponentState'
 import { Property } from 'core/domain/properties'
 
+// - Data
+import { usState } from './data'
+
 // - Styles
 // import 'slick-carousel/slick/slick.css'
 // import 'slick-carousel/slick/slick-theme.css'
@@ -53,13 +56,6 @@ const photos = [
   '/images/Section3_image3.jpg',
 ]
 
-const stateOptions = [
-  {
-    value: '',
-    label: '',
-  }
-]
-
 /**
  * Create component class
  */
@@ -79,10 +75,11 @@ export class PropertyComponent extends Component<
     // Defaul state
     this.state = {
       property: {
+        id: '',
         ownerUserId: '',
         profileImage: '',
         showcaseImages: [],
-        name: '',
+        name: 'adsfas',
         address: '',
         city: '',
         state: '',
@@ -113,8 +110,15 @@ export class PropertyComponent extends Component<
   }
 
   componentDidMount() {
-    const { getProperty } = this.props
-    getProperty!()
+    const { propertyId, properties } = this.props
+    console.log('properties ==> ', properties)
+    if (propertyId) {
+      properties.forEach((property: Property) => {
+        if (property.id === propertyId ) {
+          this.setState({property})
+        }
+      })
+    }
   }
 
   handleChange = (name: string, value: string) => {
@@ -184,7 +188,7 @@ export class PropertyComponent extends Component<
    */
   render() {
     const { translate, classes } = this.props
-    const { galleryType } = this.state
+    const { galleryType, property } = this.state
 
     return (
       <div className="container grid">
@@ -221,6 +225,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="name"
               label="Property’s name"
+              defaultValue={property.name}
               handleChange={(value: string) => {this.handleChange('name', value)}}
             />
           </div>
@@ -229,6 +234,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="address"
               label="Address"
+              defaultValue={property.address}
               handleChange={(value: string) => {this.handleChange('address', value)}}
             />
           </div>
@@ -238,6 +244,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="city"
                 label="City"
+                defaultValue={property.city}
                 handleChange={(value: string) => {this.handleChange('city', value)}}
               />
             </div>
@@ -245,7 +252,7 @@ export class PropertyComponent extends Component<
               <Select
                 id="state"
                 label="Select State"
-                options={stateOptions}
+                options={usState}
                 handleChange={(value: string) => {this.handleChange('state', value)}}
               />
             </div>
@@ -462,8 +469,12 @@ const mapStateToProps = (
   state: Map<string, any>,
   ownProps: IPropertyComponentProps
 ) => {
-  // const { userId } = ownProps.match.params
+  const { propertyId } = ownProps.match.params
+  const properties = state.getIn(['property', 'properties'])
+  console.log('ownProps.match.params ==>', ownProps.match.params)
   return {
+    propertyId,
+    properties,
     translate: getTranslate(state.get('locale')),
   }
 }

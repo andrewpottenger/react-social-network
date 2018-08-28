@@ -57,7 +57,7 @@ export class HomeRouter extends Component<IRouterProps, any> {
         />
         <Route path="/:userId/posts/:postId/:tag?" component={AsyncPostPage} />
         <Route exact path="/:userId" component={AsyncProfile} />
-        <Route path="/:userId/property" component={AsyncProperty} />
+        <Route path="/:userId/property/:propertyId?" component={AsyncProperty} />
         <PrivateRoute
           path="/"
           component={

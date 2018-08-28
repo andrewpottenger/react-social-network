@@ -28,6 +28,22 @@ export interface IPropertyComponentProps {
   userId: string
 
   /**
+   * User identifier
+   *
+   * @type {string}
+   * @memberof IPropertyComponentProps
+   */
+  propertyId: string
+
+  /**
+   * Properties
+   *
+   * @type {string}
+   * @memberof IProfileComponentProps
+   */
+  properties: Property[]
+
+  /**
    * get property
    *
    * @memberof IPropertyComponentProps

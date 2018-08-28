@@ -25,34 +25,6 @@ const propertyService: IPropertyService = provider.get<IPropertyService>(SocialP
 /* _____________ CRUD DB _____________ */
 
 /**
- * Get user info from database
- */
-// export const dbGetUserInfo = () => {
-//   return (dispatch: any, getState: Function) => {
-//     const state: Map<string, any>  = getState()
-//     let uid: string = state.getIn(['authorize', 'uid'])
-//     if (uid) {
-//       return userService.getUserProfile(uid).then((userProfile: Property) => {
-//         dispatch(addUserInfo(uid, {
-//           avatar: userProfile.avatar,
-//           email: userProfile.email,
-//           fullName: userProfile.fullName,
-//           banner: userProfile.banner,
-//           tagLine: userProfile.tagLine,
-//           creationDate: userProfile.creationDate,
-//           birthday: userProfile.birthday,
-//           companyName: userProfile.companyName,
-//           webUrl: userProfile.webUrl,
-//           twitterId: userProfile.twitterId,
-//         }))
-//       })
-//       .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
-
-//     }
-//   }
-// }
-
-/**
  *  Get Property from database
  */
 export const dbGetProperty = () => {
@@ -60,10 +32,9 @@ export const dbGetProperty = () => {
     const state: Map<string, any>  = getState()
     let uid: string = state.getIn(['authorize', 'uid'])
 
-    return propertyService.getProperty(uid).then((result) => {
-      console.log('result =======>', result)
-
-      // dispatch(updateUserInfo(uid, updatedProperty))
+    return propertyService.getProperties(uid).then((properties: Property[]) => {
+      console.log('properties =======>', properties)
+      dispatch(updateProperties(uid, properties))
       // dispatch(closeEditProfile())
     })
     .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
@@ -191,12 +162,12 @@ export const dbUpdateProperty = (newProperty: Property) => {
 /**
  * Update user information
  */
-// export const updateUserInfo = (uid: string, info: Property) => {
-//   return {
-//     type: PropertyActionType.UPDATE_USER_INFO,
-//     payload: { uid, info }
-//   }
-// }
+export const updateProperties = (uid: string, properties: Property[]) => {
+  return {
+    type: PropertyActionType.UPDATE_PROPERTIES,
+    payload: { uid, properties }
+  }
+}
 
 // export const clearAllData = () => {
 //   return {

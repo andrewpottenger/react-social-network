@@ -46,21 +46,29 @@ export class PropertyService implements IPropertyService {
   //   }
 
   /**
-   * Add new property
+   * Get new properties
    */
-  public getProperty: (userId: string)
-    => Promise<Property> = (userId) => {
-      return new Promise<Property>((resolve, reject) => {
-        // const batch = db.batch()
-        // const propertyRef = db.doc(`propertyInfo/${userId}`)
-        // let propertyRef = db.collection(`propertyInfo`).doc()
-        // propertyRef.set({ ...profile, id: propertyRef.id })
-        //   .then(() => {
-        //     resolve()
-        //   })
-        //   .catch((error: any) => {
-        //     reject(new SocialError(error.code, error.message))
-        //   })
+  public getProperties: (userId: string)
+    => Promise<Property[]> = (userId) => {
+      return new Promise<Property[]>((resolve, reject) => {
+        let propertyRef = db.collection(`propertyInfo`).where('ownerUserId', '==', userId)
+        propertyRef.get()
+          .then((snapshot: firebase.firestore.QuerySnapshot) => {
+            if (snapshot.size > 0) {
+              const properties: Property[] = []
+              snapshot.forEach((child: firebase.firestore.QueryDocumentSnapshot) => {
+                if (child.exists) {
+                  properties.push(child.data() as Property)
+                }
+              })
+              resolve(properties)
+            } else {
+              throw new SocialError(`firestore/getProperties/userId `, `document of propertyRef is not exist `)
+            }
+          })
+          .catch((error: any) => {
+            reject(new SocialError(error.code, error.message))
+          })
       })
     }
 
