@@ -952,9 +952,15 @@ input[type="file"] {
     line-height: 34px;
     color: white;
     font-weight: 300;
-    margin: 0 0 0 15px; }
+    margin: 0 0 0 15px;
+    text-transform: capitalize; }
     .property__label:first-child {
       margin-top: 11px; }
+    .property__label--dark {
+      color: #333333; }
+    .property__label--note {
+      text-align: center;
+      margin-top: 50%; }
   .property__project-header {
     margin-bottom: 12px; }
   .property__project-footer {

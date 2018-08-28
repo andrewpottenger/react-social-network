@@ -1,6 +1,7 @@
 // - Import react components
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { goBack } from 'react-router-redux'
 import { withStyles } from 'material-ui/styles'
 import IconButton from 'material-ui/IconButton'
 import Button from 'material-ui/Button'
@@ -49,13 +50,6 @@ const settings = {
   prevArrow: <ChevronLeft style={{fill: '#B9B9B9'}} />,
 }
 
-const photos = [
-  '/images/Section3_image2.jpg',
-  '/images/Section3_image3.jpg',
-  '/images/Section3_image2.jpg',
-  '/images/Section3_image3.jpg',
-]
-
 /**
  * Create component class
  */
@@ -79,7 +73,7 @@ export class PropertyComponent extends Component<
         ownerUserId: '',
         profileImage: '',
         showcaseImages: [],
-        name: 'adsfas',
+        name: '',
         address: '',
         city: '',
         state: '',
@@ -98,6 +92,7 @@ export class PropertyComponent extends Component<
         visibleToAll: '',
         changes: '',
       },
+      isEditMode: false,
       openImageGallery: false,
       galleryType: 'ProfileImageGallery',
     }
@@ -115,7 +110,10 @@ export class PropertyComponent extends Component<
     if (propertyId) {
       properties.forEach((property: Property) => {
         if (property.id === propertyId ) {
-          this.setState({property})
+          this.setState({
+            property,
+            isEditMode: true,
+          })
         }
       })
     }
@@ -125,16 +123,18 @@ export class PropertyComponent extends Component<
     const { property } = this.state
     property[name] = value
     this.setState({proeprty : property} as any)
-
-    // this.setState({
-    //   [name]: value,
-    // } as Pick<IPropertyComponentState, keyof IPropertyComponentState>)
   }
 
   saveProperty = () => {
-    const { addProperty } = this.props
-    const { property } = this.state
-    addProperty!(property)
+    
+    const { addProperty, updateProperty, goBack } = this.props
+    const { property, isEditMode } = this.state
+    if (isEditMode) {
+      updateProperty!(property)
+    } else {
+      addProperty!(property)
+    }
+    goBack()
   }
 
   handleOpenImageGallery = (galleryType: GalleryType) => {
@@ -188,36 +188,60 @@ export class PropertyComponent extends Component<
    */
   render() {
     const { translate, classes } = this.props
-    const { galleryType, property } = this.state
+    const { galleryType, property, isEditMode } = this.state
+    settings.slidesToShow = property.showcaseImages.length > 1 ? 2 : 1
 
     return (
       <div className="container grid">
         <div className={classes.leftSection}>
           <p className={cx('l-xl--secondary')}>Property's Profile</p>
-          <div className={classes.imageContainer}>
-            <img className="full-img" src="/images/Section3_image1.jpg" alt="Property Image" />
-            <IconButton className={classes.editIcon} onClick={() => this.handleOpenImageGallery('ProfileImageGallery')}>
-              <img className="full-img" src="/icons/icon-edit.png" />
-            </IconButton>
+          {
+            (property.profileImage && property.profileImage !== '') ?
+              (
+                <div className={classes.imageContainer}>
+                  <img className="full-img" src={property.profileImage} alt="Property Image" />
+                  <IconButton className={classes.editIcon} onClick={() => this.handleOpenImageGallery('ProfileImageGallery')}>
+                    <img className="full-img" src="/icons/icon-edit.png" />
+                  </IconButton>
+                </div>
+              ) :
+              (
+                <div className={classes.addPhotoButtonSpace}>
+                  <Button
+                    variant="flat"
+                    className={classes.addPhotoButton}
+                    onClick={() => this.handleOpenImageGallery('ProfileImageGallery')}
+                  >
+                    Add Property Photo &nbsp; +
+                  </Button>
+                </div>
+              )
+          }
+          {
+            property.showcaseImages && property.showcaseImages.length !== 0 &&
+              (
+                <div className={classes.carouselContainer}>
+                  <Slider {...settings}>
+                    {
+                      property.showcaseImages.map((item: string, index: number) => (
+                        <div className={classes.itemImage} key={`property-photo-${index.toString()}`} >
+                          <img src={item} alt="Slider Image" />
+                        </div>
+                      ))
+                    }
+                  </Slider>
+                </div>
+              )
+          }
+          <div className={classes.addPhotoButtonSpace}>
+            <Button
+              variant="flat"
+              className={classes.addPhotoButton}
+              onClick={() => this.handleOpenImageGallery('ShowcaseImagesGallery')}
+            >
+              Add Showcase Photo &nbsp; +
+            </Button>
           </div>
-          <div className={classes.carouselContainer}>
-            <Slider {...settings}>
-              {
-                photos.map((item: string, index: number) => (
-                  <div className={classes.itemImage} key={`property-photo-${index.toString()}`} >
-                    <img src={item} alt="Slider Image" />
-                  </div>
-                ))
-              }
-            </Slider>
-          </div>
-          <Button
-            variant="flat"
-            className={classes.plusButton}
-            onClick={() => this.handleOpenImageGallery('ShowcaseImagesGallery')}
-          >
-            Edit/Add Photos &nbsp; +
-          </Button>
         </div>
         
         <div className={classes.rightSection}>
@@ -260,6 +284,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="zip"
                 label="Zip"
+                defaultValue={property.zip}
                 handleChange={(value: string) => {this.handleChange('zip', value)}}
               />
             </div>
@@ -267,6 +292,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="location"
                 label="Location"
+                defaultValue={property.location}
                 handleChange={(value: string) => {this.handleChange('location', value)}}
               />
             </div>
@@ -276,6 +302,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="aboutHouse"
               label="Favorite things about the house"
+              defaultValue={property.aboutHouse}
               handleChange={(value: string) => {this.handleChange('aboutHouse', value)}}
             />
           </div>
@@ -284,6 +311,7 @@ export class PropertyComponent extends Component<
             <TextField
               id="aboutNeighborhood"
               label="Favorite things about the neighborhood"
+              defaultValue={property.aboutNeighborhood}
               handleChange={(value: string) => {this.handleChange('aboutNeighborhood', value)}}
             />
           </div>
@@ -293,6 +321,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="square"
                 label="Square feet"
+                defaultValue={property.square}
                 handleChange={(value: string) => {this.handleChange('square', value)}}
               />
             </div>
@@ -300,6 +329,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="beds"
                 label="Beds"
+                defaultValue={property.beds}
                 handleChange={(value: string) => {this.handleChange('beds', value)}}
               />
             </div>
@@ -307,6 +337,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="baths"
                 label="Baths"
+                defaultValue={property.baths}
                 handleChange={(value: string) => {this.handleChange('baths', value)}}
               />
             </div>
@@ -314,6 +345,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="yearPurchased"
                 label="Year Purchased"
+                defaultValue={property.yearPurchased}
                 handleChange={(value: string) => {this.handleChange('yearPurchased', value)}}
               />
             </div>
@@ -324,6 +356,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="nearBySchools"
                 label="Nearby Schools"
+                defaultValue={property.nearBySchools}
                 handleChange={(value: string) => {this.handleChange('nearBySchools', value)}}
               />
             </div>
@@ -333,6 +366,7 @@ export class PropertyComponent extends Component<
                   <TextField
                     id="lotSize"
                     label="Lot size"
+                    defaultValue={property.lotSize}
                     handleChange={(value: string) => {this.handleChange('lotSize', value)}}
                   />
                 </div>
@@ -345,6 +379,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="pros"
                 label="Pros"
+                defaultValue={property.pros}
                 multiline
                 handleChange={(value: string) => {this.handleChange('pros', value)}}
               />
@@ -353,6 +388,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="cons"
                 label="Cons"
+                defaultValue={property.cons}
                 multiline
                 handleChange={(value: string) => {this.handleChange('cons', value)}}
               />
@@ -363,7 +399,8 @@ export class PropertyComponent extends Component<
             <div className="grid-cell">
               <TextField
                 id="visibleToAll"
-                label=""                
+                label=""
+                defaultValue={property.visibleToAll}               
                 handleChange={(value: string) => {this.handleChange('visibleToAll', value)}}
               />
             </div>
@@ -374,6 +411,7 @@ export class PropertyComponent extends Component<
               <TextField
                 id="changes"
                 label="Changes/Upgrades"
+                defaultValue={property.changes}
                 multiline
                 handleChange={(value: string) => {this.handleChange('changes', value)}}
               />
@@ -409,13 +447,16 @@ export class PropertyComponent extends Component<
             >
               <span>Save &nbsp; &nbsp;</span> <span><img src="/icons/icon-cloud-down.png"/></span>
             </Button>
-
-            <Button
-              variant="flat"
-              className={classes.addPropertyButton}
-            >
-              Add Another Property &nbsp; +
-            </Button>
+            {
+              !isEditMode && (
+                <Button
+                  variant="flat"
+                  className={classes.addPropertyButton}
+                >
+                  Add Another Property &nbsp; +
+                </Button>
+              )
+            }
           </div>
 
         </div>
@@ -456,6 +497,7 @@ const mapDispatchToProps = (
     getProperty: () => dispatch(propertyActions.dbGetProperty()),
     addProperty: (property: Property) => dispatch(propertyActions.dbAddProperty(property)),
     updateProperty: (property: Property) => dispatch(propertyActions.dbUpdateProperty(property)),
+    goBack: () => dispatch(goBack()),
   }
 }
 

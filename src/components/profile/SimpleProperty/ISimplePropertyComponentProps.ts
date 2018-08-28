@@ -1,14 +1,15 @@
 import { Post } from 'src/core/domain/posts'
+import { Property } from 'src/core/domain/properties'
 
 export interface ISimplePropertyComponentProps {
 
   /**
-   * Property Image
+   * Property
    *
-   * @type {string}
+   * @type {Property}
    * @memberof ISimplePropertyComponentProps
    */
-  image: string
+  property: Property
 
   /**
    * Latest Projects

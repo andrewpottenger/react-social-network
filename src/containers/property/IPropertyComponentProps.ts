@@ -65,6 +65,13 @@ export interface IPropertyComponentProps {
   updateProperty: (property: Property) => any
 
   /**
+   * Go Back
+   *
+   * @memberof IPropertyComponentProps
+   */
+  goBack: () => any
+
+  /**
    * Styles
    */
   classes?: any

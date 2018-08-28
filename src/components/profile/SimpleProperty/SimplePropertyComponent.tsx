@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import config from 'src/config'
 import { Map, List as ImuList } from 'immutable'
+import cx from 'classnames'
 
 // - Material UI
 import { withStyles } from 'material-ui/styles'
@@ -99,18 +100,23 @@ export class SimplePropertyComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { translate, classes, image, projects } = this.props
+    const { translate, classes, property, projects } = this.props
+    const hasPropertyImage = property.profileImage && property.profileImage !== ''
 
     return (
       <div className="property">
         <Card className={classes.card}>
           <CardMedia
             className={classes.cover}
-            image={image}
-            title="Casa Austin Austin, Tx"
+            image={property.profileImage}
           >
-            <p className="property__label">Casa Austin</p>
-            <p className="property__label">Austin, TX</p>
+            <p className={cx('property__label', !hasPropertyImage && 'property__label--dark')}>{property.name}</p>
+            <p className={cx('property__label', !hasPropertyImage && 'property__label--dark')}>
+              {property.city}{property.city && property.state && ', '}{property.state}
+            </p>
+            {(!hasPropertyImage) &&
+              <p className="property__label property__label--dark property__label--note">No Property Image</p>
+            }
           </CardMedia>
           <CardContent className={classes.details}>
             <div className="grid grid__space-between grid__center property__project-header">

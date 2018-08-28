@@ -9,6 +9,11 @@ const styles = (theme: any) => ({
     marginRight: 22,
   },
 
+  addPhotoButtonSpace: {
+    marginTop: 20,
+    marginBottom: 20,
+  },
+
   rightSection: {
     flex: 1,
     paddingTop: '60px',
@@ -63,6 +68,11 @@ const styles = (theme: any) => ({
       height: '100%',
       'object-fit': 'cover',
     }
+  },
+
+  addPhotoButton: {
+    ...buttons.plusButton,
+    minWidth: '200px',
   },
 
   saveButton: {

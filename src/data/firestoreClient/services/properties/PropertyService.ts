@@ -76,10 +76,10 @@ export class PropertyService implements IPropertyService {
    * Add new property
    */
   public addProperty: (userId: string, property: Property)
-    => Promise<void> = (userId, profile) => {
+    => Promise<void> = (userId, property) => {
       return new Promise<void>((resolve, reject) => {
         let propertyRef = db.collection(`propertyInfo`).doc()
-        propertyRef.set({ ...profile, id: propertyRef.id })
+        propertyRef.set({ ...property, id: propertyRef.id })
           .then(() => {
             resolve()
           })
@@ -93,12 +93,12 @@ export class PropertyService implements IPropertyService {
    * Update property
    */
   public updateProperty: (userId: string, property: Property)
-    => Promise<void> = (userId, profile) => {
+    => Promise<void> = (userId, property) => {
       return new Promise<void>((resolve, reject) => {
         const batch = db.batch()
-        const propertyRef = db.doc(`propertyInfo/${userId}`)
+        const propertyRef = db.doc(`propertyInfo/${property.id}`)
 
-        batch.set(propertyRef,{...profile, id: userId, state: 'active'})
+        batch.set(propertyRef,{...property, id: userId, state: 'active'})
         batch.commit().then(() => {
           resolve()
         })

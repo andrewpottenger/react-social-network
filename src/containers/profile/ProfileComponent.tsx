@@ -152,19 +152,7 @@ export class ProfileComponent extends Component<
 
     return (
       <div className="container">
-        <div className={classes.profile}>
-          {/* <div style={styles.header}>
-            <ProfileHeader
-              tagLine={this.props.tagLine}
-              avatar={this.props.avatar}
-              isAuthedUser={this.props.isAuthedUser}
-              banner={this.props.banner}
-              fullName={this.props.name}
-              followerCount={0}
-              userId={this.props.userId}
-            />
-          </div> */}
-          
+        <div className={classes.profile}>          
           <div className={classes.sideContainer}>
             <Info
               userId=""
@@ -184,7 +172,6 @@ export class ProfileComponent extends Component<
               address2="Casa Austin"
               followerCount={573}
             />
-            
           </div>
           <div className={classes.mainContainer}>
             <NavLink to={`/${this.props.userId}/property`}>
@@ -199,10 +186,9 @@ export class ProfileComponent extends Component<
             </NavLink>
             {
               properties!.map((property: Property, index: number) => (
-                <NavLink to={`/${this.props.userId}/property/${property.id}`}>
+                <NavLink key={`property-${userId}-${index.toString()}`} to={`/${this.props.userId}/property/${property.id}`}>
                   <SimpleProperty
-                    key={`property-${userId}-${index.toString()}`}
-                    image={property.profileImage}
+                    property={property}
                     // Todo | We should add the real projects after edit project module is done.
                     projects={propertyData.projects}
                   />
