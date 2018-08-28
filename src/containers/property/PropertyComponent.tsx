@@ -50,6 +50,31 @@ const settings = {
   prevArrow: <ChevronLeft style={{fill: '#B9B9B9'}} />,
 }
 
+const initialProperty = {
+  id: '',
+  ownerUserId: '',
+  profileImage: '',
+  showcaseImages: [],
+  name: '',
+  address: '',
+  city: '',
+  state: '',
+  zip: '',
+  location: '',
+  aboutHouse: '',
+  aboutNeighborhood: '',
+  square: '',
+  beds: '',
+  baths: '',
+  yearPurchased: '',
+  nearBySchools: '',
+  lotSize: '',
+  pros: '',
+  cons: '',
+  visibleToAll: '',
+  changes: '',
+}
+
 /**
  * Create component class
  */
@@ -69,28 +94,7 @@ export class PropertyComponent extends Component<
     // Defaul state
     this.state = {
       property: {
-        id: '',
-        ownerUserId: '',
-        profileImage: '',
-        showcaseImages: [],
-        name: '',
-        address: '',
-        city: '',
-        state: '',
-        zip: '',
-        location: '',
-        aboutHouse: '',
-        aboutNeighborhood: '',
-        square: '',
-        beds: '',
-        baths: '',
-        yearPurchased: '',
-        nearBySchools: '',
-        lotSize: '',
-        pros: '',
-        cons: '',
-        visibleToAll: '',
-        changes: '',
+        ...initialProperty
       },
       isEditMode: false,
       openImageGallery: false,
@@ -135,6 +139,15 @@ export class PropertyComponent extends Component<
       addProperty!(property)
     }
     goBack()
+  }
+
+  addAnotherProperty = () => {
+    const { addProperty } = this.props
+    const { property } = this.state
+    addProperty!(property)
+    this.setState({
+      property: {...initialProperty},
+    })
   }
 
   handleOpenImageGallery = (galleryType: GalleryType) => {
@@ -276,6 +289,7 @@ export class PropertyComponent extends Component<
               <Select
                 id="state"
                 label="Select State"
+                defaultValue={property.state}
                 options={usState}
                 handleChange={(value: string) => {this.handleChange('state', value)}}
               />
@@ -452,6 +466,7 @@ export class PropertyComponent extends Component<
                 <Button
                   variant="flat"
                   className={classes.addPropertyButton}
+                  onClick={this.addAnotherProperty}
                 >
                   Add Another Property &nbsp; +
                 </Button>

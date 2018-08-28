@@ -11,6 +11,11 @@ export interface IEmailVerificationComponentProps {
   homePage: () => any
 
   /**
+   * Redirect to Login page
+   */
+  loginPage: () => any
+
+  /**
    * Styles
    */
   classes?: any

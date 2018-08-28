@@ -39,6 +39,13 @@ export class SelectComponent extends Component<ISelectComponentProps, ISelectCom
   componentDidMount() {
   }
 
+  componentWillReceiveProps(nextProps: ISelectComponentProps) {
+    const { defaultValue } = nextProps
+    if (defaultValue !== this.props.defaultValue) {
+      this.setState({value: defaultValue || ''})
+    }
+  }
+
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     this.setState({value})

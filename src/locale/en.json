@@ -166,6 +166,7 @@
     "emailVerification": {
         "title": "Email Verification",
         "homeButton": "HOME",
+        "loginButton": "LOGIN",
         "sendButton": "Send Email Verification",
         "description": "An verificiation email has been already sent to you. Please check your inbox. If you couldn't see the emai, please resend email verification."
     },

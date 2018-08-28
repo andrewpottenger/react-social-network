@@ -111,10 +111,11 @@ export class EmailVerificationComponent extends Component<
                     variant="raised"
                     style={this.styles.homeButton}
                     color="primary"
-                    onClick={() => this.props.homePage()}
+                    // onClick={() => this.props.homePage()}
+                    onClick={() => this.props.loginPage()}
                   >
                     {' '}
-                    {translate!('emailVerification.homeButton')}{' '}
+                    {translate!('emailVerification.loginButton')}{' '}
                   </Button>
                   <Button
                     variant="raised"
@@ -148,6 +149,9 @@ const mapDispatchToProps = (
   return {
     homePage: () => {
       dispatch(push('/'))
+    },
+    loginPage: () => {
+      dispatch(push('/login'))
     },
     sendEmailVerification: () =>
       dispatch(authorizeActions.dbSendEmailVerfication())

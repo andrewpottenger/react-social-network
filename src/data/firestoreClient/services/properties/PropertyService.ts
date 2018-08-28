@@ -98,7 +98,7 @@ export class PropertyService implements IPropertyService {
         const batch = db.batch()
         const propertyRef = db.doc(`propertyInfo/${property.id}`)
 
-        batch.set(propertyRef,{...property, id: userId, state: 'active'})
+        batch.set(propertyRef,{...property})
         batch.commit().then(() => {
           resolve()
         })
