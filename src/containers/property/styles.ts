@@ -106,6 +106,11 @@ const styles = (theme: any) => ({
 
     '& > span > span': {
       display: 'flex',
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      width: '300px',
+      margin: '0 auto 20px',
     }
   },
 
@@ -113,6 +118,11 @@ const styles = (theme: any) => ({
     ...buttons.plusButton,
     backgroundColor: color['greyD8'],
     color: color['primary-color'],
+
+    [theme.breakpoints.down('xs')]: {
+      width: '300px',
+      margin: '0 auto',
+    }
   },
 
   fullPageXs: {
