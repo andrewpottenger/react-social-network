@@ -5,8 +5,13 @@ const styles = (theme: any) => ({
   ...buttons,
 
   leftSection: {
-    width: 388,
-    marginRight: 22,
+    width: '100%',
+    // marginRight: 18,
+
+    [theme.breakpoints.up('md')]: {
+      width: 388,
+      marginRight: 22,
+    },
   },
 
   addPhotoButtonSpace: {
@@ -18,12 +23,23 @@ const styles = (theme: any) => ({
     flex: 1,
     paddingTop: '60px',
     paddingBottom: '70px',
+    // marginRight: 18,
+
+    [theme.breakpoints.up('md')]: {
+      // marginRight: 0,
+    },
   },
 
   imageContainer: {
     position: 'relative',
     width: '100%',
-    height: 457,
+    maxWidth: '400px',
+    height: 'auto',
+
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: 'unset',
+      height: 457,
+    },
   },
 
   editIcon: {

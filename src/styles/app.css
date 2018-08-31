@@ -25,6 +25,7 @@
  * ***************************
  */
 .container {
+  width: calc(100% - 16px);
   max-width: 1214px;
   margin: 0 auto; }
   .container-header {

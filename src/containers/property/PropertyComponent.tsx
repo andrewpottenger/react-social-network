@@ -25,9 +25,11 @@ import AppDialogTitle from 'layouts/dialogTitle'
 
 // - Import API
 // - Import domain
+import { Post } from 'core/domain/posts'
 
 // - Import actions
 import * as propertyActions from 'store/actions/propertyActions'
+import * as postActions from 'store/actions/postActions'
 import { IPropertyComponentProps } from './IPropertyComponentProps'
 import { IPropertyComponentState, GalleryType } from './IPropertyComponentState'
 import { Property } from 'core/domain/properties'
@@ -73,6 +75,7 @@ const initialProperty = {
   cons: '',
   visibleToAll: '',
   changes: '',
+  openToOffers: false,
 }
 
 /**
@@ -96,6 +99,8 @@ export class PropertyComponent extends Component<
       property: {
         ...initialProperty
       },
+      visibleOnNewsFeed: false,
+      openToOffers: false,
       isEditMode: false,
       openImageGallery: false,
       galleryType: 'ProfileImageGallery',
@@ -123,21 +128,29 @@ export class PropertyComponent extends Component<
     }
   }
 
-  handleChange = (name: string, value: string) => {
+  handleChange = (name: string, value: string | boolean) => {
     const { property } = this.state
     property[name] = value
     this.setState({proeprty : property} as any)
   }
 
   saveProperty = () => {
-    
     const { addProperty, updateProperty, goBack } = this.props
-    const { property, isEditMode } = this.state
+    const { property, isEditMode, visibleOnNewsFeed, openToOffers } = this.state
+    let postText = ''
+
     if (isEditMode) {
       updateProperty!(property)
+      postText = `Property(${property.name}) has been updated.`
     } else {
       addProperty!(property)
+      postText = 'New property has been added.'
     }
+    
+    if (visibleOnNewsFeed) {
+      this.postPropertyChangedFeed(postText)
+    }
+    
     goBack()
   }
 
@@ -148,6 +161,24 @@ export class PropertyComponent extends Component<
     this.setState({
       property: {...initialProperty},
     })
+  }
+
+  postPropertyChangedFeed = (postText: string) => {
+    const { post, ownerAvatar, ownerDisplayName } = this.props
+    post!(
+      {
+        body: postText,
+        tags: [],
+        ownerAvatar: ownerAvatar,
+        ownerDisplayName: ownerDisplayName,
+        disableComments: true,
+        disableSharing: true,
+        postTypeId: 0,
+        score: 0,
+        viewCount: 0
+      },
+      () => {},
+    )
   }
 
   handleOpenImageGallery = (galleryType: GalleryType) => {
@@ -437,16 +468,16 @@ export class PropertyComponent extends Component<
               <Checkbox
                 id="isVisible"
                 label="Make my changes visible on my network’s News Feed"
-                handleChange={(value: boolean) => {}}
+                handleChange={(value: boolean) => {this.setState({visibleOnNewsFeed: value})}}
               />
             </div>
             <div className="grid-cell">
               <div className="grid">
                 <div className="grid-cell">
                   <Checkbox
-                    id="isOpen"
+                    id="openToOffers"
                     label="Open to offers "
-                    handleChange={(value: boolean) => {}}
+                    handleChange={(value: boolean) => {this.handleChange('openToOffers', value)}}
                   />
                 </div>
               </div>
@@ -512,6 +543,7 @@ const mapDispatchToProps = (
     getProperty: () => dispatch(propertyActions.dbGetProperty()),
     addProperty: (property: Property) => dispatch(propertyActions.dbAddProperty(property)),
     updateProperty: (property: Property) => dispatch(propertyActions.dbUpdateProperty(property)),
+    post: (post: Post, callBack: Function) => dispatch(postActions.dbAddImagePost(post, callBack)),
     goBack: () => dispatch(goBack()),
   }
 }
@@ -528,10 +560,14 @@ const mapStateToProps = (
 ) => {
   const { propertyId } = ownProps.match.params
   const properties = state.getIn(['property', 'properties'])
+  const uid = state.getIn(['authorize', 'uid'])
+  const user = state.getIn(['user', 'info', uid], {})
   console.log('ownProps.match.params ==>', ownProps.match.params)
   return {
     propertyId,
     properties,
+    ownerAvatar: user.avatar || '',
+    ownerDisplayName: user.fullName || '',
     translate: getTranslate(state.get('locale')),
   }
 }

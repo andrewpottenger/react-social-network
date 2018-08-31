@@ -24,6 +24,7 @@ export class Property extends BaseDomain {
     public cons: string,
     public visibleToAll: string,
     public changes: string,
+    public openToOffers: boolean,
   ) {
     super()
 

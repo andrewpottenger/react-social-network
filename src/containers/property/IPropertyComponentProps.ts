@@ -44,6 +44,19 @@ export interface IPropertyComponentProps {
   properties: Property[]
 
   /**
+   * User avatar address
+   *
+   * @type {string}
+   * @memberof IPostWriteComponentProps
+   */
+  ownerAvatar?: string
+
+  /**
+   * The post owner name
+   */
+  ownerDisplayName?: string
+
+  /**
    * get property
    *
    * @memberof IPropertyComponentProps
@@ -63,6 +76,13 @@ export interface IPropertyComponentProps {
    * @memberof IPropertyComponentProps
    */
   updateProperty: (property: Property) => any
+
+  /**
+   * post
+   *
+   * @memberof IPropertyComponentProps
+   */
+  post: (post: Post, callBack: Function) => any
 
   /**
    * Go Back

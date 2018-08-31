@@ -21,6 +21,22 @@ export interface IPropertyComponentState {
   isEditMode: boolean
 
   /**
+   * visibleOnNewsFeed {true} or {false}
+   *
+   * @type {boolean}
+   * @memberof IPropertyComponentState
+   */
+  visibleOnNewsFeed: boolean
+
+  /**
+   * openToOffers {true} or {false}
+   *
+   * @type {boolean}
+   * @memberof IPropertyComponentState
+   */
+  openToOffers: boolean
+
+  /**
    * Image gallery dialog is open for choosing banner image {true} or not {false}
    *
    * @type {boolean}

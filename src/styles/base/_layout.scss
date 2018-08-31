@@ -1,4 +1,5 @@
 .container {
+  width: calc(100% - 16px);
   max-width: $main-contianer;
   margin: 0 auto;
 

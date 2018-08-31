@@ -102,7 +102,7 @@ export class SimplePropertyComponent extends Component<
           </CardMedia>
           <CardContent className={classes.details}>
             <div className="grid grid__space-between grid__center property__project-header">
-              <p className="p-lg--primary">My Latest Project</p>
+              <p className="p-lg--primary">My Latest Project {' '} {property.openToOffers ? ' [Open to Offers]' : ''}</p>
               <Button
                 variant="flat"
                 onClick={this.addNewProject}
