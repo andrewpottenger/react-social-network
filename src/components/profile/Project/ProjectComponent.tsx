@@ -31,23 +31,8 @@ import * as userActions from 'store/actions/userActions'
 import { IProjectComponentProps } from './IProjectComponentProps'
 import { IProjectComponentState } from './IProjectComponentState'
 
-const styles = (theme: any) => ({
-  card: {
-    display: 'flex',
-    height: '204px',
-  },
-  cover: {
-    flex: '1 0 auto',
-  },
-  details: {
-    position: 'relative',
-    width: '169px',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '34px 24px',
-  },
-
-})
+// - Import styles
+import styles from './styles'
 
 /**
  * Create component class

@@ -8,4 +8,12 @@ export interface INeighborsComponentState {
    * @memberof INeighborsComponentState
    */
   isSmall: boolean
+
+  /**
+   * height size of cell
+   *
+   * @type {number}
+   * @memberof INeighborsComponentState
+   */
+  cellHeight: number
 }

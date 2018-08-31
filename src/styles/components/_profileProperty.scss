@@ -10,7 +10,7 @@
     text-transform: capitalize;
 
     &:first-child {
-      margin-top: 11px;
+      padding-top: 11px;
     }
 
     &--dark {
@@ -19,7 +19,11 @@
 
     &--note {
       text-align: center;
-      margin-top: 50%;
+      margin-top: 40px;
+
+      @media (min-width: 600px) {
+        margin-top: 50%;
+      }
     }
   }
 

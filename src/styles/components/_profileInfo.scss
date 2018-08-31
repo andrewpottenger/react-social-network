@@ -1,10 +1,14 @@
 .profileInfo {
   position: relative;
-  width: 261px;
+  width: calc(100% - 24px);
   height: 320px;
   padding: 65px 12px 50px;
   margin-bottom: 20px;
   background: #E7E7E7;
+
+  @media (min-width: 960px) {
+    width: 261px;
+  }
 
   &__avatar {
     width: 152px;
@@ -21,8 +25,13 @@
   &__info {
     display: flex;
     align-items: center;
-    margin-left: 38px;
-    margin-bottom: 10px;
+    width: 170px;
+    margin: 0 auto 10px;
+
+    @media (min-width: 960px) {
+      width: auto;
+      margin-left: 38px;
+    }
 
     & > img {
       width: 18px;

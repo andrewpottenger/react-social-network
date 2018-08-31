@@ -3,6 +3,7 @@ import { color, fontScale, fontFamily } from 'src/styles/inline/variables'
 const styles = (theme: any) => ({
   textField: {
     width: '100%',
+    minWidth: '150px',
 
     '& label': {
       ...fontScale.base,

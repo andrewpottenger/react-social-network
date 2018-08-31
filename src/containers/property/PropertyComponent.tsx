@@ -463,7 +463,7 @@ export class PropertyComponent extends Component<
             </div>
           </div>
 
-          <div className="grid grid__gutters grid__fit">
+          <div className={cx('grid grid__gutters grid__fit', classes.checkBoxContainer)}>
             <div className="grid-cell">
               <Checkbox
                 id="isVisible"
@@ -508,6 +508,7 @@ export class PropertyComponent extends Component<
         </div>
 
         <Dialog
+          style={{width: '100vw'}}
           PaperProps={{ className: classes.fullPageXs }}
           open={this.state.openImageGallery}
           onClose={this.handleCloseImageGallery}

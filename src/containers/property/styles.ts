@@ -34,7 +34,8 @@ const styles = (theme: any) => ({
     position: 'relative',
     width: '100%',
     maxWidth: '400px',
-    height: 'auto',
+    height: '300px',
+    margin: '0 auto',
 
     [theme.breakpoints.up('sm')]: {
       maxWidth: 'unset',
@@ -84,6 +85,14 @@ const styles = (theme: any) => ({
       height: '100%',
       'object-fit': 'cover',
     }
+  },
+
+  checkBoxContainer: {
+    display: 'block',
+
+    [theme.breakpoints.up('lg')]: {
+      display: 'flex',
+    },
   },
 
   addPhotoButton: {

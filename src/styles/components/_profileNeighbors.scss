@@ -1,5 +1,9 @@
 .profileNeighbors {
-  width: 285px;
+  width: 100%;
+
+  @media (min-width: 960px) {
+    width: 285px;
+  }
   
   &__header {
     display: flex;

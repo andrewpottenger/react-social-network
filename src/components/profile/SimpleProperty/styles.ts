@@ -1,20 +1,31 @@
 const styles = (theme: any) => ({
   card: {
-    display: 'flex',
-    maxWidth: '906px',
-    height: '537px',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      height: '537px',
+      maxWidth: '906px',
+    },
   },
 
   cover: {
-    flex: '1 0 auto',
+    height: '200px',
+    flex: 2,
+    
+    [theme.breakpoints.up('sm')]: {
+      height: 'auto',
+    },
   },
 
   details: {
-    width: '474px',
+    flex: 3,
     display: 'flex',
     flexDirection: 'column',
     padding: '27px 20px 5px 20px',
     backgroundColor: '#E7E7E7',
+
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '474px',
+    },
   },
 
   newButton: {

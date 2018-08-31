@@ -149,7 +149,8 @@ export class NeighborsComponent extends Component<
       /**
        * If it's true , the window is in small size
        */
-      isSmall: false
+      isSmall: false,
+      cellHeight: 89,
     }
 
     // Binding functions to `this`
@@ -161,20 +162,21 @@ export class NeighborsComponent extends Component<
   handleResize = () => {
     // Set initial state
     let width = window.innerWidth
-
-    if (width > 900) {
-      this.setState({
-        isSmall: false
-      })
-    } else {
-      this.setState({
-        isSmall: true
-      })
+    let cellHeight = 89
+    if (width < 960) {
+      cellHeight = width / 3 - 20
     }
+    this.setState({cellHeight})
+    console.log('dddd')
   }
 
   componentDidMount() {
     this.handleResize()
+    window.addEventListener('resize', this.handleResize.bind(this))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize.bind(this))
   }
 
   /**
@@ -183,6 +185,7 @@ export class NeighborsComponent extends Component<
    */
   render() {
     const { classes } = this.props
+    const { cellHeight } = this.state
     
     return (
       <div className="profileNeighbors">
@@ -196,7 +199,7 @@ export class NeighborsComponent extends Component<
           <ExpansionPanelDetails className={classes.body}>
             <div className="profileNeighbors__body">
               <div >
-                <GridList cellHeight={89} className={classes.gridList} cols={3}>
+                <GridList cellHeight={cellHeight} className={classes.gridList} cols={3}>
                   {tileData.map(tile => (
                     <GridListTile key={tile.img} cols={1}>
                       <img src={tile.img} alt={tile.title} />

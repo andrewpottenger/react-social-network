@@ -1,12 +1,19 @@
 
 const styles = (theme: any) => ({
   profile: {
-    display: 'flex',
+    
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
   },
 
   sideContainer: {
-    width: '285px',
-    marginRight: 26,
+    width: '100%',
+    
+    [theme.breakpoints.up('md')]: {
+      width: '285px',
+      marginRight: 26,
+    },
   },
 
   mainContainer: {
@@ -14,10 +21,14 @@ const styles = (theme: any) => ({
   },
 
   addButton: {
+    margin: '40px auto 29px',
     fontSize: '14px',
     padding: '8px 24px',
-    marginBottom: '29px',
     textTransform: 'capitalize',
+
+    [theme.breakpoints.up('md')]: {
+      marginTop: 0,
+    },
   },
 })
 

@@ -1,6 +1,6 @@
 import { color, fontScale, fontFamily } from 'src/styles/inline/variables'
 
-const styles = {
+const styles = (theme: any) => ({
   avatar: {
     border: '2px solid rgb(255, 255, 255)',
   },
@@ -37,6 +37,6 @@ const styles = {
   aboutButtonSmall: {
     color: 'black'
   }
-}
+})
 
 export default styles
