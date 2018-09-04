@@ -541,7 +541,7 @@ const mapDispatchToProps = (
 ) => {
   const { userId } = ownProps.match.params
   return {
-    getProperty: () => dispatch(propertyActions.dbGetProperty()),
+    getProperty: () => dispatch(propertyActions.dbGetProperty(userId)),
     addProperty: (property: Property) => dispatch(propertyActions.dbAddProperty(property)),
     updateProperty: (property: Property) => dispatch(propertyActions.dbUpdateProperty(property)),
     post: (post: Post, callBack: Function) => dispatch(postActions.dbAddImagePost(post, callBack)),

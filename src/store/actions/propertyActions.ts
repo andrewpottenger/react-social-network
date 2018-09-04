@@ -27,13 +27,13 @@ const propertyService: IPropertyService = provider.get<IPropertyService>(SocialP
 /**
  *  Get Property from database
  */
-export const dbGetProperty = () => {
+export const dbGetProperty = (userId: string) => {
   return (dispatch: Function, getState: Function) => {
     const state: Map<string, any>  = getState()
-    let uid: string = state.getIn(['authorize', 'uid'])
+    // let uid: string = state.getIn(['authorize', 'uid'])
 
-    return propertyService.getProperties(uid).then((properties: Property[]) => {
-      dispatch(updateProperties(uid, properties))
+    return propertyService.getProperties(userId).then((properties: Property[]) => {
+      dispatch(updateProperties(userId, properties))
     })
     .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
   }

@@ -174,50 +174,37 @@ export class ProfileComponent extends Component<
             />
           </div>
           <div className={classes.mainContainer}>
-            <NavLink to={`/${this.props.userId}/property`}>
-              <Button
-                variant="raised"
-                color="primary"
-                onClick={this.addNewProperty}
-                className={classes.addButton}
-              >
-                Add New Property +
-              </Button>
-            </NavLink>
             {
-              properties!.map((property: Property, index: number) => (
-                <NavLink key={`property-${userId}-${index.toString()}`} to={`/${this.props.userId}/property/${property.id}`}>
-                  <SimpleProperty
-                    property={property}
-                    // Todo | We should add the real projects after edit project module is done.
-                    projects={propertyData.projects}
-                  />
-                </NavLink>
-              ))
+              isAuthedUser &&
+              <NavLink to={`/${this.props.userId}/property`}>
+                <Button
+                  variant="raised"
+                  color="primary"
+                  onClick={this.addNewProperty}
+                  className={classes.addButton}
+                >
+                  Add New Property +
+                </Button>
+              </NavLink>
+            }
+            {
+              properties && properties.length > 0 ?
+                properties!.map((property: Property, index: number) => (
+                  <NavLink
+                    key={`property-${userId}-${index.toString()}`}
+                    to={isAuthedUser ? `/${this.props.userId}/property/${property.id}` : `/${this.props.userId}`}
+                  >
+                    <SimpleProperty
+                      property={property}
+                      // Todo | We should add the real projects after edit project module is done.
+                      projects={propertyData.projects}
+                    />
+                  </NavLink>
+                )) :
+                <p className="p-md">There isn't any property</p>
             }
             {postList.evenPostList}
           </div>
-          
-          {/* {posts ? (
-            <div style={styles.content}>
-              <div className="profile__title">
-                {translate!('profile.headPostsLabel', {
-                  userName: this.props.name
-                })}
-              </div>
-              <div style={{ height: '24px' }} />
-              <St
-                posts={posts}
-                loadStream={loadPosts}
-                hasMorePosts={hasMorePosts}
-                displayWriting={false}
-              />
-            </div>
-          ) : (
-            <div className="profile__title">
-              {translate!('profile.nothingSharedLabel')}
-            </div>
-          )} */}
         </div>
       </div>
     )
@@ -238,7 +225,7 @@ const mapDispatchToProps = (
   return {
     loadPosts: () => dispatch(postActions.dbGetPostsByUserId(userId)),
     loadUserInfo: () => dispatch(userActions.dbGetUserInfoByUserId(userId, 'header')),
-    loadProperties: () => dispatch(propertyActions.dbGetProperty()),
+    loadProperties: () => dispatch(propertyActions.dbGetProperty(userId)),
   }
 }
 
@@ -256,7 +243,7 @@ const mapStateToProps = (
   const uid = state.getIn(['authorize', 'uid'], 0)
   const hasMorePosts = state.getIn(['post', 'profile', 'hasMoreData'])
   const posts = state.getIn(['post', 'userPosts', userId])
-  const userProfile = state.getIn(['user', 'info', uid], {}) as Profile
+  const userProfile = state.getIn(['user', 'info', userId], {}) as Profile
   const properties = state.getIn(['property', 'properties'])
   console.log('properties ==>', properties)
   

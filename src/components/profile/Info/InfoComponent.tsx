@@ -122,9 +122,19 @@ export class InfoComponent extends Component<
             <p className="">{followerCount || 0} followers</p>
           </div>
 
-          <IconButton className={classes.editButton}>
-            <div className={classes.editIcon} dangerouslySetInnerHTML={{__html: EditIcon.element.innerHTML}}/>
-          </IconButton>
+          {isAuthedUser ?
+            <IconButton className={classes.editButton}>
+              <div className={classes.editIcon} dangerouslySetInnerHTML={{__html: EditIcon.element.innerHTML}}/>
+            </IconButton> :
+            <div>
+              <Button variant="raised" onClick={this.props.openEditor}>
+                Follow
+              </Button>
+              <Button variant="raised" onClick={this.props.openEditor}>
+                Message
+              </Button>
+            </div>
+          }
 
           {/* <div className="right">
             {isAuthedUser ? (
