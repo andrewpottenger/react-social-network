@@ -18,6 +18,21 @@ const styles = (theme: any) => ({
     top: 0,
   },
 
+  headerButton: {
+    flex: 1,
+    height: 35,
+    ...fontScale.sm,
+    fontFamily: fontFamily.light,
+    backgroundColor: color['greyB9'],
+    color: color['white'],
+    textTransform: 'capitalize',
+    borderRadius: 0,
+  },
+
+  pinkButton: {
+    backgroundColor: color['primary-color-light'],
+  },
+
   editButtonSmall: {
     marginLeft: '20px',
     color: 'white',

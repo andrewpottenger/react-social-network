@@ -26,6 +26,14 @@ export interface IHomeHeaderComponentState {
   openNotifyMenu: boolean
 
   /**
+   * Show only header icon {true} or not {false}
+   *
+   * @type {boolean}
+   * @memberof IHomeHeaderComponentState
+   */
+    showOnlyIcon: boolean
+
+  /**
    * This is the DOM element that will be used to set the position of the popover.
    *
    * @type {*}

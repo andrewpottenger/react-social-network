@@ -79,6 +79,8 @@ const dimension = {
   mainContianerMaxWidth: '1214px',
   headerContainerMaxWidth: '1334px',
   headerHeight: '91px',
+  searchBarHeight: '40px',
+  headerAndSearchHeight: '131px',
   drawerWidth: '220px',
 }
 

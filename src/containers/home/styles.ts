@@ -3,9 +3,13 @@ import { dimension } from 'src/styles/inline/variables'
 const styles = (theme: any) => ({
   root: {
     width: '100%',
-    marginTop: dimension.headerHeight,
+    marginTop: dimension.headerAndSearchHeight,
     zIndex: 1,
-    overflow: 'hidden'
+    overflow: 'hidden',
+
+    [theme.breakpoints.up('md')]: {
+      marginTop: dimension.headerHeight,
+    }
   },
   appFrame: {
     position: 'relative',

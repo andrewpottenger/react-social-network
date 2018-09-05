@@ -76,7 +76,11 @@ export class HomeHeaderComponent extends Component<
       /**
        * If true notification menu will be open
        */
-      openNotifyMenu: false
+      openNotifyMenu: false,
+      /**
+       * If true notification menu will be open
+       */
+      showOnlyIcon: false
     }
 
     // Binding functions to `this`
@@ -162,24 +166,30 @@ export class HomeHeaderComponent extends Component<
     const { drawerStatus } = this.props
     // Set initial state
     let width = window.innerWidth
-
     if (width >= 600 && !drawerStatus) {
       this.onToggleSidebar()
     } else if (width < 600) {
     }
+    this.setState({showOnlyIcon: width < 1200})
   }
 
   componentDidMount() {
     this.handleResize(null)
+    window.addEventListener('resize', this.handleResize.bind(this))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize.bind(this))
   }
 
   // Render app DOM component
   render() {
     const { classes, translate, theme, userId } = this.props
-    const anchor = theme.direction === 'rtl' ? 'right' : 'left'
+    const { showOnlyIcon } = this.state
+    // const anchor = theme.direction === 'rtl' ? 'right' : 'left'
     return (
       <AppBar position="fixed" className={classes.root} >
-        <Toolbar className={cx(classes.toolBar, 'container-header')}>
+        <Toolbar className={cx(classes.toolBar)}>
           {/* Left side */}
           <a href="/">
             <img src="/images/backyardelogo.png" width="120" alt="Backyarde" />
@@ -196,7 +206,7 @@ export class HomeHeaderComponent extends Component<
               </div>
             </Hidden>
           </div> */}
-          <div className="homeHeader__search">
+          <div className={classes.searchContainer}>
             <SearchTextField
               id="change"
               label=""
@@ -206,20 +216,38 @@ export class HomeHeaderComponent extends Component<
 
           {/* Notification */}
           <div className="homeHeader__right">
-            <nav className="nav-links">
+            <nav className={cx('nav-links', classes.navLinks)}>
               <NavLink to="/find-a-property">
                 <MenuItem>
-                  <ListItemText primary={translate!('header.find-a-property')}/>
+                  {
+                    showOnlyIcon ?
+                      <ListItemIcon>
+                        <MailOutline color="primary" />
+                      </ListItemIcon> :
+                      <ListItemText primary={translate!('header.find-a-property')}/>
+                  }
                 </MenuItem>
               </NavLink>
               <NavLink to="/explore">
                 <MenuItem>
-                  <ListItemText primary={translate!('header.explore')} />
+                  {
+                    showOnlyIcon ?
+                      <ListItemIcon>
+                        <MailOutline color="primary" />
+                      </ListItemIcon> :
+                    <ListItemText primary={translate!('header.explore')} />
+                  }
                 </MenuItem>
               </NavLink>
               <NavLink to="/people">
                 <MenuItem>
-                  <ListItemText primary={translate!('header.people')} />
+                  {
+                    showOnlyIcon ?
+                      <ListItemIcon>
+                        <MailOutline color="primary" />
+                      </ListItemIcon> :
+                    <ListItemText primary={translate!('header.people')} />
+                  }
                 </MenuItem>
               </NavLink>
               {/* <NavLink to="/settings">
@@ -263,7 +291,7 @@ export class HomeHeaderComponent extends Component<
                   fullName={this.props.fullName!}
                   fileName={this.props.avatar!}
                   size={61}
-                  style={styles.avatarStyle}
+                  style={classes.avatarStyle}
                   onMouseEnter={this.handleAvatarTouchTap}
                 />
               </Badge>
@@ -420,6 +448,6 @@ const mapStateToProps = (
 }
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, {
-  withTheme: true
-})(HomeHeaderComponent as any) as any)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(
+  styles as any
+)(HomeHeaderComponent as any) as any)
