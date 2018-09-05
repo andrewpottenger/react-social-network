@@ -126,11 +126,11 @@ export class InfoComponent extends Component<
             <IconButton className={classes.editButton}>
               <div className={classes.editIcon} dangerouslySetInnerHTML={{__html: EditIcon.element.innerHTML}}/>
             </IconButton> :
-            <div>
-              <Button variant="raised" onClick={this.props.openEditor}>
+            <div className="profile__header-overlay">
+              <Button className={cx(classes.headerButton, classes.pinkButton)} variant="raised" onClick={this.props.openEditor}>
                 Follow
               </Button>
-              <Button variant="raised" onClick={this.props.openEditor}>
+              <Button className={classes.headerButton} variant="raised" onClick={this.props.openEditor}>
                 Message
               </Button>
             </div>
