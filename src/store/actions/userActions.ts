@@ -97,7 +97,7 @@ export const dbGetUserInfoByUserId = (uid: string, callerKey: string) => {
  * Updata user information
  * @param {object} newInfo
  */
-export const dbUpdateUserInfo = (newProfile: Profile) => {
+export const dbUpdateUserInfo = (newProfile: Profile, callback: Function) => {
   return (dispatch: any, getState: Function) => {
     const state: Map<string, any>  = getState()
     let uid: string = state.getIn(['authorize', 'uid'])
@@ -115,10 +115,11 @@ export const dbUpdateUserInfo = (newProfile: Profile) => {
       twitterId: newProfile.twitterId || '',
       creationDate: newProfile.creationDate
     }
-    return userService.updateUserProfile(uid,updatedProfile).then(() => {
+    return userService.updateUserProfile(uid, updatedProfile).then(() => {
 
       dispatch(updateUserInfo(uid, updatedProfile))
-      dispatch(closeEditProfile())
+      callback()
+      // dispatch(closeEditProfile())
     })
     .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
 

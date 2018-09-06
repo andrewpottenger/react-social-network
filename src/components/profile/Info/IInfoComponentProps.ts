@@ -57,11 +57,6 @@ export interface IInfoComponentProps {
   followerCount?: number
 
   /**
-   * Whether edit profile is open
-   */
-  editProfileOpen?: boolean
-
-  /**
    * Styles
    */
   classes?: any

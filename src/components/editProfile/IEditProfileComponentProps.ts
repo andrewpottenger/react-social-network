@@ -16,7 +16,7 @@ export interface IEditProfileComponentProps {
    * @type {string}
    * @memberof IEditProfileComponentProps
    */
-  banner: string
+  banner?: string
 
   /**
    * User avatar address
@@ -47,7 +47,7 @@ export interface IEditProfileComponentProps {
    *
    * @memberof IEditProfileComponentProps
    */
-  update?: (profile: Profile) => void
+  update?: (profile: Profile, callback?: Function) => void
 
   /**
    * On edit profile dialog close event

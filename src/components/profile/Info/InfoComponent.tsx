@@ -52,10 +52,8 @@ export class InfoComponent extends Component<
      * Defaul state
      */
     this.state = {
-      /**
-       * If it's true , the window is in small size
-       */
       isSmall: false,
+      editProfileOpen: false,
     }
 
     // Binding functions to `this`
@@ -88,8 +86,9 @@ export class InfoComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { avatar, fullName, address, companyName, followerCount, classes, translate, isAuthedUser, editProfileOpen } = this.props
-
+    const { avatar, fullName, address, companyName, followerCount, classes, translate, isAuthedUser } = this.props
+    const { editProfileOpen } = this.state
+    console.log('editProfileOpen ==>', editProfileOpen)
     return (
       <div>
         <div className="profileInfo">
@@ -123,7 +122,7 @@ export class InfoComponent extends Component<
           </div>
 
           {isAuthedUser ?
-            <IconButton className={classes.editButton}>
+            <IconButton className={classes.editButton} onClick={() => this.setState({editProfileOpen: true})}>
               <div className={classes.editIcon} dangerouslySetInnerHTML={{__html: EditIcon.element.innerHTML}}/>
             </IconButton> :
             <div className="profileInfo__header-overlay">
@@ -154,17 +153,19 @@ export class InfoComponent extends Component<
             )}
           </div> */}
         </div>
+
+        {
+          isAuthedUser && editProfileOpen &&
+            <EditProfile
+              avatar={avatar}
+              fullName={fullName}
+              open={editProfileOpen}
+              onRequestClose={() => this.setState({editProfileOpen: false})}
+            />
+        }
         
       </div>
-        // {isAuthedUser && editProfileOpen ? (
-        //   <EditProfile
-        //     avatar={this.props.avatar}
-        //     banner={this.props.banner}
-        //     fullName={this.props.fullName}
-        //   />
-        // ) : (
-        //   ''
-        // )}
+
     )
   }
 }
@@ -196,7 +197,7 @@ const mapStateToProps = (
 ) => {
   return {
     translate: getTranslate(state.get('locale')),
-    editProfileOpen: state.getIn(['user', 'openEditProfile'])
+    // editProfileOpen: state.getIn(['user', 'openEditProfile'])
   }
 }
 

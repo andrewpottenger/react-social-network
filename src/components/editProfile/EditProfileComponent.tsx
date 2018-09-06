@@ -52,51 +52,7 @@ import { IEditProfileComponentProps } from './IEditProfileComponentProps'
 import { IEditProfileComponentState } from './IEditProfileComponentState'
 import { Profile } from 'core/domain/users'
 
-const styles = (theme: any) => ({
-  dialogTitle: {
-    padding: 0
-  },
-  dialogContentRoot: {
-    maxHeight: 400,
-    minWidth: 330,
-    [theme.breakpoints.down('xs')]: {
-      maxHeight: '100%'
-    }
-  },
-  fullPageXs: {
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-      height: '100%',
-      margin: 0
-    }
-  },
-  fixedDownStickyXS: {
-    [theme.breakpoints.down('xs')]: {
-      position: 'fixed',
-      bottom: 0,
-      right: 0,
-      background: 'white',
-      width: '100%'
-    }
-  },
-  bottomPaperSpace: {
-    height: 16,
-    [theme.breakpoints.down('xs')]: {
-      height: 90
-    }
-  },
-  box: {
-    padding: '0px 24px 0px',
-    display: 'flex'
-  },
-  bottomTextSpace: {
-    marginBottom: 15
-  },
-  dayPicker: {
-    width: '100%',
-    padding: '13px 0px 8px'
-  }
-})
+import styles from './styles'
 
 /**
  * Create component class
@@ -191,6 +147,9 @@ export class EditProfileComponent extends Component<
        * User avatar address
        */
       avatar: props.avatar || '',
+
+      openModal: props.open,
+
       /**
        * It's true if the image galley for banner is open
        */
@@ -302,7 +261,7 @@ export class EditProfileComponent extends Component<
       webUrl,
       twitterId
     } = this.state
-    const { info, update } = this.props
+    const { info, update, onRequestClose } = this.props
 
     if (fullNameInput.trim() === '') {
       this.setState({
@@ -328,6 +287,8 @@ export class EditProfileComponent extends Component<
             : info && info.birthday
               ? info!.birthday!
               : 0
+      }, () => {
+        onRequestClose!()
       })
     }
   }
@@ -375,13 +336,22 @@ export class EditProfileComponent extends Component<
     this.handleResize(null)
   }
 
+  // componentWillReceiveProps(nextProps: IEditProfileComponentProps) {
+  //   const { open } = nextProps
+  //   if (open !== this.props.open) {
+  //     this.setState({openModal: open}, () => {
+  //       console.log('this.state.openModal ===>', this.state.openModal)
+  //     })
+  //   }
+  // }
+
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
   render() {
     const { classes, translate, currentLanguage } = this.props
-    const { defaultBirthday, webUrl, twitterId, companyName } = this.state
+    const { openModal, defaultBirthday, webUrl, twitterId, companyName } = this.state
     const iconButtonElement = (
       <IconButton
         style={
@@ -411,19 +381,22 @@ export class EditProfileComponent extends Component<
       </div>
     )
 
+    console.log('openModal ===>', openModal)
+
     return (
       <div>
         {/* Edit profile dialog */}
+        ddd
         <Dialog
           PaperProps={{ className: classes.fullPageXs }}
           key="Edit-Profile"
-          open={this.props.open!}
+          open={!!openModal}
           onClose={this.props.onRequestClose}
           maxWidth="sm"
         >
           <DialogContent className={classes.dialogContentRoot}>
             {/* Banner */}
-            <div style={{ position: 'relative' }}>
+            {/* <div style={{ position: 'relative' }}>
               <ImgCover
                 width="100%"
                 height="250px"
@@ -442,7 +415,7 @@ export class EditProfileComponent extends Component<
                   }}
                 />
               </div>
-            </div>
+            </div> */}
             <div className="profile__edit">
               <EventListener target="window" onResize={this.handleResize} />
               <div className="left">
@@ -585,7 +558,7 @@ export class EditProfileComponent extends Component<
         </Dialog>
 
         {/* Image gallery for banner*/}
-        <Dialog
+        {/* <Dialog
           PaperProps={{ className: classes.fullPageXs }}
           open={this.state.openBanner}
           onClose={this.handleCloseBannerGallery}
@@ -600,7 +573,7 @@ export class EditProfileComponent extends Component<
             set={this.handleRequestSetBanner}
             close={this.handleCloseBannerGallery}
           />
-        </Dialog>
+        </Dialog> */}
 
         {/* Image gallery for avatar */}
         <Dialog
@@ -635,8 +608,8 @@ const mapDispatchToProps = (
   ownProps: IEditProfileComponentProps
 ) => {
   return {
-    update: (info: Profile) => dispatch(userActions.dbUpdateUserInfo(info)),
-    onRequestClose: () => dispatch(userActions.closeEditProfile())
+    update: (info: Profile, callback: Function) => dispatch(userActions.dbUpdateUserInfo(info, callback)),
+    // onRequestClose: () => dispatch(userActions.closeEditProfile())
   }
 }
 
@@ -654,7 +627,7 @@ const mapStateToProps = (
   return {
     currentLanguage: getActiveLanguage(state.get('locale')).code,
     translate: getTranslate(state.get('locale')),
-    open: state.getIn(['user', 'openEditProfile'], false),
+    // open: state.getIn(['user', 'openEditProfile'], false),
     info: state.getIn(['user', 'info', uid]),
     avatarURL: state.getIn(['imageGallery', 'imageURLList'])
   }

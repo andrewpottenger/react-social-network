@@ -50,6 +50,14 @@ export interface IEditProfileComponentState {
   avatar: string
 
   /**
+   * Modal dialog is open for choosing banner image {true} or not {false}
+   *
+   * @type {boolean}
+   * @memberof IEditProfileComponentState
+   */
+  openModal?: boolean
+
+  /**
    * Image gallery dialog is open for choosing banner image {true} or not {false}
    *
    * @type {boolean}

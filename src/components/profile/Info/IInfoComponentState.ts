@@ -8,4 +8,9 @@ export interface IInfoComponentState {
    * @memberof IInfoComponentState
    */
   isSmall: boolean
+
+  /**
+   * Whether edit profile is open
+   */
+  editProfileOpen?: boolean
 }
