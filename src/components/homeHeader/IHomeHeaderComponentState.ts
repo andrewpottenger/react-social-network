@@ -1,4 +1,6 @@
 
+export type ViewSizeType = 'lg' | 'md' | 'sm' | 'xs' | undefined
+
 export interface IHomeHeaderComponentState {
 
   /**
@@ -26,12 +28,12 @@ export interface IHomeHeaderComponentState {
   openNotifyMenu: boolean
 
   /**
-   * Show only header icon {true} or not {false}
+   * viewSize
    *
-   * @type {boolean}
+   * @type {ViewSizeType}
    * @memberof IHomeHeaderComponentState
    */
-    showOnlyIcon: boolean
+  viewSize: ViewSizeType
 
   /**
    * This is the DOM element that will be used to set the position of the popover.

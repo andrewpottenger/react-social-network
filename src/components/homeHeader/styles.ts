@@ -2,18 +2,38 @@ import { fontScale, color, dimension } from 'src/styles/inline/variables'
 import { layouts } from 'src/styles/inline'
 
 const styles = (theme: any) => ({
+  menuRoot: {
+
+    '& > div': {
+      top: '91px !important',
+      marginLeft: '20px',
+
+      [theme.breakpoints.down('xs')]: {
+        left: '0 !important',
+        right: '0 !important',
+        maxWidth: 'unset',
+        marginLeft: 0,
+      },
+    },
+    
+    '& ul': {
+      padding: 0,
+      width: '200px',
+
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+      },
+    },
+  },
+
   root: {
     backgroundColor: color['secondary-color'],
-
-    // [theme.breakpoints.up('sm')]: {
-    //   padding: '34px 24px',
-    // },
   },
 
   toolBar: {
     ...layouts.headerContainer,
+    width: 'calc(100% - 24px)',
     minHeight: dimension.headerHeight,
-    minWidth: '320px',
     maxWidth: '600px',
     paddingLeft: '12px',
     paddingRight: '12px',
@@ -24,6 +44,7 @@ const styles = (theme: any) => ({
     },
 
     [theme.breakpoints.up('md')]: {
+      width: 'calc(100% - 48px)',
       paddingLeft: '24px',
       paddingRight: '24px',
       minWidth: '918px',
@@ -70,10 +91,49 @@ const styles = (theme: any) => ({
     }
   },
 
+  headerAvatarContainer: {
+    marginLeft: 15,
+
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: 40,
+    },
+
+    [theme.breakpoints.up('md')]: {
+      marginLeft: 70,
+    },
+  },
+
   avatarStyle: {
     margin: 5,
     cursor: 'pointer'
-  }
+  },
+
+  headerNavItem: {
+    backgroundColor: color['primary-color-light'],
+    color: 'white',
+    ...fontScale.sm,
+  },
+
+  headerNavItemSmall: {
+    backgroundColor: color['primary-color-light'],
+    '& a': {
+      color: 'white',
+      ...fontScale.xs,
+    }
+  },
+
+  activeNavItem: {
+    backgroundColor: color['grey9B'],
+    color: 'white',
+    ...fontScale.sm,
+  },
+
+  navItem: {
+    backgroundColor: 'white',
+    color: color['grey4A'],
+    ...fontScale.sm,
+  },
+  
 })
 
 export default styles

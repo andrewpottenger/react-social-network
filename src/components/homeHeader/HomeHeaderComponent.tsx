@@ -42,7 +42,7 @@ import { SearchTextField } from 'components/widgets/Form'
 import * as globalActions from 'store/actions/globalActions'
 import { authorizeActions } from 'store/actions'
 import { IHomeHeaderComponentProps } from './IHomeHeaderComponentProps'
-import { IHomeHeaderComponentState } from './IHomeHeaderComponentState'
+import { IHomeHeaderComponentState, ViewSizeType } from './IHomeHeaderComponentState'
 
 // - Import styles
 import styles from './styles'
@@ -80,7 +80,8 @@ export class HomeHeaderComponent extends Component<
       /**
        * If true notification menu will be open
        */
-      showOnlyIcon: false
+      // viewSize: ,
+      viewSize: 'lg',
     }
 
     // Binding functions to `this`
@@ -102,7 +103,7 @@ export class HomeHeaderComponent extends Component<
 
   // On click toggle sidebar
   onToggleSidebar = () => {
-    const { onToggleDrawer } = this.props
+    // const { onToggleDrawer } = this.props
     // onToggleDrawer()
   }
 
@@ -163,14 +164,25 @@ export class HomeHeaderComponent extends Component<
    * @param  {event} evt is the event is passed by winodw resize event
    */
   handleResize = (event: any) => {
-    const { drawerStatus } = this.props
+    // const { drawerStatus } = this.props
     // Set initial state
     let width = window.innerWidth
-    if (width >= 600 && !drawerStatus) {
-      this.onToggleSidebar()
-    } else if (width < 600) {
+    // if (width >= 600 && !drawerStatus) {
+    //   this.onToggleSidebar()
+    // } else if (width < 600) {
+
+    // }
+    let viewSize: ViewSizeType = 'lg'
+    if (width > 1200) {
+      viewSize = 'lg'
+    } else if (width > 600) {
+      viewSize = 'md'
+    } else {
+      viewSize = 'xs'
     }
-    this.setState({showOnlyIcon: width < 1200})
+
+    this.setState({viewSize})
+    // this.setState({showOnlyIcon: width < 1200})
   }
 
   componentDidMount() {
@@ -185,7 +197,7 @@ export class HomeHeaderComponent extends Component<
   // Render app DOM component
   render() {
     const { classes, translate, theme, userId } = this.props
-    const { showOnlyIcon } = this.state
+    const { viewSize } = this.state
     // const anchor = theme.direction === 'rtl' ? 'right' : 'left'
     return (
       <AppBar position="fixed" className={classes.root} >
@@ -220,7 +232,7 @@ export class HomeHeaderComponent extends Component<
               <NavLink to="/find-a-property">
                 <MenuItem>
                   {
-                    showOnlyIcon ?
+                    viewSize !== 'lg' ?
                       <ListItemIcon>
                         <MailOutline color="primary" />
                       </ListItemIcon> :
@@ -231,7 +243,7 @@ export class HomeHeaderComponent extends Component<
               <NavLink to="/explore">
                 <MenuItem>
                   {
-                    showOnlyIcon ?
+                     viewSize !== 'lg' ?
                       <ListItemIcon>
                         <MailOutline color="primary" />
                       </ListItemIcon> :
@@ -242,7 +254,7 @@ export class HomeHeaderComponent extends Component<
               <NavLink to="/people">
                 <MenuItem>
                   {
-                    showOnlyIcon ?
+                     viewSize !== 'lg' ?
                       <ListItemIcon>
                         <MailOutline color="primary" />
                       </ListItemIcon> :
@@ -283,7 +295,7 @@ export class HomeHeaderComponent extends Component<
 
             {/* User avatar*/}
             <div
-              className="grid grid__center header__avatar"
+              className={cx('grid grid__center', classes.headerAvatarContainer)}
               onClick={this.handleAvatarTouchTap}
             >
               <Badge className={classes.badge} badgeContent={4}>
@@ -296,117 +308,61 @@ export class HomeHeaderComponent extends Component<
                 />
               </Badge>
               <SvgKeyboardArrowDown color="primary"/>
-
             </div>
 
             <Menu
               open={this.state.openAvatarMenu}
               anchorEl={this.state.anchorEl!}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right'}}
               onClose={this.handleRequestClose}
-              className={classes.dropDown}
+              className={classes.menuRoot}
             >
-              <MenuItem
-                style={{
-                  backgroundColor: '#b450bb',
-                  color: 'white',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.my-properties')}{' '}
+              <MenuItem className={classes.headerNavItem}>
+                {' '}{translate!('header.my-properties')}{' '}
               </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#b450bb',
-                  color: 'white',
-                  fontSize: '12px'
-                }}
-              >
+              <MenuItem className={classes.headerNavItemSmall}>
                 <NavLink to={`/${userId}/property`} onClick={() => {this.setState({openAvatarMenu: false})}}>
-                  {' '}
-                  {translate!('header.add-property')}{' '}
+                  {' '}{translate!('header.add-property')}{' '}
                 </NavLink>
               </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#9b9b9b',
-                  color: 'white',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.my-favorites')}{' '}
+              <MenuItem className={classes.activeNavItem}>
+                {' '}{translate!('header.my-favorites')}{' '}
               </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-              >
+              <MenuItem className={classes.navItem}>
                 <NavLink to={`/${userId}`} onClick={() => {this.setState({openAvatarMenu: false})}}>
-                  {' '}
-                  {translate!('header.profile')}{' '}
+                  {' '}{translate!('header.edit-profile')}{' '}
                 </NavLink>
               </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.edit-profile')}{' '}
+              <MenuItem className={classes.navItem}>
+                {' '}{translate!('header.settings')}{' '}
               </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.settings')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: '#d8d8d8',
-                  color: '#4a4a4a',
-                  fontSize: '14px'
-                }}
-                onClick={this.handleLogout.bind(this)}
-              >
-                {' '}
-                {translate!('header.logout')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{
-                  backgroundColor: 'white',
-                  color: blue[500],
-                  fontSize: '14px'
-                }}
-              >
-                {' '}
-                {translate!('header.myAccount')}{' '}
-              </MenuItem>
-              <MenuItem
-                style={{ fontSize: '14px' }}
-                onClick={this.handleLogout.bind(this)}
-              >
-                {' '}
-                {translate!('header.logout')}{' '}
+  
+              {
+                 viewSize === 'xs' &&
+                  <div>
+                    <MenuItem className={classes.navItem}>
+                      <NavLink to="/find-a-property">
+                        {' '}{translate!('header.find-a-property')}{' '}
+                      </NavLink>
+                    </MenuItem>
+                    <MenuItem className={classes.navItem}>
+                      <NavLink to="/explore">
+                        {' '}{translate!('header.explore')}{' '} 
+                      </NavLink>
+                    </MenuItem>
+                    <MenuItem className={classes.navItem}>
+                      <NavLink to="/people">
+                        {' '}{translate!('header.people')}{' '}
+                      </NavLink>
+                    </MenuItem>
+                  </div>
+              }
+
+              <MenuItem className={classes.navItem} onClick={this.handleLogout.bind(this)}>
+                {' '}{translate!('header.logout')}{' '}
               </MenuItem>
             </Menu>
-            
           </div>
         </Toolbar>
       </AppBar>
