@@ -132,7 +132,7 @@ export class UserBoxComponent extends Component<
       /**
        * The value of circle input
        */
-      circleName: ``,
+      circleName: `Following`,
       /**
        * It will be true if the text field for adding group is empty
        */
@@ -199,11 +199,19 @@ export class UserBoxComponent extends Component<
     ) {
       return
     }
-    if (!isFollowed) {
-      followUser!(followingCircle!.get('id'), { avatar, userId, fullName })
+
+    if (!this.props.followingCircle) {
+      this.props.createCircle!('Following', () => {
+        followUser!(this.props.followingCircle!.get('id'), { avatar, userId, fullName })
+      })
     } else {
-      this.onRequestOpenAddCircle()
+      if (!isFollowed) {
+        followUser!(followingCircle!.get('id'), { avatar, userId, fullName })
+      } else {
+        this.onRequestOpenAddCircle()
+      }
     }
+
   }
 
   /**
@@ -515,7 +523,7 @@ const mapDispatchToProps = (
   ownProps: IUserBoxComponentProps
 ) => {
   return {
-    createCircle: (name: string) => dispatch(circleActions.dbAddCircle(name)),
+    createCircle: (name: string, callback: Function) => dispatch(circleActions.dbAddCircle(name, callback)),
     addUserToCircle: (circleIds: ImuList<string>, user: UserTie) =>
       dispatch(circleActions.dbUpdateUserInCircles(circleIds, user)),
     followUser: (circleId: string, userFollowing: UserTie) =>
@@ -546,7 +554,7 @@ const mapStateToProps = (
 ) => {
   const uid = state.getIn(['authorize', 'uid'])
   const request = state.getIn(['server', 'request'])
-
+  console.log('state ==> ', state)
   const circles: Map<string, Map<string, any>> = state.getIn(
     ['circle', 'circleList'],
     {}
@@ -555,14 +563,17 @@ const mapStateToProps = (
     ['circle', 'userTies', ownProps.userId, 'circleIdList'],
     ImuList()
   )
+
   const isFollowed = userBelongCircles.count() > 0
+  console.log('circles ==> ', circles)
   const followingCircle = circles
     .filter(
       followingCircle =>
-        followingCircle!.get('isSystem', false) &&
+        followingCircle!.get('isSystem') === false &&
         followingCircle!.get('name') === `Following`
     )
     .toArray()[0]
+    console.log('followingCircle ==ddd> ', followingCircle)
   const followRequestId = StringAPI.createServerRequestId(
     ServerRequestType.CircleFollowUser,
     ownProps.userId
@@ -588,7 +599,7 @@ const mapStateToProps = (
   ])
   const selectedCircles = state.getIn(
     ['circle', 'selectedCircles', ownProps.userId],
-    []
+    ImuList()
   )
 
   const isSelecteCirclesOpen = state.getIn(

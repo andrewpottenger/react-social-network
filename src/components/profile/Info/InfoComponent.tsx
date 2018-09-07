@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import config from 'src/config'
-import { Map } from 'immutable'
+import { Map, List as ImuList } from 'immutable'
 import cx from 'classnames'
 
 // - Material UI
@@ -24,12 +24,19 @@ import UserAvatar from 'components/userAvatar'
 import { EditIcon } from 'components/SvgIcons'
 
 // - Import API
+import StringAPI from 'api/StringAPI'
 
 // - Import actions
 import * as globalActions from 'store/actions/globalActions'
 import * as userActions from 'store/actions/userActions'
+import * as circleActions from 'store/actions/circleActions'
 import { IInfoComponentProps } from './IInfoComponentProps'
 import { IInfoComponentState } from './IInfoComponentState'
+
+// - Import Domain
+import { UserTie } from 'core/domain/circles'
+import { ServerRequestType } from 'constants/serverRequestType'
+import { ServerRequestStatusType } from 'store/actions/serverRequestStatusType'
 
 // - Import styles
 import styles from './styles'
@@ -82,6 +89,43 @@ export class InfoComponent extends Component<
   }
 
   /**
+   * Handle follow user
+   */
+  onFollowUser = (event: any) => {
+    // This prevents ghost click
+    event.preventDefault()
+    const {
+      isFollowed,
+      followUser,
+      followingCircle,
+      userId,
+      followRequest,
+      avatar,
+      fullName
+    } = this.props
+
+    if (
+      followRequest &&
+      followRequest.status === ServerRequestStatusType.Sent
+    ) {
+      return
+    }
+
+    if (!this.props.followingCircle) {
+      this.props.createCircle!('Following', () => {
+        followUser!(this.props.followingCircle!.get('id'), { avatar, userId, fullName })
+      })
+    } else {
+      if (!isFollowed) {
+        followUser!(followingCircle!.get('id'), { avatar, userId, fullName })
+      } else {
+        // this.onRequestOpenAddCircle()
+      }
+    }
+
+  }
+
+  /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
@@ -126,7 +170,7 @@ export class InfoComponent extends Component<
               <div className={classes.editIcon} dangerouslySetInnerHTML={{__html: EditIcon.element.innerHTML}}/>
             </IconButton> :
             <div className="profileInfo__header-overlay">
-              <Button className={cx(classes.headerButton, classes.pinkButton)} variant="flat" onClick={this.props.openEditor}>
+              <Button className={cx(classes.headerButton, classes.pinkButton)} variant="flat" onClick={this.onFollowUser}>
                 Follow
               </Button>
               <Button className={classes.headerButton} variant="flat" onClick={this.props.openEditor}>
@@ -181,7 +225,10 @@ const mapDispatchToProps = (
   ownProps: IInfoComponentProps
 ) => {
   return {
-    openEditor: () => dispatch(userActions.openEditProfile())
+    openEditor: () => dispatch(userActions.openEditProfile()),
+    createCircle: (name: string, callback: Function) => dispatch(circleActions.dbAddCircle(name, callback)),
+    followUser: (circleId: string, userFollowing: UserTie) =>
+      dispatch(circleActions.dbFollowUser(circleId, userFollowing)),
   }
 }
 
@@ -195,8 +242,34 @@ const mapStateToProps = (
   state: Map<string, any>,
   ownProps: IInfoComponentProps
 ) => {
+
+  const circles: Map<string, Map<string, any>> = state.getIn(
+    ['circle', 'circleList'],
+    {}
+  )
+  const userBelongCircles: ImuList<any> = state.getIn(
+    ['circle', 'userTies', ownProps.userId, 'circleIdList'],
+    ImuList()
+  )
+  const isFollowed = userBelongCircles.count() > 0
+  const followingCircle = circles
+    .filter(
+      followingCircle =>
+        followingCircle!.get('isSystem') === false &&
+        followingCircle!.get('name') === `Following`
+    )
+    .toArray()[0]
+  const followRequestId = StringAPI.createServerRequestId(
+    ServerRequestType.CircleFollowUser,
+    ownProps.userId
+  )
+  const followRequest = state.getIn(['server', 'request', followRequestId])
+
   return {
     translate: getTranslate(state.get('locale')),
+    isFollowed,
+    followingCircle,
+    followRequest,
     // editProfileOpen: state.getIn(['user', 'openEditProfile'])
   }
 }

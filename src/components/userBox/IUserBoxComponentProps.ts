@@ -59,7 +59,7 @@ export interface IUserBoxComponentProps {
   /**
    * Create a circle
    */
-  createCircle?: (name: string) => any
+  createCircle?: (name: string, callback?: Function) => any
 
   /**
    * Add a user in a circle

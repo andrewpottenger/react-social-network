@@ -35,7 +35,7 @@ const userTieService: IUserTieService = provider.get<IUserTieService>(SocialProv
  * Add a circle
  * @param {string} circleName
  */
-export let dbAddCircle = (circleName: string) => {
+export let dbAddCircle = (circleName: string, callback?: Function) => {
   return (dispatch: any, getState: Function) => {
 
     const state: Map<string, any>  = getState()
@@ -50,6 +50,9 @@ export let dbAddCircle = (circleName: string) => {
       circle.id = circleKey
       circle.ownerId = uid
       dispatch(addCircle(Map(circle)))
+      setTimeout(() => {
+        callback!()
+      }, 500)
 
     }, (error: SocialError) => dispatch(globalActions.showMessage(error.message)))
 

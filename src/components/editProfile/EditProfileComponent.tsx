@@ -474,7 +474,7 @@ export class EditProfileComponent extends Component<
                   </FormHelperText>
                 </FormControl>
               </div>
-              <div className={classes.box}>
+              {/* <div className={classes.box}>
                 <FormControl fullWidth aria-describedby="tagLineInputError">
                   <InputLabel htmlFor="tagLineInput">
                     {translate!('profile.tagline')}
@@ -489,7 +489,7 @@ export class EditProfileComponent extends Component<
                     {this.state.fullNameInputError}
                   </FormHelperText>
                 </FormControl>
-              </div>
+              </div> */}
               <div className={classes.box}>
                 <TextField
                   className={classes.bottomTextSpace}
@@ -500,7 +500,7 @@ export class EditProfileComponent extends Component<
                   fullWidth
                 />
               </div>
-              <div className={classes.box}>
+              {/* <div className={classes.box}>
                 <TextField
                   className={classes.bottomTextSpace}
                   onChange={this.handleInputChange}
@@ -535,7 +535,7 @@ export class EditProfileComponent extends Component<
                     localeUtils: MomentLocaleUtils
                   }}
                 />
-              </div>
+              </div> */}
               <br />
             </Paper>
             <div className={classes.bottomPaperSpace} />

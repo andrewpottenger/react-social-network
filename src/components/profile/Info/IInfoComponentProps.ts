@@ -1,3 +1,6 @@
+import { ServerRequestModel } from 'models/server/serverRequestModel'
+import { UserTie } from 'core/domain/circles'
+
 export interface IInfoComponentProps {
 
   /**
@@ -49,12 +52,27 @@ export interface IInfoComponentProps {
   companyName: string
 
   /**
+   * Whether current user followed this user
+   */
+  isFollowed?: boolean
+
+  /**
    * Number of user followers
    *
    * @type {number}
    * @memberof IProfileHeaderComponentProps
    */
   followerCount?: number
+
+  /**
+   * The `Following` circle identifier of current user
+   */
+  followingCircle?: Map<string, any>
+
+  /**
+   * The status of following user server request
+   */
+  followRequest?: ServerRequestModel
 
   /**
    * Styles
@@ -67,6 +85,16 @@ export interface IInfoComponentProps {
    * @memberof IInfoComponentProps
    */
   openEditor?: () => void
+
+  /**
+   * Add referer user to the `Following` circle of current user
+   */
+  followUser?: (circleId: string, userFollowing: UserTie) => any
+
+  /**
+   * Create a circle
+   */
+  createCircle?: (name: string, callback?: Function) => any
 
   /**
    * Translate to locale string
