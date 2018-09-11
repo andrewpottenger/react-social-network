@@ -324,10 +324,56 @@ export const dbGetCirclesByUserId = (uid: string) => {
   return (dispatch: any, getState: Function) => {
 
     if (uid) {
+      console.log('userId ==>', uid)
       return circleService.getCircles(uid)
         .then((circles: { [circleId: string]: Circle }) => {
+          console.log('dbGetCirclesByUserId ===>', circles)
           dispatch(addCircles(circles))
         })
+        .catch((error: SocialError) => {
+          dispatch(globalActions.showMessage(error.message))
+        })
+    }
+  }
+}
+
+/**
+ *  Get all user ties from data base by userId
+ */
+export const dbGetUserTiesByUserId = (userId: string) => {
+  return (dispatch: any, getState: Function) => {
+    const state: Map<string, any>  = getState()
+    console.log('userId ==>', userId)
+    if (userId) {
+      userTieService.getUserTies(userId).then((result) => {
+
+        // dispatch(userActions.addPeopleInfo(result as any))
+        // dispatch(addUserTies(result))
+        console.log('dbGetUserTiesByUserId ====>', result)
+
+      })
+        .catch((error: SocialError) => {
+          dispatch(globalActions.showMessage(error.message))
+        })
+    }
+  }
+}
+
+/**
+ *  Get all followers by userId
+ */
+export const dbGetFollowersByUserId = (userId: string) => {
+  return (dispatch: any, getState: Function) => {
+    const state: Map<string, any>  = getState()
+    console.log('userId ==>', userId)
+    if (userId) {
+      userTieService.getUserTieSender(userId).then((result) => {
+
+        // dispatch(userActions.addPeopleInfo(result as any))
+        // dispatch(addUserTieds(result))
+        console.log('dbGetFollowersByUserId ====>', result)
+
+      })
         .catch((error: SocialError) => {
           dispatch(globalActions.showMessage(error.message))
         })

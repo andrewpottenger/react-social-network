@@ -97,6 +97,21 @@ export interface IInfoComponentProps {
   createCircle?: (name: string, callback?: Function) => any
 
   /**
+   * Load circles by userId
+   */
+  loadCircles?: (userId: string) => any
+
+  /**
+   * Load UserTies by userId
+   */
+  getUserTies?: (userId: string) => any
+
+  /**
+   * Load followers by userId
+   */
+  getFollowers?: (userId: string) => any
+
+  /**
    * Translate to locale string
    */
   translate?: (state: any) => any

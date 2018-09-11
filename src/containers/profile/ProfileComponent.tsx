@@ -24,12 +24,14 @@ import { Property } from 'src/core/domain/properties'
 import * as postActions from 'src/store/actions/postActions'
 import * as userActions from 'src/store/actions/userActions'
 import * as propertyActions from 'store/actions/propertyActions'
+import * as dbGetCirclesByUserId from 'store/actions/circleActions'
 import { IProfileComponentProps } from './IProfileComponentProps'
 import { IProfileComponentState } from './IProfileComponentState'
 import { Profile } from 'core/domain/users'
 
 // - Import styles
 import styles from './styles'
+import { circleActions } from 'store/actions'
 
 const propertyData = {
   image: 'images/Section3_image1.jpg',
@@ -155,7 +157,7 @@ export class ProfileComponent extends Component<
         <div className={classes.profile}>          
           <div className={classes.sideContainer}>
             <Info
-              userId=""
+              userId={userId}
               isAuthedUser={isAuthedUser}
               fullName={fullName}
               avatar={avatar}
@@ -164,7 +166,7 @@ export class ProfileComponent extends Component<
               followerCount={573}
             />
             <Neighbors
-              userId=""
+              userId={userId}
               isAuthedUser={isAuthedUser}
               fullName="Brian D’Ambrosio"
               avatar="images/profile-image.jpg"

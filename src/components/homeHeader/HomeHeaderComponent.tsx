@@ -25,6 +25,7 @@ import { ListItemIcon, ListItemText } from 'material-ui/List'
 import Paper from 'material-ui/Paper'
 import Hidden from 'material-ui/Hidden'
 import MailOutline from 'material-ui-icons/MailOutline'
+// import People from 'material-ui-icons/People'
 import Tooltip from 'material-ui/Tooltip'
 import Badge from 'material-ui/Badge'
 import Typography from 'material-ui/Typography'
@@ -234,7 +235,8 @@ export class HomeHeaderComponent extends Component<
                   {
                     viewSize !== 'lg' ?
                       <ListItemIcon>
-                        <MailOutline color="primary" />
+                       
+                        <SvgHome color="primary" />
                       </ListItemIcon> :
                       <ListItemText primary={translate!('header.find-a-property')}/>
                   }
@@ -245,7 +247,7 @@ export class HomeHeaderComponent extends Component<
                   {
                      viewSize !== 'lg' ?
                       <ListItemIcon>
-                        <MailOutline color="primary" />
+                        <SvgExplore color="primary" />
                       </ListItemIcon> :
                     <ListItemText primary={translate!('header.explore')} />
                   }
@@ -256,7 +258,7 @@ export class HomeHeaderComponent extends Component<
                   {
                      viewSize !== 'lg' ?
                       <ListItemIcon>
-                        <MailOutline color="primary" />
+                        <SvgPeople color="primary" />
                       </ListItemIcon> :
                     <ListItemText primary={translate!('header.people')} />
                   }

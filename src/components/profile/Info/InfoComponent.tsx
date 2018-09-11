@@ -85,7 +85,11 @@ export class InfoComponent extends Component<
   }
 
   componentDidMount() {
+    const { loadCircles, getUserTies, getFollowers, userId } = this.props
     this.handleResize()
+    loadCircles!(userId)
+    getUserTies!(userId)
+    getFollowers!(userId)
   }
 
   /**
@@ -226,6 +230,9 @@ const mapDispatchToProps = (
 ) => {
   return {
     openEditor: () => dispatch(userActions.openEditProfile()),
+    loadCircles: (userId: string) => dispatch(circleActions.dbGetCirclesByUserId(userId)),
+    getUserTies: (userId: string) => dispatch(circleActions.dbGetUserTiesByUserId(userId)),
+    getFollowers: (userId: string) => dispatch(circleActions.dbGetFollowersByUserId(userId)),
     createCircle: (name: string, callback: Function) => dispatch(circleActions.dbAddCircle(name, callback)),
     followUser: (circleId: string, userFollowing: UserTie) =>
       dispatch(circleActions.dbFollowUser(circleId, userFollowing)),
@@ -247,10 +254,13 @@ const mapStateToProps = (
     ['circle', 'circleList'],
     {}
   )
+
+  console.log('ownProps.userId xxxxx==> ', ownProps.userId)
   const userBelongCircles: ImuList<any> = state.getIn(
     ['circle', 'userTies', ownProps.userId, 'circleIdList'],
     ImuList()
   )
+
   const isFollowed = userBelongCircles.count() > 0
   const followingCircle = circles
     .filter(
@@ -264,6 +274,8 @@ const mapStateToProps = (
     ownProps.userId
   )
   const followRequest = state.getIn(['server', 'request', followRequestId])
+
+  console.log('this.state in profile xxxxx==> ', state)
 
   return {
     translate: getTranslate(state.get('locale')),
