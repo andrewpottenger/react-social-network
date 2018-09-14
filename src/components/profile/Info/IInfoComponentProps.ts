@@ -89,7 +89,7 @@ export interface IInfoComponentProps {
   /**
    * Add referer user to the `Following` circle of current user
    */
-  followUser?: (circleId: string, userFollowing: UserTie) => any
+  followUser?: (circleId: string, userFollowing: UserTie, callback: Function) => any
 
   /**
    * Create a circle

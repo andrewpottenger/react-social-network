@@ -89,7 +89,7 @@ export const dbUpdateProperty = (newProperty: Property) => {
 /* _____________ CRUD State _____________ */
 
 /**
- * Update user information
+ * Update property
  */
 export const updateProperties = (uid: string, properties: Property[]) => {
   return {

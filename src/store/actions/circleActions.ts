@@ -62,7 +62,7 @@ export let dbAddCircle = (circleName: string, callback?: Function) => {
 /**
  * Add referer user to the `Following` circle of current user
  */
-export const dbFollowUser = (followingCircleId: string, userFollowing: UserTie) => {
+export const dbFollowUser = (followingCircleId: string, userFollowing: UserTie, callback?: Function) => {
   return (dispatch: Function, getState: Function) => {
     const state: Map<string, any>  = getState()
     let uid: string = state.getIn(['authorize', 'uid'])
@@ -103,6 +103,8 @@ export const dbFollowUser = (followingCircleId: string, userFollowing: UserTie) 
             notifierUserId: uid,
             isSeen: false
           }))
+
+        callback!()
 
       }, (error: SocialError) => {
         dispatch(globalActions.showMessage(error.message))
@@ -324,10 +326,8 @@ export const dbGetCirclesByUserId = (uid: string) => {
   return (dispatch: any, getState: Function) => {
 
     if (uid) {
-      console.log('userId ==>', uid)
       return circleService.getCircles(uid)
         .then((circles: { [circleId: string]: Circle }) => {
-          console.log('dbGetCirclesByUserId ===>', circles)
           dispatch(addCircles(circles))
         })
         .catch((error: SocialError) => {
@@ -343,13 +343,12 @@ export const dbGetCirclesByUserId = (uid: string) => {
 export const dbGetUserTiesByUserId = (userId: string) => {
   return (dispatch: any, getState: Function) => {
     const state: Map<string, any>  = getState()
-    console.log('userId ==>', userId)
     if (userId) {
       userTieService.getUserTies(userId).then((result) => {
-
-        // dispatch(userActions.addPeopleInfo(result as any))
-        // dispatch(addUserTies(result))
-        console.log('dbGetUserTiesByUserId ====>', result)
+        const ties = {
+          ...result,
+        }
+        dispatch(userActions.updateUserInfoTies(userId, ties as any))
 
       })
         .catch((error: SocialError) => {
@@ -365,14 +364,12 @@ export const dbGetUserTiesByUserId = (userId: string) => {
 export const dbGetFollowersByUserId = (userId: string) => {
   return (dispatch: any, getState: Function) => {
     const state: Map<string, any>  = getState()
-    console.log('userId ==>', userId)
     if (userId) {
       userTieService.getUserTieSender(userId).then((result) => {
-
-        // dispatch(userActions.addPeopleInfo(result as any))
-        // dispatch(addUserTieds(result))
-        console.log('dbGetFollowersByUserId ====>', result)
-
+        const followers = {
+          ...result,
+        }
+        dispatch(userActions.updateUserInfoFollowers(userId, followers as any))
       })
         .catch((error: SocialError) => {
           dispatch(globalActions.showMessage(error.message))

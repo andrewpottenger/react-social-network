@@ -192,6 +192,26 @@ export const updateUserInfo = (uid: string, info: Profile) => {
   }
 }
 
+/**
+ * Update user information ties
+ */
+export const updateUserInfoTies = (uid: string, info: Profile) => {
+  return {
+    type: UserActionType.UPDATE_USER_INFO_TIES,
+    payload: { uid, info }
+  }
+}
+
+/**
+ * Update user information followers
+ */
+export const updateUserInfoFollowers = (uid: string, info: Profile) => {
+  return {
+    type: UserActionType.UPDATE_USER_INFO_FOLLOWERS,
+    payload: { uid, info }
+  }
+}
+
 export const clearAllData = () => {
   return {
     type: UserActionType.CLEAR_ALL_DATA_USER

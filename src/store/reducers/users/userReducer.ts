@@ -31,6 +31,26 @@ export let userReducer = (state = Map(new UserState()), action: IUserAction) => 
       return state
         .mergeIn(['info', payload.uid], payload.info)
 
+    case UserActionType.UPDATE_USER_INFO_TIES:
+    {
+      const userInfo = {
+        ...state.getIn(['info', payload.uid]),
+        ties: { ...payload.info },
+      }
+      return state
+        .setIn(['info', payload.uid], userInfo)
+    }
+
+    case UserActionType.UPDATE_USER_INFO_FOLLOWERS:
+    {
+      const userInfo = {
+        ...state.getIn(['info', payload.uid]),
+        followers: { ...payload.info },
+      }
+      return state
+        .setIn(['info', payload.uid], userInfo)
+    }
+
     case UserActionType.CLEAR_ALL_DATA_USER:
       return Map(new UserState())
 

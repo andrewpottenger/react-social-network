@@ -381,8 +381,6 @@ export class EditProfileComponent extends Component<
       </div>
     )
 
-    console.log('openModal ===>', openModal)
-
     return (
       <div>
         {/* Edit profile dialog */}

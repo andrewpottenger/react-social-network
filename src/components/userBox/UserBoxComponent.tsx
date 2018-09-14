@@ -554,7 +554,6 @@ const mapStateToProps = (
 ) => {
   const uid = state.getIn(['authorize', 'uid'])
   const request = state.getIn(['server', 'request'])
-  console.log('state ==> ', state)
   const circles: Map<string, Map<string, any>> = state.getIn(
     ['circle', 'circleList'],
     {}
@@ -565,7 +564,6 @@ const mapStateToProps = (
   )
 
   const isFollowed = userBelongCircles.count() > 0
-  console.log('circles ==> ', circles)
   const followingCircle = circles
     .filter(
       followingCircle =>

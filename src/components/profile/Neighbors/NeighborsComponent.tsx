@@ -47,6 +47,7 @@ const styles = (theme: any) => ({
   },
 
   gridList: {
+    width: '100%',
     height: 'auto',
     margin: '-5px !important',
     
@@ -59,72 +60,6 @@ const styles = (theme: any) => ({
     width: '100%',
   },
 })
-
-// Todo | Fake data, 
-const tileData = [
-  {
-    img: 'images/section2_image1.jpg',
-    title: 'Breakfast',
-    author: 'jill111',
-    featured: true,
-  },
-  {
-    img: 'images/section2_image2.jpg',
-    title: 'Tasty burger',
-    author: 'director90',
-  },
-  {
-    img: 'images/section2_image3.jpg',
-    title: 'Camera',
-    author: 'Danson67',
-  },
-  {
-    img: 'images/section2_image4.jpg',
-    title: 'Morning',
-    author: 'fancycrave1',
-    featured: true,
-  },
-  {
-    img: 'images/section2_image5.jpg',
-    title: 'Hats',
-    author: 'Hans',
-  },
-  {
-    img: 'images/section2_image6.jpg',
-    title: 'Honey',
-    author: 'fancycravel',
-  },
-  {
-    img: 'images/section2_image7.jpg',
-    title: 'Vegetables',
-    author: 'jill111',
-  },
-  {
-    img: 'images/section2_image8.jpg',
-    title: 'Water plant',
-    author: 'BkrmadtyaKarki',
-  },
-  {
-    img: 'images/section2_image9.jpg',
-    title: 'Mushrooms',
-    author: 'PublicDomainPictures',
-  },
-  {
-    img: 'images/section2_image10.jpg',
-    title: 'Olive oil',
-    author: 'congerdesign',
-  },
-  {
-    img: 'images/section2_image11.jpg',
-    title: 'Sea star',
-    author: '821292',
-  },
-  {
-    img: 'images/section2_image12.jpg',
-    title: 'Bike',
-    author: 'danfador',
-  },
-]
 
 const expandIcon = <ExpandMoreIcon style={{color: 'white'}} />
 
@@ -167,7 +102,6 @@ export class NeighborsComponent extends Component<
       cellHeight = width / 3 - 20
     }
     this.setState({cellHeight})
-    console.log('dddd')
   }
 
   componentDidMount() {
@@ -184,7 +118,7 @@ export class NeighborsComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { classes } = this.props
+    const { classes, neighbors } = this.props
     const { cellHeight } = this.state
     
     return (
@@ -198,15 +132,20 @@ export class NeighborsComponent extends Component<
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.body}>
             <div className="profileNeighbors__body">
-              <div >
-                <GridList cellHeight={cellHeight} className={classes.gridList} cols={3}>
-                  {tileData.map(tile => (
-                    <GridListTile key={tile.img} cols={1}>
-                      <img src={tile.img} alt={tile.title} />
-                    </GridListTile>
-                  ))}
-                </GridList>
-              </div>
+      
+              <GridList cellHeight={cellHeight} className={classes.gridList} cols={3}>
+                {Object.keys(neighbors).map(i => (
+                  <GridListTile key={neighbors[i].userId} cols={1}>
+                    {
+                      neighbors[i].avatar ?
+                        <img src={neighbors[i].avatar} alt={neighbors[i].fullName} /> :
+                        <div className="profileNeighbors__body-empty-title">{neighbors[i].fullName}</div>
+                    }
+                    
+                  </GridListTile>
+                ))}
+              </GridList>
+        
             </div>
           </ExpansionPanelDetails>
         </ExpansionPanel>

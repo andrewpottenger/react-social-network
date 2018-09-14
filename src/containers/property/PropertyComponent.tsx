@@ -115,7 +115,6 @@ export class PropertyComponent extends Component<
 
   componentDidMount() {
     const { propertyId, properties } = this.props
-    console.log('properties ==> ', properties)
     if (propertyId) {
       properties.forEach((property: Property) => {
         if (property.id === propertyId ) {
@@ -203,7 +202,6 @@ export class PropertyComponent extends Component<
    */
   handleRequestSetImage = (url: string) => {
     const { galleryType, property } = this.state
-    console.log('url ==>', url)
     if (galleryType === 'ProfileImageGallery') {
       property.profileImage = url
       this.setState({property})
@@ -563,7 +561,6 @@ const mapStateToProps = (
   const properties = state.getIn(['property', 'properties'])
   const uid = state.getIn(['authorize', 'uid'])
   const user = state.getIn(['user', 'info', uid], {})
-  console.log('ownProps.match.params ==>', ownProps.match.params)
   return {
     propertyId,
     properties,

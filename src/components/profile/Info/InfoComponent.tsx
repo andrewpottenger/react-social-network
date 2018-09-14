@@ -101,6 +101,7 @@ export class InfoComponent extends Component<
     const {
       isFollowed,
       followUser,
+      getFollowers,
       followingCircle,
       userId,
       followRequest,
@@ -117,11 +118,15 @@ export class InfoComponent extends Component<
 
     if (!this.props.followingCircle) {
       this.props.createCircle!('Following', () => {
-        followUser!(this.props.followingCircle!.get('id'), { avatar, userId, fullName })
+        followUser!(this.props.followingCircle!.get('id'), { avatar, userId, fullName }, () => {
+          getFollowers!(userId)
+        })
       })
     } else {
       if (!isFollowed) {
-        followUser!(followingCircle!.get('id'), { avatar, userId, fullName })
+        followUser!(followingCircle!.get('id'), { avatar, userId, fullName }, () => {
+          getFollowers!(userId)
+        })
       } else {
         // this.onRequestOpenAddCircle()
       }
@@ -136,7 +141,6 @@ export class InfoComponent extends Component<
   render() {
     const { avatar, fullName, address, companyName, followerCount, classes, translate, isAuthedUser } = this.props
     const { editProfileOpen } = this.state
-    console.log('editProfileOpen ==>', editProfileOpen)
     return (
       <div>
         <div className="profileInfo">
@@ -177,7 +181,7 @@ export class InfoComponent extends Component<
               <Button className={cx(classes.headerButton, classes.pinkButton)} variant="flat" onClick={this.onFollowUser}>
                 Follow
               </Button>
-              <Button className={classes.headerButton} variant="flat" onClick={this.props.openEditor}>
+              <Button className={classes.headerButton} variant="flat" onClick={() => {}}>
                 Message
               </Button>
             </div>
@@ -234,8 +238,8 @@ const mapDispatchToProps = (
     getUserTies: (userId: string) => dispatch(circleActions.dbGetUserTiesByUserId(userId)),
     getFollowers: (userId: string) => dispatch(circleActions.dbGetFollowersByUserId(userId)),
     createCircle: (name: string, callback: Function) => dispatch(circleActions.dbAddCircle(name, callback)),
-    followUser: (circleId: string, userFollowing: UserTie) =>
-      dispatch(circleActions.dbFollowUser(circleId, userFollowing)),
+    followUser: (circleId: string, userFollowing: UserTie, callback: Function) =>
+      dispatch(circleActions.dbFollowUser(circleId, userFollowing, callback)),
   }
 }
 
@@ -255,7 +259,6 @@ const mapStateToProps = (
     {}
   )
 
-  console.log('ownProps.userId xxxxx==> ', ownProps.userId)
   const userBelongCircles: ImuList<any> = state.getIn(
     ['circle', 'userTies', ownProps.userId, 'circleIdList'],
     ImuList()
@@ -274,8 +277,6 @@ const mapStateToProps = (
     ownProps.userId
   )
   const followRequest = state.getIn(['server', 'request', followRequestId])
-
-  console.log('this.state in profile xxxxx==> ', state)
 
   return {
     translate: getTranslate(state.get('locale')),

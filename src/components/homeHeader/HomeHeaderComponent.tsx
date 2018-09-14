@@ -197,7 +197,7 @@ export class HomeHeaderComponent extends Component<
 
   // Render app DOM component
   render() {
-    const { classes, translate, theme, userId } = this.props
+    const { classes, translate, theme, userId, notifyCount } = this.props
     const { viewSize } = this.state
     // const anchor = theme.direction === 'rtl' ? 'right' : 'left'
     return (
@@ -272,7 +272,7 @@ export class HomeHeaderComponent extends Component<
             </nav>
             <Manager>
               <Target className="homeHeader__notify-wrapper">
-                {this.props.notifyCount! > 0 ? (
+                {/* {this.props.notifyCount! > 0 ? (
                   <Tooltip title={translate!('header.notificationTooltip')}>
                     <IconButton onClick={this.handleNotifyTouchTap}>
                       <div className="homeHeader__notify">
@@ -286,7 +286,12 @@ export class HomeHeaderComponent extends Component<
                       <MailOutline color="primary" />
                     </IconButton>
                   </Tooltip>
-                )}
+                )} */}
+                <Tooltip title={translate!('header.notificationTooltip')}>
+                  <IconButton onClick={this.handleNotifyTouchTap}>
+                    <MailOutline color="primary" />
+                  </IconButton>
+                </Tooltip>
               </Target>
               <Notify
                 open={this.state.openNotifyMenu}
@@ -300,15 +305,26 @@ export class HomeHeaderComponent extends Component<
               className={cx('grid grid__center', classes.headerAvatarContainer)}
               onClick={this.handleAvatarTouchTap}
             >
-              <Badge className={classes.badge} badgeContent={4}>
-                <UserAvatarComponent
-                  fullName={this.props.fullName!}
-                  fileName={this.props.avatar!}
-                  size={61}
-                  style={classes.avatarStyle}
-                  onMouseEnter={this.handleAvatarTouchTap}
-                />
-              </Badge>
+              {
+                notifyCount! > 0 ?
+                  <Badge className={classes.badge} badgeContent={notifyCount!}>
+                    <UserAvatarComponent
+                      fullName={this.props.fullName!}
+                      fileName={this.props.avatar!}
+                      size={61}
+                      style={classes.avatarStyle}
+                      onMouseEnter={this.handleAvatarTouchTap}
+                    />
+                  </Badge> :
+                  <UserAvatarComponent
+                    fullName={this.props.fullName!}
+                    fileName={this.props.avatar!}
+                    size={61}
+                    style={classes.avatarStyle}
+                    onMouseEnter={this.handleAvatarTouchTap}
+                  />
+              }
+
               <SvgKeyboardArrowDown color="primary"/>
             </div>
 

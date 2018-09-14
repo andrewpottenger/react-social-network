@@ -84,6 +84,22 @@ export interface IProfileComponentProps {
   properties: Property[],
 
   /**
+   * Properties
+   *
+   * @type {object}
+   * @memberof IProfileComponentProps
+   */
+  ties: any,
+
+  /**
+   * Properties
+   *
+   * @type {object}
+   * @memberof IProfileComponentProps
+   */
+  followers: any,
+
+  /**
    * If there is more posts to show in profile
    */
   hasMorePosts: boolean

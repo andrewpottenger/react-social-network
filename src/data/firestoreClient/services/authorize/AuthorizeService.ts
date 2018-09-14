@@ -183,7 +183,6 @@ export class AuthorizeService implements IAuthorizeService {
       }
       firebaseAuth().signInWithPopup(provider).then((result) => {
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        console.log('signInWithPopup result ==>', result)
         let token = result.credential.accessToken
         // The signed-in user info.
         const {user} = result

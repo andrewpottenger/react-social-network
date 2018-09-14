@@ -1039,10 +1039,22 @@ input[type="file"] {
       color: white;
       font-size: 14px; }
   .profileNeighbors__body {
+    width: 100%;
     display: flex;
     flex-wrap: wrap; }
     .profileNeighbors__body-card {
       width: 33.33%; }
+    .profileNeighbors__body-empty-title {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 16px;
+      text-transform: capitalize;
+      color: white;
+      background: #912099; }
 
 .sendFeedback__content {
   position: fixed;

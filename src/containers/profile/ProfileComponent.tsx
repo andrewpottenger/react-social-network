@@ -146,11 +146,12 @@ export class ProfileComponent extends Component<
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { fullName, companyName, avatar, isAuthedUser, userId, properties, classes } = this.props
+    const { fullName, companyName, avatar, isAuthedUser, userId, ties, followers, properties, classes } = this.props
     const St = StreamComponent as any
     const postList = this.postLoad() as
       | { evenPostList: Post[]; oddPostList: Post[]; divided: boolean }
       | any
+    const followerCount = followers ? Object.keys(followers).length : 0
 
     return (
       <div className="container">
@@ -163,16 +164,15 @@ export class ProfileComponent extends Component<
               avatar={avatar}
               address="Austin, TX"
               companyName={companyName}
-              followerCount={573}
+              followerCount={followerCount}
             />
             <Neighbors
               userId={userId}
               isAuthedUser={isAuthedUser}
-              fullName="Brian D’Ambrosio"
-              avatar="images/profile-image.jpg"
-              address1="Austin, TX"
-              address2="Casa Austin"
-              followerCount={573}
+              neighbors={{
+                ...ties,
+                ...followers,
+              }}
             />
           </div>
           <div className={classes.mainContainer}>
@@ -247,12 +247,13 @@ const mapStateToProps = (
   const posts = state.getIn(['post', 'userPosts', userId])
   const userProfile = state.getIn(['user', 'info', userId], {}) as Profile
   const properties = state.getIn(['property', 'properties'])
-  console.log('properties ==>', properties)
   
   return {
     translate: getTranslate(state.get('locale')),
     avatar: userProfile.avatar,
     fullName: userProfile.fullName,
+    ties: userProfile.ties,
+    followers: userProfile.followers,
     companyName: userProfile.companyName,
     // banner: userProfile.banner,
     // tagLine: userProfile.tagLine,
